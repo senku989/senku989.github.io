@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أكثر 500 كلمة استعمالاً في الإنجليزية</title>
+    <title>أكثر 100 كلمة شائعة في اختبارات الآيلتس</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -34,41 +34,40 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
-        .modal {
+        .modal, .modal-overlay {
             display: none;
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(0.8);
             background: #fff;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             max-width: 400px;
             width: 90%;
+            text-align: center;
             opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-        .modal.active {
-            display: block; /* التغيير هنا */
-            opacity: 1;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
         }
         .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
+            top: 0;
+            left: 0;
             z-index: 999;
+            display: none;
             opacity: 0;
-            transition: opacity 0.3s ease-in-out;
+            transition: opacity 0.5s ease-out;
         }
-        .modal-overlay.active {
-            display: block; /* التغيير هنا */
+        .modal.active, .modal-overlay.active {
+            display: block;
             opacity: 1;
+        }
+        .modal.active {
+            transform: translate(-50%, -50%) scale(1);
         }
         .modal-content h2 {
             color: #4a90e2;
@@ -76,6 +75,7 @@
         }
         .modal-content p {
             line-height: 1.6;
+            text-align: center; /* توسيط النص */
         }
         .close-btn {
             float: right;
@@ -86,10 +86,8 @@
     </style>
 </head>
 <body>
-    <h1>أكثر 500 كلمة استعمالاً في الإنجليزية</h1>
-    <div class="words-container" id="words-container">
-        <!-- الكلمات ستضاف هنا باستخدام JavaScript -->
-    </div>
+    <h1>أكثر 100 كلمة شائعة في اختبارات الآيلتس</h1>
+    <div class="words-container" id="words-container"></div>
 
     <!-- النافذة المنبثقة -->
     <div class="modal-overlay" id="modal-overlay"></div>
@@ -99,169 +97,63 @@
             <h2 id="word-title"></h2>
             <p><strong>المعنى:</strong> <span id="word-definition"></span></p>
             <p><strong>مثال:</strong> <span id="word-example"></span></p>
-            <button id="speak-btn">قراءة الكلمة</button>
         </div>
     </div>
 
     <script>
-        // بيانات الكلمات (100 كلمة كمثال)
         const words = [
-            { word: "the", definition: "أداة تعريف", example: "The sun is shining." },
-            { word: "be", definition: "يكون", example: "I want to be a doctor." },
-            { word: "to", definition: "إلى", example: "I went to the park." },
-            { word: "of", definition: "من", example: "This is a piece of cake." },
-            { word: "and", definition: "و", example: "I like apples and oranges." },
-            { word: "a", definition: "أداة تعريف", example: "I saw a cat." },
-            { word: "in", definition: "في", example: "The book is in the bag." },
-            { word: "that", definition: "ذلك", example: "That is my car." },
-            { word: "have", definition: "يملك", example: "I have a pen." },
-            { word: "I", definition: "أنا", example: "I am happy." },
-            { word: "it", definition: "هو/هي (لشيء)", example: "It is raining." },
-            { word: "for", definition: "لأجل", example: "This gift is for you." },
-            { word: "not", definition: "لا", example: "I do not know." },
-            { word: "on", definition: "على", example: "The book is on the table." },
-            { word: "with", definition: "مع", example: "I went with my friend." },
-            { word: "he", definition: "هو", example: "He is a teacher." },
-            { word: "as", definition: "كما", example: "As you know, I love music." },
-            { word: "you", definition: "أنت/أنتم", example: "You are amazing." },
-            { word: "do", definition: "يفعل", example: "What do you do?" },
-            { word: "at", definition: "في", example: "I am at home." },
-            { word: "this", definition: "هذا", example: "This is my book." },
-            { word: "but", definition: "لكن", example: "I want to go, but I can't." },
-            { word: "his", definition: "له", example: "This is his car." },
-            { word: "by", definition: "بواسطة", example: "The book was written by him." },
-            { word: "from", definition: "من", example: "I am from Egypt." },
-            { word: "they", definition: "هم", example: "They are students." },
-            { word: "we", definition: "نحن", example: "We are friends." },
-            { word: "say", definition: "يقول", example: "He says hello." },
-            { word: "her", definition: "لها", example: "This is her bag." },
-            { word: "she", definition: "هي", example: "She is a doctor." },
-            { word: "or", definition: "أو", example: "Do you want tea or coffee?" },
-            { word: "an", definition: "أداة تعريف", example: "I saw an elephant." },
-            { word: "will", definition: "سوف", example: "I will call you later." },
-            { word: "my", definition: "لي", example: "This is my house." },
-            { word: "one", definition: "واحد", example: "I have one pen." },
-            { word: "all", definition: "كل", example: "All students are here." },
-            { word: "would", definition: "سوف (افتراض)", example: "I would like to go." },
-            { word: "there", definition: "هناك", example: "There is a cat on the roof." },
-            { word: "their", definition: "لهم", example: "Their house is big." },
-            { word: "what", definition: "ما", example: "What is your name?" },
-            { word: "so", definition: "لذلك", example: "I was tired, so I slept." },
-            { word: "up", definition: "فوق", example: "Look up at the sky." },
-            { word: "out", definition: "خارج", example: "Get out of the room." },
-            { word: "if", definition: "إذا", example: "If you study, you will succeed." },
-            { word: "about", definition: "حول", example: "Tell me about yourself." },
-            { word: "who", definition: "من", example: "Who is that?" },
-            { word: "get", definition: "يحصل", example: "I get a gift." },
-            { word: "which", definition: "الذي", example: "Which book do you want?" },
-            { word: "go", definition: "يذهب", example: "I go to school." },
-            { word: "me", definition: "لي", example: "Give me the book." },
-            { word: "when", definition: "متى", example: "When will you come?" },
-            { word: "make", definition: "يصنع", example: "I make a cake." },
-            { word: "can", definition: "يستطيع", example: "I can swim." },
-            { word: "like", definition: "يحب", example: "I like pizza." },
-            { word: "time", definition: "وقت", example: "What time is it?" },
-            { word: "no", definition: "لا", example: "No, I don't want it." },
-            { word: "just", definition: "فقط", example: "Just do it." },
-            { word: "him", definition: "له", example: "I gave him the book." },
-            { word: "know", definition: "يعرف", example: "I know the answer." },
-            { word: "take", definition: "يأخذ", example: "Take the pen." },
-            { word: "people", definition: "ناس", example: "Many people are here." },
-            { word: "into", definition: "إلى داخل", example: "Go into the room." },
-            { word: "year", definition: "سنة", example: "This year is 2023." },
-            { word: "your", definition: "لك", example: "Your book is on the table." },
-            { word: "good", definition: "جيد", example: "This is a good idea." },
-            { word: "some", definition: "بعض", example: "I have some books." },
-            { word: "could", definition: "يمكن", example: "Could you help me?" },
-            { word: "them", definition: "هم", example: "I gave them the keys." },
-            { word: "see", definition: "يرى", example: "I see a bird." },
-            { word: "other", definition: "آخر", example: "I have other plans." },
-            { word: "than", definition: "من", example: "He is taller than me." },
-            { word: "then", definition: "ثم", example: "I will go, then I will sleep." },
-            { word: "now", definition: "الآن", example: "I am busy now." },
-            { word: "look", definition: "ينظر", example: "Look at the picture." },
-            { word: "only", definition: "فقط", example: "I have only one pen." },
-            { word: "come", definition: "يأتي", example: "Come here, please." },
-            { word: "its", definition: "له", example: "The cat is in its bed." },
-            { word: "over", definition: "فوق", example: "The plane is flying over the city." },
-            {word: "think", definition: "يفكر", example: "I think it's a good idea." },
-            { word: "also", definition: "أيضًا", example: "She likes it, also." },
-            { word: "back", definition: "خلف", example: "Go back to your seat." },
-            { word: "after", definition: "بعد", example: "After the movie, we can go out." },
-            { word: "use", definition: "يستخدم", example: "I use my phone every day." },
-            { word: "two", definition: "اثنان", example: "I have two dogs." },
-            { word: "how", definition: "كيف", example: "How are you?" },
-            { word: "our", definition: "خاص بنا", example: "Our house is big." },
-            { word: "work", definition: "يعمل", example: "I work at a company." },
-            { word: "first", definition: "أول", example: "This is my first time." },
-            { word: "well", definition: "جيدًا", example: "She sings very well." },
-            { word: "way", definition: "طريق", example: "This is the right way." },
-            { word: "even", definition: "حتى", example: "I don't even know him." },
-            { word: "new", definition: "جديد", example: "I bought a new phone." },
-            { word: "want", definition: "يريد", example: "I want to go home." },
-            { word: "because", definition: "لأن", example: "I am happy because I won." },
-            { word: "any", definition: "أي", example: "Do you have any questions?" },
-            { word: "these", definition: "هذه", example: "These are my shoes." },
-            { word: "give", definition: "يعطي", example: "Give me the keys." },
-            { word: "day", definition: "يوم", example: "Today is a beautiful day." },
-            { word: "most", definition: "أغلب", example: "This is the most expensive item." },
-            { word: "us", definition: "نا", example: "They will join us later." },
-            { word: "are", definition: "يكون", example: "They are happy." },
-            { word: "was", definition: "كان", example: "He was there yesterday." },
-            { word: "were", definition: "كانوا", example: "We were at the park." },
-            { word: "her", definition: "لها", example: "I gave her the book." },
-            { word: "more", definition: "أكثر", example: "I need more time." },
-            { word: "other", definition: "آخر", example: "I will buy the other one." },
-            { word: "how", definition: "كيف", example: "How do you do that?" }
+            { word: "analyze", definition: "تحليل", example: "Scientists analyze data to find patterns." },
+            { word: "approach", definition: "نهج / طريقة", example: "This approach is more effective in solving the problem." },
+            { word: "assess", definition: "تقييم", example: "The teacher will assess your performance." },
+            { word: "assume", definition: "يفترض", example: "I assume he will be late today." },
+            { word: "authority", definition: "سلطة", example: "The government has the authority to make laws." },
+            { word: "benefit", definition: "فائدة", example: "Exercise has many health benefits." },
+            { word: "concept", definition: "مفهوم", example: "The concept of gravity explains why objects fall." },
+            { word: "consistent", definition: "متسق", example: "His performance has been consistent over time." },
+            { word: "data", definition: "بيانات", example: "The company collects data from customers." },
+            { word: "derive", definition: "يستمد", example: "We derive energy from the sun." }
         ];
 
         const wordsContainer = document.getElementById('words-container');
         const modal = document.getElementById('modal');
         const modalOverlay = document.getElementById('modal-overlay');
-        const closeBtn = document.getElementById('close-btn');
-        const speakBtn = document.getElementById('speak-btn');
+        const closeModalBtn = document.getElementById('close-btn');
+        const wordTitle = document.getElementById('word-title');
+        const wordDefinition = document.getElementById('word-definition');
+        const wordExample = document.getElementById('word-example');
 
-        // Function to render words
-        function renderWords() {
-            wordsContainer.innerHTML = '';
-            words.forEach((item) => {
-                const wordCard = document.createElement('div');
-                wordCard.classList.add('word-card');
-                wordCard.innerText = item.word;
+        words.forEach(item => {
+            const wordCard = document.createElement('div');
+            wordCard.classList.add('word-card');
+            wordCard.textContent = item.word;
 
-                // Add event listener for click
-                wordCard.addEventListener('click', () => {
-                    showModal(item);
-                });
+            wordCard.addEventListener('click', () => {
+                wordTitle.textContent = item.word;
+                wordDefinition.textContent = item.definition;
+                wordExample.textContent = item.example;
 
-                wordsContainer.appendChild(wordCard);
+                modal.style.display = "block";
+                modalOverlay.style.display = "block";
+                setTimeout(() => {
+                    modal.classList.add('active');
+                    modalOverlay.classList.add('active');
+                }, 10);
             });
-        }
 
-        // Function to show the modal with word details
-        function showModal(wordData) {
-            document.getElementById('word-title').innerText = wordData.word;
-            document.getElementById('word-definition').innerText = wordData.definition;
-            document.getElementById('word-example').innerText = wordData.example;
-            modal.classList.add('active');
-            modalOverlay.classList.add('active');
-        }
+            wordsContainer.appendChild(wordCard);
+        });
 
-        // Close modal
-        closeBtn.addEventListener('click', () => {
+        function closeModal() {
             modal.classList.remove('active');
             modalOverlay.classList.remove('active');
-        });
+            setTimeout(() => {
+                modal.style.display = "none";
+                modalOverlay.style.display = "none";
+            }, 500); // زيادة الوقت لإغلاق النافذة ببطء
+        }
 
-        // Speak the word
-        speakBtn.addEventListener('click', () => {
-            const wordTitle = document.getElementById('word-title').innerText;
-            const utterance = new SpeechSynthesisUtterance(wordTitle);
-            window.speechSynthesis.speak(utterance);
-        });
-
-        // Initial render of words
-        renderWords();
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', closeModal);
     </script>
 </body>
 </html>
