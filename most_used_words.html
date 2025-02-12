@@ -39,14 +39,17 @@
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(0.8);
             background: #fff;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             max-width: 400px;
             width: 90%;
+            text-align: center;
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
         }
         .modal-overlay {
             width: 100%;
@@ -55,9 +58,16 @@
             top: 0;
             left: 0;
             z-index: 999;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
         }
         .modal.active, .modal-overlay.active {
             display: block;
+            opacity: 1;
+        }
+        .modal.active {
+            transform: translate(-50%, -50%) scale(1);
         }
         .modal-content h2 {
             color: #4a90e2;
@@ -128,15 +138,17 @@
             wordsContainer.appendChild(wordCard);
         });
 
-        closeModalBtn.addEventListener('click', () => {
+        function closeModal() {
             modal.classList.remove('active');
             modalOverlay.classList.remove('active');
-        });
+            setTimeout(() => {
+                modal.style.display = "none";
+                modalOverlay.style.display = "none";
+            }, 300);
+        }
 
-        modalOverlay.addEventListener('click', () => {
-            modal.classList.remove('active');
-            modalOverlay.classList.remove('active');
-        });
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', closeModal);
     </script>
 </body>
 </html>
