@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أكثر 500 كلمة استعمالاً في الإنجليزية</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #4a90e2;
+        }
+        .words-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+        .word-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .word-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-width: 400px;
+            width: 90%;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .modal-content h2 {
+            color: #4a90e2;
+            margin-bottom: 10px;
+        }
+        .modal-content p {
+            line-height: 1.6;
+        }
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>أكثر 500 كلمة استعمالاً في الإنجليزية</h1>
+    <div class="words-container" id="words-container">
+        <!-- الكلمات ستضاف هنا باستخدام JavaScript -->
+    </div>
+
+    <!-- النافذة المنبثقة -->
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-btn">&times;</span>
+            <h2 id="word-title"></h2>
+            <p><strong>التعريف:</strong> <span id="word-definition"></span></p>
+            <p><strong>مثال:</strong> <span id="word-example"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // بيانات الكلمات (يمكن استبدالها بقاعدة بيانات)
+        const words = [
+            { word: "the", definition: "أداة تعريف", example: "The sun is shining." },
+            { word: "be", definition: "يكون", example: "I want to be a doctor." },
+            { word: "to", definition: "إلى", example: "I went to the park." },
+            { word: "of", definition: "من", example: "This is a piece of cake." },
+            { word: "and", definition: "و", example: "I like apples and oranges." },
+            // يمكن إضافة المزيد من الكلمات هنا
+        ];
+
+        const wordsContainer = document.getElementById('words-container');
+        const modal = document.getElementById('modal');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const closeBtn = document.getElementById('close-btn');
+        const wordTitle = document.getElementById('word-title');
+        const wordDefinition = document.getElementById('word-definition');
+        const wordExample = document.getElementById('word-example');
+
+        // عرض الكلمات في الواجهة
+        words.forEach(item => {
+            const wordCard = document.createElement('div');
+            wordCard.classList.add('word-card');
+            wordCard.textContent = item.word;
+            wordCard.addEventListener('click', () => showModal(item));
+            wordsContainer.appendChild(wordCard);
+        });
+
+        // فتح النافذة المنبثقة
+        function showModal(data) {
+            wordTitle.textContent = data.word;
+            wordDefinition.textContent = data.definition;
+            wordExample.textContent = data.example;
+            modal.style.display = 'block';
+            modalOverlay.style.display = 'block';
+        }
+
+        // إغلاق النافذة المنبثقة
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            modalOverlay.style.display = 'none';
+        });
+
+        modalOverlay.addEventListener('click', () => {
+            modal.style.display = 'none';
+            modalOverlay.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
