@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أكثر 100 كلمة شائعة في اختبارات الآيلتس</title>
+    <title>أكثر كلمات الآيلتس استعمالاً</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -34,40 +34,39 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
-        .modal, .modal-overlay {
+        .modal {
             display: none;
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
+            transform: translate(-50%, -50%);
             background: #fff;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             z-index: 1000;
             max-width: 400px;
             width: 90%;
-            text-align: center;
             opacity: 0;
-            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .modal.active {
+            opacity: 1;
         }
         .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            top: 0;
-            left: 0;
             z-index: 999;
-            display: none;
             opacity: 0;
-            transition: opacity 0.5s ease-out;
+            transition: opacity 0.3s ease-in-out;
         }
-        .modal.active, .modal-overlay.active {
-            display: block;
+        .modal-overlay.active {
             opacity: 1;
-        }
-        .modal.active {
-            transform: translate(-50%, -50%) scale(1);
         }
         .modal-content h2 {
             color: #4a90e2;
@@ -75,7 +74,6 @@
         }
         .modal-content p {
             line-height: 1.6;
-            text-align: center; /* توسيط النص */
         }
         .close-btn {
             float: right;
@@ -83,11 +81,25 @@
             font-size: 20px;
             color: #333;
         }
+        #speak-btn {
+            background: #4a90e2;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #speak-btn:hover {
+            background: #357abd;
+        }
     </style>
 </head>
 <body>
-    <h1>أكثر 100 كلمة شائعة في اختبارات الآيلتس</h1>
-    <div class="words-container" id="words-container"></div>
+    <h1>أكثر كلمات الآيلتس استعمالاً</h1>
+    <div class="words-container" id="words-container">
+        <!-- الكلمات ستضاف هنا باستخدام JavaScript -->
+    </div>
 
     <!-- النافذة المنبثقة -->
     <div class="modal-overlay" id="modal-overlay"></div>
@@ -97,63 +109,104 @@
             <h2 id="word-title"></h2>
             <p><strong>المعنى:</strong> <span id="word-definition"></span></p>
             <p><strong>مثال:</strong> <span id="word-example"></span></p>
+            <button id="speak-btn">قراءة الكلمة</button>
         </div>
     </div>
 
     <script>
+        // بيانات كلمات الآيلتس (100 كلمة كمثال)
         const words = [
-            { word: "analyze", definition: "تحليل", example: "Scientists analyze data to find patterns." },
-            { word: "approach", definition: "نهج / طريقة", example: "This approach is more effective in solving the problem." },
-            { word: "assess", definition: "تقييم", example: "The teacher will assess your performance." },
-            { word: "assume", definition: "يفترض", example: "I assume he will be late today." },
-            { word: "authority", definition: "سلطة", example: "The government has the authority to make laws." },
-            { word: "benefit", definition: "فائدة", example: "Exercise has many health benefits." },
-            { word: "concept", definition: "مفهوم", example: "The concept of gravity explains why objects fall." },
-            { word: "consistent", definition: "متسق", example: "His performance has been consistent over time." },
-            { word: "data", definition: "بيانات", example: "The company collects data from customers." },
-            { word: "derive", definition: "يستمد", example: "We derive energy from the sun." }
+            { word: "analyze", definition: "يحلل", example: "We need to analyze the data before making a decision." },
+            { word: "approach", definition: "يقترب/نهج", example: "The company adopted a new approach to marketing." },
+            { word: "assess", definition: "يقيم", example: "Teachers assess students' progress regularly." },
+            { word: "assume", definition: "يفترض", example: "Let's assume that the meeting is postponed." },
+            { word: "benefit", definition: "فائدة", example: "Regular exercise has many health benefits." },
+            { word: "concept", definition: "مفهوم", example: "The concept of time travel fascinates many people." },
+            { word: "consist", definition: "يتكون", example: "The team consists of five members." },
+            { word: "context", definition: "سياق", example: "It's important to understand the context of the story." },
+            { word: "define", definition: "يحدد", example: "Can you define the term 'globalization'?" },
+            { word: "derive", definition: "يستمد", example: "Many medicines are derived from plants." },
+            { word: "distribute", definition: "يوزع", example: "The organization distributes food to the needy." },
+            { word: "establish", definition: "يؤسس", example: "The company was established in 1995." },
+            { word: "estimate", definition: "يقدر", example: "Can you estimate the cost of the project?" },
+            { word: "evident", definition: "واضح", example: "It's evident that she worked hard on this project." },
+            { word: "factor", definition: "عامل", example: "Time is an important factor in this experiment." },
+            { word: "function", definition: "وظيفة/يعمل", example: "The main function of the heart is to pump blood." },
+            { word: "identify", definition: "يحدد", example: "Can you identify the main idea of the passage?" },
+            { word: "income", definition: "دخل", example: "His monthly income is $3000." },
+            { word: "indicate", definition: "يشير", example: "The results indicate a positive trend." },
+            { word: "individual", definition: "فرد/شخص", example: "Each individual has unique talents." },
+            { word: "interpret", definition: "يفسر", example: "How do you interpret this poem?" },
+            { word: "involve", definition: "يتضمن", example: "The job involves a lot of traveling." },
+            { word: "issue", definition: "قضية/مشكلة", example: "Climate change is a major issue today." },
+            { word: "method", definition: "طريقة", example: "What method did you use to solve the problem?" },
+            { word: "occur", definition: "يحدث", example: "The accident occurred at midnight." },
+            { word: "percent", definition: "بالمئة", example: "Fifty percent of the students passed the exam." },
+            { word: "policy", definition: "سياسة", example: "The government introduced a new economic policy." },
+            { word: "principle", definition: "مبدأ", example: "Honesty is a key principle in business." },
+            { word: "process", definition: "عملية", example: "The manufacturing process is highly automated." },
+            { word: "require", definition: "يتطلب", example: "This job requires a lot of patience." },
+            { word: "research", definition: "بحث", example: "She is conducting research on cancer treatment." },
+            { word: "respond", definition: "يستجيب", example: "How did the company respond to the crisis?" },
+            { word: "role", definition: "دور", example: "Parents play an important role in education." },
+            { word: "section", definition: "قسم", example: "Please read the first section of the book." },
+            { word: "significant", definition: "مهم/كبير", example: "There was a significant increase in sales." },
+            { word: "similar", definition: "مشابه", example: "The two paintings are very similar." },
+            { word: "source", definition: "مصدر", example: "The internet is a great source of information." },
+            { word: "specific", definition: "محدد", example: "Can you give me a specific example?" },
+            { word: "structure", definition: "هيكل/بناء", example: "The structure of the building is very strong." },
+            { word: "theory", definition: "نظرية", example: "Einstein's theory of relativity is famous." },
+            { word: "vary", definition: "يختلف", example: "Prices vary depending on the season." },
+            // يمكنك إضافة المزيد من الكلمات هنا
         ];
 
         const wordsContainer = document.getElementById('words-container');
         const modal = document.getElementById('modal');
         const modalOverlay = document.getElementById('modal-overlay');
-        const closeModalBtn = document.getElementById('close-btn');
+        const closeBtn = document.getElementById('close-btn');
         const wordTitle = document.getElementById('word-title');
         const wordDefinition = document.getElementById('word-definition');
         const wordExample = document.getElementById('word-example');
+        const speakBtn = document.getElementById('speak-btn');
 
+        // عرض الكلمات في الواجهة
         words.forEach(item => {
             const wordCard = document.createElement('div');
             wordCard.classList.add('word-card');
             wordCard.textContent = item.word;
-
-            wordCard.addEventListener('click', () => {
-                wordTitle.textContent = item.word;
-                wordDefinition.textContent = item.definition;
-                wordExample.textContent = item.example;
-
-                modal.style.display = "block";
-                modalOverlay.style.display = "block";
-                setTimeout(() => {
-                    modal.classList.add('active');
-                    modalOverlay.classList.add('active');
-                }, 10);
-            });
-
+            wordCard.addEventListener('click', () => showModal(item));
             wordsContainer.appendChild(wordCard);
         });
 
-        function closeModal() {
-            modal.classList.remove('active');
-            modalOverlay.classList.remove('active');
-            setTimeout(() => {
-                modal.style.display = "none";
-                modalOverlay.style.display = "none";
-            }, 500); // زيادة الوقت لإغلاق النافذة ببطء
+        // فتح النافذة المنبثقة ببطء
+        function showModal(data) {
+            wordTitle.textContent = data.word;
+            wordDefinition.textContent = data.definition;
+            wordExample.textContent = data.example;
+            modalOverlay.classList.add('active');
+            modal.classList.add('active');
         }
 
-        closeModalBtn.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', closeModal);
+        // إغلاق النافذة المنبثقة
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            modalOverlay.classList.remove('active');
+        });
+
+        modalOverlay.addEventListener('click', () => {
+            modal.classList.remove('active');
+            modalOverlay.classList.remove('active');
+        });
+
+        // خاصية قراءة الكلمة
+        speakBtn.addEventListener('click', () => {
+            const word = wordTitle.textContent;
+            if (word) {
+                const utterance = new SpeechSynthesisUtterance(word);
+                utterance.lang = 'en-US'; // اللغة الإنجليزية
+                speechSynthesis.speak(utterance);
+            }
+        });
     </script>
 </body>
 </html>
