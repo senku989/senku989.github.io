@@ -99,9 +99,7 @@
 </head>
 <body>
     <h1>100 كلمة سترفع معدلك في اختبار الآيلتس</h1>
-    <div class="words-container" id="words-container">
-        <!-- الكلمات ستضاف هنا باستخدام JavaScript -->
-    </div>
+    <div class="words-container" id="words-container"></div>
 
     <!-- النافذة المنبثقة -->
     <div class="modal-overlay" id="modal-overlay"></div>
@@ -117,25 +115,44 @@
 
     <script>
         const words = [
-  {word: "Aberration", definition: "a deviation from what is normal or expected", example: "His sudden anger was an aberration from his usual calm demeanor. / كان غضبه المفاجئ انحرافًا عن هدوئه المعتاد."},
-  {word: "Acquiesce", definition: "to accept or comply reluctantly", example: "She acquiesced to the new policy despite her reservations. / وافقت على السياسة الجديدة على مضض رغم تحفظاتها."},
-  {word: "Altruism", definition: "selfless concern for the well-being of others", example: "His altruism was evident when he donated all his savings to charity. / كان كرمه واضحًا عندما تبرع بجميع مدخراته للجمعيات الخيرية."},
-  {word: "Ameliorate", definition: "to improve or make better", example: "New policies were introduced to ameliorate working conditions. / تم تقديم سياسات جديدة لتحسين ظروف العمل."},
-  {word: "Aplomb", definition: "self-confidence and composure", example: "She handled the difficult questions with aplomb. / تعاملت مع الأسئلة الصعبة بثقة واتزان."},
-  {word: "Belligerent", definition: "hostile and aggressive", example: "His belligerent attitude made negotiations difficult. / جعل موقفه العدائي المفاوضات صعبة."},
-  {word: "Benevolent", definition: "well-meaning and kind", example: "The benevolent businessman donated generously to education. / تبرع رجل الأعمال الخيّر بسخاء للتعليم."},
-  {word: "Cacophony", definition: "a harsh, discordant mixture of sounds", example: "The construction site was filled with a cacophony of noises. / امتلأ موقع البناء بضوضاء مزعجة."},
-  {word: "Capricious", definition: "unpredictable and impulsive", example: "The weather in this region is extremely capricious. / الطقس في هذه المنطقة متقلب للغاية."},
-  {word: "Circumspect", definition: "cautious and unwilling to take risks", example: "He was circumspect in giving out personal information. / كان حذرًا في إعطاء معلوماته الشخصية."},
-  {word: "Cogent", definition: "clear, logical, and convincing", example: "Her argument was cogent and well-structured. / كان طرحها مقنعًا ومنظمًا جيدًا."},
-  {word: "Convoluted", definition: "complex and difficult to follow", example: "His explanation was so convoluted that no one understood. / كان شرحه معقدًا لدرجة أن لا أحد فهمه."},
-  {word: "Debilitate", definition: "to weaken or impair", example: "The disease debilitated his immune system. / أضعف المرض جهازه المناعي."},
-  {word: "Deference", definition: "respect and submission to authority", example: "He showed deference to his elders. / أبدى احترامًا لكبار السن."},
-  {word: "Diatribe", definition: "a forceful and bitter verbal attack", example: "The politician launched a diatribe against his opponents. / شنّ السياسي هجومًا لفظيًا عنيفًا على خصومه."},
-  {word: "Disparate", definition: "fundamentally different", example: "The cultures of the two countries are disparate. / ثقافات البلدين مختلفة تمامًا."},
-  {word: "Effusive", definition: "expressing feelings of gratitude excessively", example: "She was effusive in her praise for the team. / بالغت في مدحها للفريق."},
-  {word: "Egregious", definition: "outstandingly bad", example: "His egregious mistake cost the company millions. / خطؤه الفادح كلف الشركة ملايين."},
-  {word:
+  {word: "Aberration", definition: "A deviation from what is normal or expected.", example: "His sudden anger was an aberration from his usual calm demeanor. / كان غضبه المفاجئ انحرافًا عن هدوئه المعتاد."},
+  {word: "Acquiesce", definition: "To accept or comply reluctantly.", example: "She acquiesced to the new policy despite her reservations. / وافقت على السياسة الجديدة على مضض رغم تحفظاتها."},
+  {word: "Altruism", definition: "Selfless concern for the well-being of others.", example: "His altruism was evident when he donated all his savings to charity. / كان كرمه واضحًا عندما تبرع بجميع مدخراته للجمعيات الخيرية."},
+  {word: "Ameliorate", definition: "To improve or make better.", example: "New policies were introduced to ameliorate working conditions. / تم تقديم سياسات جديدة لتحسين ظروف العمل."},
+  {word: "Aplomb", definition: "Self-confidence and composure.", example: "She handled the difficult questions with aplomb. / تعاملت مع الأسئلة الصعبة بثقة واتزان."},
+  {word: "Belligerent", definition: "Hostile and aggressive.", example: "His belligerent attitude made negotiations difficult. / جعل موقفه العدائي المفاوضات صعبة."},
+  {word: "Benevolent", definition: "Well-meaning and kind.", example: "The benevolent businessman donated generously to education. / تبرع رجل الأعمال الخيّر بسخاء للتعليم."},
+  {word: "Cacophony", definition: "A harsh, discordant mixture of sounds.", example: "The construction site was filled with a cacophony of noises. / امتلأ موقع البناء بضوضاء مزعجة."},
+  {word: "Capricious", definition: "Unpredictable and impulsive.", example: "The weather in this region is extremely capricious. / الطقس في هذه المنطقة متقلب للغاية."},
+  {word: "Circumspect", definition: "Cautious and unwilling to take risks.", example: "He was circumspect in giving out personal information. / كان حذرًا في إعطاء معلوماته الشخصية."},
+  {word: "Cogent", definition: "Clear, logical, and convincing.", example: "Her argument was cogent and well-structured. / كان طرحها مقنعًا ومنظمًا جيدًا."},
+  {word: "Convoluted", definition: "Complex and difficult to follow.", example: "His explanation was so convoluted that no one understood. / كان شرحه معقدًا لدرجة أن لا أحد فهمه."},
+  {word: "Debilitate", definition: "To weaken or impair.", example: "The disease debilitated his immune system. / أضعف المرض جهازه المناعي."},
+  {word: "Deference", definition: "Respect and submission to authority.", example: "He showed deference to his elders. / أبدى احترامًا لكبار السن."},
+  {word: "Diatribe", definition: "A forceful and bitter verbal attack.", example: "The politician launched a diatribe against his opponents. / شنّ السياسي هجومًا لفظيًا عنيفًا على خصومه."},
+  {word: "Disparate", definition: "Fundamentally different.", example: "The cultures of the two countries are disparate. / ثقافات البلدين مختلفة تمامًا."},
+  {word: "Effusive", definition: "Expressing feelings of gratitude excessively.", example: "She was effusive in her praise for the team. / بالغت في مدحها للفريق."},
+  {word: "Egregious", definition: "Outstandingly bad.", example: "His egregious mistake cost the company millions. / خطؤه الفادح كلف الشركة ملايين."},
+  {word: "Elucidate", definition: "To make something clear or explain.", example: "The professor elucidated the concept with a simple example. / أوضح الأستاذ المفهوم بمثال بسيط."},
+  {word: "Ephemeral", definition: "Lasting for a very short time.", example: "Fame is often ephemeral. / الشهرة غالبًا ما تكون قصيرة الأمد."},
+  {word: "Esoteric", definition: "Intended for or understood by only a small group.", example: "The philosopher’s ideas were too esoteric for most people. / كانت أفكار الفيلسوف غامضة لمعظم الناس."},
+  {word: "Fastidious", definition: "Very attentive to detail.", example: "She is fastidious about keeping her house clean. / تهتم كثيرًا بالحفاظ على منزلها نظيفًا."},
+  {word: "Flabbergasted", definition: "Extremely surprised or shocked.", example: "I was flabbergasted by the test results. / كنت مذهولًا من نتائج الاختبار."},
+  {word: "Garrulous", definition: "Excessively talkative.", example: "The garrulous old man told endless stories. / الرجل العجوز الثرثار أخبرنا بقصص لا تنتهي."},
+  {word: "Grandiose", definition: "Impressive but overly ambitious.", example: "His plans for the company were grandiose but unrealistic. / كانت خططه للشركة ضخمة ولكن غير واقعية."},
+  {word: "Harangue", definition: "A lengthy and aggressive speech.", example: "The manager gave a harangue about productivity. / ألقى المدير خطابًا طويلًا عن الإنتاجية."},
+  {word: "Impetuous", definition: "Acting or done quickly without thought.", example: "His impetuous decision cost him a lot. / قراره المتهور كلفه الكثير."},
+  {word: "Juxtapose", definition: "To place things side by side for contrast.", example: "The artist juxtaposed light and dark colors. / وضع الفنان الألوان الفاتحة والداكنة جنبًا إلى جنب للمقارنة."},
+  {word: "Languid", definition: "Slow, relaxed, and lacking energy.", example: "She moved with a languid grace. / تحركت برشاقة بطيئة ومسترخية."},
+  {word: "Magnanimous", definition: "Very generous or forgiving.", example: "He was magnanimous in victory. / كان كريمًا في انتصاره."},
+  {word: "Nefarious", definition: "Wicked, evil, or criminal.", example: "The villain had a nefarious plan. / كان للشرير خطة شريرة."},
+  {word: "Obfuscate", definition: "To deliberately make something unclear.", example: "The politician obfuscated the truth. / تعمد السياسي إخفاء الحقيقة."},
+  {word: "Quintessential", definition: "The most typical example of something.", example: "She is the quintessential leader. / إنها القائدة المثالية."},
+  {word: "Rescind", definition: "To revoke or cancel.", example: "The government rescinded the law. / ألغت الحكومة القانون."},
+  {word: "Superfluous", definition: "Unnecessary or excessive.", example: "Your explanation was superfluous. / كان شرحك زائدًا عن الحاجة."},
+  {word: "Ubiquitous", definition: "Present or found everywhere.", example: "Smartphones are ubiquitous nowadays. / الهواتف الذكية منتشرة في كل مكان هذه الأيام."},
+  {word: "Voracious", definition: "Having a huge appetite for food or knowledge.", example: "She is a voracious reader. / إنها قارئة نهمة."}
+];
 
         const wordsContainer = document.getElementById('words-container');
         const modal = document.getElementById('modal');
@@ -173,9 +190,9 @@
         closeBtn.addEventListener('click', closeModal);
         modalOverlay.addEventListener('click', closeModal);
 
-        // نطق الكلمة (Text-to-Speech)
+        // نطق الكلمة مع تعريفها ومثالها
         speakBtn.addEventListener('click', () => {
-            const textToSpeak = wordTitle.textContent;
+            const textToSpeak = `${wordTitle.textContent}. Definition: ${wordDefinition.textContent}. Example: ${wordExample.textContent}`;
             const speech = new SpeechSynthesisUtterance(textToSpeak);
             speech.lang = 'en';
             window.speechSynthesis.speak(speech);
