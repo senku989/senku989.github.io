@@ -7,96 +7,140 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f4f4f9;
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            text-align: center;
             padding: 20px;
+            color: #333;
         }
         h1 {
-            text-align: center;
+            font-size: 24px;
+        }
+        .words-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 800px;
+            margin: auto;
         }
         .word {
             background: #fff;
-            border: 1px solid #ccc;
+            margin: 5px;
+            padding: 10px 15px;
             border-radius: 5px;
-            padding: 15px;
-            margin: 10px 0;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             cursor: pointer;
-            transition: background 0.3s;
+            transition: transform 0.2s;
         }
         .word:hover {
-            background: #e6e6ff;
+            transform: scale(1.1);
         }
-        .details {
+        .popup {
             display: none;
-            margin-top: 10px;
-            font-size: 0.9em;
-            color: #555;
-        }
-        input[type="text"] {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: left;
+            width: 300px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            animation: fadeIn 0.5s ease-out;
+        }
+        .close {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
 <body>
+    <h1>Top 100 Most Used English Words</h1>
+    <div class="words-container" id="words-container"></div>
 
-    <h1>Top 100 English Words</h1>
-    <input type="text" id="search" placeholder="Search for a word...">
-
-    <div id="wordList"></div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2 id="word-title"></h2>
+            <p id="word-definition"></p>
+            <p id="word-example"></p>
+        </div>
+    </div>
 
     <script>
         const words = [
-            { word: "the", type: "article", definition: "Used to specify a particular noun.", example: "The cat is on the roof." },
-            { word: "be", type: "verb", definition: "To exist or occur.", example: "I will be there soon." },
-            { word: "to", type: "preposition", definition: "Expressing motion or direction.", example: "I am going to the park." },
-            { word: "of", type: "preposition", definition: "Indicating possession or association.", example: "The color of the sky is blue." },
-            { word: "and", type: "conjunction", definition: "Used to connect words or phrases.", example: "She likes apples and oranges." },
-            { word: "a", type: "article", definition: "Used before a noun to indicate one of a general group.", example: "I saw a bird." },
-            { word: "in", type: "preposition", definition: "Expressing the situation of something that is enclosed or surrounded.", example: "She is in the room." },
-            { word: "that", type: "conjunction", definition: "Used to introduce a clause.", example: "I think that you are right." },
-            { word: "have", type: "verb", definition: "To possess or own something.", example: "I have a car." },
-            { word: "I", type: "pronoun", definition: "Refers to the speaker.", example: "I am happy." },
-            { word: "it", type: "pronoun", definition: "Used to refer to a thing previously mentioned.", example: "It is raining." },
-            { word: "for", type: "preposition", definition: "Used to indicate purpose.", example: "This is for you." },
-            { word: "not", type: "adverb", definition: "Used to make a negative statement.", example: "I do not like it." },
-            { word: "on", type: "preposition", definition: "Used to indicate position.", example: "The book is on the table." },
-            { word: "with", type: "preposition", definition: "Accompanied by someone or something.", example: "I am with my friend." }
+            { word: "the", definition: "Used to specify a particular noun.", example: "The sun is bright today." },
+            { word: "be", definition: "To exist or happen.", example: "I want to be a doctor." },
+            { word: "to", definition: "Expressing motion or direction.", example: "I am going to the store." },
+            { word: "of", definition: "Expressing relationship or belonging.", example: "A piece of cake." },
+            { word: "and", definition: "Used to connect words or phrases.", example: "She sings and dances." },
+            { word: "a", definition: "Used when mentioning something for the first time.", example: "I saw a cat outside." },
+            { word: "in", definition: "Inside or within something.", example: "The keys are in my pocket." },
+            { word: "that", definition: "Used to specify a thing.", example: "That car is fast." },
+            { word: "have", definition: "To possess something.", example: "I have a new book." },
+            { word: "I", definition: "Used to refer to oneself.", example: "I love ice cream." },
+            { word: "it", definition: "Referring to an object or thing.", example: "It is raining." },
+            { word: "for", definition: "Used to indicate purpose.", example: "This gift is for you." },
+            { word: "not", definition: "Used to negate something.", example: "I do not like spicy food." },
+            { word: "on", definition: "Indicating position.", example: "The book is on the table." },
+            { word: "with", definition: "Used to show association.", example: "I am with my friend." },
+            { word: "he", definition: "Referring to a male person.", example: "He is my brother." },
+            { word: "as", definition: "Used to compare things.", example: "She is as tall as her sister." },
+            { word: "you", definition: "Referring to the person spoken to.", example: "You are amazing!" },
+            { word: "do", definition: "To perform an action.", example: "I do my homework every day." },
+            { word: "at", definition: "Indicating a location.", example: "Meet me at the park." },
+            { word: "this", definition: "Referring to something close.", example: "This is my phone." },
+            { word: "but", definition: "Used to contrast ideas.", example: "I like tea, but I prefer coffee." },
+            { word: "his", definition: "Belonging to a male person.", example: "That is his car." },
+            { word: "by", definition: "Indicating means of action.", example: "The book was written by her." },
+            { word: "from", definition: "Indicating origin.", example: "I am from Oman." },
+            { word: "they", definition: "Referring to multiple people.", example: "They are playing outside." },
+            { word: "we", definition: "Referring to a group including oneself.", example: "We are best friends." },
+            { word: "say", definition: "To speak or express something.", example: "What did he say?" },
+            { word: "her", definition: "Belonging to a female person.", example: "This is her bag." },
+            { word: "she", definition: "Referring to a female person.", example: "She is my sister." },
+            { word: "or", definition: "Used to offer choices.", example: "Tea or coffee?" },
+            { word: "an", definition: "Used before words starting with a vowel sound.", example: "I saw an elephant." },
+            { word: "will", definition: "Indicating future action.", example: "I will call you later." },
+            { word: "my", definition: "Indicating possession.", example: "This is my phone." },
+            { word: "one", definition: "The number 1.", example: "I have one apple." },
+            { word: "all", definition: "Referring to the whole group.", example: "All students passed the exam." },
+            { word: "would", definition: "Indicating past intention.", example: "I would like some tea." },
+            { word: "there", definition: "Indicating a place.", example: "The keys are over there." },
+            { word: "their", definition: "Belonging to them.", example: "That is their house." },
+            { word: "what", definition: "Asking about something.", example: "What is your name?" }
         ];
 
-        function displayWords(filter = "") {
-            const wordList = document.getElementById("wordList");
-            wordList.innerHTML = "";
-
-            words.forEach(wordObj => {
-                if (wordObj.word.toLowerCase().includes(filter.toLowerCase())) {
-                    const wordDiv = document.createElement("div");
-                    wordDiv.classList.add("word");
-                    wordDiv.innerHTML = `
-                        <strong>${wordObj.word}</strong> (${wordObj.type})
-                        <div class="details">
-                            <p><strong>Definition:</strong> ${wordObj.definition}</p>
-                            <p><strong>Example:</strong> ${wordObj.example}</p>
-                        </div>
-                    `;
-                    wordDiv.addEventListener("click", () => {
-                        const details = wordDiv.querySelector(".details");
-                        details.style.display = details.style.display === "none" ? "block" : "none";
-                    });
-                    wordList.appendChild(wordDiv);
-                }
-            });
-        }
-
-        document.getElementById("search").addEventListener("input", (e) => {
-            displayWords(e.target.value);
+        const wordsContainer = document.getElementById("words-container");
+        words.forEach(item => {
+            let wordDiv = document.createElement("div");
+            wordDiv.className = "word";
+            wordDiv.innerText = item.word;
+            wordDiv.onclick = () => showPopup(item);
+            wordsContainer.appendChild(wordDiv);
         });
 
-        displayWords();
-    </script>
+        function showPopup(item) {
+            document.getElementById("word-title").innerText = item.word;
+            document.getElementById("word-definition").innerText = item.definition;
+            document.getElementById("word-example").innerText = item.example;
+            document.getElementById("popup").style.display = "flex";
+        }
 
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
 </body>
 </html>
