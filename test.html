@@ -47,74 +47,65 @@
         .disabled {
             pointer-events: none;
         }
+        .insta-link {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 16px;
+            text-decoration: none;
+            background-color: #833AB4;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
 
+    <a class="insta-link" href="https://www.instagram.com/e.nglish98" target="_blank">تابعني على إنستجرام</a>
+
     <div class="quiz-container">
-        <h2>اختبار اللغة الإنجليزية</h2>
+        <h2>اختبار اللغة الإنجليزية الأكاديمي</h2>
         
         <div class="question-box">
-            <p class="question">1. She might not reply to your email because she has a lot on her ______ right now.</p>
+            <p class="question">1. Choose the correct verb tense: "By the time she arrived, we _____ dinner."</p>
             <div class="options">
-                <button onclick="checkAnswer(this, false)">1. fork</button>
-                <button onclick="checkAnswer(this, false)">2. spoon</button>
-                <button onclick="checkAnswer(this, true)">3. plate</button>
+                <button onclick="checkAnswer(this, false)">1. eat</button>
+                <button onclick="checkAnswer(this, true)">2. had eaten</button>
+                <button onclick="checkAnswer(this, false)">3. were eating</button>
             </div>
         </div>
 
         <div class="question-box">
-            <p class="question">2. He was so tired that he hit the ______ as soon as he got home.</p>
+            <p class="question">2. Select the correct word: "The professor gave a very _____ lecture on climate change."</p>
             <div class="options">
-                <button onclick="checkAnswer(this, false)">1. wall</button>
-                <button onclick="checkAnswer(this, true)">2. sack</button>
-                <button onclick="checkAnswer(this, false)">3. chair</button>
+                <button onclick="checkAnswer(this, false)">1. bored</button>
+                <button onclick="checkAnswer(this, true)">2. informative</button>
+                <button onclick="checkAnswer(this, false)">3. uninterested</button>
             </div>
         </div>
 
         <div class="question-box">
-            <p class="question">3. I can't come to the party because I’m feeling under the ______.</p>
+            <p class="question">3. Identify the correct preposition: "She is very experienced _____ managing large projects."</p>
             <div class="options">
-                <button onclick="checkAnswer(this, false)">1. tree</button>
-                <button onclick="checkAnswer(this, true)">2. weather</button>
-                <button onclick="checkAnswer(this, false)">3. table</button>
+                <button onclick="checkAnswer(this, false)">1. on</button>
+                <button onclick="checkAnswer(this, true)">2. in</button>
+                <button onclick="checkAnswer(this, false)">3. about</button>
             </div>
         </div>
 
         <div class="question-box">
-            <p class="question">4. She spilled the beans about the surprise party.</p>
+            <p class="question">4. Which sentence is grammatically correct?</p>
             <div class="options">
-                <button onclick="checkAnswer(this, false)">1. She cooked beans</button>
-                <button onclick="checkAnswer(this, false)">2. She made a mess</button>
-                <button onclick="checkAnswer(this, true)">3. She revealed a secret</button>
+                <button onclick="checkAnswer(this, false)">1. "The informations are accurate."</button>
+                <button onclick="checkAnswer(this, false)">2. "She enjoy reading books."</button>
+                <button onclick="checkAnswer(this, true)">3. "The information is accurate."</button>
             </div>
         </div>
 
         <div class="question-box">
-            <p class="question">5. That new project is a piece of ______.</p>
+            <p class="question">5. What is the synonym of "significant"?</p>
             <div class="options">
-                <button onclick="checkAnswer(this, false)">1. rock</button>
-                <button onclick="checkAnswer(this, false)">2. cake</button>
-                <button onclick="checkAnswer(this, true)">3. cake</button>
-            </div>
-        </div>
-
-    </div>
-
-    <script>
-        function checkAnswer(button, isCorrect) {
-            if (isCorrect) {
-                button.classList.add("correct");
-                button.innerHTML += " ✔";
-            } else {
-                button.classList.add("wrong");
-                button.innerHTML += " ✘";
-            }
-            // تعطيل جميع الأزرار بعد اختيار الإجابة
-            let buttons = button.parentElement.querySelectorAll("button");
-            buttons.forEach(btn => btn.classList.add("disabled"));
-        }
-    </script>
-
-</body>
-</html>
+                <button onclick="checkAnswer(this, true)">1. important</button>
+                <button onclick="checkAnswer(this, false)">2. minor</button>
+                <button onclick="checkAnswer(this
