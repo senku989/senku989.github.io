@@ -9,10 +9,13 @@
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #f4f4f4;
-            direction: ltr;
+            color: black;
+            direction: rtl;
             margin: 0;
-            padding-bottom: 60px; /* عشان ما يغطي الفوتر على المحتوى */
+            padding-bottom: 60px;
+            transition: background 0.3s, color 0.3s;
         }
+
         .quiz-container {
             background: white;
             padding: 20px;
@@ -20,35 +23,35 @@
             width: 80%;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s, color 0.3s;
         }
+
         h2 {
             color: #003366;
         }
-        .question-box {
-            margin-bottom: 20px;
-        }
-        .question {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
+
         .question .number {
             color: blue;
             font-weight: bold;
         }
+
         .question .prefix {
             color: red;
             font-weight: bold;
         }
+
         .question .text {
             color: black;
             direction: ltr;
             display: inline-block;
         }
+
         .options {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
+
         button {
             padding: 10px;
             font-size: 16px;
@@ -58,19 +61,21 @@
             transition: 0.3s;
             outline: none;
         }
+
         .correct {
             background-color: #4CAF50;
             color: white;
         }
+
         .wrong {
             background-color: #FF5733;
             color: white;
         }
+
         .disabled {
             pointer-events: none;
         }
-        
-        /* الفوتر */
+
         .footer {
             position: fixed;
             bottom: 0;
@@ -81,6 +86,7 @@
             padding: 10px 0;
             font-size: 16px;
         }
+
         .footer a {
             color: white;
             text-decoration: none;
@@ -89,75 +95,81 @@
             justify-content: center;
             gap: 10px;
         }
+
         .footer img {
             width: 24px;
             height: 24px;
+        }
+
+        .dark-mode-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dark-mode-btn:hover {
+            background: #555;
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+
+        .dark-mode .quiz-container {
+            background: #1e1e1e;
+            color: white;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode h2 {
+            color: #f4f4f4;
+        }
+
+        .dark-mode .question .text {
+            color: white;
+        }
+
+        .dark-mode .question .number {
+            color: #4DB6AC;
+        }
+
+        .dark-mode .question .prefix {
+            color: #FF9800;
+        }
+
+        .dark-mode .footer {
+            background: #222;
+        }
+
+        .dark-mode .dark-mode-btn {
+            background: #f4f4f4;
+            color: black;
+        }
+
+        .dark-mode .dark-mode-btn:hover {
+            background: #ccc;
         }
     </style>
 </head>
 <body>
 
+    <button class="dark-mode-btn" onclick="toggleDarkMode()">🌙 تبديل الوضع</button>
+
     <div class="quiz-container">
         <h2>اختبار اللغة الإنجليزية</h2>
 
-        <!-- 30 سؤال -->
-        <script>
-            let questions = [
-                { q: "She might not reply to your email because she has a lot on her ______ right now.", options: ["fork", "spoon", "plate"], correct: 2 },
-                { q: "He was so tired that he hit the ______ as soon as he got home.", options: ["wall", "sack", "chair"], correct: 1 },
-                { q: "I can't come to the party because I’m feeling under the ______.", options: ["tree", "weather", "table"], correct: 1 },
-                { q: "She spilled the beans about the surprise party.", options: ["She cooked beans", "She made a mess", "She revealed a secret"], correct: 2 },
-                { q: "That new project is a piece of ______.", options: ["rock", "cake", "paper"], correct: 1 },
-                { q: "He was caught red-______ while stealing the money.", options: ["headed", "handed", "faced"], correct: 1 },
-                { q: "We need to get the ball ______ on this project.", options: ["spinning", "rolling", "moving"], correct: 1 },
-                { q: "Don't judge a book by its ______.", options: ["cover", "pages", "story"], correct: 0 },
-                { q: "She is pulling my ______.", options: ["hand", "leg", "ear"], correct: 1 },
-                { q: "A penny for your ______.", options: ["mind", "thoughts", "idea"], correct: 1 },
-                { q: "Break a ______!", options: ["leg", "arm", "bone"], correct: 0 },
-                { q: "Let’s hit the ______ and go home.", options: ["bed", "road", "book"], correct: 1 },
-                { q: "Actions speak louder than ______.", options: ["thoughts", "words", "promises"], correct: 1 },
-                { q: "The early bird catches the ______.", options: ["worm", "fish", "seed"], correct: 0 },
-                { q: "Bite the ______ and face your fears.", options: ["bullet", "apple", "truth"], correct: 0 },
-                { q: "He always goes the extra ______ to help others.", options: ["mile", "step", "inch"], correct: 0 },
-                { q: "She is feeling blue today.", options: ["happy", "sad", "excited"], correct: 1 },
-                { q: "Don't put all your eggs in one ______.", options: ["box", "basket", "tray"], correct: 1 },
-                { q: "Let’s wrap this ______ up.", options: ["meeting", "gift", "task"], correct: 2 },
-                { q: "It costs an arm and a ______.", options: ["leg", "hand", "foot"], correct: 0 },
-                { q: "He's the black ______ of the family.", options: ["sheep", "goat", "horse"], correct: 0 },
-                { q: "Let’s call it a ______.", options: ["day", "night", "end"], correct: 0 },
-                { q: "A blessing in ______.", options: ["gift", "disguise", "secret"], correct: 1 },
-                { q: "He turned a blind ______ to the problem.", options: ["hand", "eye", "ear"], correct: 1 },
-                { q: "You're barking up the wrong ______.", options: ["tree", "house", "dog"], correct: 0 },
-                { q: "We’re in the same ______.", options: ["boat", "car", "plane"], correct: 0 },
-                { q: "Don't cry over spilled ______.", options: ["water", "milk", "juice"], correct: 1 },
-                { q: "It’s just a drop in the ______.", options: ["ocean", "lake", "river"], correct: 0 },
-                { q: "Don’t count your chickens before they ______.", options: ["fly", "hatch", "grow"], correct: 1 },
-                { q: "Every cloud has a silver ______.", options: ["line", "lining", "shine"], correct: 1 },
-            ];
-
-            document.write('<div id="questions-container">');
-            questions.forEach((item, index) => {
-                document.write(`
-                    <div class="question-box">
-                        <p class="question">
-                            <span class="number">${index + 1}.</span> 
-                            <span class="prefix">اختر الكلمة الصحيحة:</span> 
-                            <span class="text">${item.q}</span>
-                        </p>
-                        <div class="options">
-                            ${item.options.map((option, i) => 
-                                `<button onclick="checkAnswer(this, ${i === item.correct})">${i + 1}. ${option}</button>`
-                            ).join('')}
-                        </div>
-                    </div>
-                `);
-            });
-            document.write('</div>');
-        </script>
+        <div id="questions-container"></div>
 
     </div>
 
-    <!-- الفوتر -->
     <div class="footer">
         <a href="https://www.instagram.com/e.nglish98" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
@@ -166,17 +178,53 @@
     </div>
 
     <script>
-        function checkAnswer(button, isCorrect) {
-            if (isCorrect) {
-                button.classList.add("correct");
-                button.innerHTML += " ✔";
-            } else {
-                button.classList.add("wrong");
-                button.innerHTML += " ✘";
-            }
-            let buttons = button.parentElement.querySelectorAll("button");
-            buttons.forEach(btn => btn.classList.add("disabled"));
+        let questions = [
+            { q: "She might not reply to your email because she has a lot on her ______ right now.", options: ["fork", "spoon", "plate"], correct: 2 },
+            { q: "He was so tired that he hit the ______ as soon as he got home.", options: ["wall", "sack", "chair"], correct: 1 },
+            { q: "I can't come to the party because I’m feeling under the ______.", options: ["tree", "weather", "table"], correct: 1 },
+            { q: "She spilled the beans about the surprise party.", options: ["She cooked beans", "She made a mess", "She revealed a secret"], correct: 2 },
+            { q: "That new project is a piece of ______.", options: ["rock", "cake", "glass"], correct: 1 },
+            { q: "He's always crying over spilled ______.", options: ["juice", "milk", "water"], correct: 1 },
+            { q: "They let the cat out of the ______.", options: ["house", "bag", "window"], correct: 1 },
+            { q: "I'm not feeling well, I need to hit the ______.", options: ["sack", "road", "gym"], correct: 0 },
+            { q: "The early bird catches the ______.", options: ["fish", "worm", "rabbit"], correct: 1 },
+            { q: "He's pulling my ______.", options: ["leg", "hand", "ear"], correct: 0 },
+            { q: "He got cold ______ before the wedding.", options: ["feet", "hands", "ears"], correct: 0 },
+            { q: "I'm all ______! Just tell me what happened.", options: ["eyes", "ears", "nose"], correct: 1 },
+            { q: "Break a ______!", options: ["leg", "arm", "finger"], correct: 0 },
+            { q: "I’m going to give you a piece of my ______.", options: ["cake", "mind", "heart"], correct: 1 },
+            { q: "Don't judge a book by its ______.", options: ["author", "cover", "pages"], correct: 1 },
+            { q: "The ball is in your ______.", options: ["court", "hands", "field"], correct: 0 },
+            { q: "I was on cloud ______ when I won the competition.", options: ["seven", "nine", "ten"], correct: 1 },
+            { q: "He let me off the ______.", options: ["boat", "hook", "trap"], correct: 1 },
+            { q: "Bite the ______!", options: ["dust", "bullet", "apple"], correct: 1 },
+            { q: "You're barking up the wrong ______.", options: ["door", "tree", "wall"], correct: 1 },
+        ];
+
+        let container = document.getElementById("questions-container");
+        questions.forEach((item, index) => {
+            container.innerHTML += `
+                <div class="question-box">
+                    <p class="question">
+                        <span class="number">${index + 1}.</span> 
+                        <span class="prefix">اختر الكلمة الصحيحة:</span> 
+                        <span class="text">${item.q}</span>
+                    </p>
+                    <div class="options">
+                        ${item.options.map((option, i) => `<button onclick="checkAnswer(this, ${i === item.correct})">${i + 1}. ${option}</button>`).join('')}
+                    </div>
+                </div>
+            `;
+        });
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode") ? "enabled" : "disabled");
         }
+
+        window.onload = function() {
+            if (localStorage.getItem("darkMode") === "enabled") document.body.classList.add("dark-mode");
+        };
     </script>
 
 </body>
