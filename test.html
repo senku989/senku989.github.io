@@ -9,13 +9,15 @@
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #f4f4f4;
-            direction: ltr;
+            direction: rtl;
+            margin: 0;
+            padding-bottom: 60px; /* عشان ما يغطي الفوتر على المحتوى */
         }
         .quiz-container {
             background: white;
             padding: 20px;
             margin: 50px auto;
-            width: 90%;
+            width: 70%;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
@@ -66,6 +68,30 @@
         .disabled {
             pointer-events: none;
         }
+        
+        /* الفوتر */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 16px;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .footer img {
+            width: 24px;
+            height: 24px;
+        }
     </style>
 </head>
 <body>
@@ -114,7 +140,7 @@
                     <div class="question-box">
                         <p class="question">
                             <span class="number">${index + 1}.</span> 
-                            <span class="prefix">Choose the correct word:</span> 
+                            <span class="prefix">اختر الكلمة الصحيحة:</span> 
                             <span class="text">${item.q}</span>
                         </p>
                         <div class="options">
@@ -128,6 +154,14 @@
             document.write('</div>');
         </script>
 
+    </div>
+
+    <!-- الفوتر -->
+    <div class="footer">
+        <a href="https://www.instagram.com/e.nglish98" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+            @e.nglish98
+        </a>
     </div>
 
     <script>
