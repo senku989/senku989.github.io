@@ -15,6 +15,11 @@
             transition: background 0.3s, color 0.3s;
         }
 
+        .dark-mode {
+            background-color: #1e1e1e;
+            color: white;
+        }
+
         .quiz-container {
             background: white;
             padding: 20px;
@@ -22,20 +27,33 @@
             width: 80%;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s;
+        }
+
+        .dark-mode .quiz-container {
+            background: #333;
         }
 
         h2 {
             color: #003366;
         }
 
-        .question .number {
-            color: blue;
-            font-weight: bold;
+        .toggle-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            background: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
         }
 
-        .question .prefix {
-            color: red;
-            font-weight: bold;
+        .dark-mode .toggle-btn {
+            background: white;
+            color: black;
         }
 
         .options {
@@ -51,6 +69,7 @@
             cursor: pointer;
             border-radius: 5px;
             transition: 0.3s;
+            outline: none;
         }
 
         .correct {
@@ -92,9 +111,33 @@
         .show {
             opacity: 1;
         }
+
+        .insta-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #e1306c;
+            color: white;
+            font-size: 24px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        .insta-btn:hover {
+            background: #c2185b;
+        }
     </style>
 </head>
 <body>
+
+    <button class="toggle-btn" onclick="toggleMode()">Toggle Mode</button>
 
     <div class="quiz-container">
         <h2>English Quiz</h2>
@@ -107,37 +150,15 @@
         <p>Correct answers: <span id="score">0</span> / 30</p>
     </div>
 
+    <a href="https://www.instagram.com/e.nglish98" class="insta-btn" target="_blank">📸</a>
+
     <script>
         let questions = [
             { q: "She might not reply to your email because she has a lot on her ______ right now.", options: ["fork", "spoon", "plate"], correct: 2 },
             { q: "He was so tired that he hit the ______ as soon as he got home.", options: ["wall", "sack", "chair"], correct: 1 },
             { q: "I can't come to the party because I’m feeling under the ______.", options: ["tree", "weather", "table"], correct: 1 },
             { q: "She spilled the beans about the surprise party.", options: ["She cooked beans", "She made a mess", "She revealed a secret"], correct: 2 },
-            { q: "That new project is a piece of ______.", options: ["rock", "cake", "glass"], correct: 1 },
-            { q: "He's always crying over spilled ______.", options: ["juice", "milk", "water"], correct: 1 },
-            { q: "They let the cat out of the ______.", options: ["house", "bag", "window"], correct: 1 },
-            { q: "I'm not feeling well, I need to hit the ______.", options: ["sack", "road", "gym"], correct: 0 },
-            { q: "The early bird catches the ______.", options: ["fish", "worm", "rabbit"], correct: 1 },
-            { q: "He's pulling my ______.", options: ["leg", "hand", "ear"], correct: 0 },
-            { q: "It's a ______ of cake.", options: ["piece", "slice", "bite"], correct: 0 },
-            { q: "Don't count your chickens before they ______.", options: ["hatch", "fly", "sit"], correct: 0 },
-            { q: "We need to take the ______ by the horns.", options: ["dog", "bull", "fish"], correct: 1 },
-            { q: "She got cold feet before the wedding.", options: ["She got sick", "She got nervous", "She got angry"], correct: 1 },
-            { q: "He was on top of the world when he won the prize.", options: ["sad", "happy", "angry"], correct: 1 },
-            { q: "This is a no-brainer.", options: ["Easy decision", "Hard decision", "Confusing decision"], correct: 0 },
-            { q: "The ball is in your ______ now.", options: ["court", "field", "house"], correct: 0 },
-            { q: "He’s a real ______ in the office.", options: ["star", "fish", "dog"], correct: 0 },
-            { q: "She was born with a silver ______ in her mouth.", options: ["spoon", "fork", "knife"], correct: 0 },
-            { q: "It’s as easy as pie.", options: ["difficult", "simple", "complicated"], correct: 1 },
-            { q: "I can't make heads or ______ of this.", options: ["tails", "feet", "hands"], correct: 0 },
-            { q: "Don’t bite off more than you can ______.", options: ["chew", "eat", "swallow"], correct: 0 },
-            { q: "He’s in the doghouse.", options: ["in trouble", "in the office", "on vacation"], correct: 0 },
-            { q: "She broke the ______ when she told everyone.", options: ["news", "secret", "truth"], correct: 1 },
-            { q: "I’ll take the bull by the ______.", options: ["horns", "hands", "ears"], correct: 0 },
-            { q: "We need to get back to the ______ and make some changes.", options: ["drawing board", "whiteboard", "sketch"], correct: 0 },
-            { q: "He let the cat out of the ______.", options: ["bag", "hat", "box"], correct: 0 },
-            { q: "She doesn't have the ______ of the job.", options: ["time", "money", "skills"], correct: 2 },
-            { q: "We are over the ______ with this project.", options: ["moon", "hill", "top"], correct: 0 }
+            { q: "That new project is a piece of ______.", options: ["rock", "cake", "glass"], correct: 1 }
         ];
 
         let score = 0;
@@ -148,15 +169,15 @@
         questions.forEach((item, index) => {
             let questionBox = document.createElement("div");
             questionBox.innerHTML = `
-                <p class="question"><span class="number">${index + 1}.</span> ${item.q}</p>
+                <p class="question"><b>${index + 1}.</b> ${item.q}</p>
                 <div class="options">
-                    ${item.options.map((option, i) => `<button onclick="checkAnswer(this, ${i === item.correct})">${option}</button>`).join('')}
+                    ${item.options.map((option, i) => `<button onclick="checkAnswer(this, ${i === item.correct}, ${index}, ${i})">${option}</button>`).join('')}
                 </div>
             `;
             container.appendChild(questionBox);
         });
 
-        function checkAnswer(button, isCorrect) {
+        function checkAnswer(button, isCorrect, questionIndex, optionIndex) {
             feedback.innerText = isCorrect ? "✔" : "✘";
             feedback.style.color = isCorrect ? "green" : "red";
             feedback.classList.add("show");
@@ -167,7 +188,18 @@
                 scoreDisplay.textContent = score;
             }
 
-            button.parentElement.querySelectorAll("button").forEach(btn => btn.classList.add("disabled"));
+            let buttons = button.parentElement.querySelectorAll("button");
+            buttons.forEach((btn, i) => {
+                btn.classList.add("disabled");
+                if (i === optionIndex) {
+                    btn.classList.add(isCorrect ? "correct" : "wrong");
+                    btn.innerHTML += isCorrect ? " ✔" : " ✘";
+                }
+            });
+        }
+
+        function toggleMode() {
+            document.body.classList.toggle("dark-mode");
         }
     </script>
 
