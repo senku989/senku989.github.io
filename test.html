@@ -9,18 +9,18 @@
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #f4f4f4;
-            direction: ltr;
+            direction: rtl;
         }
         .quiz-container {
             background: white;
             padding: 20px;
             margin: 50px auto;
-            width: 90%;
+            width: 70%;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
         h2 {
-            color: #003366; /* لون العنوان */
+            color: #003366;
         }
         .question-box {
             margin-bottom: 20px;
@@ -30,16 +30,16 @@
             margin-bottom: 10px;
         }
         .question .number {
-            color: blue; /* لون رقم السؤال */
+            color: blue;
             font-weight: bold;
         }
         .question .prefix {
-            color: red; /* لون مقدمة السؤال */
+            color: red;
             font-weight: bold;
         }
         .question .text {
-            color: black; /* لون النص التابع */
-            direction: ltr; /* جعل النص الإنجليزي من اليسار لليمين */
+            color: black;
+            direction: ltr;
             display: inline-block;
         }
         .options {
@@ -72,71 +72,61 @@
 
     <div class="quiz-container">
         <h2>اختبار اللغة الإنجليزية</h2>
-        
-        <div class="question-box">
-            <p class="question">
-                <span class="number">1.</span> 
-                <span class="prefix">Choose the correct word:</span> 
-                <span class="text">She might not reply to your email because she has a lot on her ______ right now.</span>
-            </p>
-            <div class="options">
-                <button onclick="checkAnswer(this, false)">1. fork</button>
-                <button onclick="checkAnswer(this, false)">2. spoon</button>
-                <button onclick="checkAnswer(this, true)">3. plate</button>
-            </div>
-        </div>
 
-        <div class="question-box">
-            <p class="question">
-                <span class="number">2.</span> 
-                <span class="prefix">Choose the correct word:</span> 
-                <span class="text">He was so tired that he hit the ______ as soon as he got home.</span>
-            </p>
-            <div class="options">
-                <button onclick="checkAnswer(this, false)">1. wall</button>
-                <button onclick="checkAnswer(this, true)">2. sack</button>
-                <button onclick="checkAnswer(this, false)">3. chair</button>
-            </div>
-        </div>
+        <!-- 30 سؤال -->
+        <script>
+            let questions = [
+                { q: "She might not reply to your email because she has a lot on her ______ right now.", options: ["fork", "spoon", "plate"], correct: 2 },
+                { q: "He was so tired that he hit the ______ as soon as he got home.", options: ["wall", "sack", "chair"], correct: 1 },
+                { q: "I can't come to the party because I’m feeling under the ______.", options: ["tree", "weather", "table"], correct: 1 },
+                { q: "She spilled the beans about the surprise party.", options: ["She cooked beans", "She made a mess", "She revealed a secret"], correct: 2 },
+                { q: "That new project is a piece of ______.", options: ["rock", "cake", "paper"], correct: 1 },
+                { q: "He was caught red-______ while stealing the money.", options: ["headed", "handed", "faced"], correct: 1 },
+                { q: "We need to get the ball ______ on this project.", options: ["spinning", "rolling", "moving"], correct: 1 },
+                { q: "Don't judge a book by its ______.", options: ["cover", "pages", "story"], correct: 0 },
+                { q: "She is pulling my ______.", options: ["hand", "leg", "ear"], correct: 1 },
+                { q: "A penny for your ______.", options: ["mind", "thoughts", "idea"], correct: 1 },
+                { q: "Break a ______!", options: ["leg", "arm", "bone"], correct: 0 },
+                { q: "Let’s hit the ______ and go home.", options: ["bed", "road", "book"], correct: 1 },
+                { q: "Actions speak louder than ______.", options: ["thoughts", "words", "promises"], correct: 1 },
+                { q: "The early bird catches the ______.", options: ["worm", "fish", "seed"], correct: 0 },
+                { q: "Bite the ______ and face your fears.", options: ["bullet", "apple", "truth"], correct: 0 },
+                { q: "He always goes the extra ______ to help others.", options: ["mile", "step", "inch"], correct: 0 },
+                { q: "She is feeling blue today.", options: ["happy", "sad", "excited"], correct: 1 },
+                { q: "Don't put all your eggs in one ______.", options: ["box", "basket", "tray"], correct: 1 },
+                { q: "Let’s wrap this ______ up.", options: ["meeting", "gift", "task"], correct: 2 },
+                { q: "It costs an arm and a ______.", options: ["leg", "hand", "foot"], correct: 0 },
+                { q: "He's the black ______ of the family.", options: ["sheep", "goat", "horse"], correct: 0 },
+                { q: "Let’s call it a ______.", options: ["day", "night", "end"], correct: 0 },
+                { q: "A blessing in ______.", options: ["gift", "disguise", "secret"], correct: 1 },
+                { q: "He turned a blind ______ to the problem.", options: ["hand", "eye", "ear"], correct: 1 },
+                { q: "You're barking up the wrong ______.", options: ["tree", "house", "dog"], correct: 0 },
+                { q: "We’re in the same ______.", options: ["boat", "car", "plane"], correct: 0 },
+                { q: "Don't cry over spilled ______.", options: ["water", "milk", "juice"], correct: 1 },
+                { q: "It’s just a drop in the ______.", options: ["ocean", "lake", "river"], correct: 0 },
+                { q: "Don’t count your chickens before they ______.", options: ["fly", "hatch", "grow"], correct: 1 },
+                { q: "Every cloud has a silver ______.", options: ["line", "lining", "shine"], correct: 1 },
+            ];
 
-        <div class="question-box">
-            <p class="question">
-                <span class="number">3.</span> 
-                <span class="prefix">Choose the correct word:</span> 
-                <span class="text">I can't come to the party because I’m feeling under the ______.</span>
-            </p>
-            <div class="options">
-                <button onclick="checkAnswer(this, false)">1. tree</button>
-                <button onclick="checkAnswer(this, true)">2. weather</button>
-                <button onclick="checkAnswer(this, false)">3. table</button>
-            </div>
-        </div>
-
-        <div class="question-box">
-            <p class="question">
-                <span class="number">4.</span> 
-                <span class="prefix">What does this phrase mean?:</span> 
-                <span class="text">She spilled the beans about the surprise party.</span>
-            </p>
-            <div class="options">
-                <button onclick="checkAnswer(this, false)">1. She cooked beans</button>
-                <button onclick="checkAnswer(this, false)">2. She made a mess</button>
-                <button onclick="checkAnswer(this, true)">3. She revealed a secret</button>
-            </div>
-        </div>
-
-        <div class="question-box">
-            <p class="question">
-                <span class="number">5.</span> 
-                <span class="prefix">Complete the phrase:</span> 
-                <span class="text">That new project is a piece of ______.</span>
-            </p>
-            <div class="options">
-                <button onclick="checkAnswer(this, false)">1. rock</button>
-                <button onclick="checkAnswer(this, false)">2. cake</button>
-                <button onclick="checkAnswer(this, true)">3. cake</button>
-            </div>
-        </div>
+            document.write('<div id="questions-container">');
+            questions.forEach((item, index) => {
+                document.write(`
+                    <div class="question-box">
+                        <p class="question">
+                            <span class="number">${index + 1}.</span> 
+                            <span class="prefix">Choose the correct word:</span> 
+                            <span class="text">${item.q}</span>
+                        </p>
+                        <div class="options">
+                            ${item.options.map((option, i) => 
+                                `<button onclick="checkAnswer(this, ${i === item.correct})">${i + 1}. ${option}</button>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `);
+            });
+            document.write('</div>');
+        </script>
 
     </div>
 
@@ -149,7 +139,6 @@
                 button.classList.add("wrong");
                 button.innerHTML += " ✘";
             }
-            // تعطيل جميع الأزرار بعد اختيار الإجابة
             let buttons = button.parentElement.querySelectorAll("button");
             buttons.forEach(btn => btn.classList.add("disabled"));
         }
