@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اختبار اللغة الإنجليزية</title>
+    <title>اختبار اللغة الإنجليزية الأكاديمي</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #f4f4f4;
             direction: rtl;
+            margin: 0;
+            padding: 0;
         }
         .quiz-container {
             background: white;
@@ -47,65 +49,92 @@
         .disabled {
             pointer-events: none;
         }
-        .insta-link {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 16px;
-            text-decoration: none;
-            background-color: #833AB4;
+        .footer {
+            background: #222;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer a {
             color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .footer img {
+            width: 30px;
+            vertical-align: middle;
         }
     </style>
 </head>
 <body>
 
-    <a class="insta-link" href="https://www.instagram.com/e.nglish98" target="_blank">تابعني على إنستجرام</a>
-
     <div class="quiz-container">
         <h2>اختبار اللغة الإنجليزية الأكاديمي</h2>
-        
-        <div class="question-box">
-            <p class="question">1. Choose the correct verb tense: "By the time she arrived, we _____ dinner."</p>
-            <div class="options">
-                <button onclick="checkAnswer(this, false)">1. eat</button>
-                <button onclick="checkAnswer(this, true)">2. had eaten</button>
-                <button onclick="checkAnswer(this, false)">3. were eating</button>
-            </div>
-        </div>
 
-        <div class="question-box">
-            <p class="question">2. Select the correct word: "The professor gave a very _____ lecture on climate change."</p>
-            <div class="options">
-                <button onclick="checkAnswer(this, false)">1. bored</button>
-                <button onclick="checkAnswer(this, true)">2. informative</button>
-                <button onclick="checkAnswer(this, false)">3. uninterested</button>
-            </div>
-        </div>
+        <div id="questions-container"></div>
 
-        <div class="question-box">
-            <p class="question">3. Identify the correct preposition: "She is very experienced _____ managing large projects."</p>
-            <div class="options">
-                <button onclick="checkAnswer(this, false)">1. on</button>
-                <button onclick="checkAnswer(this, true)">2. in</button>
-                <button onclick="checkAnswer(this, false)">3. about</button>
-            </div>
-        </div>
+    </div>
 
-        <div class="question-box">
-            <p class="question">4. Which sentence is grammatically correct?</p>
-            <div class="options">
-                <button onclick="checkAnswer(this, false)">1. "The informations are accurate."</button>
-                <button onclick="checkAnswer(this, false)">2. "She enjoy reading books."</button>
-                <button onclick="checkAnswer(this, true)">3. "The information is accurate."</button>
-            </div>
-        </div>
+    <div class="footer">
+        <a href="https://www.instagram.com/e.nglish98" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+        </a>
+    </div>
 
-        <div class="question-box">
-            <p class="question">5. What is the synonym of "significant"?</p>
-            <div class="options">
-                <button onclick="checkAnswer(this, true)">1. important</button>
-                <button onclick="checkAnswer(this, false)">2. minor</button>
-                <button onclick="checkAnswer(this
+    <script>
+        const questions = [
+            { question: "1. Choose the correct verb tense: 'By the time she arrived, we _____ dinner.'", options: ["eat", "had eaten", "were eating"], correct: 1 },
+            { question: "2. Select the correct word: 'The professor gave a very _____ lecture on climate change.'", options: ["bored", "informative", "uninterested"], correct: 1 },
+            { question: "3. Identify the correct preposition: 'She is very experienced _____ managing large projects.'", options: ["on", "in", "about"], correct: 1 },
+            { question: "4. Which sentence is grammatically correct?", options: ["The informations are accurate.", "She enjoy reading books.", "The information is accurate."], correct: 2 },
+            { question: "5. What is the synonym of 'significant'?", options: ["important", "minor", "irrelevant"], correct: 0 },
+            { question: "6. The past tense of 'go' is:", options: ["goed", "went", "gone"], correct: 1 },
+            { question: "7. What is the antonym of 'increase'?", options: ["reduce", "expand", "enlarge"], correct: 0 },
+            { question: "8. Choose the correct article: 'She is ____ honest person.'", options: ["a", "an", "the"], correct: 1 },
+            { question: "9. Identify the correct sentence:", options: ["I has a book.", "She have a car.", "He has a bike."], correct: 2 },
+            { question: "10. Find the correct spelling:", options: ["accomodate", "accommodate", "acommodate"], correct: 1 },
+            { question: "11. Choose the correct modal verb: 'You _____ be on time for the meeting.'", options: ["must", "can", "may"], correct: 0 },
+            { question: "12. What is the opposite of 'dangerous'?", options: ["risky", "safe", "harmful"], correct: 1 },
+            { question: "13. Select the correct verb form: 'She _____ her homework before dinner.'", options: ["finish", "finished", "finishes"], correct: 1 },
+            { question: "14. Which word is a noun?", options: ["quickly", "happiness", "running"], correct: 1 },
+            { question: "15. What is the comparative form of 'good'?", options: ["better", "best", "gooder"], correct: 0 },
+            { question: "16. Identify the passive voice sentence:", options: ["She wrote the book.", "The book was written by her.", "She writes a book."], correct: 1 },
+            { question: "17. What is the plural of 'child'?", options: ["childs", "children", "childes"], correct: 1 },
+            { question: "18. Which word is a preposition?", options: ["happily", "beside", "run"], correct: 1 },
+            { question: "19. Choose the correct conjunction: 'I was tired, _____ I went to bed early.'", options: ["but", "so", "because"], correct: 1 },
+            { question: "20. What is the opposite of 'strong'?", options: ["powerful", "weak", "heavy"], correct: 1 },
+            { question: "21. Identify the correct spelling:", options: ["necessary", "necesary", "necessery"], correct: 0 },
+            { question: "22. Which is a countable noun?", options: ["water", "milk", "apple"], correct: 2 },
+            { question: "23. What is the synonym of 'huge'?", options: ["tiny", "gigantic", "small"], correct: 1 },
+            { question: "24. Choose the correct sentence:", options: ["He don’t like coffee.", "He doesn’t like coffee.", "He not like coffee."], correct: 1 },
+            { question: "25. What is the opposite of 'polite'?", options: ["kind", "rude", "friendly"], correct: 1 },
+            { question: "26. Select the correct past form: 'She _____ to the store yesterday.'", options: ["goes", "went", "going"], correct: 1 },
+            { question: "27. Which word is an adjective?", options: ["quick", "quickly", "run"], correct: 0 },
+            { question: "28. What is the synonym of 'intelligent'?", options: ["smart", "slow", "dumb"], correct: 0 },
+            { question: "29. Choose the correct pronoun: 'This book is mine, that one is _____.'", options: ["your", "yours", "you"], correct: 1 },
+            { question: "30. What is the opposite of 'success'?", options: ["failure", "win", "achievement"], correct: 0 },
+        ];
+
+        const container = document.getElementById("questions-container");
+
+        questions.forEach((q, index) => {
+            let questionHTML = `<div class="question-box">
+                <p class="question">${q.question}</p>
+                <div class="options">
+                    ${q.options.map((opt, i) => `<button onclick="checkAnswer(this, ${i === q.correct})">${opt}</button>`).join("")}
+                </div>
+            </div>`;
+            container.innerHTML += questionHTML;
+        });
+
+        function checkAnswer(button, isCorrect) {
+            button.classList.add(isCorrect ? "correct" : "wrong");
+            button.innerHTML += isCorrect ? " ✔" : " ✘";
+            button.parentElement.querySelectorAll("button").forEach(btn => btn.classList.add("disabled"));
+        }
+    </script>
+
+</body>
+</html>
