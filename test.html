@@ -9,43 +9,49 @@
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #f4f4f4;
-            color: #333;
-            direction: rtl;
+            color: black;
+            direction: ltr;
+            margin: 0;
+            padding-bottom: 60px;
             transition: background 0.3s, color 0.3s;
         }
-        .dark-mode {
-            background-color: #222;
-            color: #fff;
-        }
+
         .quiz-container {
             background: white;
-            padding: 15px;
-            margin: 30px auto;
-            width: 70%;
+            padding: 20px;
+            margin: 50px auto;
+            width: 80%;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             transition: background 0.3s, color 0.3s;
         }
-        .dark-mode .quiz-container {
-            background: #333;
+
+        h2 {
+            color: #003366;
         }
-        .question {
-            font-size: 18px;
-            margin-bottom: 10px;
+
+        .question .number {
+            color: blue;
+            font-weight: bold;
         }
-        .question-title {
+
+        .question .prefix {
             color: red;
             font-weight: bold;
-            font-size: 20px;
         }
-        .question-text {
-            color: blue;
+
+        .question .text {
+            color: black;
+            direction: ltr;
+            display: inline-block;
         }
+
         .options {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
+
         button {
             padding: 10px;
             font-size: 16px;
@@ -53,133 +59,162 @@
             cursor: pointer;
             border-radius: 5px;
             transition: 0.3s;
-            background: #fff;
-            width: 100%;
+            outline: none;
         }
+
         .correct {
-            background-color: #4CAF50 !important;
+            background-color: #4CAF50;
             color: white;
         }
+
         .wrong {
-            background-color: #FF5733 !important;
+            background-color: #FF5733;
             color: white;
         }
+
         .disabled {
             pointer-events: none;
         }
-        .mode-toggle {
-            padding: 10px;
-            background: white;
-            border: 1px solid #ccc;
-            cursor: pointer;
-            margin: 20px;
-            border-radius: 5px;
-        }
-        .dark-mode .mode-toggle {
-            background: #444;
-            color: white;
-        }
-        footer {
+
+        .footer {
             position: fixed;
             bottom: 0;
             width: 100%;
             background: #333;
             color: white;
             text-align: center;
-            padding: 10px;
+            padding: 10px 0;
+            font-size: 16px;
         }
-        .dark-mode footer {
-            background: #000;
-        }
-        .footer-content {
+
+        .footer a {
+            color: white;
+            text-decoration: none;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
         }
-        .footer-content img {
-            width: 25px;
-            height: 25px;
+
+        .footer img {
+            width: 24px;
+            height: 24px;
         }
-        a {
+
+        .dark-mode-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px;
+            background: #333;
             color: white;
-            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
         }
-        a:active, a:focus {
+
+        .dark-mode-btn:hover {
+            background: #555;
+        }
+
+        body.dark-mode {
+            background-color: #121212;
             color: white;
+        }
+
+        .dark-mode .quiz-container {
+            background: #1e1e1e;
+            color: white;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .dark-mode h2 {
+            color: #f4f4f4;
+        }
+
+        .dark-mode .question .text {
+            color: white;
+        }
+
+        .dark-mode .question .number {
+            color: #4DB6AC;
+        }
+
+        .dark-mode .question .prefix {
+            color: #FF9800;
+        }
+
+        .dark-mode .footer {
+            background: #222;
+        }
+
+        .dark-mode .dark-mode-btn {
+            background: #f4f4f4;
+            color: black;
+        }
+
+        .dark-mode .dark-mode-btn:hover {
+            background: #ccc;
         }
     </style>
 </head>
 <body>
 
-    <button class="mode-toggle" onclick="toggleDarkMode()">تبديل الوضع</button>
+    <button class="dark-mode-btn" onclick="toggleDarkMode()">🌙 تبديل الوضع</button>
 
     <div class="quiz-container">
         <h2>اختبار اللغة الإنجليزية</h2>
-        
-        <div class="question-box">
-            <p class="question-title">1. اختر الإجابة الصحيحة:</p>
-            <p class="question-text">She might not reply to your email because she has a lot on her ______ right now.</p>
-            <div class="options">
-                <button onclick="checkAnswer(this, false)">1. fork</button>
-                <button onclick="checkAnswer(this, false)">2. spoon</button>
-                <button onclick="checkAnswer(this, true)">3. plate</button>
-            </div>
-        </div>
 
-        <div class="question-box">
-            <p class="question-title">2. اختر الإجابة الصحيحة:</p>
-            <p class="question-text">He was so tired that he hit the ______ as soon as he got home.</p>
-            <div class="options">
-                <button onclick="checkAnswer(this, false)">1. wall</button>
-                <button onclick="checkAnswer(this, true)">2. sack</button>
-                <button onclick="checkAnswer(this, false)">3. chair</button>
-            </div>
-        </div>
-
-        <div class="question-box">
-            <p class="question-title">3. اختر الإجابة الصحيحة:</p>
-            <p class="question-text">I can't come to the party because I’m feeling under the ______.</p>
-            <div class="options">
-                <button onclick="checkAnswer(this, false)">1. tree</button>
-                <button onclick="checkAnswer(this, true)">2. weather</button>
-                <button onclick="checkAnswer(this, false)">3. table</button>
-            </div>
-        </div>
-
-        <div class="question-box">
-            <p class="question-title">4. اختر الإجابة الصحيحة:</p>
-            <p class="question-text">She spilled the beans about the surprise party.</p>
-            <div class="options">
-                <button onclick="checkAnswer(this, false)">1. She cooked beans</button>
-                <button onclick="checkAnswer(this, false)">2. She made a mess</button>
-                <button onclick="checkAnswer(this, true)">3. She revealed a secret</button>
-            </div>
-        </div>
-
-        <div class="question-box">
-            <p class="question-title">5. اختر الإجابة الصحيحة:</p>
-            <p class="question-text">That new project is a piece of ______.</p>
-            <div class="options">
-                <button onclick="checkAnswer(this, false)">1. rock</button>
-                <button onclick="checkAnswer(this, false)">2. cake</button>
-                <button onclick="checkAnswer(this, true)">3. cake</button>
-            </div>
-        </div>
+        <div id="questions-container"></div>
 
     </div>
 
-    <footer>
-        <div class="footer-content">
-            <a href="https://www.instagram.com/e.nglish98" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-            </a>
-            <a href="https://www.instagram.com/e.nglish98" target="_blank">@e.nglish98</a>
-        </div>
-        <p>عدد الزوار: <span id="visitor-count">جارِ التحميل...</span></p>
-    </footer>
+    <div class="footer">
+        <a href="https://www.instagram.com/e.nglish98" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+            @e.nglish98
+        </a>
+    </div>
 
     <script>
+        let questions = [
+            { q: "She might not reply to your email because she has a lot on her ______ right now.", options: ["fork", "spoon", "plate"], correct: 2 },
+            { q: "He was so tired that he hit the ______ as soon as he got home.", options: ["wall", "sack", "chair"], correct: 1 },
+            { q: "I can't come to the party because I’m feeling under the ______.", options: ["tree", "weather", "table"], correct: 1 },
+            { q: "She spilled the beans about the surprise party.", options: ["She cooked beans", "She made a mess", "She revealed a secret"], correct: 2 },
+            { q: "That new project is a piece of ______.", options: ["rock", "cake", "glass"], correct: 1 },
+            { q: "He's always crying over spilled ______.", options: ["juice", "milk", "water"], correct: 1 },
+            { q: "They let the cat out of the ______.", options: ["house", "bag", "window"], correct: 1 },
+            { q: "I'm not feeling well, I need to hit the ______.", options: ["sack", "road", "gym"], correct: 0 },
+            { q: "The early bird catches the ______.", options: ["fish", "worm", "rabbit"], correct: 1 },
+            { q: "He's pulling my ______.", options: ["leg", "hand", "ear"], correct: 0 }
+        ];
+
+        let container = document.getElementById("questions-container");
+        
+        questions.forEach((item, index) => {
+            let questionBox = document.createElement("div");
+            questionBox.classList.add("question-box");
+
+            let questionText = `
+                <p class="question">
+                    <span class="number">${index + 1}.</span> 
+                    <span class="prefix">اختر الكلمة الصحيحة:</span> 
+                    <span class="text">${item.q}</span>
+                </p>
+                <div class="options">
+            `;
+
+            item.options.forEach((option, i) => {
+                questionText += `<button onclick="checkAnswer(this, ${i === item.correct})">${i + 1}. ${option}</button>`;
+            });
+
+            questionText += `</div>`;
+            questionBox.innerHTML = questionText;
+            container.appendChild(questionBox);
+        });
+
         function checkAnswer(button, isCorrect) {
             if (isCorrect) {
                 button.classList.add("correct");
@@ -188,27 +223,21 @@
                 button.classList.add("wrong");
                 button.innerHTML += " ✘";
             }
+
             let buttons = button.parentElement.querySelectorAll("button");
             buttons.forEach(btn => btn.classList.add("disabled"));
         }
 
         function toggleDarkMode() {
             document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode") ? "enabled" : "disabled");
         }
 
-        function updateVisitorCount() {
-            let counterUrl = "https://api.countapi.xyz/update/e.nglish98/visits/?amount=1";
-            fetch(counterUrl)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("visitor-count").innerText = data.value;
-                })
-                .catch(error => {
-                    document.getElementById("visitor-count").innerText = "تعذر تحميل العدد";
-                });
-        }
-
-        updateVisitorCount();
+        window.onload = function() {
+            if (localStorage.getItem("darkMode") === "enabled") {
+                document.body.classList.add("dark-mode");
+            }
+        };
     </script>
 
 </body>
