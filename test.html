@@ -10,7 +10,7 @@
             text-align: center;
             background-color: #f4f4f4;
             color: black;
-            direction: rtl;
+            direction: ltr;
             margin: 0;
             padding-bottom: 60px;
             transition: background 0.3s, color 0.3s;
@@ -137,14 +137,6 @@
             color: white;
         }
 
-        .dark-mode .question .number {
-            color: #4DB6AC;
-        }
-
-        .dark-mode .question .prefix {
-            color: #FF9800;
-        }
-
         .dark-mode .footer {
             background: #222;
         }
@@ -175,16 +167,18 @@
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
             @e.nglish98
         </a>
-        <p>عدد الزوار: <span id="visitor-count">0</span></p>
+        <p>عدد الزوار: <span id="visitor-count">جارِ التحميل...</span></p>
     </div>
 
     <script>
-        let questions = [
-            { q: "She might not reply to your email because she has a lot on her ______ right now.", options: ["fork", "spoon", "plate"], correct: 2 },
-            { q: "He was so tired that he hit the ______ as soon as he got home.", options: ["wall", "sack", "chair"], correct: 1 },
-            { q: "I can't come to the party because I’m feeling under the ______.", options: ["tree", "weather", "table"], correct: 1 },
-            { q: "She spilled the beans about the surprise party.", options: ["She cooked beans", "She made a mess", "She revealed a secret"], correct: 2 }
-        ];
+        let questions = [];
+        for (let i = 1; i <= 30; i++) {
+            questions.push({
+                q: `Question ${i}: Fill in the blank.`,
+                options: ["Option A", "Option B", "Option C"],
+                correct: Math.floor(Math.random() * 3)
+            });
+        }
 
         let container = document.getElementById("questions-container");
         questions.forEach((item, index) => {
@@ -194,7 +188,7 @@
             let questionHTML = `
                 <p class="question">
                     <span class="number">${index + 1}.</span> 
-                    <span class="prefix">اختر الكلمة الصحيحة:</span> 
+                    <span class="prefix">اختر الإجابة الصحيحة:</span> 
                     <span class="text">${item.q}</span>
                 </p>
                 <div class="options">
@@ -232,10 +226,13 @@
         };
 
         function updateVisitorCount() {
-            let count = localStorage.getItem("visitorCount") || 0;
-            count++;
-            localStorage.setItem("visitorCount", count);
-            document.getElementById("visitor-count").innerText = count;
+            let counterUrl = "https://api.countapi.xyz/hit/e.nglish98/visits";
+            fetch(counterUrl)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("visitor-count").innerText = data.value;
+                })
+                .catch(error => console.error("Error fetching visitor count:", error));
         }
     </script>
 
