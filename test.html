@@ -10,7 +10,6 @@
             text-align: center;
             background-color: #f4f4f4;
             color: black;
-            direction: ltr;
             margin: 0;
             padding-bottom: 60px;
             transition: background 0.3s, color 0.3s;
@@ -23,7 +22,6 @@
             width: 80%;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s, color 0.3s;
         }
 
         h2 {
@@ -40,10 +38,6 @@
             font-weight: bold;
         }
 
-        .question .text {
-            color: black;
-        }
-
         .options {
             display: flex;
             flex-direction: column;
@@ -57,7 +51,6 @@
             cursor: pointer;
             border-radius: 5px;
             transition: 0.3s;
-            outline: none;
         }
 
         .correct {
@@ -85,94 +78,33 @@
             font-size: 16px;
         }
 
-        .footer a {
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .footer img {
-            width: 24px;
-            height: 24px;
-        }
-
-        .dark-mode-btn {
+        .feedback {
             position: fixed;
-            top: 20px;
-            left: 20px;
-            padding: 10px;
-            background: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 100px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 1s;
         }
 
-        .dark-mode-btn:hover {
-            background: #555;
-        }
-
-        body.dark-mode {
-            background-color: #121212;
-            color: white;
-        }
-
-        .dark-mode .quiz-container {
-            background: #1e1e1e;
-            color: white;
-            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
-        }
-
-        .dark-mode h2 {
-            color: #f4f4f4;
-        }
-
-        .dark-mode .question .text {
-            color: white;
-        }
-
-        .dark-mode .question .number {
-            color: #4DB6AC;
-        }
-
-        .dark-mode .question .prefix {
-            color: #FF9800;
-        }
-
-        .dark-mode .footer {
-            background: #222;
-        }
-
-        .dark-mode .dark-mode-btn {
-            background: #f4f4f4;
-            color: black;
-        }
-
-        .dark-mode .dark-mode-btn:hover {
-            background: #ccc;
+        .show {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
 
-    <button class="dark-mode-btn" onclick="toggleDarkMode()">🌙 Toggle Mode</button>
-
     <div class="quiz-container">
         <h2>English Quiz</h2>
-
         <div id="questions-container"></div>
-
     </div>
 
+    <div class="feedback" id="feedback"></div>
+
     <div class="footer">
-        <a href="https://www.instagram.com/e.nglish98" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-            @e.nglish98
-        </a>
+        <p>Correct answers: <span id="score">0</span> / 30</p>
     </div>
 
     <script>
@@ -200,63 +132,43 @@
             { q: "I can't make heads or ______ of this.", options: ["tails", "feet", "hands"], correct: 0 },
             { q: "Don’t bite off more than you can ______.", options: ["chew", "eat", "swallow"], correct: 0 },
             { q: "He’s in the doghouse.", options: ["in trouble", "in the office", "on vacation"], correct: 0 },
-            { q: "She broke the ______ when she told everyone.", options: ["news", "news", "secret"], correct: 2 },
+            { q: "She broke the ______ when she told everyone.", options: ["news", "secret", "truth"], correct: 1 },
             { q: "I’ll take the bull by the ______.", options: ["horns", "hands", "ears"], correct: 0 },
-            { q: "We need to get back to the ______ and make some changes.", options: ["drawing", "writing", "plan"], correct: 2 },
+            { q: "We need to get back to the ______ and make some changes.", options: ["drawing board", "whiteboard", "sketch"], correct: 0 },
             { q: "He let the cat out of the ______.", options: ["bag", "hat", "box"], correct: 0 },
-            { q: "I’ll be back before the ______ bell.", options: ["school", "alarm", "first"], correct: 2 },
             { q: "She doesn't have the ______ of the job.", options: ["time", "money", "skills"], correct: 2 },
-            { q: "We are over the ______ with this project.", options: ["moon", "hill", "top"], correct: 0 },
-            { q: "She has a chip on her ______.", options: ["shoulder", "head", "leg"], correct: 0 }
+            { q: "We are over the ______ with this project.", options: ["moon", "hill", "top"], correct: 0 }
         ];
 
+        let score = 0;
         let container = document.getElementById("questions-container");
-        
+        let feedback = document.getElementById("feedback");
+        let scoreDisplay = document.getElementById("score");
+
         questions.forEach((item, index) => {
             let questionBox = document.createElement("div");
-            questionBox.classList.add("question-box");
-
-            let questionText = `
-                <p class="question">
-                    <span class="number">${index + 1}.</span> 
-                    <span class="prefix">Choose the correct word:</span> 
-                    <span class="text">${item.q}</span>
-                </p>
+            questionBox.innerHTML = `
+                <p class="question"><span class="number">${index + 1}.</span> ${item.q}</p>
                 <div class="options">
+                    ${item.options.map((option, i) => `<button onclick="checkAnswer(this, ${i === item.correct})">${option}</button>`).join('')}
+                </div>
             `;
-
-            item.options.forEach((option, i) => {
-                questionText += `<button onclick="checkAnswer(this, ${i === item.correct})">${i + 1}. ${option}</button>`;
-            });
-
-            questionText += `</div>`;
-            questionBox.innerHTML = questionText;
             container.appendChild(questionBox);
         });
 
         function checkAnswer(button, isCorrect) {
+            feedback.innerText = isCorrect ? "✔" : "✘";
+            feedback.style.color = isCorrect ? "green" : "red";
+            feedback.classList.add("show");
+            setTimeout(() => feedback.classList.remove("show"), 1000);
+
             if (isCorrect) {
-                button.classList.add("correct");
-                button.innerHTML += " ✔";
-            } else {
-                button.classList.add("wrong");
-                button.innerHTML += " ✘";
+                score++;
+                scoreDisplay.textContent = score;
             }
 
-            let buttons = button.parentElement.querySelectorAll("button");
-            buttons.forEach(btn => btn.classList.add("disabled"));
+            button.parentElement.querySelectorAll("button").forEach(btn => btn.classList.add("disabled"));
         }
-
-        function toggleDarkMode() {
-            document.body.classList.toggle("dark-mode");
-            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode") ? "enabled" : "disabled");
-        }
-
-        window.onload = function() {
-            if (localStorage.getItem("darkMode") === "enabled") {
-                document.body.classList.add("dark-mode");
-            }
-        };
     </script>
 
 </body>
