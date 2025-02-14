@@ -175,6 +175,7 @@
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
             @e.nglish98
         </a>
+        <p>عدد الزوار: <span id="visitor-count">0</span></p>
     </div>
 
     <script>
@@ -182,40 +183,43 @@
             { q: "She might not reply to your email because she has a lot on her ______ right now.", options: ["fork", "spoon", "plate"], correct: 2 },
             { q: "He was so tired that he hit the ______ as soon as he got home.", options: ["wall", "sack", "chair"], correct: 1 },
             { q: "I can't come to the party because I’m feeling under the ______.", options: ["tree", "weather", "table"], correct: 1 },
-            { q: "She spilled the beans about the surprise party.", options: ["She cooked beans", "She made a mess", "She revealed a secret"], correct: 2 },
-            { q: "That new project is a piece of ______.", options: ["rock", "cake", "glass"], correct: 1 },
-            { q: "He's always crying over spilled ______.", options: ["juice", "milk", "water"], correct: 1 },
-            { q: "They let the cat out of the ______.", options: ["house", "bag", "window"], correct: 1 },
-            { q: "I'm not feeling well, I need to hit the ______.", options: ["sack", "road", "gym"], correct: 0 },
-            { q: "The early bird catches the ______.", options: ["fish", "worm", "rabbit"], correct: 1 },
-            { q: "He's pulling my ______.", options: ["leg", "hand", "ear"], correct: 0 },
-            { q: "He got cold ______ before the wedding.", options: ["feet", "hands", "ears"], correct: 0 },
-            { q: "I'm all ______! Just tell me what happened.", options: ["eyes", "ears", "nose"], correct: 1 },
-            { q: "Break a ______!", options: ["leg", "arm", "finger"], correct: 0 },
-            { q: "I’m going to give you a piece of my ______.", options: ["cake", "mind", "heart"], correct: 1 },
-            { q: "Don't judge a book by its ______.", options: ["author", "cover", "pages"], correct: 1 },
-            { q: "The ball is in your ______.", options: ["court", "hands", "field"], correct: 0 },
-            { q: "I was on cloud ______ when I won the competition.", options: ["seven", "nine", "ten"], correct: 1 },
-            { q: "He let me off the ______.", options: ["boat", "hook", "trap"], correct: 1 },
-            { q: "Bite the ______!", options: ["dust", "bullet", "apple"], correct: 1 },
-            { q: "You're barking up the wrong ______.", options: ["door", "tree", "wall"], correct: 1 },
+            { q: "She spilled the beans about the surprise party.", options: ["She cooked beans", "She made a mess", "She revealed a secret"], correct: 2 }
         ];
 
         let container = document.getElementById("questions-container");
         questions.forEach((item, index) => {
-            container.innerHTML += `
-                <div class="question-box">
-                    <p class="question">
-                        <span class="number">${index + 1}.</span> 
-                        <span class="prefix">اختر الكلمة الصحيحة:</span> 
-                        <span class="text">${item.q}</span>
-                    </p>
-                    <div class="options">
-                        ${item.options.map((option, i) => `<button onclick="checkAnswer(this, ${i === item.correct})">${i + 1}. ${option}</button>`).join('')}
-                    </div>
-                </div>
+            let questionBox = document.createElement("div");
+            questionBox.classList.add("question-box");
+            
+            let questionHTML = `
+                <p class="question">
+                    <span class="number">${index + 1}.</span> 
+                    <span class="prefix">اختر الكلمة الصحيحة:</span> 
+                    <span class="text">${item.q}</span>
+                </p>
+                <div class="options">
             `;
+            item.options.forEach((option, i) => {
+                questionHTML += `<button onclick="checkAnswer(this, ${i === item.correct})">${i + 1}. ${option}</button>`;
+            });
+            questionHTML += `</div>`;
+            
+            questionBox.innerHTML = questionHTML;
+            container.appendChild(questionBox);
         });
+
+        function checkAnswer(button, isCorrect) {
+            if (isCorrect) {
+                button.classList.add("correct");
+                button.innerHTML += " ✔";
+            } else {
+                button.classList.add("wrong");
+                button.innerHTML += " ✘";
+            }
+
+            let buttons = button.parentElement.querySelectorAll("button");
+            buttons.forEach(btn => btn.classList.add("disabled"));
+        }
 
         function toggleDarkMode() {
             document.body.classList.toggle("dark-mode");
@@ -224,7 +228,15 @@
 
         window.onload = function() {
             if (localStorage.getItem("darkMode") === "enabled") document.body.classList.add("dark-mode");
+            updateVisitorCount();
         };
+
+        function updateVisitorCount() {
+            let count = localStorage.getItem("visitorCount") || 0;
+            count++;
+            localStorage.setItem("visitorCount", count);
+            document.getElementById("visitor-count").innerText = count;
+        }
     </script>
 
 </body>
