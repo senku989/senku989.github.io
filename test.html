@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اختبار اللغة الإنجليزية</title>
+    <title>English Quiz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,8 +42,6 @@
 
         .question .text {
             color: black;
-            direction: ltr;
-            display: inline-block;
         }
 
         .options {
@@ -161,10 +159,10 @@
 </head>
 <body>
 
-    <button class="dark-mode-btn" onclick="toggleDarkMode()">🌙 تبديل الوضع</button>
+    <button class="dark-mode-btn" onclick="toggleDarkMode()">🌙 Toggle Mode</button>
 
     <div class="quiz-container">
-        <h2>اختبار اللغة الإنجليزية</h2>
+        <h2>English Quiz</h2>
 
         <div id="questions-container"></div>
 
@@ -188,7 +186,28 @@
             { q: "They let the cat out of the ______.", options: ["house", "bag", "window"], correct: 1 },
             { q: "I'm not feeling well, I need to hit the ______.", options: ["sack", "road", "gym"], correct: 0 },
             { q: "The early bird catches the ______.", options: ["fish", "worm", "rabbit"], correct: 1 },
-            { q: "He's pulling my ______.", options: ["leg", "hand", "ear"], correct: 0 }
+            { q: "He's pulling my ______.", options: ["leg", "hand", "ear"], correct: 0 },
+            { q: "It's a ______ of cake.", options: ["piece", "slice", "bite"], correct: 0 },
+            { q: "Don't count your chickens before they ______.", options: ["hatch", "fly", "sit"], correct: 0 },
+            { q: "We need to take the ______ by the horns.", options: ["dog", "bull", "fish"], correct: 1 },
+            { q: "She got cold feet before the wedding.", options: ["She got sick", "She got nervous", "She got angry"], correct: 1 },
+            { q: "He was on top of the world when he won the prize.", options: ["sad", "happy", "angry"], correct: 1 },
+            { q: "This is a no-brainer.", options: ["Easy decision", "Hard decision", "Confusing decision"], correct: 0 },
+            { q: "The ball is in your ______ now.", options: ["court", "field", "house"], correct: 0 },
+            { q: "He’s a real ______ in the office.", options: ["star", "fish", "dog"], correct: 0 },
+            { q: "She was born with a silver ______ in her mouth.", options: ["spoon", "fork", "knife"], correct: 0 },
+            { q: "It’s as easy as pie.", options: ["difficult", "simple", "complicated"], correct: 1 },
+            { q: "I can't make heads or ______ of this.", options: ["tails", "feet", "hands"], correct: 0 },
+            { q: "Don’t bite off more than you can ______.", options: ["chew", "eat", "swallow"], correct: 0 },
+            { q: "He’s in the doghouse.", options: ["in trouble", "in the office", "on vacation"], correct: 0 },
+            { q: "She broke the ______ when she told everyone.", options: ["news", "news", "secret"], correct: 2 },
+            { q: "I’ll take the bull by the ______.", options: ["horns", "hands", "ears"], correct: 0 },
+            { q: "We need to get back to the ______ and make some changes.", options: ["drawing", "writing", "plan"], correct: 2 },
+            { q: "He let the cat out of the ______.", options: ["bag", "hat", "box"], correct: 0 },
+            { q: "I’ll be back before the ______ bell.", options: ["school", "alarm", "first"], correct: 2 },
+            { q: "She doesn't have the ______ of the job.", options: ["time", "money", "skills"], correct: 2 },
+            { q: "We are over the ______ with this project.", options: ["moon", "hill", "top"], correct: 0 },
+            { q: "She has a chip on her ______.", options: ["shoulder", "head", "leg"], correct: 0 }
         ];
 
         let container = document.getElementById("questions-container");
@@ -200,7 +219,7 @@
             let questionText = `
                 <p class="question">
                     <span class="number">${index + 1}.</span> 
-                    <span class="prefix">اختر الكلمة الصحيحة:</span> 
+                    <span class="prefix">Choose the correct word:</span> 
                     <span class="text">${item.q}</span>
                 </p>
                 <div class="options">
