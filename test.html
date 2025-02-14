@@ -3,29 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اختبار اللغة الإنجليزية الأكاديمي</title>
+    <title>اختبار اللغة الإنجليزية</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #e3f2fd; /* أزرق فاتح */
+            background-color: #f4f4f4;
             direction: rtl;
-            margin: 0;
-            padding: 0;
         }
         .quiz-container {
             background: white;
             padding: 20px;
             margin: 50px auto;
-            width: 60%;
+            width: 70%; /* زودنا العرض */
             border-radius: 10px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #003366; /* لون العنوان */
+        }
+        .question-box {
+            margin-bottom: 20px;
         }
         .question {
             font-size: 18px;
-            font-weight: bold;
-            color: #333;
             margin-bottom: 10px;
+        }
+        .question .prefix {
+            color: red; /* لون مقدمة السؤال */
+            font-weight: bold;
+        }
+        .question .text {
+            color: black; /* لون النص التابع */
+            direction: ltr; /* جعل النص الإنجليزي من اليسار لليمين */
+            display: inline-block;
         }
         .options {
             display: flex;
@@ -33,108 +44,105 @@
             gap: 10px;
         }
         button {
-            padding: 12px;
+            padding: 10px;
             font-size: 16px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
             transition: 0.3s;
-            background-color: #2196F3; /* أزرق */
-            color: white;
-        }
-        button:hover {
-            background-color: #1976D2; /* أزرق داكن عند المرور */
         }
         .correct {
-            background-color: #4CAF50 !important; /* أخضر */
+            background-color: #4CAF50;
+            color: white;
         }
         .wrong {
-            background-color: #FF5733 !important; /* أحمر */
+            background-color: #FF5733;
+            color: white;
         }
         .disabled {
             pointer-events: none;
-        }
-        .footer {
-            background: #222;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-        .footer a {
-            text-decoration: none;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .footer img {
-            width: 30px;
-            vertical-align: middle;
         }
     </style>
 </head>
 <body>
 
     <div class="quiz-container">
-        <h2 style="color: #0D47A1;">اختبار اللغة الإنجليزية الأكاديمي</h2>
+        <h2>اختبار اللغة الإنجليزية</h2>
+        
+        <div class="question-box">
+            <p class="question">
+                <span class="prefix">Choose the correct word:</span> 
+                <span class="text">She might not reply to your email because she has a lot on her ______ right now.</span>
+            </p>
+            <div class="options">
+                <button onclick="checkAnswer(this, false)">1. fork</button>
+                <button onclick="checkAnswer(this, false)">2. spoon</button>
+                <button onclick="checkAnswer(this, true)">3. plate</button>
+            </div>
+        </div>
 
-        <div id="questions-container"></div>
+        <div class="question-box">
+            <p class="question">
+                <span class="prefix">Choose the correct word:</span> 
+                <span class="text">He was so tired that he hit the ______ as soon as he got home.</span>
+            </p>
+            <div class="options">
+                <button onclick="checkAnswer(this, false)">1. wall</button>
+                <button onclick="checkAnswer(this, true)">2. sack</button>
+                <button onclick="checkAnswer(this, false)">3. chair</button>
+            </div>
+        </div>
 
-    </div>
+        <div class="question-box">
+            <p class="question">
+                <span class="prefix">Choose the correct word:</span> 
+                <span class="text">I can't come to the party because I’m feeling under the ______.</span>
+            </p>
+            <div class="options">
+                <button onclick="checkAnswer(this, false)">1. tree</button>
+                <button onclick="checkAnswer(this, true)">2. weather</button>
+                <button onclick="checkAnswer(this, false)">3. table</button>
+            </div>
+        </div>
 
-    <div class="footer">
-        <a href="https://www.instagram.com/e.nglish98" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-        </a>
-        <a href="https://www.instagram.com/e.nglish98" target="_blank">@e.nglish98</a>
+        <div class="question-box">
+            <p class="question">
+                <span class="prefix">What does this phrase mean?:</span> 
+                <span class="text">She spilled the beans about the surprise party.</span>
+            </p>
+            <div class="options">
+                <button onclick="checkAnswer(this, false)">1. She cooked beans</button>
+                <button onclick="checkAnswer(this, false)">2. She made a mess</button>
+                <button onclick="checkAnswer(this, true)">3. She revealed a secret</button>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="question">
+                <span class="prefix">Complete the phrase:</span> 
+                <span class="text">That new project is a piece of ______.</span>
+            </p>
+            <div class="options">
+                <button onclick="checkAnswer(this, false)">1. rock</button>
+                <button onclick="checkAnswer(this, false)">2. cake</button>
+                <button onclick="checkAnswer(this, true)">3. cake</button>
+            </div>
+        </div>
+
     </div>
 
     <script>
-        const questions = [
-            { question: "1. Choose the correct verb tense: 'By the time she arrived, we _____ dinner.'", options: ["eat", "had eaten", "were eating"], correct: 1 },
-            { question: "2. Select the correct word: 'The professor gave a very _____ lecture on climate change.'", options: ["bored", "informative", "uninterested"], correct: 1 },
-            { question: "3. Identify the correct preposition: 'She is very experienced _____ managing large projects.'", options: ["on", "in", "about"], correct: 1 },
-            { question: "4. Which sentence is grammatically correct?", options: ["The informations are accurate.", "She enjoy reading books.", "The information is accurate."], correct: 2 },
-            { question: "5. What is the synonym of 'significant'?", options: ["important", "minor", "irrelevant"], correct: 0 },
-            { question: "6. The past tense of 'go' is:", options: ["goed", "went", "gone"], correct: 1 },
-            { question: "7. What is the antonym of 'increase'?", options: ["reduce", "expand", "enlarge"], correct: 0 },
-            { question: "8. Choose the correct article: 'She is ____ honest person.'", options: ["a", "an", "the"], correct: 1 },
-            { question: "9. Identify the correct sentence:", options: ["I has a book.", "She have a car.", "He has a bike."], correct: 2 },
-            { question: "10. Find the correct spelling:", options: ["accomodate", "accommodate", "acommodate"], correct: 1 },
-            { question: "11. Choose the correct modal verb: 'You _____ be on time for the meeting.'", options: ["must", "can", "may"], correct: 0 },
-            { question: "12. What is the opposite of 'dangerous'?", options: ["risky", "safe", "harmful"], correct: 1 },
-            { question: "13. Select the correct verb form: 'She _____ her homework before dinner.'", options: ["finish", "finished", "finishes"], correct: 1 },
-            { question: "14. Which word is a noun?", options: ["quickly", "happiness", "running"], correct: 1 },
-            { question: "15. What is the comparative form of 'good'?", options: ["better", "best", "gooder"], correct: 0 },
-            { question: "16. Identify the passive voice sentence:", options: ["She wrote the book.", "The book was written by her.", "She writes a book."], correct: 1 },
-            { question: "17. What is the plural of 'child'?", options: ["childs", "children", "childes"], correct: 1 },
-            { question: "18. Which word is a preposition?", options: ["happily", "beside", "run"], correct: 1 },
-            { question: "19. Choose the correct conjunction: 'I was tired, _____ I went to bed early.'", options: ["but", "so", "because"], correct: 1 },
-            { question: "20. What is the opposite of 'strong'?", options: ["powerful", "weak", "heavy"], correct: 1 }
-        ];
-
-        const container = document.getElementById("questions-container");
-
-        questions.forEach((q, index) => {
-            let questionHTML = `<div class="question-box">
-                <p class="question">${q.question}</p>
-                <div class="options">
-                    ${q.options.map((opt, i) => `<button onclick="checkAnswer(this, ${i === q.correct})">${opt}</button>`).join("")}
-                </div>
-            </div>`;
-            container.innerHTML += questionHTML;
-        });
-
         function checkAnswer(button, isCorrect) {
-            button.classList.add(isCorrect ? "correct" : "wrong");
-            button.innerHTML += isCorrect ? " ✔" : " ✘";
-            button.parentElement.querySelectorAll("button").forEach(btn => btn.classList.add("disabled"));
+            if (isCorrect) {
+                button.classList.add("correct");
+                button.innerHTML += " ✔";
+            } else {
+                button.classList.add("wrong");
+                button.innerHTML += " ✘";
+            }
+            // تعطيل جميع الأزرار بعد اختيار الإجابة
+            let buttons = button.parentElement.querySelectorAll("button");
+            buttons.forEach(btn => btn.classList.add("disabled"));
         }
     </script>
 
