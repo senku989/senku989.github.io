@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f4f4f4;
+            background-color: #e3f2fd; /* أزرق فاتح */
             direction: rtl;
             margin: 0;
             padding: 0;
@@ -19,10 +19,12 @@
             margin: 50px auto;
             width: 60%;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
         }
         .question {
             font-size: 18px;
+            font-weight: bold;
+            color: #333;
             margin-bottom: 10px;
         }
         .options {
@@ -31,20 +33,23 @@
             gap: 10px;
         }
         button {
-            padding: 10px;
+            padding: 12px;
             font-size: 16px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
             transition: 0.3s;
+            background-color: #2196F3; /* أزرق */
+            color: white;
+        }
+        button:hover {
+            background-color: #1976D2; /* أزرق داكن عند المرور */
         }
         .correct {
-            background-color: #4CAF50;
-            color: white;
+            background-color: #4CAF50 !important; /* أخضر */
         }
         .wrong {
-            background-color: #FF5733;
-            color: white;
+            background-color: #FF5733 !important; /* أحمر */
         }
         .disabled {
             pointer-events: none;
@@ -56,11 +61,17 @@
             position: fixed;
             bottom: 0;
             width: 100%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
         .footer a {
-            color: white;
             text-decoration: none;
+            color: white;
             font-size: 18px;
+            font-weight: bold;
         }
         .footer img {
             width: 30px;
@@ -71,7 +82,7 @@
 <body>
 
     <div class="quiz-container">
-        <h2>اختبار اللغة الإنجليزية الأكاديمي</h2>
+        <h2 style="color: #0D47A1;">اختبار اللغة الإنجليزية الأكاديمي</h2>
 
         <div id="questions-container"></div>
 
@@ -81,6 +92,7 @@
         <a href="https://www.instagram.com/e.nglish98" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
         </a>
+        <a href="https://www.instagram.com/e.nglish98" target="_blank">@e.nglish98</a>
     </div>
 
     <script>
@@ -104,17 +116,7 @@
             { question: "17. What is the plural of 'child'?", options: ["childs", "children", "childes"], correct: 1 },
             { question: "18. Which word is a preposition?", options: ["happily", "beside", "run"], correct: 1 },
             { question: "19. Choose the correct conjunction: 'I was tired, _____ I went to bed early.'", options: ["but", "so", "because"], correct: 1 },
-            { question: "20. What is the opposite of 'strong'?", options: ["powerful", "weak", "heavy"], correct: 1 },
-            { question: "21. Identify the correct spelling:", options: ["necessary", "necesary", "necessery"], correct: 0 },
-            { question: "22. Which is a countable noun?", options: ["water", "milk", "apple"], correct: 2 },
-            { question: "23. What is the synonym of 'huge'?", options: ["tiny", "gigantic", "small"], correct: 1 },
-            { question: "24. Choose the correct sentence:", options: ["He don’t like coffee.", "He doesn’t like coffee.", "He not like coffee."], correct: 1 },
-            { question: "25. What is the opposite of 'polite'?", options: ["kind", "rude", "friendly"], correct: 1 },
-            { question: "26. Select the correct past form: 'She _____ to the store yesterday.'", options: ["goes", "went", "going"], correct: 1 },
-            { question: "27. Which word is an adjective?", options: ["quick", "quickly", "run"], correct: 0 },
-            { question: "28. What is the synonym of 'intelligent'?", options: ["smart", "slow", "dumb"], correct: 0 },
-            { question: "29. Choose the correct pronoun: 'This book is mine, that one is _____.'", options: ["your", "yours", "you"], correct: 1 },
-            { question: "30. What is the opposite of 'success'?", options: ["failure", "win", "achievement"], correct: 0 },
+            { question: "20. What is the opposite of 'strong'?", options: ["powerful", "weak", "heavy"], correct: 1 }
         ];
 
         const container = document.getElementById("questions-container");
