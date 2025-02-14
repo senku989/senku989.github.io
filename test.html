@@ -199,46 +199,53 @@
         questions = [...questions, ...questions]; // تكرار الأسئلة ليصبح العدد 30
 
         let score = 0;
-        let container = document.getElementById("questions-container");
-        let feedback = document.getElementById("feedback");
-        let scoreDisplay = document.getElementById("score");
+    let container = document.getElementById("questions-container");
+    let feedback = document.getElementById("feedback");
+    let scoreDisplay = document.getElementById("score");
 
-        questions.forEach((item, index) => {
-            let questionBox = document.createElement("div");
-            questionBox.innerHTML = `
-                <p class="question"><b>${index + 1}.</b> ${item.q}</p>
-                <div class="options">
-                    ${item.options.map((option, i) => `<button onclick="checkAnswer(this, ${i === item.correct}, ${index}, ${i})">${option}</button>`).join('')}
-                </div>
-            `;
-            container.appendChild(questionBox);
-        });
+    questions.forEach((item, index) => {
+        let questionBox = document.createElement("div");
+        questionBox.innerHTML = `
+            <p class="question"><b>${index + 1}.</b> ${item.q}</p>
+            <div class="options">
+                ${item.options.map((option, i) => `<button onclick="checkAnswer(this, ${i === item.correct}, ${index}, ${i})">${option}</button>`).join('')}
+            </div>
+        `;
+        container.appendChild(questionBox);
+    });
 
-        function checkAnswer(button, isCorrect, questionIndex, optionIndex) {
-            feedback.innerText = isCorrect ? "✔" : "✘";
-            feedback.style.color = isCorrect ? "green" : "red";
-            feedback.classList.add("show");
-            setTimeout(() => feedback.classList.remove("show"), 1000);
+    function checkAnswer(button, isCorrect, questionIndex, optionIndex) {
+        feedback.innerText = isCorrect ? "✔" : "✘";
+        feedback.style.color = isCorrect ? "green" : "red";
+        feedback.classList.add("show");
+        setTimeout(() => feedback.classList.remove("show"), 1000);
 
-            if (isCorrect) {
-                score++;
-                scoreDisplay.textContent = score;
+        if (isCorrect) {
+            score++;
+            scoreDisplay.textContent = score;
+        }
+
+        let buttons = button.parentElement.querySelectorAll("button");
+        buttons.forEach((btn, i) => {
+            btn.classList.add("disabled");
+            if (i === optionIndex) {
+                btn.classList.add(isCorrect ? "correct" : "wrong");
+                btn.innerHTML += isCorrect ? " ✔" : " ✘";
             }
+        });
+    }
 
-            let buttons = button.parentElement.querySelectorAll("button");
-            buttons.forEach((btn, i) => {
-                btn.classList.add("disabled");
-                if (i === optionIndex) {
-                    btn.classList.add(isCorrect ? "correct" : "wrong");
-                    btn.innerHTML += isCorrect ? " ✔" : " ✘";
-                }
-            });
-        }
+    function toggleMode() {
+        document.body.classList.toggle("dark-mode");
 
-        function toggleMode() {
-            document.body.classList.toggle("dark-mode");
+        // حفظ حالة الوضع في localStorage
+        if (document.body.classList.contains("dark-mode")) {
+            localStorage.setItem("mode", "dark");
+        } else {
+            localStorage.setItem("mode", "light");
         }
-    </script>
+    }
+</script>
 
 </body>
 </html>
