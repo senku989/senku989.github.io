@@ -9,49 +9,43 @@
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #f4f4f4;
-            color: black;
-            direction: ltr;
-            margin: 0;
-            padding-bottom: 60px;
+            color: #333;
+            direction: rtl;
             transition: background 0.3s, color 0.3s;
         }
-
+        .dark-mode {
+            background-color: #222;
+            color: #fff;
+        }
         .quiz-container {
             background: white;
-            padding: 20px;
-            margin: 50px auto;
-            width: 80%;
+            padding: 15px;
+            margin: 30px auto;
+            width: 70%;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             transition: background 0.3s, color 0.3s;
         }
-
-        h2 {
-            color: #003366;
+        .dark-mode .quiz-container {
+            background: #333;
         }
-
-        .question .number {
-            color: blue;
-            font-weight: bold;
+        .question {
+            font-size: 18px;
+            margin-bottom: 10px;
         }
-
-        .question .prefix {
+        .question-title {
             color: red;
             font-weight: bold;
+            font-size: 20px;
         }
-
-        .question .text {
-            color: black;
-            direction: ltr;
-            display: inline-block;
+        .question-text {
+            color: blue;
         }
-
         .options {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-
         button {
             padding: 10px;
             font-size: 16px;
@@ -59,149 +53,133 @@
             cursor: pointer;
             border-radius: 5px;
             transition: 0.3s;
-            outline: none;
+            background: #fff;
+            width: 100%;
         }
-
         .correct {
-            background-color: #4CAF50;
+            background-color: #4CAF50 !important;
             color: white;
         }
-
         .wrong {
-            background-color: #FF5733;
+            background-color: #FF5733 !important;
             color: white;
         }
-
         .disabled {
             pointer-events: none;
         }
-
-        .footer {
+        .mode-toggle {
+            padding: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            margin: 20px;
+            border-radius: 5px;
+        }
+        .dark-mode .mode-toggle {
+            background: #444;
+            color: white;
+        }
+        footer {
             position: fixed;
             bottom: 0;
             width: 100%;
             background: #333;
             color: white;
             text-align: center;
-            padding: 10px 0;
-            font-size: 16px;
+            padding: 10px;
         }
-
-        .footer a {
-            color: white;
-            text-decoration: none;
+        .dark-mode footer {
+            background: #000;
+        }
+        .footer-content {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
         }
-
-        .footer img {
-            width: 24px;
-            height: 24px;
+        .footer-content img {
+            width: 25px;
+            height: 25px;
         }
-
-        .dark-mode-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            padding: 10px;
-            background: #333;
+        a {
             color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
+            text-decoration: none;
         }
-
-        .dark-mode-btn:hover {
-            background: #555;
-        }
-
-        body.dark-mode {
-            background-color: #121212;
+        a:active, a:focus {
             color: white;
-        }
-
-        .dark-mode .quiz-container {
-            background: #1e1e1e;
-            color: white;
-            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
-        }
-
-        .dark-mode h2 {
-            color: #f4f4f4;
-        }
-
-        .dark-mode .question .text {
-            color: white;
-        }
-
-        .dark-mode .footer {
-            background: #222;
-        }
-
-        .dark-mode .dark-mode-btn {
-            background: #f4f4f4;
-            color: black;
-        }
-
-        .dark-mode .dark-mode-btn:hover {
-            background: #ccc;
         }
     </style>
 </head>
 <body>
 
-    <button class="dark-mode-btn" onclick="toggleDarkMode()">🌙 تبديل الوضع</button>
+    <button class="mode-toggle" onclick="toggleDarkMode()">تبديل الوضع</button>
 
     <div class="quiz-container">
         <h2>اختبار اللغة الإنجليزية</h2>
+        
+        <div class="question-box">
+            <p class="question-title">1. اختر الإجابة الصحيحة:</p>
+            <p class="question-text">She might not reply to your email because she has a lot on her ______ right now.</p>
+            <div class="options">
+                <button onclick="checkAnswer(this, false)">1. fork</button>
+                <button onclick="checkAnswer(this, false)">2. spoon</button>
+                <button onclick="checkAnswer(this, true)">3. plate</button>
+            </div>
+        </div>
 
-        <div id="questions-container"></div>
+        <div class="question-box">
+            <p class="question-title">2. اختر الإجابة الصحيحة:</p>
+            <p class="question-text">He was so tired that he hit the ______ as soon as he got home.</p>
+            <div class="options">
+                <button onclick="checkAnswer(this, false)">1. wall</button>
+                <button onclick="checkAnswer(this, true)">2. sack</button>
+                <button onclick="checkAnswer(this, false)">3. chair</button>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="question-title">3. اختر الإجابة الصحيحة:</p>
+            <p class="question-text">I can't come to the party because I’m feeling under the ______.</p>
+            <div class="options">
+                <button onclick="checkAnswer(this, false)">1. tree</button>
+                <button onclick="checkAnswer(this, true)">2. weather</button>
+                <button onclick="checkAnswer(this, false)">3. table</button>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="question-title">4. اختر الإجابة الصحيحة:</p>
+            <p class="question-text">She spilled the beans about the surprise party.</p>
+            <div class="options">
+                <button onclick="checkAnswer(this, false)">1. She cooked beans</button>
+                <button onclick="checkAnswer(this, false)">2. She made a mess</button>
+                <button onclick="checkAnswer(this, true)">3. She revealed a secret</button>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <p class="question-title">5. اختر الإجابة الصحيحة:</p>
+            <p class="question-text">That new project is a piece of ______.</p>
+            <div class="options">
+                <button onclick="checkAnswer(this, false)">1. rock</button>
+                <button onclick="checkAnswer(this, false)">2. cake</button>
+                <button onclick="checkAnswer(this, true)">3. cake</button>
+            </div>
+        </div>
 
     </div>
 
-    <div class="footer">
-        <a href="https://www.instagram.com/e.nglish98" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-            @e.nglish98
-        </a>
+    <footer>
+        <div class="footer-content">
+            <a href="https://www.instagram.com/e.nglish98" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+            </a>
+            <a href="https://www.instagram.com/e.nglish98" target="_blank">@e.nglish98</a>
+        </div>
         <p>عدد الزوار: <span id="visitor-count">جارِ التحميل...</span></p>
-    </div>
+    </footer>
 
     <script>
-        let questions = [];
-        for (let i = 1; i <= 30; i++) {
-            questions.push({
-                q: `Question ${i}: Fill in the blank.`,
-                options: ["Option A", "Option B", "Option C"],
-                correct: Math.floor(Math.random() * 3)
-            });
-        }
-
-        let container = document.getElementById("questions-container");
-        questions.forEach((item, index) => {
-            let questionBox = document.createElement("div");
-            questionBox.classList.add("question-box");
-            
-            let questionHTML = `
-                <p class="question">
-                    <span class="number">${index + 1}.</span> 
-                    <span class="prefix">اختر الإجابة الصحيحة:</span> 
-                    <span class="text">${item.q}</span>
-                </p>
-                <div class="options">
-            `;
-            item.options.forEach((option, i) => {
-                questionHTML += `<button onclick="checkAnswer(this, ${i === item.correct})">${i + 1}. ${option}</button>`;
-            });
-            questionHTML += `</div>`;
-            
-            questionBox.innerHTML = questionHTML;
-            container.appendChild(questionBox);
-        });
-
         function checkAnswer(button, isCorrect) {
             if (isCorrect) {
                 button.classList.add("correct");
@@ -210,30 +188,27 @@
                 button.classList.add("wrong");
                 button.innerHTML += " ✘";
             }
-
             let buttons = button.parentElement.querySelectorAll("button");
             buttons.forEach(btn => btn.classList.add("disabled"));
         }
 
         function toggleDarkMode() {
             document.body.classList.toggle("dark-mode");
-            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode") ? "enabled" : "disabled");
         }
 
-        window.onload = function() {
-            if (localStorage.getItem("darkMode") === "enabled") document.body.classList.add("dark-mode");
-            updateVisitorCount();
-        };
-
         function updateVisitorCount() {
-            let counterUrl = "https://api.countapi.xyz/hit/e.nglish98/visits";
+            let counterUrl = "https://api.countapi.xyz/update/e.nglish98/visits/?amount=1";
             fetch(counterUrl)
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById("visitor-count").innerText = data.value;
                 })
-                .catch(error => console.error("Error fetching visitor count:", error));
+                .catch(error => {
+                    document.getElementById("visitor-count").innerText = "تعذر تحميل العدد";
+                });
         }
+
+        updateVisitorCount();
     </script>
 
 </body>
