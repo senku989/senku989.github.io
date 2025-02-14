@@ -161,13 +161,14 @@
 
     <script>
 document.addEventListener("DOMContentLoaded", function() {
-    let link = document.querySelector('#bg a');
-    if (link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault(); // منع الانتقال إلى الرابط
-        });
-    }
-});
+        let link = document.querySelector('#bg a');
+        if (link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // منع الانتقال الافتراضي للرابط
+                window.location.href = "https://www.instagram.com/yourusername/"; // تحويله إلى صفحة إنستغرام الخاصة بك
+            });
+        }
+    });
 
 
 
