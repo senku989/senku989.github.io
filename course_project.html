@@ -5,49 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تقرير نظام الري الذكي</title>
     <style>
-        body { font-family: Arial, sans-serif; direction: rtl; text-align: right; margin: 20px; }
-        h1, h2 { color: #007BFF; }
+        body { font-family: Arial, sans-serif; text-align: right; margin: 20px; }
+        .english { display: none; direction: ltr; text-align: left; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
         th { background-color: #f8f9fa; }
+        button { margin-bottom: 20px; padding: 10px 20px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <h1>📌 تقرير عن نظام الري الذكي باستخدام Arduino</h1>
+    <button onclick="toggleLanguage()">🔄 تغيير اللغة | Switch Language</button>
 
-    <h2>🔹 مقدمة</h2>
-    <p>تم تطوير هذا النظام الذكي للتحكم في الري بناءً على العوامل البيئية، باستخدام Arduino ومستشعرات رطوبة التربة ودرجة حرارة الجو. يهدف النظام إلى تحسين كفاءة استخدام المياه وتجنب الري غير الضروري.</p>
+    <!-- المحتوى بالعربية -->
+    <div class="arabic">
+        <h1>📌 تقرير عن نظام الري الذكي باستخدام Arduino</h1>
+        <h2>🔹 مقدمة</h2>
+        <p>تم تطوير هذا النظام الذكي للتحكم في الري بناءً على العوامل البيئية، باستخدام Arduino ومستشعرات رطوبة التربة ودرجة حرارة الجو. يهدف النظام إلى تحسين كفاءة استخدام المياه وتجنب الري غير الضروري.</p>
+        <h2>🔹 الفكرة الأساسية</h2>
+        <ul>
+            <li><strong>إذا كانت التربة جافة</strong> (رطوبة التربة أقل من الحد المطلوب).</li>
+            <li><strong>إذا لم يكن الجو حارًا جدًا</strong> (لتجنب التبخر السريع وإجهاد النبات).</li>
+        </ul>
+        <h2>🔹 لماذا تم استبعاد مستشعر حرارة التربة؟</h2>
+        <table>
+            <tr>
+                <th>المعيار</th>
+                <th>التأثير على الري</th>
+                <th>هل هو ضروري؟</th>
+            </tr>
+            <tr>
+                <td><strong>رطوبة التربة</strong></td>
+                <td>العامل الأساسي في تحديد الحاجة للري.</td>
+                <td style="color: green;">✅ نعم</td>
+            </tr>
+            <tr>
+                <td><strong>درجة حرارة الجو</strong></td>
+                <td>تمنع الري في الأوقات التي يكون فيها التبخر عاليًا.</td>
+                <td style="color: green;">✅ نعم</td>
+            </tr>
+            <tr>
+                <td><strong>درجة حرارة التربة</strong></td>
+                <td>تؤثر فقط في حالات نادرة (مثل الطقس البارد جدًا).</td>
+                <td style="color: red;">❌ لا</td>
+            </tr>
+        </table>
+    </div>
 
-    <h2>🔹 الفكرة الأساسية</h2>
-    <ul>
-        <li><strong>إذا كانت التربة جافة</strong> (رطوبة التربة أقل من الحد المطلوب).</li>
-        <li><strong>إذا لم يكن الجو حارًا جدًا</strong> (لتجنب التبخر السريع وإجهاد النبات).</li>
-    </ul>
+    <!-- المحتوى بالإنجليزية -->
+    <div class="english">
+        <h1>📌 Smart Irrigation System Report</h1>
+        <h2>🔹 Introduction</h2>
+        <p>This smart irrigation system is developed using Arduino and environmental sensors to optimize water usage and prevent unnecessary irrigation.</p>
+        <h2>🔹 Core Concept</h2>
+        <ul>
+            <li><strong>If soil moisture is low</strong> (below the required threshold).</li>
+            <li><strong>If air temperature is not too high</strong> (to prevent excessive evaporation and plant stress).</li>
+        </ul>
+        <h2>🔹 Why was the Soil Temperature Sensor Excluded?</h2>
+        <table>
+            <tr>
+                <th>Factor</th>
+                <th>Impact on Irrigation</th>
+                <th>Is it Necessary?</th>
+            </tr>
+            <tr>
+                <td><strong>Soil Moisture</strong></td>
+                <td>The key factor in determining irrigation needs.</td>
+                <td style="color: green;">✅ Yes</td>
+            </tr>
+            <tr>
+                <td><strong>Air Temperature</strong></td>
+                <td>Prevents irrigation during excessive evaporation periods.</td>
+                <td style="color: green;">✅ Yes</td>
+            </tr>
+            <tr>
+                <td><strong>Soil Temperature</strong></td>
+                <td>Only affects irrigation in rare cases (e.g., extreme cold).</td>
+                <td style="color: red;">❌ No</td>
+            </tr>
+        </table>
+    </div>
 
-    <h2>🔹 لماذا تم استبعاد مستشعر حرارة التربة؟</h2>
-    <table>
-        <tr>
-            <th>المعيار</th>
-            <th>التأثير على الري</th>
-            <th>هل هو ضروري؟</th>
-        </tr>
-        <tr>
-            <td><strong>رطوبة التربة</strong></td>
-            <td>العامل الأساسي في تحديد الحاجة للري.</td>
-            <td style="color: green;">✅ نعم</td>
-        </tr>
-        <tr>
-            <td><strong>درجة حرارة الجو</strong></td>
-            <td>تمنع الري في الأوقات التي يكون فيها التبخر عاليًا.</td>
-            <td style="color: green;">✅ نعم</td>
-        </tr>
-        <tr>
-            <td><strong>درجة حرارة التربة</strong></td>
-            <td>تؤثر فقط في حالات نادرة (مثل الطقس البارد جدًا).</td>
-            <td style="color: red;">❌ لا</td>
-        </tr>
-    </table>
+    <script>
+        function toggleLanguage() {
+            var arabic = document.querySelector(".arabic");
+            var english = document.querySelector(".english");
+            
+            if (arabic.style.display === "none") {
+                arabic.style.display = "block";
+                english.style.display = "none";
+            } else {
+                arabic.style.display = "none";
+                english.style.display = "block";
+            }
+        }
+    </script>
 
 </body>
 </html>
