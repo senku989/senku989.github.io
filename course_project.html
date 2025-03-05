@@ -6,102 +6,118 @@
     <title>نظام الري الذكي باستخدام Arduino</title>
     <style>
         body { font-family: Arial, sans-serif; direction: rtl; text-align: right; margin: 20px; background-color: #f4f4f4; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
         h1, h2 { color: #007BFF; }
-        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
         th { background-color: #007BFF; color: white; }
-        .english { direction: ltr; text-align: left; margin-top: 40px; }
+        .lang-btn { float: left; padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer; border-radius: 5px; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>📌 نظام الري الذكي باستخدام Arduino</h1>
-        <h1 class="english">📌 Smart Irrigation System Using Arduino</h1>
+        <button class="lang-btn" onclick="toggleLanguage()">English</button>
 
-        <h2>🔹 مقدمة</h2>
-        <p>يهدف هذا المشروع إلى تطوير نظام ري ذكي يعتمد على مستشعرات رطوبة التربة ودرجة حرارة الجو لضمان ري النباتات فقط عند الحاجة.</p>
-        
-        <h2 class="english">🔹 Introduction</h2>
-        <p class="english">This project aims to develop a smart irrigation system that uses soil moisture and air temperature sensors to ensure plants are watered only when needed.</p>
+        <h1 id="title">📌 نظام الري الذكي باستخدام Arduino</h1>
 
-        <h2>🔹 مكونات المشروع</h2>
-        <h2 class="english">🔹 Project Components</h2>
+        <h2 id="intro-title">🔹 مقدمة</h2>
+        <p id="intro-text">هذا المشروع عبارة عن نموذج أولي لنظام ري ذكي يعتمد على مستشعرات البيئة لتحديد وقت الري بناءً على رطوبة التربة ودرجة حرارة الجو. يهدف المشروع إلى ترشيد استهلاك المياه وتحسين صحة النباتات.</p>
+
+        <h2 id="components-title">🔹 مكونات المشروع</h2>
         <table>
             <tr>
-                <th>المكون</th>
-                <th>الوظيفة</th>
-                <th class="english">Component</th>
-                <th class="english">Function</th>
+                <th id="component-header">المكون</th>
+                <th id="function-header">الوظيفة</th>
             </tr>
             <tr>
-                <td>Arduino Uno</td>
-                <td>وحدة التحكم الرئيسية</td>
-                <td class="english">Arduino Uno</td>
-                <td class="english">Main control unit</td>
+                <td id="arduino">Arduino Uno</td>
+                <td id="arduino-func">وحدة التحكم الرئيسية</td>
             </tr>
             <tr>
-                <td>مستشعر رطوبة التربة ×2</td>
-                <td>لقياس مستوى الرطوبة لكل شجرة</td>
-                <td class="english">Soil Moisture Sensor ×2</td>
-                <td class="english">Measures soil moisture level for each tree</td>
+                <td id="moisture">مستشعر رطوبة التربة ×2</td>
+                <td id="moisture-func">لقياس مستوى الرطوبة لكل شجرة</td>
             </tr>
             <tr>
-                <td>مستشعر درجة حرارة الجو</td>
-                <td>لقياس حرارة الهواء لتجنب الري في الحرارة العالية</td>
-                <td class="english">Air Temperature Sensor</td>
-                <td class="english">Measures air temperature to avoid irrigation in high heat</td>
+                <td id="temp-sensor">مستشعر درجة حرارة الجو</td>
+                <td id="temp-sensor-func">لقياس حرارة الهواء لتجنب الري في الحرارة العالية</td>
             </tr>
             <tr>
-                <td>محرك سيرفو</td>
-                <td>فتح وإغلاق صمام الماء</td>
-                <td class="english">Servo Motor</td>
-                <td class="english">Opens and closes the water valve</td>
+                <td id="servo">محرك سيرفو</td>
+                <td id="servo-func">فتح وإغلاق صمام الماء</td>
             </tr>
             <tr>
-                <td>خزان ماء</td>
-                <td>مصدر المياه للنباتات</td>
-                <td class="english">Water Tank</td>
-                <td class="english">Water source for plants</td>
+                <td id="tank">خزان ماء</td>
+                <td id="tank-func">مصدر المياه للنباتات</td>
             </tr>
         </table>
 
-        <h2>🔹 نظام الري لكل شجرة</h2>
-        <h2 class="english">🔹 Irrigation System for Each Tree</h2>
+        <h2 id="irrigation-title">🔹 نظام الري لكل شجرة</h2>
         <table>
             <tr>
-                <th>الشجرة</th>
-                <th>الحد الأدنى لرطوبة التربة قبل الري</th>
-                <th>الحد الأقصى لدرجة الحرارة لتشغيل الري</th>
-                <th class="english">Tree</th>
-                <th class="english">Minimum Soil Moisture Before Irrigation</th>
-                <th class="english">Maximum Temperature to Allow Irrigation</th>
+                <th id="tree-header">الشجرة</th>
+                <th id="moisture-limit-header">الحد الأدنى لرطوبة التربة قبل الري</th>
+                <th id="temp-limit-header">الحد الأقصى لدرجة الحرارة لتشغيل الري</th>
             </tr>
             <tr>
-                <td>التين</td>
-                <td>أقل من 40%</td>
-                <td>أقل من 40°C</td>
-                <td class="english">Fig Tree</td>
-                <td class="english">Less than 40%</td>
-                <td class="english">Less than 40°C</td>
+                <td id="fig">التين</td>
+                <td id="fig-moisture">أقل من 40%</td>
+                <td id="fig-temp">أقل من 40°C</td>
             </tr>
             <tr>
-                <td>النخيل الصغير</td>
-                <td>أقل من 25%</td>
-                <td>أقل من 40°C</td>
-                <td class="english">Small Palm Tree</td>
-                <td class="english">Less than 25%</td>
-                <td class="english">Less than 40°C</td>
+                <td id="palm">النخيل الصغير</td>
+                <td id="palm-moisture">أقل من 25%</td>
+                <td id="palm-temp">أقل من 40°C</td>
             </tr>
         </table>
 
-        <h2>🔹 طريقة عمل النظام</h2>
-        <p>يقوم النظام بقراءة بيانات المستشعرات لكل شجرة على حدة، ثم يقرر تشغيل الري إذا كانت التربة جافة ودرجة الحرارة مناسبة. عند تحقيق المستوى المطلوب من الرطوبة، يتم إيقاف الري تلقائيًا.</p>
-
-        <h2 class="english">🔹 How the System Works</h2>
-        <p class="english">The system reads sensor data for each tree separately and decides to start irrigation if the soil is dry and the temperature is appropriate. When the desired moisture level is reached, irrigation stops automatically.</p>
+        <h2 id="operation-title">🔹 طريقة عمل النظام</h2>
+        <p id="operation-text">يقوم النظام بقراءة بيانات المستشعرات لكل شجرة على حدة، ثم يقرر تشغيل الري إذا كانت التربة جافة ودرجة الحرارة مناسبة. عند تحقيق المستوى المطلوب من الرطوبة، يتم إيقاف الري تلقائيًا.</p>
     </div>
+
+    <script>
+        let isArabic = true;
+
+        function toggleLanguage() {
+            isArabic = !isArabic;
+            document.body.style.direction = isArabic ? "rtl" : "ltr";
+            document.body.style.textAlign = isArabic ? "right" : "left";
+
+            document.querySelector(".lang-btn").innerText = isArabic ? "English" : "عربي";
+
+            const translations = {
+                title: ["📌 نظام الري الذكي باستخدام Arduino", "📌 Smart Irrigation System Using Arduino"],
+                introTitle: ["🔹 مقدمة", "🔹 Introduction"],
+                introText: [
+                    "هذا المشروع عبارة عن نموذج أولي لنظام ري ذكي يعتمد على مستشعرات البيئة لتحديد وقت الري بناءً على رطوبة التربة ودرجة حرارة الجو. يهدف المشروع إلى ترشيد استهلاك المياه وتحسين صحة النباتات.",
+                    "This project is a prototype of a smart irrigation system that relies on environmental sensors to determine irrigation time based on soil moisture and air temperature. The goal is to optimize water usage and improve plant health."
+                ],
+                componentsTitle: ["🔹 مكونات المشروع", "🔹 Project Components"],
+                componentHeader: ["المكون", "Component"],
+                functionHeader: ["الوظيفة", "Function"],
+                arduinoFunc: ["وحدة التحكم الرئيسية", "Main control unit"],
+                moistureFunc: ["لقياس مستوى الرطوبة لكل شجرة", "Measures soil moisture for each plant"],
+                tempSensorFunc: ["لقياس حرارة الهواء لتجنب الري في الحرارة العالية", "Measures air temperature to avoid irrigation in high heat"],
+                servoFunc: ["فتح وإغلاق صمام الماء", "Opens and closes the water valve"],
+                tankFunc: ["مصدر المياه للنباتات", "Water source for the plants"],
+                irrigationTitle: ["🔹 نظام الري لكل شجرة", "🔹 Irrigation System for Each Tree"],
+                treeHeader: ["الشجرة", "Tree"],
+                moistureLimitHeader: ["الحد الأدنى لرطوبة التربة قبل الري", "Minimum Soil Moisture Before Irrigation"],
+                tempLimitHeader: ["الحد الأقصى لدرجة الحرارة لتشغيل الري", "Maximum Temperature for Irrigation"],
+                fig: ["التين", "Fig"],
+                palm: ["النخيل الصغير", "Small Palm"],
+                operationTitle: ["🔹 طريقة عمل النظام", "🔹 How the System Works"],
+                operationText: [
+                    "يقوم النظام بقراءة بيانات المستشعرات لكل شجرة على حدة، ثم يقرر تشغيل الري إذا كانت التربة جافة ودرجة الحرارة مناسبة. عند تحقيق المستوى المطلوب من الرطوبة، يتم إيقاف الري تلقائيًا.",
+                    "The system reads sensor data for each tree separately, then decides to start irrigation if the soil is dry and the temperature is suitable. Irrigation stops automatically when the desired moisture level is reached."
+                ]
+            };
+
+            for (const key in translations) {
+                document.getElementById(key).innerText = isArabic ? translations[key][0] : translations[key][1];
+            }
+        }
+    </script>
 
 </body>
 </html>
