@@ -11,7 +11,7 @@
       margin: 0;
       height: 100vh;
       font-family: 'Tajawal', sans-serif;
-      background: linear-gradient(135deg, #ff6600, #ff944d, #ffb366);
+      background: linear-gradient(135deg, #ff7300, #ff8c00, #ffa31a);
       background-size: 400% 400%;
       display: flex;
       justify-content: center;
@@ -31,7 +31,7 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* === شعار سفرة === */
+    /* شعار سفرة */
     .logo-bubble {
       position: absolute;
       top: 25px;
@@ -67,10 +67,10 @@
       50% { transform: translateY(-6px); }
     }
 
-    /* === فقاعة الصح === */
+    /* فقاعة الصح */
     .circle {
-      width: 150px;
-      height: 150px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.25);
       display: flex;
@@ -91,15 +91,15 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    /* === علامة الصح المتحركة === */
+    /* علامة الصح */
     .checkmark {
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
     }
 
     .checkmark circle {
       fill: none;
-      stroke: white;
+      stroke: #00ff73;
       stroke-width: 8;
       stroke-linecap: round;
       animation: circleDraw 1s ease-out forwards;
@@ -107,12 +107,12 @@
 
     .checkmark path {
       fill: none;
-      stroke: white;
+      stroke: #00ff73;
       stroke-width: 8;
       stroke-linecap: round;
       stroke-linejoin: round;
-      stroke-dasharray: 48;
-      stroke-dashoffset: 48;
+      stroke-dasharray: 70;
+      stroke-dashoffset: 70;
       animation: checkDraw 0.8s ease-out 1s forwards;
     }
 
@@ -122,7 +122,7 @@
     }
 
     @keyframes checkDraw {
-      from { stroke-dashoffset: 48; }
+      from { stroke-dashoffset: 70; }
       to { stroke-dashoffset: 0; }
     }
 
@@ -147,7 +147,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* === الرذاذ الخلفي === */
+    /* الرذاذ الخلفي */
     .spark {
       position: absolute;
       width: 6px;
@@ -167,8 +167,10 @@
       position: absolute;
       bottom: 12px;
       font-size: 14px;
-      opacity: 0.8;
+      opacity: 0.85;
       color: #fffaf0;
+      text-align: center;
+      width: 100%;
       text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
   </style>
@@ -183,7 +185,7 @@
   <div class="circle">
     <svg class="checkmark" viewBox="0 0 100 100">
       <circle cx="50" cy="50" r="45" />
-      <path d="M30 50 L45 65 L70 40" />
+      <path d="M30 55 L45 70 L75 35" />
     </svg>
   </div>
 
