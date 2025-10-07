@@ -11,21 +11,23 @@
       margin: 0;
       height: 100vh;
       font-family: 'Tajawal', sans-serif;
-      background: linear-gradient(135deg, #ff7e5f, #feb47b);
-      background-size: 300% 300%;
+      background: linear-gradient(135deg, #ff6600, #ff944d, #ffb366);
+      background-size: 400% 400%;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       color: #fff;
-      animation: gradientShift 8s ease infinite;
+      animation: orangeWave 20s ease-in-out infinite;
       overflow: hidden;
       position: relative;
     }
 
-    @keyframes gradientShift {
+    @keyframes orangeWave {
       0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      25% { background-position: 100% 50%; }
+      50% { background-position: 100% 100%; }
+      75% { background-position: 0% 100%; }
       100% { background-position: 0% 50%; }
     }
 
@@ -165,7 +167,9 @@
       position: absolute;
       bottom: 12px;
       font-size: 14px;
-      opacity: 0.7;
+      opacity: 0.8;
+      color: #fffaf0;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
   </style>
 </head>
@@ -193,6 +197,6 @@
   <div class="spark" style="top:40%; left:70%; animation-delay: 3s;"></div>
   <div class="spark" style="top:10%; left:90%; animation-delay: 4s;"></div>
 
-  <footer>© 2025 — تصميم أمجد 💛</footer>
+  <footer>© 2025 — تصميم فريق سفرة 💛</footer>
 </body>
 </html>
