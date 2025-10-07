@@ -11,7 +11,7 @@
       margin: 0;
       height: 100vh;
       font-family: 'Tajawal', sans-serif;
-      background: linear-gradient(135deg, #00b09b, #96c93d);
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
       background-size: 300% 300%;
       display: flex;
       justify-content: center;
@@ -20,6 +20,7 @@
       color: #fff;
       animation: gradientShift 8s ease infinite;
       overflow: hidden;
+      position: relative;
     }
 
     @keyframes gradientShift {
@@ -28,23 +29,59 @@
       100% { background-position: 0% 50%; }
     }
 
-    .circle {
-      width: 130px;
-      height: 130px;
+    /* === شعار سفرة === */
+    .logo-bubble {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 15px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.25);
+      backdrop-filter: blur(8px);
+      animation: floatLogo 6s ease-in-out infinite;
+    }
+
+    .logo-bubble img {
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(255,255,255,0.4);
+    }
+
+    .logo-bubble span {
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    @keyframes floatLogo {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* === فقاعة الصح === */
+    .circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: pop 0.9s ease forwards;
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      animation: bubblePulse 3s ease-in-out infinite, pop 1s ease forwards;
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.35);
+      position: relative;
     }
 
-    .check {
-      font-size: 60px;
-      opacity: 0;
-      transform: scale(0.5);
-      animation: checkPop 1.2s ease 0.5s forwards;
+    @keyframes bubblePulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
 
     @keyframes pop {
@@ -52,10 +89,39 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    @keyframes checkPop {
-      0% { opacity: 0; transform: scale(0.5) rotate(-15deg); }
-      70% { opacity: 1; transform: scale(1.1) rotate(10deg); }
-      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    /* === علامة الصح المتحركة === */
+    .checkmark {
+      width: 80px;
+      height: 80px;
+    }
+
+    .checkmark circle {
+      fill: none;
+      stroke: white;
+      stroke-width: 8;
+      stroke-linecap: round;
+      animation: circleDraw 1s ease-out forwards;
+    }
+
+    .checkmark path {
+      fill: none;
+      stroke: white;
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      animation: checkDraw 0.8s ease-out 1s forwards;
+    }
+
+    @keyframes circleDraw {
+      from { stroke-dasharray: 0 314; }
+      to { stroke-dasharray: 314 0; }
+    }
+
+    @keyframes checkDraw {
+      from { stroke-dashoffset: 48; }
+      to { stroke-dashoffset: 0; }
     }
 
     h1 {
@@ -70,6 +136,7 @@
       font-size: 18px;
       margin: 0;
       opacity: 0;
+      color: #fff8ee;
       animation: fadeUp 1.5s ease 1.2s forwards;
     }
 
@@ -78,28 +145,20 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* === الرذاذ الخلفي === */
     .spark {
       position: absolute;
-      width: 5px;
-      height: 5px;
-      background: rgba(255,255,255,0.8);
+      width: 6px;
+      height: 6px;
+      background: rgba(255,255,255,0.85);
       border-radius: 50%;
-      animation: sparkle 6s linear infinite;
+      animation: sparkle 7s linear infinite;
     }
 
     @keyframes sparkle {
-      0% {
-        transform: translate(0,0) scale(0);
-        opacity: 1;
-      }
-      50% {
-        transform: translate(200px,-200px) scale(1);
-        opacity: 0.6;
-      }
-      100% {
-        transform: translate(-100px,300px) scale(0);
-        opacity: 0;
-      }
+      0% { transform: translate(0,0) scale(0); opacity: 1; }
+      50% { transform: translate(180px,-200px) scale(1); opacity: 0.6; }
+      100% { transform: translate(-150px,250px) scale(0); opacity: 0; }
     }
 
     footer {
@@ -111,18 +170,29 @@
   </style>
 </head>
 <body>
-  <div class="circle">
-    <div class="check">✅</div>
+
+  <div class="logo-bubble">
+    <img src="images/safra.jpeg" alt="شعار سفرة">
+    <span>سفرة</span>
   </div>
+
+  <div class="circle">
+    <svg class="checkmark" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" />
+      <path d="M30 50 L45 65 L70 40" />
+    </svg>
+  </div>
+
   <h1>تم التحقق من حسابك بنجاح</h1>
   <p>شكرًا لتأكيدك البريد الإلكتروني ✨</p>
 
+  <!-- الرذاذ المتحرك -->
   <div class="spark" style="top:20%; left:10%; animation-delay: 0s;"></div>
   <div class="spark" style="top:60%; left:30%; animation-delay: 1s;"></div>
   <div class="spark" style="top:80%; left:80%; animation-delay: 2s;"></div>
   <div class="spark" style="top:40%; left:70%; animation-delay: 3s;"></div>
   <div class="spark" style="top:10%; left:90%; animation-delay: 4s;"></div>
 
-  <footer>© 2025 — تصميم أمجد 💚</footer>
+  <footer>© 2025 — تصميم أمجد 💛</footer>
 </body>
 </html>
