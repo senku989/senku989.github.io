@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تم التحقق بنجاح ✅</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #00b09b, #96c93d);
+      background-size: 300% 300%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #fff;
+      animation: gradientShift 8s ease infinite;
+      overflow: hidden;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .circle {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pop 0.9s ease forwards;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    }
+
+    .check {
+      font-size: 60px;
+      opacity: 0;
+      transform: scale(0.5);
+      animation: checkPop 1.2s ease 0.5s forwards;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes checkPop {
+      0% { opacity: 0; transform: scale(0.5) rotate(-15deg); }
+      70% { opacity: 1; transform: scale(1.1) rotate(10deg); }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    h1 {
+      font-size: 30px;
+      margin: 25px 0 10px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+      animation: fadeUp 1.2s ease 1s forwards;
+      opacity: 0;
+    }
+
+    p {
+      font-size: 18px;
+      margin: 0;
+      opacity: 0;
+      animation: fadeUp 1.5s ease 1.2s forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .spark {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 50%;
+      animation: sparkle 6s linear infinite;
+    }
+
+    @keyframes sparkle {
+      0% {
+        transform: translate(0,0) scale(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translate(200px,-200px) scale(1);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translate(-100px,300px) scale(0);
+        opacity: 0;
+      }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 12px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="circle">
+    <div class="check">✅</div>
+  </div>
+  <h1>تم التحقق من حسابك بنجاح</h1>
+  <p>شكرًا لتأكيدك البريد الإلكتروني ✨</p>
+
+  <div class="spark" style="top:20%; left:10%; animation-delay: 0s;"></div>
+  <div class="spark" style="top:60%; left:30%; animation-delay: 1s;"></div>
+  <div class="spark" style="top:80%; left:80%; animation-delay: 2s;"></div>
+  <div class="spark" style="top:40%; left:70%; animation-delay: 3s;"></div>
+  <div class="spark" style="top:10%; left:90%; animation-delay: 4s;"></div>
+
+  <footer>© 2025 — تصميم أمجد 💚</footer>
+</body>
+</html>
