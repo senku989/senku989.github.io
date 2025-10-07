@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>تم التحقق بنجاح ✅</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg1: #ff7a00;
-      --bg2: #ffb347;
+      /* خلفية برتقالي أغمق أقرب لشعارك */
+      --bg1: #dd5a00; /* أغمق */
+      --bg2: #ff8a33;
       --accent: #0b8457;
-      --glass: rgba(255,255,255,0.12);
-      --glass-strong: rgba(255,255,255,0.2);
+      --glass: rgba(255,255,255,0.08);
+      --glass-strong: rgba(255,255,255,0.14);
       --text: #ffffff;
-      --muted: rgba(255,255,255,0.85);
+      --muted: rgba(255,255,255,0.9);
     }
 
+    *{box-sizing:border-box}
     html,body{
       height:100%;
       margin:0;
       padding:0;
       direction:rtl;
-      font-family: 'Tajawal', sans-serif;
+      font-family:'Tajawal', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
-      background-size: 400% 400%;
-      animation: bgShift 10s ease infinite;
-      color: var(--text);
+      background-size: 300% 300%;
+      animation: bgShift 12s ease infinite;
+      color:var(--text);
       overflow:hidden;
       display:flex;
       align-items:center;
       justify-content:center;
+      padding:28px;
     }
 
     @keyframes bgShift {
@@ -40,176 +43,173 @@
       100%{background-position:0% 50%}
     }
 
-    /* Top-right brand block (kept as-is) */
+    /* شعار في أقصى اليمين أعلى */
     .brand-wrap{
-      position:absolute;
+      position:fixed;
       top:18px;
       right:18px;
       display:flex;
       flex-direction:column;
       align-items:center;
       gap:10px;
-      z-index:30;
+      z-index:40;
       text-align:center;
-      transition:transform .18s ease, box-shadow .18s ease;
+      transition: transform .14s ease;
     }
-
     .brand-card{
       display:flex;
       flex-direction:column;
       align-items:center;
       gap:8px;
-      padding:12px;
+      padding:10px;
       border-radius:12px;
       backdrop-filter: blur(6px) saturate(120%);
       background: linear-gradient(180deg, var(--glass-strong), var(--glass));
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.03);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.28);
     }
-
     .brand-card img{
       width:72px;
       height:72px;
       object-fit:contain;
       display:block;
-      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.25));
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.32));
     }
-
     .brand-name{
       font-weight:800;
-      font-size:18px;
+      font-size:17px;
       color:var(--text);
-      letter-spacing:0.6px;
-      text-shadow: 0 4px 18px rgba(11,132,87,0.18);
       margin:0;
+      letter-spacing:0.4px;
     }
-
     .brand-tag{
-      font-weight:700;
+      font-weight:600;
       font-size:12px;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.92);
       padding:4px 8px;
       border-radius:999px;
-      background: rgba(11,132,87,0.12);
-      border: 1px solid rgba(11,132,87,0.12);
+      background: rgba(11,132,87,0.11);
     }
 
-    .brand-wrap:hover { transform: translateY(-4px); box-shadow:0 18px 40px rgba(0,0,0,0.28); }
-
-    /* Fullscreen text layout (no centered card) */
-    .content {
+    /* المحتوى بدون صندوق محدود - نص يغطي المساحة */
+    main.content {
       width:100%;
+      max-width:1100px;
       height:100%;
       display:flex;
+      flex-direction:column;
       align-items:center;
       justify-content:center;
       text-align:center;
-      padding:48px;
-      box-sizing:border-box;
-      gap:20px;
-      flex-direction:column;
+      gap:18px;
+      padding:40px;
     }
 
+    /* دائرة والـ SVG المرسوم */
     .circle {
       width:140px;
       height:140px;
       border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.22), rgba(255,255,255,0.06));
       display:flex;
       align-items:center;
       justify-content:center;
-      box-shadow: 0 14px 40px rgba(0,0,0,0.35);
-      margin-bottom:6px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.14), rgba(255,255,255,0.03));
+      box-shadow: 0 18px 44px rgba(0,0,0,0.36);
       flex-shrink:0;
     }
 
-    .check {
-      font-size:64px;
-      transform:translateY(4px);
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.35));
-    }
-
+    /* نصوص أكبر، أكثر وضوحًا، وتباين أعلى */
     h1 {
-      font-size:42px;
-      margin:6px 0 0;
+      font-size:44px;
+      line-height:1.02;
+      margin:0;
+      font-weight:800;
       color:var(--text);
-      text-shadow: 0 10px 30px rgba(0,0,0,0.28);
-      line-height:1.05;
+      text-shadow: 0 12px 32px rgba(0,0,0,0.32);
+      letter-spacing:0.2px;
     }
 
     p {
       margin:0;
       color:var(--muted);
       font-size:18px;
-      max-width:900px;
-      line-height:1.6;
+      max-width:980px;
+      line-height:1.7;
+      font-weight:600;
     }
 
-    /* Decorative sparkles (kept) */
+    /* Sparkles */
     .sparkle {
-      position:absolute;
+      position:fixed;
       width:10px;
       height:10px;
       border-radius:50%;
-      background:rgba(255,255,255,0.85);
-      box-shadow:0 6px 20px rgba(255,255,255,0.22);
-      opacity:0.9;
-      transform: scale(.8);
+      background:rgba(255,255,255,0.9);
+      box-shadow:0 8px 22px rgba(255,255,255,0.16);
+      opacity:0.95;
+      transform: scale(.85);
       animation: sparkMove 6s ease-in-out infinite;
+      z-index:5;
     }
-
     .sparkle.s1{ top:12%; left:6%; animation-delay:0s; }
     .sparkle.s2{ top:70%; left:22%; animation-delay:1.4s; }
     .sparkle.s3{ top:82%; left:78%; animation-delay:2.2s; }
     .sparkle.s4{ top:38%; left:72%; animation-delay:3.1s; }
     .sparkle.s5{ top:8%; left:92%; animation-delay:4.3s; }
-
     @keyframes sparkMove {
-      0%{ transform: translateY(0) scale(.7); opacity:0.9; }
-      50%{ transform: translateY(-40px) scale(1.15); opacity:0.6; }
-      100%{ transform: translateY(0) scale(.8); opacity:0.9; }
+      0%{ transform: translateY(0) scale(.8); opacity:0.95; }
+      50%{ transform: translateY(-28px) scale(1.05); opacity:0.6; }
+      100%{ transform: translateY(0) scale(.85); opacity:0.95; }
     }
 
+    /* Footer centered */
     footer {
-      position:absolute;
+      position:fixed;
       bottom:14px;
-      left:18px;
+      left:50%;
+      transform:translateX(-50%);
       font-size:13px;
-      color: rgba(255,255,255,0.9);
-      opacity:0.95;
+      color: rgba(255,255,255,0.95);
+      opacity:0.98;
+      z-index:60;
+      text-align:center;
     }
 
-    /* Responsive adjustments */
+    /* Responsive tweaks */
     @media (max-width:900px){
-      h1{ font-size:30px; }
+      h1{ font-size:34px; }
+      p{ font-size:16px; line-height:1.6; }
       .circle{ width:110px; height:110px; }
+      .brand-card img{ width:60px; height:60px; }
     }
-
     @media (max-width:480px){
       h1{ font-size:22px; }
-      p{ font-size:15px; }
-      .brand-card img{ width:56px; height:56px; }
-      .brand-name{ font-size:16px; }
+      p{ font-size:14px; }
+      .brand-wrap{ top:12px; right:12px; }
     }
   </style>
 </head>
 <body>
-  <!-- الشعار كما هو في الزاوية العلوية اليمنى -->
+  <!-- شعار سفرة كما هو -->
   <div class="brand-wrap" aria-hidden="false">
     <div class="brand-card" role="img" aria-label="شعار سفرة">
-      <img src="images/safra.jpeg" alt="سفــرة" />
+      <img src="images/safra.jpeg" alt="سفرة" />
       <div class="brand-name">سفرة</div>
       <div class="brand-tag">توصيل سريع</div>
     </div>
   </div>
 
-  <!-- محتوى الشاشة الكامل بدون صندوق محدود -->
+  <!-- المحتوى الرئيسي بدون صندوق واضح -->
   <main class="content" role="main" aria-labelledby="main-title">
     <div class="circle" aria-hidden="true">
-      <div class="check">✅</div>
+      <!-- SVG رسم علامة الصح باللون الأخضر مع أنيميشن رسم تدريجي -->
+      <svg id="check-svg" width="86" height="86" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+        <circle cx="60" cy="60" r="54" stroke="rgba(11,132,87,0.12)" stroke-width="12" />
+        <path id="check-path" d="M34 62 L52 80 L88 38" stroke="#00C27A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="200" stroke-dashoffset="200"/>
+      </svg>
     </div>
 
     <h1 id="main-title">تم التحقق من حسابك بنجاح</h1>
-    <p>شكرًا لتأكيدك بريدك الإلكتروني. يمكنك الآن العودة إلى التطبيق والاستمرار في استخدام خدمات سفرة يدويًا.</p>
+    <p>شكرًا لتأكيد بريدك الإلكتروني. عد الآن إلى التطبيق لاستكمال تجربتك يدوياً.</p>
   </main>
 
   <div class="sparkle s1"></div>
@@ -219,5 +219,29 @@
   <div class="sparkle s5"></div>
 
   <footer>© 2025 — فريق سفرة</footer>
+
+  <script>
+    /* رسم تدريجي لعلامة الصح عند تحميل الصفحة */
+    document.addEventListener('DOMContentLoaded', function(){
+      const path = document.getElementById('check-path');
+      // إجمالي طول المسار تقريبي؛ نحاكي رسم بطيء
+      const total = path.getTotalLength ? path.getTotalLength() : 200;
+      path.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(.2,.9,.2,1)';
+      // بداية مخفية
+      path.style.strokeDasharray = total;
+      path.style.strokeDashoffset = total;
+      // تشغيل بعد فريم واحد حتى يظهر النعومة فور التحميل
+      requestAnimationFrame(()=> {
+        requestAnimationFrame(()=> {
+          path.style.strokeDashoffset = '0';
+        });
+      });
+
+      // إضافة توهج بسيط للعلامة بعد الانتهاء
+      path.addEventListener('transitionend', ()=> {
+        path.style.filter = 'drop-shadow(0 8px 22px rgba(0,194,122,0.25))';
+      });
+    });
+  </script>
 </body>
 </html>
