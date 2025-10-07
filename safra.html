@@ -1,208 +1,279 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تم التحقق بنجاح ✅</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>تم التحقق بنجاح — سفرة</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
 
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: 'Tajawal', sans-serif;
-      background: linear-gradient(135deg, #ff7a00, #ffb347, #ff7a00);
-      background-size: 400% 400%;
-      animation: gradientShift 12s ease infinite;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      color: #fff;
-      overflow: hidden;
-    }
+  /* =========== Body & Background =========== */
+  :root{
+    --orange-1: #ff5a00; /* قوي */
+    --orange-2: #ff7a00;
+    --orange-3: #ff9b33;
+    --accent-green: #00ff73; /* صح أخضر زاهي */
+  }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      25% { background-position: 50% 100%; }
-      50% { background-position: 100% 50%; }
-      75% { background-position: 50% 0%; }
-      100% { background-position: 0% 50%; }
-    }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    height:100vh;
+    font-family:'Tajawal',sans-serif;
+    color:#fff;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    /* vivid orange gradient (dark/vivid) */
+    background: linear-gradient(120deg, var(--orange-1), var(--orange-2) 45%, var(--orange-3) 100%);
+    background-size: 400% 400%;
+    animation: gradientFlow 14s ease-in-out infinite;
+    position:relative;
+  }
 
-    /* شعار سفرة */
-    .logo-container {
-      position: absolute;
-      top: 25px;
-      right: 25px;
-      display: flex;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 50px;
-      padding: 10px 18px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
-      animation: floatLogo 4s ease-in-out infinite;
-    }
+  @keyframes gradientFlow{
+    0%{background-position:0% 50%}
+    25%{background-position:50% 100%}
+    50%{background-position:100% 50%}
+    75%{background-position:50% 0%}
+    100%{background-position:0% 50%}
+  }
 
-    @keyframes floatLogo {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
+  /* =========== Logo bubble (top-right) =========== */
+  .logo-bubble{
+    position:absolute;
+    top:22px;
+    right:22px;
+    display:flex;
+    gap:10px;
+    align-items:center;
+    padding:10px 14px;
+    border-radius:50px;
+    background:rgba(255,255,255,0.12);
+    box-shadow:0 6px 22px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.04);
+    backdrop-filter:blur(6px);
+    animation: floatLogo 5s ease-in-out infinite;
+    z-index:30;
+  }
+  .logo-bubble img{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    object-fit:cover;
+    box-shadow:0 6px 18px rgba(0,0,0,0.22);
+  }
+  .logo-bubble span{
+    font-weight:700;
+    font-size:19px;
+    color:#fff;
+    text-shadow:0 2px 6px rgba(0,0,0,0.28);
+  }
+  @keyframes floatLogo{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+  }
 
-    .logo-container img {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      margin-left: 10px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.5);
-    }
+  /* =========== Center bubble with check =========== */
+  .circle{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12), rgba(255,255,255,0.03) 40%, rgba(255,255,255,0.02) 45%, rgba(255,255,255,0) 60%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.25), inset 0 -6px 18px rgba(255,255,255,0.03);
+    position:relative;
+    z-index:10;
+    animation: bubblePop 0.9s cubic-bezier(.2,.9,.3,1) forwards, bubbleFloat 3.5s ease-in-out infinite;
+  }
+  @keyframes bubblePop{
+    from{transform:scale(0);opacity:0}
+    to{transform:scale(1);opacity:1}
+  }
+  @keyframes bubbleFloat{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-6px)}
+  }
 
-    .logo-container span {
-      font-weight: bold;
-      color: #fff;
-      font-size: 20px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
+  /* gloss sweep across bubble */
+  .circle::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.18) 45%, rgba(255,255,255,0.05) 100%);
+    transform:translateX(-120%);
+    mix-blend-mode: overlay;
+    animation: gloss 3.2s linear infinite;
+    pointer-events:none;
+  }
+  @keyframes gloss{
+    0%{transform:translateX(-120%)}
+    50%{transform:translateX(20%)}
+    100%{transform:translateX(120%)}
+  }
 
-    /* فقاعة علامة الصح */
-    .circle {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: pop 1s ease forwards;
-      box-shadow: 0 0 35px rgba(255, 255, 255, 0.3);
-      position: relative;
-    }
+  /* =========== SVG checkmark (big & clear) =========== */
+  .check-wrap{
+    width:140px;
+    height:140px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+  svg.checkmark{
+    width:120px;
+    height:120px;
+    overflow:visible;
+    filter: drop-shadow(0 8px 18px rgba(0,0,0,0.25)) drop-shadow(0 0 24px rgba(0,0,0,0.06));
+  }
+  /* circle stroke */
+  svg.checkmark circle{
+    fill:none;
+    stroke: rgba(255,255,255,0.22);
+    stroke-width:8;
+    stroke-linecap:round;
+    stroke-dasharray: 314;
+    stroke-dashoffset: 314;
+    animation: drawCircle 1s ease-out 0.1s forwards;
+  }
+  /* check path */
+  svg.checkmark path{
+    fill:none;
+    stroke: var(--accent-green);
+    stroke-width:10;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    /* pick long dash to cover whole path */
+    stroke-dasharray: 220;
+    stroke-dashoffset: 220;
+    animation: drawCheck 0.9s ease-out 1.05s forwards;
+  }
 
-    .check {
-      position: relative;
-      width: 60px;
-      height: 120px;
-      opacity: 0;
-      animation: drawCheck 1s ease 0.6s forwards;
-    }
+  @keyframes drawCircle{
+    to{ stroke-dashoffset: 0; }
+  }
+  @keyframes drawCheck{
+    to{ stroke-dashoffset: 0; }
+  }
 
-    .check::before, .check::after {
-      content: '';
-      position: absolute;
-      background: #2fff8d;
-      border-radius: 4px;
-      transform-origin: left top;
-    }
+  /* little inner glow ring to emphasize */
+  .glow-ring{
+    position:absolute;
+    width:190px;
+    height:190px;
+    border-radius:50%;
+    background: radial-gradient(circle at center, rgba(0,255,115,0.14), rgba(0,255,115,0.02) 35%, rgba(0,255,115,0.0) 60%);
+    filter: blur(12px);
+    z-index:5;
+    opacity:0;
+    animation: glowIn 0.6s ease 1.6s forwards;
+    pointer-events:none;
+  }
+  @keyframes glowIn{
+    to{opacity:1}
+  }
 
-    .check::before {
-      width: 8px;
-      height: 45px;
-      left: 30px;
-      top: 55px;
-      transform: rotate(45deg) scaleY(0);
-      animation: lineGrow 0.4s ease 0.6s forwards;
-    }
+  /* =========== Title & subtitle =========== */
+  h1{
+    margin:24px 0 6px;
+    font-size:28px;
+    font-weight:700;
+    text-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    opacity:0;
+    transform:translateY(8px);
+    animation: fadeUp 1s ease 1.6s forwards;
+  }
+  p{
+    margin:0;
+    font-size:16px;
+    color: #fff8ea;
+    opacity:0;
+    transform:translateY(8px);
+    animation: fadeUp 1s ease 1.9s forwards;
+  }
 
-    .check::after {
-      width: 8px;
-      height: 85px;
-      left: 50px;
-      top: 25px;
-      transform: rotate(-45deg) scaleY(0);
-      animation: lineGrow 0.6s ease 1s forwards;
-    }
+  /* =========== floating spark particles =========== */
+  .spark{
+    position:absolute;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background: rgba(255,255,255,0.9);
+    box-shadow:0 0 12px rgba(255,255,255,0.25);
+    animation: sparkMove 7s linear infinite;
+    z-index:2;
+  }
+  @keyframes sparkMove{
+    0%{transform:translate(0,0) scale(0); opacity:1}
+    45%{transform:translate(240px,-220px) scale(1); opacity:0.7}
+    100%{transform:translate(-150px,260px) scale(0); opacity:0}
+  }
 
-    @keyframes pop {
-      0% { transform: scale(0); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
+  /* =========== Footer (visible & clear) =========== */
+  footer{
+    position: absolute;
+    bottom:18px;
+    width:100%;
+    text-align:center;
+    font-size:14px;
+    color:#ffe9c9;
+    text-shadow:0 2px 12px rgba(0,0,0,0.45);
+    letter-spacing:0.6px;
+    opacity:0;
+    transform:translateY(8px);
+    animation: fadeUp 1s ease 2.2s forwards;
+  }
 
-    @keyframes lineGrow {
-      to { transform: rotate(var(--angle, 0)) scaleY(1); }
-    }
-
-    @keyframes drawCheck {
-      from { opacity: 0; transform: scale(0.7); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    h1 {
-      font-size: 30px;
-      margin: 25px 0 10px;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.25);
-      animation: fadeUp 1.2s ease 1.3s forwards;
-      opacity: 0;
-    }
-
-    p {
-      font-size: 18px;
-      margin: 0;
-      opacity: 0;
-      animation: fadeUp 1.5s ease 1.5s forwards;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .spark {
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      background: rgba(255,255,255,0.8);
-      border-radius: 50%;
-      animation: sparkle 6s linear infinite;
-    }
-
-    @keyframes sparkle {
-      0% {
-        transform: translate(0,0) scale(0);
-        opacity: 1;
-      }
-      50% {
-        transform: translate(200px,-200px) scale(1);
-        opacity: 0.6;
-      }
-      100% {
-        transform: translate(-100px,300px) scale(0);
-        opacity: 0;
-      }
-    }
-
-    footer {
-      position: absolute;
-      bottom: 18px;
-      font-size: 15px;
-      color: #ffe2b2;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5), 0 0 8px rgba(255,165,0,0.4);
-      letter-spacing: 1px;
-      font-weight: 500;
-      text-align: center;
-      width: 100%;
-      animation: fadeUp 1.5s ease 2s forwards;
-      opacity: 0;
-    }
-  </style>
+  /* small responsive tweak */
+  @media (max-width:420px){
+    .circle{ width:170px; height:170px;}
+    .check-wrap{ width:110px; height:110px;}
+    svg.checkmark{ width:92px; height:92px;}
+    h1{ font-size:22px;}
+    .logo-bubble span{ font-size:17px;}
+  }
+</style>
 </head>
 <body>
-  <div class="logo-container">
+
+  <!-- logo + name bubble (top-right) -->
+  <div class="logo-bubble" role="img" aria-label="سفرة">
     <span>سفرة</span>
-    <img src="images/safra.jpeg" alt="شعار سفرة">
+    <img src="images/safra.jpeg" alt="سفرة logo" />
   </div>
 
-  <div class="circle">
-    <div class="check"></div>
+  <!-- main bubble with svg check -->
+  <div class="circle" aria-hidden="false">
+    <div class="glow-ring" aria-hidden="true"></div>
+    <div class="check-wrap">
+      <svg class="checkmark" viewBox="0 0 120 120" aria-hidden="true">
+        <!-- circle outline draws first -->
+        <circle cx="60" cy="60" r="50" />
+        <!-- check path:
+             left short stroke, right longer stroke (right leg longer to match real check)
+             coordinates tuned for shape that looks like ✔
+        -->
+        <path d="M36 64 L54 82 L90 38" />
+      </svg>
+    </div>
   </div>
+
   <h1>تم التحقق من حسابك بنجاح</h1>
   <p>شكرًا لتأكيدك البريد الإلكتروني ✨</p>
 
-  <div class="spark" style="top:20%; left:10%; animation-delay: 0s;"></div>
-  <div class="spark" style="top:60%; left:30%; animation-delay: 1s;"></div>
-  <div class="spark" style="top:80%; left:80%; animation-delay: 2s;"></div>
-  <div class="spark" style="top:40%; left:70%; animation-delay: 3s;"></div>
-  <div class="spark" style="top:10%; left:90%; animation-delay: 4s;"></div>
+  <!-- spark particles -->
+  <div class="spark" style="top:18%; left:8%; animation-delay:0s"></div>
+  <div class="spark" style="top:62%; left:26%; animation-delay:1s"></div>
+  <div class="spark" style="top:78%; left:82%; animation-delay:2s"></div>
+  <div class="spark" style="top:44%; left:70%; animation-delay:3s"></div>
+  <div class="spark" style="top:12%; left:92%; animation-delay:4s"></div>
 
   <footer>© 2025 — فريق سفرة 🧡</footer>
+
 </body>
 </html>
