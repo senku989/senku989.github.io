@@ -204,5 +204,32 @@
   <div class="spark" style="top:10%; left:90%; animation-delay: 4s;"></div>
 
   <footer>© 2025 — فريق سفرة 🧡</footer>
+
+
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBlH9qfb9lWl2f3lmuuKdbi-KRs3rvGZFE",
+    authDomain: "safra-f9b23.firebaseapp.com",
+    projectId: "safra-f9b23",
+  };
+  firebase.initializeApp(firebaseConfig);
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const oobCode = urlParams.get("oobCode");
+
+  if (oobCode) {
+    firebase.auth().applyActionCode(oobCode)
+      .then(() => {
+        // ✅ تم التحقق فعليًا
+        document.body.innerHTML = "<h2>✅ تم التحقق من بريدك بنجاح</h2>";
+      })
+      .catch((error) => {
+        document.body.innerHTML = "<h2>❌ فشل التحقق: " + error.message + "</h2>";
+      });
+  }
+</script>
 </body>
 </html>
