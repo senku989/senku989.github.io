@@ -30,7 +30,6 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* شعار سفرة */
     .logo-bubble {
       position: absolute;
       top: 25px;
@@ -66,7 +65,6 @@
       50% { transform: translateY(-6px); }
     }
 
-    /* فقاعة الصح / الحالة */
     .circle {
       width: 160px;
       height: 160px;
@@ -90,7 +88,6 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    /* علامة (افتراضية صح) */
     .checkmark {
       width: 90px;
       height: 90px;
@@ -125,20 +122,23 @@
       to { stroke-dashoffset: 0; }
     }
 
-    /* حالة الخطأ ستستبدل الـ SVG عبر JS لتبقى التنسيق نفسه */
-    .error-stroke {
+    /* ستايل لعلامة الخطأ (سيُطبّق على عناصر SVG عند الفشل) */
+    .error-circle {
+      stroke: #ff4d4d !important;
+      stroke-width: 8 !important;
+      fill: none !important;
+    }
+    .error-x {
       stroke: #ff4d4d !important;
       stroke-width: 8 !important;
       stroke-linecap: round;
       stroke-linejoin: round;
-      animation: none !important;
     }
 
     h1 {
       font-size: 30px;
       margin: 25px 0 10px;
       text-shadow: 0 2px 10px rgba(0,0,0,0.25);
-      animation: fadeUp 1.2s ease 1s forwards;
       opacity: 1;
     }
 
@@ -146,16 +146,9 @@
       font-size: 18px;
       margin: 0;
       color: #fff8ee;
-      animation: fadeUp 1.5s ease 1.2s forwards;
       opacity: 1;
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* الرذاذ الخلفي */
     .spark {
       position: absolute;
       width: 6px;
@@ -181,11 +174,9 @@
       font-weight: 500;
       text-align: center;
       width: 100%;
-      animation: fadeUp 1.5s ease 2s forwards;
       opacity: 1;
     }
 
-    /* رسالة الخطأ الودية - تبقى ضمن نفس التنسيق العام */
     #verification-error {
       display: none;
       position: absolute;
@@ -213,8 +204,7 @@
   </div>
 
   <div class="circle" id="status-circle">
-    <!-- SVG قابلة للاستبدال عند الخطأ بواسطة JS لكن الأبعاد والتنسيق تبقى كما هي -->
-    <svg class="checkmark" id="status-svg" viewBox="0 0 100 100" aria-hidden="true">
+    <svg class="checkmark" id="status-svg" viewBox="0 0 100 100" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
       <circle id="status-circle-outline" cx="50" cy="50" r="45" />
       <path id="status-checkpath" d="M30 55 L45 70 L75 35" />
     </svg>
@@ -226,10 +216,8 @@
     <p id="line2"> يمكنك الآن الاستمتاع بخدمات<br>تطبيق سفرة بأمان </p>
   </center>
 
-  <!-- رسالة الخطأ الودية (تظهر فقط عند فشل التحقق) -->
   <div id="verification-error" role="status" aria-live="polite"></div>
 
-  <!-- الرذاذ المتحرك -->
   <div class="spark" style="top:20%; left:10%; animation-delay: 0s;"></div>
   <div class="spark" style="top:60%; left:30%; animation-delay: 1s;"></div>
   <div class="spark" style="top:80%; left:80%; animation-delay: 2s;"></div>
@@ -253,19 +241,7 @@
   const urlParams = new URLSearchParams(window.location.search);
   const oobCode = urlParams.get("oobCode");
 
-  // إزالة المعاملات من الشريط للحماية ومنع إعادة الاستخدام العرضية في واجهة المستخدم
-  function removeQueryParamsKeepPath() {
-    try {
-      if (window.history && window.history.replaceState) {
-        const newUrl = window.location.origin + window.location.pathname;
-        window.history.replaceState({}, document.title, newUrl);
-      }
-    } catch (e) {
-      console.warn("removeQueryParamsKeepPath failed", e);
-    }
-  }
-
-  // عرض رسالة خطأ ودية داخل العنصر الموجود، بدون تغيير التصميم الرئيسي
+  // عرض رسالة خطأ ودية داخل العنصر الموجود
   function showFriendlyError(msg) {
     const el = document.getElementById("verification-error");
     if (!el) return;
@@ -273,7 +249,7 @@
     el.style.display = "block";
   }
 
-  // تحويل رمز الخطأ إلى رسالة ودية باللغة العربية
+  // خريطة رسائل ودية
   function friendlyMessageFromErrorCode(code) {
     const map = {
       "auth/expired-action-code": "انتهت صلاحية طلبك لإثبات ملكية بريدك الإلكتروني أو سبق أن تم استخدام الرابط. حاول إرسال رابط التحقق مجددًا.",
@@ -287,46 +263,65 @@
     return map[code] || map["default"];
   }
 
-  // عند الفشل: نحافظ على كل التنسيق لكن نستبدل علامة الصح بعلامة خطأ (X) ونعرض رسالة ودية
+  // عند الفشل: نخفي نصوص النجاح لكن لا نغير التصميم العام، ونرسم دائرة حمراء مع X داخلها
   function markAsErrorAndShow(message) {
-    // استبدال محتوى الـ SVG بحافظة على الأبعاد والتنسيق
+    // إخفاء النصوص التي تفيد بنجاح التحقق لمنع التناقض
+    document.getElementById("title-text").textContent = "فشل في التحقق";
+    document.getElementById("line1").style.display = "none";
+    document.getElementById("line2").style.display = "none";
+
+    // استبدال محتويات الـ SVG بدائرة حمراء مع X (الحجم والتنسيق محفوظ)
     const svg = document.getElementById("status-svg");
     if (svg) {
-      // نضع دائرة حمراء وخط X داخلها مع نفس الأبعاد
       svg.innerHTML = `
-        <circle class="error-stroke" cx="50" cy="50" r="45" />
-        <path class="error-stroke" d="M32 32 L68 68 M68 32 L32 68" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle class="error-circle" cx="50" cy="50" r="45" />
+        <path class="error-x" d="M34 34 L66 66 M66 34 L34 66" />
       `;
-      // optionally add subtle animation for error
-      svg.querySelectorAll('.error-stroke').forEach(el => {
-        el.style.transition = 'stroke 250ms ease, transform 250ms ease';
-      });
+      // small pop animation for X
+      svg.style.transformOrigin = "50% 50%";
+      svg.animate([
+        { transform: 'scale(0.8)', opacity: 0.8 },
+        { transform: 'scale(1.05)', opacity: 1 },
+        { transform: 'scale(1)', opacity: 1 }
+      ], { duration: 420, easing: 'cubic-bezier(.2,.9,.3,1)' });
     }
 
-    // عرض رسالة ودية في العنصر المخصص
+    // عرض رسالة ودية واضحة للمستخدم
     showFriendlyError(message);
+  }
+
+  // نزيل المعاملات (query params) بعد نجاح التحقق فقط. عند فشل نترك الرابط كما هو حتى عند إعادة تحميل الصفحة تظهر الحالة نفسها.
+  function removeQueryParamsKeepPath() {
+    try {
+      if (window.history && window.history.replaceState) {
+        const newUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
+      }
+    } catch (e) {
+      console.warn("removeQueryParamsKeepPath failed", e);
+    }
   }
 
   async function handleVerify(code) {
     try {
       await applyActionCode(auth, code);
-      // نجاح التحقق: لا نغيّر أي شيء في التصميم أو النصوص
+      // نجاح: لا نغير أي نص أو SVG، نحافظ تماماً على التصميم كما طلبت
       console.log("applyActionCode: success");
+      // بعد النجاح نزيل المعاملات كي لا يُعاد تنفيذها عند الريفريش
       removeQueryParamsKeepPath();
-      // لا نغير الـ SVG أو النصوص أبداً عند النجاح
     } catch (err) {
       console.error("applyActionCode error:", err);
       const friendly = friendlyMessageFromErrorCode(err?.code || "");
       markAsErrorAndShow(friendly);
-      removeQueryParamsKeepPath();
+      // لا نزيل المعاملات هنا لكي تظل حالة الخطأ مرئية عند الريفريش حتى تصلح الرابط أو تطلب رابط جديد
     }
   }
 
   if (oobCode) {
     handleVerify(oobCode);
   } else {
+    // لا نغير التصميم إذا لم يوجد oobCode
     console.warn("no oobCode in URL");
-    // لا نغير أي شيء إذا لم يكن هناك oobCode
   }
 </script>
 </body>
