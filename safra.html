@@ -19,7 +19,6 @@
       flex-direction: column;
       color: #fff;
       animation: orangeWave 10s ease-in-out infinite;
-      
       position: relative;
     }
 
@@ -164,19 +163,37 @@
     }
 
     footer {
-  position: absolute;
-  bottom: 40px;
-  font-size: 15px;
-  color: #ffe2b2; /* بيج مائل للبرتقالي */
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5), 0 0 8px rgba(255,165,0,0.4);
-  letter-spacing: 1px;
-  font-weight: 500;
-  text-align: center;
-  width: 100%;
-  animation: fadeUp 1.5s ease 2s forwards;
-  opacity: 1;
-}
-}
+      position: absolute;
+      bottom: 40px;
+      font-size: 15px;
+      color: #ffe2b2; /* بيج مائل للبرتقالي */
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5), 0 0 8px rgba(255,165,0,0.4);
+      letter-spacing: 1px;
+      font-weight: 500;
+      text-align: center;
+      width: 100%;
+      animation: fadeUp 1.5s ease 2s forwards;
+      opacity: 1;
+    }
+
+    /* رسالة الخطأ الودية - نحافظ على الديزاين العام */
+    #verification-error {
+      display: none;
+      position: absolute;
+      bottom: 110px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 720px;
+      width: calc(100% - 40px);
+      background: rgba(0,0,0,0.28);
+      color: #fff8ee;
+      padding: 12px 16px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      backdrop-filter: blur(6px);
+    }
   </style>
 </head>
 <body>
@@ -194,8 +211,14 @@
   </div>
 
   <h1>تم التحقق من حسابك بنجاح</h1>
-  <center><p>شكرًا لتأكيدك البريد الإلكتروني ✨</p>
-  <p> يمكنك الآن الاستمتاع بخدمات<br>تطبيق سفرة بأمان </p></center>
+  <center>
+    <p>شكرًا لتأكيدك البريد الإلكتروني ✨</p>
+    <p> يمكنك الآن الاستمتاع بخدمات<br>تطبيق سفرة بأمان </p>
+  </center>
+
+  <!-- رسالة الخطأ الودية (تظهر فقط عند فشل التحقق) -->
+  <div id="verification-error" role="status" aria-live="polite"></div>
+
   <!-- الرذاذ المتحرك -->
   <div class="spark" style="top:20%; left:10%; animation-delay: 0s;"></div>
   <div class="spark" style="top:60%; left:30%; animation-delay: 1s;"></div>
@@ -204,7 +227,6 @@
   <div class="spark" style="top:10%; left:90%; animation-delay: 4s;"></div>
 
   <footer>© 2025 — فريق سفرة 🧡</footer>
-
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
@@ -222,27 +244,62 @@
   const urlParams = new URLSearchParams(window.location.search);
   const oobCode = urlParams.get("oobCode");
 
-  async function handleVerify(code) {
+  // إزالة المعاملات من الشريط للحماية ومنع إعادة الاستخدام العرضية في واجهة المستخدم
+  function removeQueryParamsKeepPath() {
     try {
-      await applyActionCode(auth, code);
-      document.body.innerHTML = `
-        <div style="padding:40px;text-align:center;">
-          <h1>✅ تم التحقق من بريدك بنجاح</h1>
-          <p>الرجاء العودة للتطبيق وتسجيل الدخول.</p>
-        </div>`;
-      console.log("applyActionCode: success");
-    } catch (err) {
-      document.body.innerHTML = `
-        <div style="padding:40px;text-align:center;">
-          <h1>❌ فشل التحقق</h1>
-          <p>${err.message}</p>
-        </div>`;
-      console.error("applyActionCode error:", err);
+      if (window.history && window.history.replaceState) {
+        const newUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
+      }
+    } catch (e) {
+      console.warn("removeQueryParamsKeepPath failed", e);
     }
   }
 
-  if (oobCode) handleVerify(oobCode);
-  else console.warn("no oobCode in URL");
+  // عرض رسالة خطأ ودية داخل العنصر الموجود، بدون تغيير التصميم الرئيسي
+  function showFriendlyError(msg) {
+    const el = document.getElementById("verification-error");
+    if (!el) return;
+    el.textContent = msg;
+    el.style.display = "block";
+  }
+
+  // ترجمة رموز أخطاء Firebase إلى رسائل عربية ودية
+  function friendlyMessageFromErrorCode(code) {
+    const map = {
+      "auth/expired-action-code": "انتهت صلاحية طلبك لإثبات ملكية بريدك الإلكتروني أو سبق أن تم استخدام الرابط. حاول إرسال رابط التحقق مجددًا.",
+      "auth/invalid-action-code": "الربط الذي فتحته غير صالح. حاول طلب رابط تحقق جديد من التطبيق.",
+      "auth/user-disabled": "حساب المستخدم معطل. تواصل مع الدعم للمساعدة.",
+      "auth/user-not-found": "لا يوجد حساب مرتبط بهذا البريد. تأكد من البريد أو سجّل حسابًا جديدًا.",
+      "auth/invalid-email": "عنوان البريد الإلكتروني يبدو غير صالحًا. تحقق وحاول مرة أخرى.",
+      "auth/too-many-requests": "تم اكتشاف محاولات متعددة. انتظر لحظة ثم حاول مرة أخرى.",
+      // افتراضي
+      "default": "حدث خطأ أثناء التحقق. حاول مرة أخرى أو تواصل مع الدعم."
+    };
+    return map[code] || map["default"];
+  }
+
+  async function handleVerify(code) {
+    try {
+      await applyActionCode(auth, code);
+      // نجاح التحقق: لا نغير التصميم، فقط نزيل المعاملات من الشريط وسجل نجاحًا
+      console.log("applyActionCode: success");
+      removeQueryParamsKeepPath();
+      // خيار: يمكنك هنا إرسال حدث للسيرفر أو تفعيل Analytics إن رغبت
+    } catch (err) {
+      console.error("applyActionCode error:", err);
+      const friendly = friendlyMessageFromErrorCode(err?.code || "");
+      showFriendlyError(friendly);
+      removeQueryParamsKeepPath();
+    }
+  }
+
+  if (oobCode) {
+    handleVerify(oobCode);
+  } else {
+    // لا نعرض أي شيء إذا ما كان هناك oobCode لأن التصميم يجب أن يبقى كما هو
+    console.warn("no oobCode in URL");
+  }
 </script>
 </body>
 </html>
