@@ -3,17 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>سفرة | التحقق من البريد</title>
+  <title>تم التحقق بنجاح ✅</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
 
     body {
       margin: 0;
+      height: 90vh;
       font-family: 'Tajawal', sans-serif;
       background: linear-gradient(135deg, #ff7300, #ff8c00, #ffa31a);
       background-size: 400% 400%;
-      animation: orangeWave 10s ease-in-out infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       color: #fff;
+      animation: orangeWave 10s ease-in-out infinite;
+      position: relative;
+      visibility: hidden; /* الصفحة مخفية مؤقتًا */
     }
 
     @keyframes orangeWave {
@@ -22,15 +29,6 @@
       50% { background-position: 100% 100%; }
       75% { background-position: 0% 100%; }
       100% { background-position: 0% 50%; }
-    }
-
-    .container {
-      height: 90vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      position: relative;
     }
 
     .logo-bubble {
@@ -91,7 +89,7 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    .checkmark, .errormark {
+    .checkmark {
       width: 90px;
       height: 90px;
     }
@@ -100,25 +98,12 @@
       fill: none;
       stroke: #00ff73;
       stroke-width: 8;
+      stroke-linecap: round;
     }
 
     .checkmark path {
       fill: none;
       stroke: #00ff73;
-      stroke-width: 8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .errormark circle {
-      fill: none;
-      stroke: #ff4d4d;
-      stroke-width: 8;
-    }
-
-    .errormark path {
-      fill: none;
-      stroke: #ff4d4d;
       stroke-width: 8;
       stroke-linecap: round;
       stroke-linejoin: round;
@@ -136,6 +121,21 @@
       color: #fff8ee;
     }
 
+    .spark {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 50%;
+      animation: sparkle 7s linear infinite;
+    }
+
+    @keyframes sparkle {
+      0% { transform: translate(0,0) scale(0); opacity: 1; }
+      50% { transform: translate(180px,-200px) scale(1); opacity: 0.6; }
+      100% { transform: translate(-150px,250px) scale(0); opacity: 0; }
+    }
+
     footer {
       position: absolute;
       bottom: 40px;
@@ -147,71 +147,35 @@
       text-align: center;
       width: 100%;
     }
-
-    #loading {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 22px;
-      font-weight: 600;
-      color: #fff;
-      background: linear-gradient(135deg, #ff7300, #ff8c00, #ffa31a);
-      animation: orangeWave 10s ease-in-out infinite;
-    }
   </style>
 </head>
 <body>
-  <div id="loading">جارٍ التحقق من بريدك الإلكتروني...</div>
-  <main id="app" style="display:none;"></main>
 
-  <template id="success">
-    <div class="container">
-      <div class="logo-bubble">
-        <img src="images/safra.jpeg" alt="شعار سفرة">
-        <span>سفرة</span>
-      </div>
+  <div class="logo-bubble">
+    <img src="images/safra.jpeg" alt="شعار سفرة">
+    <span>سفرة</span>
+  </div>
 
-      <div class="circle">
-        <svg class="checkmark" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="45" />
-          <path d="M30 55 L45 70 L75 35" />
-        </svg>
-      </div>
+  <div class="circle">
+    <svg class="checkmark" id="status-svg" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" />
+      <path d="M30 55 L45 70 L75 35" />
+    </svg>
+  </div>
 
-      <h1>تم التحقق من حسابك بنجاح</h1>
-      <center>
-        <p>شكرًا لتأكيدك البريد الإلكتروني ✨</p>
-        <p> يمكنك الآن الاستمتاع بخدمات<br>تطبيق سفرة بأمان </p>
-      </center>
+  <h1 id="title-text">تم التحقق من حسابك بنجاح</h1>
+  <center>
+    <p id="line1">شكرًا لتأكيدك البريد الإلكتروني ✨</p>
+    <p id="line2"> يمكنك الآن الاستمتاع بخدمات<br>تطبيق سفرة بأمان </p>
+  </center>
 
-      <footer>© 2025 — فريق سفرة 🧡</footer>
-    </div>
-  </template>
+  <div class="spark" style="top:20%; left:10%; animation-delay: 0s;"></div>
+  <div class="spark" style="top:60%; left:30%; animation-delay: 1s;"></div>
+  <div class="spark" style="top:80%; left:80%; animation-delay: 2s;"></div>
+  <div class="spark" style="top:40%; left:70%; animation-delay: 3s;"></div>
+  <div class="spark" style="top:10%; left:90%; animation-delay: 4s;"></div>
 
-  <template id="error">
-    <div class="container">
-      <div class="logo-bubble">
-        <img src="images/safra.jpeg" alt="شعار سفرة">
-        <span>سفرة</span>
-      </div>
-
-      <div class="circle">
-        <svg class="errormark" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="45" />
-          <path d="M34 34 L66 66 M66 34 L34 66" />
-        </svg>
-      </div>
-
-      <h1>فشل التحقق من البريد</h1>
-      <center>
-        <p>انتهت صلاحية الرابط أو تم استخدامه مسبقًا</p>
-        <p>يرجى طلب رابط تحقق جديد من التطبيق</p>
-      </center>
-
-      <footer>© 2025 — فريق سفرة 🧡</footer>
-    </div>
-  </template>
+  <footer>© 2025 — فريق سفرة 🧡</footer>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
@@ -227,17 +191,24 @@
   const auth = getAuth(app);
   const oobCode = new URLSearchParams(location.search).get("oobCode");
 
-  const appContainer = document.getElementById("app");
-  const loadingScreen = document.getElementById("loading");
+  const title = document.getElementById("title-text");
+  const line1 = document.getElementById("line1");
+  const line2 = document.getElementById("line2");
+  const svg = document.getElementById("status-svg");
 
-  const showTemplate = (id) => {
-    const tpl = document.getElementById(id);
-    if (tpl) {
-      appContainer.innerHTML = tpl.innerHTML;
-      loadingScreen.style.display = "none";
-      appContainer.style.display = "block";
+  function showErrorVisuals() {
+    if (title) title.textContent = "فشل التحقق من البريد";
+    if (line1) line1.style.display = "none";
+    if (line2) line2.style.display = "none";
+
+    if (svg) {
+      svg.innerHTML = `
+        <circle cx="50" cy="50" r="45" stroke="#ff4d4d" stroke-width="8" fill="none"/>
+        <path d="M34 34 L66 66 M66 34 L34 66" stroke="#ff4d4d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      `;
     }
-  };
+  }
 
-  if (oobCode) {
-    applyActionCode(auth, oobCode
+  async function verifyEmail(code) {
+    try {
+      await
