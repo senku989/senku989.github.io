@@ -206,30 +206,43 @@
   <footer>© 2025 — فريق سفرة 🧡</footer>
 
 
-<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+  import { getAuth, applyActionCode } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
 
-<script>
   const firebaseConfig = {
     apiKey: "AIzaSyBlH9qfb9lWl2f3lmuuKdbi-KRs3rvGZFE",
     authDomain: "safra-f9b23.firebaseapp.com",
     projectId: "safra-f9b23",
   };
-  firebase.initializeApp(firebaseConfig);
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
 
   const urlParams = new URLSearchParams(window.location.search);
   const oobCode = urlParams.get("oobCode");
 
-  if (oobCode) {
-    firebase.auth().applyActionCode(oobCode)
-      .then(() => {
-        // ✅ تم التحقق فعليًا
-        document.body.innerHTML = "<h2>✅ تم التحقق من بريدك بنجاح</h2>";
-      })
-      .catch((error) => {
-        document.body.innerHTML = "<h2>❌ فشل التحقق: " + error.message + "</h2>";
-      });
+  async function handleVerify(code) {
+    try {
+      await applyActionCode(auth, code);
+      document.body.innerHTML = `
+        <div style="padding:40px;text-align:center;">
+          <h1>✅ تم التحقق من بريدك بنجاح</h1>
+          <p>الرجاء العودة للتطبيق وتسجيل الدخول.</p>
+        </div>`;
+      console.log("applyActionCode: success");
+    } catch (err) {
+      document.body.innerHTML = `
+        <div style="padding:40px;text-align:center;">
+          <h1>❌ فشل التحقق</h1>
+          <p>${err.message}</p>
+        </div>`;
+      console.error("applyActionCode error:", err);
+    }
   }
+
+  if (oobCode) handleVerify(oobCode);
+  else console.warn("no oobCode in URL");
 </script>
 </body>
 </html>
