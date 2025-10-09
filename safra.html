@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>تم التحقق بنجاح ✅</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
@@ -66,7 +66,7 @@
       50% { transform: translateY(-6px); }
     }
 
-    /* فقاعة الصح */
+    /* فقاعة الصح / الحالة */
     .circle {
       width: 160px;
       height: 160px;
@@ -90,7 +90,7 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    /* علامة الصح */
+    /* علامة (افتراضية صح) */
     .checkmark {
       width: 90px;
       height: 90px;
@@ -125,20 +125,29 @@
       to { stroke-dashoffset: 0; }
     }
 
+    /* حالة الخطأ ستستبدل الـ SVG عبر JS لتبقى التنسيق نفسه */
+    .error-stroke {
+      stroke: #ff4d4d !important;
+      stroke-width: 8 !important;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      animation: none !important;
+    }
+
     h1 {
       font-size: 30px;
       margin: 25px 0 10px;
       text-shadow: 0 2px 10px rgba(0,0,0,0.25);
       animation: fadeUp 1.2s ease 1s forwards;
-      opacity: 0;
+      opacity: 1;
     }
 
     p {
       font-size: 18px;
       margin: 0;
-      opacity: 0;
       color: #fff8ee;
       animation: fadeUp 1.5s ease 1.2s forwards;
+      opacity: 1;
     }
 
     @keyframes fadeUp {
@@ -166,7 +175,7 @@
       position: absolute;
       bottom: 40px;
       font-size: 15px;
-      color: #ffe2b2; /* بيج مائل للبرتقالي */
+      color: #ffe2b2;
       text-shadow: 0 2px 10px rgba(0,0,0,0.5), 0 0 8px rgba(255,165,0,0.4);
       letter-spacing: 1px;
       font-weight: 500;
@@ -176,7 +185,7 @@
       opacity: 1;
     }
 
-    /* رسالة الخطأ الودية - نحافظ على الديزاين العام */
+    /* رسالة الخطأ الودية - تبقى ضمن نفس التنسيق العام */
     #verification-error {
       display: none;
       position: absolute;
@@ -203,17 +212,18 @@
     <span>سفرة</span>
   </div>
 
-  <div class="circle">
-    <svg class="checkmark" viewBox="0 0 100 100">
-      <circle cx="50" cy="50" r="45" />
-      <path d="M30 55 L45 70 L75 35" />
+  <div class="circle" id="status-circle">
+    <!-- SVG قابلة للاستبدال عند الخطأ بواسطة JS لكن الأبعاد والتنسيق تبقى كما هي -->
+    <svg class="checkmark" id="status-svg" viewBox="0 0 100 100" aria-hidden="true">
+      <circle id="status-circle-outline" cx="50" cy="50" r="45" />
+      <path id="status-checkpath" d="M30 55 L45 70 L75 35" />
     </svg>
   </div>
 
-  <h1>تم التحقق من حسابك بنجاح</h1>
+  <h1 id="title-text">تم التحقق من حسابك بنجاح</h1>
   <center>
-    <p>شكرًا لتأكيدك البريد الإلكتروني ✨</p>
-    <p> يمكنك الآن الاستمتاع بخدمات<br>تطبيق سفرة بأمان </p>
+    <p id="line1">شكرًا لتأكيدك البريد الإلكتروني ✨</p>
+    <p id="line2"> يمكنك الآن الاستمتاع بخدمات<br>تطبيق سفرة بأمان </p>
   </center>
 
   <!-- رسالة الخطأ الودية (تظهر فقط عند فشل التحقق) -->
@@ -240,7 +250,6 @@
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-
   const urlParams = new URLSearchParams(window.location.search);
   const oobCode = urlParams.get("oobCode");
 
@@ -264,7 +273,7 @@
     el.style.display = "block";
   }
 
-  // ترجمة رموز أخطاء Firebase إلى رسائل عربية ودية
+  // تحويل رمز الخطأ إلى رسالة ودية باللغة العربية
   function friendlyMessageFromErrorCode(code) {
     const map = {
       "auth/expired-action-code": "انتهت صلاحية طلبك لإثبات ملكية بريدك الإلكتروني أو سبق أن تم استخدام الرابط. حاول إرسال رابط التحقق مجددًا.",
@@ -273,23 +282,42 @@
       "auth/user-not-found": "لا يوجد حساب مرتبط بهذا البريد. تأكد من البريد أو سجّل حسابًا جديدًا.",
       "auth/invalid-email": "عنوان البريد الإلكتروني يبدو غير صالحًا. تحقق وحاول مرة أخرى.",
       "auth/too-many-requests": "تم اكتشاف محاولات متعددة. انتظر لحظة ثم حاول مرة أخرى.",
-      // افتراضي
       "default": "حدث خطأ أثناء التحقق. حاول مرة أخرى أو تواصل مع الدعم."
     };
     return map[code] || map["default"];
   }
 
+  // عند الفشل: نحافظ على كل التنسيق لكن نستبدل علامة الصح بعلامة خطأ (X) ونعرض رسالة ودية
+  function markAsErrorAndShow(message) {
+    // استبدال محتوى الـ SVG بحافظة على الأبعاد والتنسيق
+    const svg = document.getElementById("status-svg");
+    if (svg) {
+      // نضع دائرة حمراء وخط X داخلها مع نفس الأبعاد
+      svg.innerHTML = `
+        <circle class="error-stroke" cx="50" cy="50" r="45" />
+        <path class="error-stroke" d="M32 32 L68 68 M68 32 L32 68" stroke-linecap="round" stroke-linejoin="round"/>
+      `;
+      // optionally add subtle animation for error
+      svg.querySelectorAll('.error-stroke').forEach(el => {
+        el.style.transition = 'stroke 250ms ease, transform 250ms ease';
+      });
+    }
+
+    // عرض رسالة ودية في العنصر المخصص
+    showFriendlyError(message);
+  }
+
   async function handleVerify(code) {
     try {
       await applyActionCode(auth, code);
-      // نجاح التحقق: لا نغير التصميم، فقط نزيل المعاملات من الشريط وسجل نجاحًا
+      // نجاح التحقق: لا نغيّر أي شيء في التصميم أو النصوص
       console.log("applyActionCode: success");
       removeQueryParamsKeepPath();
-      // خيار: يمكنك هنا إرسال حدث للسيرفر أو تفعيل Analytics إن رغبت
+      // لا نغير الـ SVG أو النصوص أبداً عند النجاح
     } catch (err) {
       console.error("applyActionCode error:", err);
       const friendly = friendlyMessageFromErrorCode(err?.code || "");
-      showFriendlyError(friendly);
+      markAsErrorAndShow(friendly);
       removeQueryParamsKeepPath();
     }
   }
@@ -297,8 +325,8 @@
   if (oobCode) {
     handleVerify(oobCode);
   } else {
-    // لا نعرض أي شيء إذا ما كان هناك oobCode لأن التصميم يجب أن يبقى كما هو
     console.warn("no oobCode in URL");
+    // لا نغير أي شيء إذا لم يكن هناك oobCode
   }
 </script>
 </body>
