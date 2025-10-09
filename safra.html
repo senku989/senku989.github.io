@@ -20,6 +20,7 @@
       color: #fff;
       animation: orangeWave 10s ease-in-out infinite;
       position: relative;
+      visibility: hidden; /* الصفحة مخفية حتى يتم تحليل السكربت */
     }
 
     @keyframes orangeWave {
@@ -122,12 +123,12 @@
       to { stroke-dashoffset: 0; }
     }
 
-    /* ستايل لعلامة الخطأ (سيُطبّق على عناصر SVG عند الفشل) */
     .error-circle {
       stroke: #ff4d4d !important;
       stroke-width: 8 !important;
       fill: none !important;
     }
+
     .error-x {
       stroke: #ff4d4d !important;
       stroke-width: 8 !important;
@@ -204,9 +205,9 @@
   </div>
 
   <div class="circle" id="status-circle">
-    <svg class="checkmark" id="status-svg" viewBox="0 0 100 100" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
-      <circle id="status-circle-outline" cx="50" cy="50" r="45" />
-      <path id="status-checkpath" d="M30 55 L45 70 L75 35" />
+    <svg class="checkmark" id="status-svg" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" />
+      <path d="M30 55 L45 70 L75 35" />
     </svg>
   </div>
 
@@ -224,105 +225,4 @@
   <div class="spark" style="top:40%; left:70%; animation-delay: 3s;"></div>
   <div class="spark" style="top:10%; left:90%; animation-delay: 4s;"></div>
 
-  <footer>© 2025 — فريق سفرة 🧡</footer>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-  import { getAuth, applyActionCode } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyBlH9qfb9lWl2f3lmuuKdbi-KRs3rvGZFE",
-    authDomain: "safra-f9b23.firebaseapp.com",
-    projectId: "safra-f9b23",
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const urlParams = new URLSearchParams(window.location.search);
-  const oobCode = urlParams.get("oobCode");
-
-  // عرض رسالة خطأ ودية داخل العنصر الموجود
-  function showFriendlyError(msg) {
-    const el = document.getElementById("verification-error");
-    if (!el) return;
-    el.textContent = msg;
-    el.style.display = "block";
-  }
-
-  // خريطة رسائل ودية
-  function friendlyMessageFromErrorCode(code) {
-    const map = {
-      "auth/expired-action-code": "انتهت صلاحية طلبك لإثبات ملكية بريدك الإلكتروني أو سبق أن تم استخدام الرابط. حاول إرسال رابط التحقق مجددًا.",
-      "auth/invalid-action-code": "الرابط الذي فتحته غير صالح. حاول طلب رابط تحقق جديد من التطبيق.",
-      "auth/user-disabled": "حساب المستخدم معطل. تواصل مع الدعم للمساعدة.",
-      "auth/user-not-found": "لا يوجد حساب مرتبط بهذا البريد. تأكد من البريد أو سجّل حسابًا جديدًا.",
-      "auth/invalid-email": "عنوان البريد الإلكتروني يبدو غير صالحًا. تحقق وحاول مرة أخرى.",
-      "auth/too-many-requests": "تم اكتشاف محاولات متعددة. انتظر لحظة ثم حاول مرة أخرى.",
-      "default": "حدث خطأ أثناء التحقق. حاول مرة أخرى أو تواصل مع الدعم."
-    };
-    return map[code] || map["default"];
-  }
-
-  // عند الفشل: نخفي نصوص النجاح لكن لا نغير التصميم العام، ونرسم دائرة حمراء مع X داخلها
-  function markAsErrorAndShow(message) {
-    // إخفاء النصوص التي تفيد بنجاح التحقق لمنع التناقض
-    document.getElementById("title-text").textContent = "فشل في التحقق";
-    document.getElementById("line1").style.display = "none";
-    document.getElementById("line2").style.display = "none";
-
-    // استبدال محتويات الـ SVG بدائرة حمراء مع X (الحجم والتنسيق محفوظ)
-    const svg = document.getElementById("status-svg");
-    if (svg) {
-      svg.innerHTML = `
-        <circle class="error-circle" cx="50" cy="50" r="45" />
-        <path class="error-x" d="M34 34 L66 66 M66 34 L34 66" />
-      `;
-      // small pop animation for X
-      svg.style.transformOrigin = "50% 50%";
-      svg.animate([
-        { transform: 'scale(0.8)', opacity: 0.8 },
-        { transform: 'scale(1.05)', opacity: 1 },
-        { transform: 'scale(1)', opacity: 1 }
-      ], { duration: 420, easing: 'cubic-bezier(.2,.9,.3,1)' });
-    }
-
-    // عرض رسالة ودية واضحة للمستخدم
-    showFriendlyError(message);
-  }
-
-  // نزيل المعاملات (query params) بعد نجاح التحقق فقط. عند فشل نترك الرابط كما هو حتى عند إعادة تحميل الصفحة تظهر الحالة نفسها.
-  function removeQueryParamsKeepPath() {
-    try {
-      if (window.history && window.history.replaceState) {
-        const newUrl = window.location.origin + window.location.pathname;
-        window.history.replaceState({}, document.title, newUrl);
-      }
-    } catch (e) {
-      console.warn("removeQueryParamsKeepPath failed", e);
-    }
-  }
-
-  async function handleVerify(code) {
-    try {
-      await applyActionCode(auth, code);
-      // نجاح: لا نغير أي نص أو SVG، نحافظ تماماً على التصميم كما طلبت
-      console.log("applyActionCode: success");
-      // بعد النجاح نزيل المعاملات كي لا يُعاد تنفيذها عند الريفريش
-      removeQueryParamsKeepPath();
-    } catch (err) {
-      console.error("applyActionCode error:", err);
-      const friendly = friendlyMessageFromErrorCode(err?.code || "");
-      markAsErrorAndShow(friendly);
-      // لا نزيل المعاملات هنا لكي تظل حالة الخطأ مرئية عند الريفريش حتى تصلح الرابط أو تطلب رابط جديد
-    }
-  }
-
-  if (oobCode) {
-    handleVerify(oobCode);
-  } else {
-    // لا نغير التصميم إذا لم يوجد oobCode
-    console.warn("no oobCode in URL");
-  }
-</script>
-</body>
-</html>
+  <footer>© 2025 — فريق سفرة 🧡</
