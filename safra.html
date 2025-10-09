@@ -20,7 +20,6 @@
       color: #fff;
       animation: orangeWave 10s ease-in-out infinite;
       position: relative;
-      visibility: hidden; /* الصفحة مخفية مؤقتًا */
     }
 
     @keyframes orangeWave {
@@ -99,6 +98,7 @@
       stroke: #00ff73;
       stroke-width: 8;
       stroke-linecap: round;
+      animation: circleDraw 1s ease-out forwards;
     }
 
     .checkmark path {
@@ -107,18 +107,46 @@
       stroke-width: 8;
       stroke-linecap: round;
       stroke-linejoin: round;
+      stroke-dasharray: 70;
+      stroke-dashoffset: 70;
+      animation: checkDraw 0.8s ease-out 1s forwards;
+    }
+
+    @keyframes circleDraw {
+      from { stroke-dasharray: 0 314; }
+      to { stroke-dasharray: 314 0; }
+    }
+
+    @keyframes checkDraw {
+      from { stroke-dashoffset: 70; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    /* ستايل لعلامة الخطأ (سيُطبّق على عناصر SVG عند الفشل) */
+    .error-circle {
+      stroke: #ff4d4d !important;
+      stroke-width: 8 !important;
+      fill: none !important;
+    }
+    .error-x {
+      stroke: #ff4d4d !important;
+      stroke-width: 8 !important;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     h1 {
       font-size: 30px;
       margin: 25px 0 10px;
       text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+      opacity: 1;
     }
 
     p {
       font-size: 18px;
       margin: 0;
       color: #fff8ee;
+      opacity: 1;
     }
 
     .spark {
@@ -146,6 +174,25 @@
       font-weight: 500;
       text-align: center;
       width: 100%;
+      opacity: 1;
+    }
+
+    #verification-error {
+      display: none;
+      position: absolute;
+      bottom: 110px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 720px;
+      width: calc(100% - 40px);
+      background: rgba(0,0,0,0.28);
+      color: #fff8ee;
+      padding: 12px 16px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      backdrop-filter: blur(6px);
     }
   </style>
 </head>
@@ -156,10 +203,10 @@
     <span>سفرة</span>
   </div>
 
-  <div class="circle">
-    <svg class="checkmark" id="status-svg" viewBox="0 0 100 100">
-      <circle cx="50" cy="50" r="45" />
-      <path d="M30 55 L45 70 L75 35" />
+  <div class="circle" id="status-circle">
+    <svg class="checkmark" id="status-svg" viewBox="0 0 100 100" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+      <circle id="status-circle-outline" cx="50" cy="50" r="45" />
+      <path id="status-checkpath" d="M30 55 L45 70 L75 35" />
     </svg>
   </div>
 
@@ -168,6 +215,8 @@
     <p id="line1">شكرًا لتأكيدك البريد الإلكتروني ✨</p>
     <p id="line2"> يمكنك الآن الاستمتاع بخدمات<br>تطبيق سفرة بأمان </p>
   </center>
+
+  <div id="verification-error" role="status" aria-live="polite"></div>
 
   <div class="spark" style="top:20%; left:10%; animation-delay: 0s;"></div>
   <div class="spark" style="top:60%; left:30%; animation-delay: 1s;"></div>
@@ -189,26 +238,91 @@
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  const oobCode = new URLSearchParams(location.search).get("oobCode");
+  const urlParams = new URLSearchParams(window.location.search);
+  const oobCode = urlParams.get("oobCode");
 
-  const title = document.getElementById("title-text");
-  const line1 = document.getElementById("line1");
-  const line2 = document.getElementById("line2");
-  const svg = document.getElementById("status-svg");
+  // عرض رسالة خطأ ودية داخل العنصر الموجود
+  function showFriendlyError(msg) {
+    const el = document.getElementById("verification-error");
+    if (!el) return;
+    el.textContent = msg;
+    el.style.display = "block";
+  }
 
-  function showErrorVisuals() {
-    if (title) title.textContent = "فشل التحقق من البريد";
-    if (line1) line1.style.display = "none";
-    if (line2) line2.style.display = "none";
+  // خريطة رسائل ودية
+  function friendlyMessageFromErrorCode(code) {
+    const map = {
+      "auth/expired-action-code": "انتهت صلاحية طلبك لإثبات ملكية بريدك الإلكتروني أو سبق أن تم استخدام الرابط. حاول إرسال رابط التحقق مجددًا.",
+      "auth/invalid-action-code": "الربط الذي فتحته غير صالح. حاول طلب رابط تحقق جديد من التطبيق.",
+      "auth/user-disabled": "حساب المستخدم معطل. تواصل مع الدعم للمساعدة.",
+      "auth/user-not-found": "لا يوجد حساب مرتبط بهذا البريد. تأكد من البريد أو سجّل حسابًا جديدًا.",
+      "auth/invalid-email": "عنوان البريد الإلكتروني يبدو غير صالحًا. تحقق وحاول مرة أخرى.",
+      "auth/too-many-requests": "تم اكتشاف محاولات متعددة. انتظر لحظة ثم حاول مرة أخرى.",
+      "default": "حدث خطأ أثناء التحقق. حاول مرة أخرى أو تواصل مع الدعم."
+    };
+    return map[code] || map["default"];
+  }
 
+  // عند الفشل: نخفي نصوص النجاح لكن لا نغير التصميم العام، ونرسم دائرة حمراء مع X داخلها
+  function markAsErrorAndShow(message) {
+    // إخفاء النصوص التي تفيد بنجاح التحقق لمنع التناقض
+    document.getElementById("title-text").textContent = "فشل في التحقق";
+    document.getElementById("line1").style.display = "none";
+    document.getElementById("line2").style.display = "none";
+
+    // استبدال محتويات الـ SVG بدائرة حمراء مع X (الحجم والتنسيق محفوظ)
+    const svg = document.getElementById("status-svg");
     if (svg) {
       svg.innerHTML = `
-        <circle cx="50" cy="50" r="45" stroke="#ff4d4d" stroke-width="8" fill="none"/>
-        <path d="M34 34 L66 66 M66 34 L34 66" stroke="#ff4d4d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle class="error-circle" cx="50" cy="50" r="45" />
+        <path class="error-x" d="M34 34 L66 66 M66 34 L34 66" />
       `;
+      // small pop animation for X
+      svg.style.transformOrigin = "50% 50%";
+      svg.animate([
+        { transform: 'scale(0.8)', opacity: 0.8 },
+        { transform: 'scale(1.05)', opacity: 1 },
+        { transform: 'scale(1)', opacity: 1 }
+      ], { duration: 420, easing: 'cubic-bezier(.2,.9,.3,1)' });
+    }
+
+    // عرض رسالة ودية واضحة للمستخدم
+    showFriendlyError(message);
+  }
+
+  // نزيل المعاملات (query params) بعد نجاح التحقق فقط. عند فشل نترك الرابط كما هو حتى عند إعادة تحميل الصفحة تظهر الحالة نفسها.
+  function removeQueryParamsKeepPath() {
+    try {
+      if (window.history && window.history.replaceState) {
+        const newUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, newUrl);
+      }
+    } catch (e) {
+      console.warn("removeQueryParamsKeepPath failed", e);
     }
   }
 
-  async function verifyEmail(code) {
+  async function handleVerify(code) {
     try {
-      await
+      await applyActionCode(auth, code);
+      // نجاح: لا نغير أي نص أو SVG، نحافظ تماماً على التصميم كما طلبت
+      console.log("applyActionCode: success");
+      // بعد النجاح نزيل المعاملات كي لا يُعاد تنفيذها عند الريفريش
+      removeQueryParamsKeepPath();
+    } catch (err) {
+      console.error("applyActionCode error:", err);
+      const friendly = friendlyMessageFromErrorCode(err?.code || "");
+      markAsErrorAndShow(friendly);
+      // لا نزيل المعاملات هنا لكي تظل حالة الخطأ مرئية عند الريفريش حتى تصلح الرابط أو تطلب رابط جديد
+    }
+  }
+
+  if (oobCode) {
+    handleVerify(oobCode);
+  } else {
+    // لا نغير التصميم إذا لم يوجد oobCode
+    console.warn("no oobCode in URL");
+  }
+</script>
+</body>
+</html>
