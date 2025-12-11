@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QBank — بنك الأسئلة</title>
+
+  <!-- Google Font (Arabic friendly) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 RTL -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Your main CSS (kept external as requested) -->
+  <link rel="stylesheet" href="style.css">
+
+  <meta name="description" content="QBank — منصة بنك أسئلة ذكية لطلاب المدارس. اختبر مستواك وتابع تقدمك بسهولة.">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded-bottom-4">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+      <img src="assets/images/qbank-logo.png" alt="QBank Logo" class="logo-img" />
+      <div class="d-flex flex-column">
+        <span class="brand-title" data-text="brand">QBank</span>
+        <small class="text-muted" data-text="brand-sub">بنك الأسئلة – اختبر مستواك</small>
+      </div>
+    </a>
+
+    <!-- Navbar collapse for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+      aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-2">
+        <li class="nav-item"><a class="nav-link btn btn-light" href="#">الرئيسية</a></li>
+        <li class="nav-item"><a class="nav-link btn btn-light" href="#features">المميزات</a></li>
+        <li class="nav-item"><a class="nav-link btn btn-light" href="#pricing">الأسعار</a></li>
+        <li class="nav-item"><a class="nav-link btn btn-light" href="#contact">تواصل معنا</a></li>
+      </ul>
+
+      <div class="ms-auto d-flex align-items-center gap-2">
+        <!-- Language Switch -->
+        <button id="langSwitch" class="btn btn-outline-secondary rounded-pill d-flex align-items-center gap-2" aria-label="تبديل اللغة">
+          <i class="fa-solid fa-language"></i>
+        </button>
+
+        <!-- Theme Switch -->
+        <button id="themeSwitch" class="btn btn-outline-secondary rounded-pill d-flex align-items-center gap-2" aria-label="تبديل الوضع">
+          <i id="themeIcon" class="fa-solid fa-moon"></i>
+        </button>
+
+        <a href="login.html" class="btn btn-outline-primary rounded-pill px-4" data-text="login">تسجيل دخول</a>
+        <a href="signup.html" class="btn btn-primary rounded-pill px-4" data-text="signup">إنشاء حساب</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero-section py-5">
+  <div class="container">
+    <div class="row align-items-center gy-4">
+      <div class="col-lg-6">
+        <div class="hero-card p-4 rounded-4 shadow-sm">
+          <h1 class="display-6 mb-3 fw-bold" data-text="hero-title">اختبر نفسك — تعرف على مستواك الحقيقي</h1>
+          <p class="lead text-muted mb-4" data-text="hero-desc">
+            منصة QBank تمنحك اختبارات ذكية تتكيف مع مستواك، تتيح لك تتبع الأداء وتحسين نقاط الضعف — باشتراك بسيط شهريًا.
+          </p>
+
+          <div class="d-flex flex-column flex-sm-row gap-3">
+            <a href="#pricing" class="btn btn-success btn-lg rounded-pill px-5 shadow-sm" data-text="start">لنبدأ</a>
+            <a href="#features" class="btn btn-outline-secondary rounded-pill px-4" data-text="see-features">اطّلع على المميزات</a>
+          </div>
+
+          <ul class="mt-4 feature-list list-unstyled">
+            <li class="mb-2"><i class="fa fa-check-circle text-success me-2"></i><span data-text="f1">اختبارات تكيّفية حسب الأداء</span></li>
+            <li class="mb-2"><i class="fa fa-check-circle text-success me-2"></i><span data-text="f2">حماية الحساب من المشاركة غير المصرّح بها</span></li>
+            <li class="mb-2"><i class="fa fa-check-circle text-success me-2"></i><span data-text="f3">تحليلات مفصّلة للأداء</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-6 text-center">
+        <div class="hero-visual position-relative mx-auto">
+          <!-- decorative blob (keeps page lightweight) -->
+          <svg class="blob blob-1" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(300,300)">
+              <path d="M120,-167C160,-137,185,-94,206,-43C227,9,244,70,216,110C188,150,116,169,58,169C0,169,-42,152,-96,129C-150,106,-217,76,-231,22C-246,-33,-208,-108,-156,-146C-104,-185,-52,-187,0,-187C52,-187,104,-186,120,-167Z" fill="#18a093" opacity="0.12"></path>
+            </g>
+          </svg>
+
+          <img src="assets/images/hero-illustration.jpg" alt="Hero Illustration" class="img-fluid hero-img rounded-4 shadow-lg" />
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- FEATURES -->
+<section id="features" class="py-5">
+  <div class="container">
+    <div class="row g-4 align-items-stretch">
+      <div class="col-md-4">
+        <div class="card h-100 rounded-4 shadow-sm p-3 feature-card">
+          <div class="icon-circle bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+            <i class="fa fa-brain fa-lg"></i>
+          </div>
+          <h5 class="fw-bold" data-text="feat1-title">اختبارات ذكية</h5>
+          <p class="text-muted" data-text="feat1-desc">المنصة تختار الأسئلة حسب أداء الطالب لتقدم تحدّي مناسب وفعّال.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 rounded-4 shadow-sm p-3 feature-card">
+          <div class="icon-circle bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+            <i class="fa fa-layer-group fa-lg"></i>
+          </div>
+          <h5 class="fw-bold" data-text="feat2-title">بنك أسئلة منظم</h5>
+          <p class="text-muted" data-text="feat2-desc">أسئلة مصنفة حسب الصف والمادة والمستوى مع إمكانية إضافة دفعات بسهولة.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 rounded-4 shadow-sm p-3 feature-card">
+          <div class="icon-circle bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3">
+            <i class="fa fa-shield-alt fa-lg"></i>
+          </div>
+          <h5 class="fw-bold" data-text="feat3-title">حماية الاشتراكات</h5>
+          <p class="text-muted" data-text="feat3-desc">حد أجهزة مسموح وOTP عند أجهزة جديدة لتقليل مشاركة الحسابات.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="py-5">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4" data-text="pricing-title">خطط الاشتراك</h2>
+    <div class="row g-4">
+      <div class="col-md-4 position-relative">
+        <div class="p-4 border rounded-4 shadow-sm">
+          <h5 class="fw-bold">جهاز واحد</h5>
+          <p class="text-secondary">استخدام على جهاز واحد فقط</p>
+          <h3 class="fw-bold">1 ر.ع / شهر</h3>
+          <a href="#" class="btn btn-primary rounded-pill mt-3 subscribe-btn" data-plan="1">اشترك الآن</a>
+        </div>
+      </div>
+
+      <div class="col-md-4 position-relative">
+        <span class="popular-badge">الأكثر طلبًا</span>
+        <div class="p-4 border rounded-4 shadow-sm">
+          <h5 class="fw-bold">جهازين</h5>
+          <p class="text-secondary">استخدام على جهازين متزامنين</p>
+          <h3 class="fw-bold">1.200 ر.ع / شهر</h3>
+          <a href="#" class="btn btn-primary rounded-pill mt-3 subscribe-btn" data-plan="2">اشترك الآن</a>
+        </div>
+      </div>
+
+      <div class="col-md-4 position-relative">
+        <div class="p-4 border rounded-4 shadow-sm">
+          <h5 class="fw-bold">3 أجهزة</h5>
+          <p class="text-secondary">استخدام على 3 أجهزة متزامنة</p>
+          <h3 class="fw-bold">1.400 ر.ع / شهر</h3>
+          <a href="#" class="btn btn-primary rounded-pill mt-3 subscribe-btn" data-plan="3">اشترك الآن</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-5">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4">تواصل معنا</h2>
+    <p class="text-secondary mb-2">لديك سؤال أو تحتاج دعم؟ تواصل معنا عبر البريد أو الهاتف.</p>
+    <p>
+      <i class="fa-solid fa-envelope me-2"></i>
+      <a href="mailto:support@qbank.com" class="btn btn-outline-primary rounded-pill">support@qbank.com</a>
+    </p>
+    <p>
+      <i class="fa-solid fa-phone me-2"></i>
+      <a href="tel:+96891296616" class="btn btn-outline-primary rounded-pill">+96891296616</a>
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-4 mt-5 bg-white">
+  <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-3">
+      <img src="assets/images/qbank-logo.png" alt="QBank" class="footer-logo">
+      <div>
+        <div class="fw-bold">QBank</div>
+        <small class="text-muted">بنك الأسئلة — كل ما يحتاجه الطالب</small>
+      </div>
+    </div>
+
+    <div class="text-muted small">
+      © <span id="year"></span> QBank — جميع الحقوق محفوظة
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Page Script: Theme, Language, Subscribe -->
+<script>
+/* -------------------------------
+   Helper: translations
+---------------------------------*/
+const translations = {
+  ar: {
+    brand: "QBank",
+    "brand-sub": "بنك الأسئلة – اختبر مستواك",
+    login: "تسجيل دخول",
+    signup: "إنشاء حساب",
+    "hero-title": "اختبر نفسك — تعرف على مستواك الحقيقي",
+    "hero-desc": "منصة QBank تمنحك اختبارات ذكية تتكيف مع مستواك، تتيح لك تتبع الأداء وتحسين نقاط الضعف — باشتراك بسيط شهريًا.",
+    start: "لنبدأ",
+    "see-features": "اطّلع على المميزات",
+    "feat1-title": "اختبارات ذكية",
+    "feat1-desc": "المنصة تختار الأسئلة حسب أداء الطالب لتقدم تحدّي مناسب وفعّال.",
+    "feat2-title": "بنك أسئلة منظم",
+    "feat2-desc": "أسئلة مصنفة حسب الصف والمادة والمستوى مع إمكانية إضافة دفعات بسهولة.",
+    "feat3-title": "حماية الاشتراكات",
+    "feat3-desc": "حد أجهزة مسموح وOTP عند أجهزة جديدة لتقليل مشاركة الحسابات.",
+    "pricing-title": "خطط الاشتراك",
+    f1: "اختبارات تكيّفية حسب الأداء",
+    f2: "حماية الحساب من المشاركة غير المصرّح بها",
+    f3: "تحليلات مفصّلة للأداء"
+  },
+  en: {
+    brand: "QBank",
+    "brand-sub": "Question Bank — Test Yourself",
+    login: "Login",
+    signup: "Sign Up",
+    "hero-title": "Test Yourself — Discover Your Real Level",
+    "hero-desc": "QBank offers smart adaptive exams, tracking performance and improving weaknesses — all with a simple monthly subscription.",
+    start: "Start",
+    "see-features": "View Features",
+    "feat1-title": "Smart Exams",
+    "feat1-desc": "The platform chooses questions based on student performance for effective adaptive learning.",
+    "feat2-title": "Organized Question Bank",
+    "feat2-desc": "Questions categorized by grade, subject and level, with easy bulk additions.",
+    "feat3-title": "Subscription Protection",
+    "feat3-desc": "Device limits + OTP for new devices to reduce account sharing.",
+    "pricing-title": "Pricing Plans",
+    f1: "Adaptive exams by performance",
+    f2: "Account sharing protection",
+    f3: "Detailed performance analytics"
+  }
+};
+
+/* -------------------------------
+   Theme (dark / light) - persistent
+---------------------------------*/
+const themeSwitch = document.getElementById("themeSwitch");
+const themeIcon = document.getElementById("themeIcon");
+const savedTheme = localStorage.getItem("qbank-theme");
+
+function applyTheme(theme) {
+  if (theme === "dark") {
+    document.body.classList.add("dark-mode");
+    themeIcon.classList.replace("fa-moon", "fa-sun");
+  } else {
+    document.body.classList.remove("dark-mode");
+    themeIcon.classList.replace("fa-sun", "fa-moon");
+  }
+}
+
+applyTheme(savedTheme || "light");
+
+themeSwitch.addEventListener("click", () => {
+  const nowDark = document.body.classList.toggle("dark-mode");
+  const next = nowDark ? "dark" : "light";
+  localStorage.setItem("qbank-theme", next);
+  applyTheme(next);
+});
+
+/* -------------------------------
+   Language toggle - persistent
+---------------------------------*/
+const langSwitch = document.getElementById("langSwitch");
+let currentLang = localStorage.getItem("qbank-lang") || "ar";
+
+function applyLang(lang) {
+  document.documentElement.lang = (lang === "ar" ? "ar" : "en");
+  document.documentElement.dir = (lang === "ar" ? "rtl" : "ltr");
+
+  document.querySelectorAll("[data-text]").forEach(el => {
+    const key = el.dataset.text;
+    if (translations[lang] && translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+  // also translate inline spans
+  document.querySelectorAll("span[data-text]").forEach(el => {
+    const key = el.dataset.text;
+    if (translations[lang] && translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+}
+
+applyLang(currentLang);
+
+langSwitch.addEventListener("click", () => {
+  currentLang = currentLang === "ar" ? "en" : "ar";
+  localStorage.setItem("qbank-lang", currentLang);
+  applyLang(currentLang);
+});
+
+/* -------------------------------
+   Subscribe buttons: store selected plan
+---------------------------------*/
+document.querySelectorAll(".subscribe-btn").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const plan = btn.dataset.plan;
+    // store selected plan locally — actual validation + payment handling via Cloud Functions later
+    localStorage.setItem("selectedPlan", plan);
+    // redirect to signup so user creates account and then we process payment server-side
+    window.location.href = "signup.html";
+  });
+});
+
+/* -------------------------------
+   Year in footer
+---------------------------------*/
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
