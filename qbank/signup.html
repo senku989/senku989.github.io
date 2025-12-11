@@ -7,16 +7,91 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 
   <style>
-    .auth-card { max-width:520px; margin:30px auto; }
-    .floating-whatsapp { position:fixed; bottom:18px; right:18px; z-index:9999; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; color:#fff; background:#25D366; box-shadow:0 6px 18px rgba(0,0,0,0.18); }
-    .top-controls { position:fixed; top:18px; left:18px; display:flex; gap:8px; z-index:999; }
-    .control-btn { background:var(--card-bg, #fff); border:1px solid rgba(0,0,0,0.06); padding:8px 10px; border-radius:10px; cursor:pointer; }
+body.signup-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 35px;
+  font-family: "Cairo", system-ui, sans-serif;
+}
+
+.auth-card {
+  width: 60vw;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.auth-card .form-content { width: 60%; margin: 0 auto; }
+.input-group { display: flex; width: 100%; }
+.input-group-text { flex: 0 0 auto; }
+.form-control { flex: 1 1 auto; }
+
+.link-btn {
+  display: inline-block;
+  background: rgba(13,110,253,0.06);
+  color: var(--qbank-blue, #15557b);
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background .15s ease, transform .08s ease;
+  border: 1px solid rgba(13,110,253,0.06);
+}
+.link-btn:hover {
+  background: rgba(13,110,253,0.10);
+  transform: translateY(-1px);
+}
+
+.floating-whatsapp {
+  position: fixed; bottom: 18px; right: 18px; z-index: 9999;
+  width: 60px; height: 60px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; color: #fff; background: #25D366;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18); text-decoration: none;
+}
+
+.top-controls { position: fixed; top: 18px; left: 18px; display:flex; gap:8px; z-index:999; }
+.control-btn { background:var(--card-bg,#fff); border:1px solid rgba(0,0,0,0.06); padding:8px 10px; border-radius:10px; cursor:pointer; }
+
+@media (max-width: 700px) {
+  .auth-card { width: 90vw; max-width: 100vw; padding: 18px; }
+  .auth-card .form-content { width: 90%; }
+}
+
+/* Popup */
+.notify {
+  display: none;
+  position: fixed;
+  top:50%; left:50%;
+  transform:translate(-50%, -50%);
+  min-width:350px;
+  max-width:500px;
+  background:#dc3545;
+  color:#fff;
+  border-radius:16px;
+  box-shadow:0 14px 38px rgba(0,0,0,0.28);
+  z-index:10000;
+  padding:18px 22px;
+}
+.notify .close {
+  background:rgba(255,255,255,0.2);
+  border:none;
+  float:left;
+  font-size:20px;
+  width:34px; height:34px;
+  border-radius:8px;
+}
   </style>
 </head>
-<body class="login-body">
+
+<body class="signup-body">
+  <center>
 
   <div class="top-controls">
     <button id="backBtn" class="control-btn">الرئيسية</button>
@@ -26,125 +101,146 @@
 
   <div class="auth-card p-5 shadow-lg rounded-4">
     <div class="text-center mb-3">
-      <img src="assets/images/qbank-logo.png" alt="QBank" class="logo-img mb-2">
-      <h3 id="title" class="fw-bold">إنشاء حساب جديد</h3>
-      <p id="subtitle" class="text-muted small-text">انضم إلينا وابدأ رحلتك مع بنك الأسئلة الذكي</p>
+      <img src="assets/images/qbank-logo.png" class="logo-img mb-2">
+      <h3 id="title" class="fw-bold">إنشاء حساب</h3>
+      <p id="subtitle" class="text-muted">املأ البيانات لإنشاء الحساب</p>
     </div>
 
-    <form id="signupForm">
-      <div class="mb-3 input-group">
-        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-        <input id="name" type="text" class="form-control" placeholder="اسمك الثلاثي" required>
+    <form id="signupForm" autocomplete="on" novalidate>
+      <div class="form-content">
+
+        <div class="mb-3 input-group">
+          <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+          <input id="name" type="text" class="form-control" placeholder="اسمك الكامل" required>
+        </div>
+
+        <div class="mb-3 input-group">
+          <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+          <input id="email" type="email" class="form-control" placeholder="example@gmail.com" required>
+        </div>
+
+        <div class="mb-3 input-group">
+          <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+          <input id="password" type="password" class="form-control" placeholder="••••••••" required>
+        </div>
+
+        <button id="signupBtn" type="submit" class="btn btn-primary w-100 rounded-pill fw-bold mb-3">
+          <i class="fa-solid fa-user-plus me-2"></i>
+          <span id="signupBtnText">إنشاء حساب</span>
+        </button>
+
+        <p class="text-center mt-3">
+          <span id="haveAccountText">لديك حساب مسبقًا؟</span>
+          <a id="loginLink" href="login.html" class="link-btn">تسجيل الدخول</a>
+        </p>
+
       </div>
-
-      <div class="mb-3 input-group">
-        <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-        <input id="email" type="email" class="form-control" placeholder="example@gmail.com" required>
-      </div>
-
-      <div class="mb-3 input-group">
-        <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-        <input id="password" type="password" class="form-control" placeholder="كلمة المرور" required>
-      </div>
-
-      <button id="signupBtn" type="submit" class="btn btn-primary w-100 rounded-pill fw-bold mb-3">
-        <i class="fa-solid fa-user-plus me-2"></i> <span id="signupBtnText">إنشاء حساب</span>
-      </button>
-
-      <button id="googleSignupBtn" type="button" class="google-btn w-100 mb-2">
-        <img src="assets/images/google.png" alt="Google" style="width:22px"> <span id="googleText"> المتابعة عبر جوجل</span>
-      </button>
-
-      <p class="text-center mt-3 small-text">
-        لديك حساب بالفعل؟ <a id="loginLink" href="login.html" class="app-link fw-bold">تسجيل الدخول</a>
-      </p>
     </form>
-
-    <p id="err" style="color:#cc3333; text-align:center; margin-top:8px;"></p>
-    <p id="ok" style="color:#148a00; text-align:center; margin-top:8px;"></p>
   </div>
 
-  <a id="whatsapp" class="floating-whatsapp" href="https://wa.me/96891234567" target="_blank" title="دعم فني">
+  <!-- Popup -->
+  <div id="notify" class="notify">
+    <button class="close" id="notifyClose">&times;</button>
+    <div id="notifyMsg" class="mt-2"></div>
+  </div>
+
+  <a id="whatsapp" class="floating-whatsapp" href="https://wa.me/96891234567" target="_blank">
     <i class="fa-brands fa-whatsapp"></i>
   </a>
 
   <script type="module">
-    import { initFirebase, signupWithEmail, loginWithGoogle, friendlyErrorMessage } from './firebase.js';
+    import { initFirebase, signupWithEmail, friendlyErrorMessage } from './firebase.js';
     initFirebase();
 
-    const signupForm = document.getElementById('signupForm');
-    const errEl = document.getElementById('err');
-    const okEl = document.getElementById('ok');
-    const backBtn = document.getElementById('backBtn');
-    const langBtn = document.getElementById('langBtn');
-    const themeBtn = document.getElementById('themeBtn');
-    const themeIcon = document.getElementById('themeIcon');
+    const notify = document.getElementById("notify");
+    const notifyMsg = document.getElementById("notifyMsg");
+    const notifyClose = document.getElementById("notifyClose");
 
+    function showNotify(msg){
+      notifyMsg.textContent = msg;
+      notify.style.display = "block";
+    }
+    notifyClose.onclick = ()=> notify.style.display="none";
+
+    // language strings
     const strings = {
-      ar: { title: "إنشاء حساب جديد", subtitle: "انضم إلينا وابدأ رحلتك مع بنك الأسئلة الذكي", signup: "إنشاء حساب", google: " المتابعة عبر جوجل", haveAccount: "لديك حساب بالفعل؟" },
-      en: { title: "Sign Up", subtitle: "Join and start your journey with the Question Bank", signup: "Create Account", google: " Continue with Google", haveAccount: "Already have an account?" }
+      ar: {
+        title:"إنشاء حساب",
+        subtitle:"املأ البيانات لإنشاء الحساب",
+        create:"إنشاء حساب",
+        have:"لديك حساب مسبقًا؟",
+        login:"تسجيل الدخول",
+        errFill:"يرجى تعبئة جميع الحقول"
+      },
+      en: {
+        title:"Create Account",
+        subtitle:"Fill the information to create your account",
+        create:"Create Account",
+        have:"Already have an account?",
+        login:"Login",
+        errFill:"Please fill all fields"
+      }
     };
 
-    function getSavedTheme(){ return localStorage.getItem('qbank-theme') || 'light'; }
-    function getSavedLang(){ return localStorage.getItem('qbank-lang') || 'ar'; }
+    function getLang(){ return localStorage.getItem("qbank-lang") || "ar"; }
+    function getTheme(){ return localStorage.getItem("qbank-theme") || "light"; }
 
-    function applyTheme(t) {
-      if (t === 'dark') document.body.classList.add('dark-mode'); else document.body.classList.remove('dark-mode');
-      if (document.body.classList.contains('dark-mode')) themeIcon.classList.replace('fa-moon','fa-sun'); else themeIcon.classList.replace('fa-sun','fa-moon');
-    }
-    function applyLang(l) {
-      const s = strings[l] || strings.ar;
-      document.getElementById('title').textContent = s.title;
-      document.getElementById('subtitle').textContent = s.subtitle;
-      document.getElementById('signupBtnText').textContent = s.signup;
-      document.getElementById('googleText').textContent = s.google;
-      if (l === 'ar') { document.documentElement.lang='ar'; document.documentElement.dir='rtl'; }
-      else { document.documentElement.lang='en'; document.documentElement.dir='ltr'; }
+    function applyLang(l){
+      const s=strings[l];
+      document.getElementById("title").textContent=s.title;
+      document.getElementById("subtitle").textContent=s.subtitle;
+      document.getElementById("signupBtnText").textContent=s.create;
+      document.getElementById("haveAccountText").textContent=s.have;
+      document.getElementById("loginLink").textContent=s.login;
+      document.documentElement.lang=l;
+      document.documentElement.dir=(l==="ar")?"rtl":"ltr";
     }
 
-    applyTheme(getSavedTheme());
-    applyLang(getSavedLang());
+    function applyTheme(t){
+      if(t==="dark") document.body.classList.add("dark-mode");
+      else document.body.classList.remove("dark-mode");
+    }
 
-    themeBtn.addEventListener('click', () => {
-      const next = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
-      localStorage.setItem('qbank-theme', next);
-      applyTheme(next);
-    });
+    applyLang(getLang());
+    applyTheme(getTheme());
 
-    langBtn.addEventListener('click', () => {
-      const next = getSavedLang() === 'ar' ? 'en' : 'ar';
-      localStorage.setItem('qbank-lang', next);
+    document.getElementById("langBtn").onclick = ()=>{
+      const next=(getLang()==="ar")?"en":"ar";
+      localStorage.setItem("qbank-lang",next);
       applyLang(next);
-    });
+    };
 
-    backBtn.addEventListener('click', () => { window.location.href = 'index.html'; });
+    document.getElementById("themeBtn").onclick = ()=>{
+      const next=(getTheme()==="light")?"dark":"light";
+      localStorage.setItem("qbank-theme",next);
+      applyTheme(next);
+    };
 
-    signupForm.addEventListener('submit', async (e) => {
+    document.getElementById("backBtn").onclick = ()=> window.location.href="index.html";
+
+    // Submit
+    document.getElementById("signupForm").addEventListener("submit", async(e)=>{
       e.preventDefault();
-      errEl.textContent = ''; okEl.textContent = '';
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-      if (!name || !email || !password) { errEl.textContent = "املأ جميع الحقول"; return; }
-      try {
-        await signupWithEmail(name, email, password);
-        okEl.textContent = "تم إنشاء الحساب! تحقق من بريدك (إن وُجد).";
-        setTimeout(()=> window.location.href = 'dashboard.html', 1200);
-      } catch (err) {
-        console.error(err);
-        errEl.textContent = friendlyErrorMessage(err) || 'حدث خطأ';
-      }
-    });
 
-    document.getElementById('googleSignupBtn').addEventListener('click', async () => {
-      try {
-        await loginWithGoogle();
-        window.location.href = 'dashboard.html';
-      } catch (err) {
-        console.error(err);
-        errEl.textContent = friendlyErrorMessage(err) || 'حدث خطأ';
+      const name=document.getElementById("name").value.trim();
+      const email=document.getElementById("email").value.trim();
+      const password=document.getElementById("password").value.trim();
+
+      const s=strings[getLang()];
+
+      if(!name || !email || !password){
+        showNotify(s.errFill);
+        return;
+      }
+
+      try{
+        const res = await signupWithEmail(name,email,password);
+        window.location.href="dashboard.html";
+      } catch(err){
+        showNotify(friendlyErrorMessage(err.code));
       }
     });
   </script>
+
 </body>
 </html>
