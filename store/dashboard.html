@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>لوحة التحكم</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="admin.js" defer></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1 class="brand">لوحة التحكم</h1>
+      <nav>
+        <a class="btn" href="index.html">العودة للمتجر</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>إضافة منتج جديد</h2>
+      <form id="productForm" class="form-grid">
+        <label>
+          رابط صورة المنتج
+          <input type="url" id="imageUrl" placeholder="https://..." required />
+        </label>
+
+        <label>
+          اسم المنتج
+          <input type="text" id="name" placeholder="اسم المنتج" required />
+        </label>
+
+        <label class="wide">
+          وصف المنتج
+          <textarea id="description" rows="4" placeholder="وصف مختصر وجذاب" required></textarea>
+        </label>
+
+        <label>
+          هل المنتج فيه خصم؟
+          <select id="hasDiscount" required>
+            <option value="false">لا</option>
+            <option value="true">نعم</option>
+          </select>
+        </label>
+
+        <label>
+          سعر المنتج قبل الخصم
+          <input type="number" id="priceBefore" min="0" step="0.01" placeholder="0.00" required />
+        </label>
+
+        <label>
+          سعر المنتج بعد الخصم
+          <input type="number" id="priceAfter" min="0" step="0.01" placeholder="0.00" required />
+        </label>
+
+        <label class="wide">
+          رابط المنتج على Payhip
+          <input type="url" id="payhipUrl" placeholder="https://payhip.com/..." required />
+        </label>
+
+        <div class="actions">
+          <button type="submit" class="btn primary">إضافة المنتج</button>
+          <button type="reset" class="btn">تفريغ الحقول</button>
+        </div>
+      </form>
+      <div id="status" class="status"></div>
+    </section>
+
+    <section class="card">
+      <h2>المنتجات الحالية</h2>
+      <div id="adminProducts" class="grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© لوحة التحكم — Firebase Realtime Database (REST)</p>
+    </div>
+  </footer>
+</body>
+</html>
