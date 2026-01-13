@@ -105,16 +105,17 @@ img { display: block; max-width: 100%; height: auto; }
 .social-links a:hover { background: var(--gradient); transform: scale(1.1); }
 
 /* FOOTER */
-.footer { margin-top: 40px; padding: 40px 24px; background: linear-gradient(180deg, rgba(21,26,46,.9), rgba(15,18,32,.95)); border-top: 1px solid rgba(255,255,255,.08); }
-.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
-.footer h4 { margin: 0 0 8px; }
-.footer-links { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-.footer-links a { color: var(--muted); transition: color .2s ease; }
-.footer-links a:hover { color: #fff; }
-.footer-social { display: flex; gap: 12px; margin-top: 8px; }
-.footer-social a { color: #fff; background: var(--surface); padding: 8px 12px; border-radius: 8px; transition: all .3s ease; }
-.footer-social a:hover { background: var(--gradient); transform: scale(1.05); }
-.copy { margin-top: 16px; color: var(--muted); text-align: center; }
+.footer { background: linear-gradient(180deg, rgba(21,26,46,.95), rgba(15,18,32,.95)); color: var(--text); padding: 50px 24px 20px; border-top: 1px solid rgba(255,255,255,.08); }
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 24px; margin-bottom: 20px; }
+.footer h4 { margin-bottom: 12px; font-weight: 700; color: var(--gradient); background-clip: text; -webkit-background-clip: text; color: transparent; font-size: 18px; }
+.footer p { font-size: 14px; line-height: 1.6; color: var(--muted); }
+.footer-links ul, .footer-docs ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.footer-links a, .footer-docs a { color: var(--muted); transition: color .3s ease; font-size: 14px; }
+.footer-links a:hover, .footer-docs a:hover { color: #fff; }
+.footer-social .social-links { display: flex; gap: 12px; margin-top: 8px; }
+.footer-social a { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--surface); color: #fff; font-size: 20px; transition: all .3s ease; }
+.footer-social a:hover { background: var(--gradient); transform: scale(1.1); }
+.copy { text-align: center; color: var(--muted); font-size: 13px; margin-top: 16px; }
 
 /* SCROLL REVEAL */
 .observe { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
