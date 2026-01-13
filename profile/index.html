@@ -5,26 +5,60 @@
   <title>الحسين بن علي مسعود الكلباني | Marketing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="موقع شخصي عصري للتسويق الرقمي - الحسين بن علي مسعود الكلباني" />
-  
+
+  <!-- Canonical & Social -->
+  <link rel="canonical" href="https://senku989.github.io/profile/" />
+  <meta property="og:locale" content="ar_AR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="الحسين بن علي مسعود الكلباني | Marketing" />
+  <meta property="og:description" content="موقع شخصي عصري للتسويق الرقمي - الحسين بن علي مسعود الكلباني" />
+  <meta property="og:url" content="https://senku989.github.io/profile/" />
+  <meta property="og:image" content="https://senku989.github.io/profile/profile-traditional.jpg" />
+  <meta property="og:site_name" content="الحسين الكلباني" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="الحسين بن علي مسعود الكلباني | Marketing" />
+  <meta name="twitter:description" content="موقع شخصي عصري للتسويق الرقمي - الحسين بن علي مسعود الكلباني" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Structured data (Person) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "الحسين بن علي مسعود الكلباني",
+    "jobTitle": "متخصص في التسويق الرقمي",
+    "url": "https://senku989.github.io/profile/",
+    "email": "mailto:hussain.marketing@gmail.com",
+    "sameAs": [
+      "https://instagram.com/senku98"
+    ]
+  }
+  </script>
+
   <!-- خطوط -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet" />
-  
+
   <!-- أيقونات Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
+  <!-- أساسي CSS -->
   <link rel="stylesheet" href="style.css" />
+
   <link rel="icon" href="profile-traditional.jpg" />
 </head>
 <body>
+  <!-- Skip link for keyboard users -->
+  <a class="skip-link" href="#main">تخطي إلى المحتوى</a>
+
   <!-- Navigation -->
-  <header class="nav">
+  <header class="nav" role="banner">
     <div class="brand">
-      <span class="logo-dot"></span>
+      <span class="logo-dot" aria-hidden="true"></span>
       <span class="brand-text">الحسين الكلباني</span>
     </div>
-    <nav>
+    <nav role="navigation" aria-label="قائمة الموقع">
       <ul>
         <li><a href="#about">من أنا</a></li>
         <li><a href="#skills">المهارات</a></li>
@@ -37,120 +71,159 @@
     </nav>
   </header>
 
-  <!-- About -->
-  <section id="about" class="section hero observe">
-    <div class="hero-grid">
-      <div class="hero-text card interactive">
-        <h1 class="gradient-text">الحسين بن علي مسعود الكلباني</h1>
-        <p class="subtitle">متخصص في التسويق الرقمي | دبلومة CDP العالمية</p>
-        <p class="bio">
-          أؤمن أن التسويق الذكي يبني علاقة إنسانية طويلة الأمد—يمزج الإبداع بالتحليل ويحوّل الأفكار إلى تأثير ملموس.
-        </p>
-        <div class="cta-row">
-          <a class="btn primary" href="#contact">ابدأ التواصل</a>
+  <main id="main" role="main">
+    <!-- About -->
+    <section id="about" class="section hero observe">
+      <div class="hero-grid">
+        <div class="hero-text card interactive">
+          <h1 class="gradient-text">الحسين بن علي مسعود الكلباني</h1>
+          <p class="subtitle">متخصص في التسويق الرقمي | دبلومة CDP العالمية</p>
+          <p class="bio">
+            أؤمن أن التسويق الذكي يبني علاقة إنسانية طويلة الأمد—يمزج الإبداع بالتحليل ويحوّل الأفكار إلى تأثير ملموس.
+          </p>
+          <div class="cta-row">
+            <a class="btn primary" href="#contact" aria-label="ابدأ التواصل">ابدأ التواصل</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="false">
+          <!-- picture element to prefer WebP when available -->
+          <picture>
+            <source type="image/webp" srcset="profile-traditional.webp 1x, profile-traditional@2x.webp 2x">
+            <img src="profile-traditional.jpg"
+                 alt="الحسين الكلباني بالزي العماني"
+                 class="blob-image"
+                 loading="lazy"
+                 width="400" height="400">
+          </picture>
         </div>
       </div>
-      <div class="hero-visual">
-        <img src="profile-traditional.jpg" alt="الحسين الكلباني بالزي العماني" class="blob-image" />
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Skills -->
-  <section id="skills" class="section observe">
-    <div class="skills-layout">
-      <div class="skills-text">
-        <h2 class="section-title">المهارات</h2>
-        <p class="section-subtitle">كل مهارة داخل عنصر تفاعلي—تحرك، يضيء، ويتفاعل معك</p>
-        <div class="skills-grid">
-          <div class="skill-chip"><span>إدارة الحملات</span></div>
-          <div class="skill-chip alt"><span>تحليل البيانات</span></div>
-          <div class="skill-chip"><span>التسويق عبر السوشيال</span></div>
-          <div class="skill-chip alt"><span>بناء العلامة</span></div>
-          <div class="skill-chip"><span>استراتيجيات المحتوى</span></div>
-          <div class="skill-chip alt"><span>إعلانات مدفوعة</span></div>
-          <div class="skill-chip"><span>تحسين الأداء</span></div>
-          <div class="skill-chip alt"><span>أبحاث الجمهور</span></div>
+    <!-- Skills -->
+    <section id="skills" class="section observe">
+      <div class="skills-layout">
+        <div class="skills-text">
+          <h2 class="section-title">المهارات</h2>
+          <p class="section-subtitle">كل مهارة داخل عنصر تفاعلي—تحرك، يضيء، ويتفاعل معك</p>
+          <div class="skills-grid">
+            <div class="skill-chip"><span>إدارة الحملات</span></div>
+            <div class="skill-chip alt"><span>تحليل البيانات</span></div>
+            <div class="skill-chip"><span>التسويق عبر السوشيال</span></div>
+            <div class="skill-chip alt"><span>بناء العلامة</span></div>
+            <div class="skill-chip"><span>استراتيجيات المحتوى</span></div>
+            <div class="skill-chip alt"><span>إعلانات مدفوعة</span></div>
+            <div class="skill-chip"><span>تحسين الأداء</span></div>
+            <div class="skill-chip alt"><span>أبحاث الجمهور</span></div>
+          </div>
+        </div>
+
+        <div class="skills-visual">
+          <picture>
+            <source type="image/webp" srcset="marketing.webp 1x, marketing@2x.webp 2x">
+            <img src="marketing.jpg" alt="التسويق الرقمي" class="shape-image polygon"
+                 loading="lazy" width="600" height="400">
+          </picture>
         </div>
       </div>
-      <div class="skills-visual">
-        <img src="marketing.jpg" alt="التسويق الرقمي" class="shape-image polygon" />
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="section observe">
+      <h2 class="section-title">الخبرات</h2>
+      <div class="cards-grid">
+        <article class="card interactive" aria-labelledby="exp1-title">
+          <h3 id="exp1-title">حملات متعددة القنوات</h3>
+          <p>تصميم وتنفيذ حملات عبر إنستغرام، تيك توك، وفيسبوك.</p>
+        </article>
+
+        <article class="card interactive" aria-labelledby="exp2-title">
+          <h3 id="exp2-title">تحليل بيانات الأداء</h3>
+          <p>تحويل الأرقام إلى قرارات—تحسين الميزانيات ورفع التحويلات.</p>
+        </article>
+
+        <article class="card interactive" aria-labelledby="exp3-title">
+          <h3 id="exp3-title">بناء الهوية والمحتوى</h3>
+          <p>لغة بصرية وصوت متسق يخلق ولاءً طويل الأمد.</p>
+        </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Experience -->
-  <section id="experience" class="section observe">
-    <h2 class="section-title">الخبرات</h2>
-    <div class="cards-grid">
-      <article class="card interactive">
-        <h3>حملات متعددة القنوات</h3>
-        <p>تصميم وتنفيذ حملات عبر إنستغرام، تيك توك، وفيسبوك.</p>
-      </article>
-      <article class="card interactive">
-        <h3>تحليل بيانات الأداء</h3>
-        <p>تحويل الأرقام إلى قرارات—تحسين الميزانيات ورفع التحويلات.</p>
-      </article>
-      <article class="card interactive">
-        <h3>بناء الهوية والمحتوى</h3>
-        <p>لغة بصرية وصوت متسق يخلق ولاءً طويل الأمد.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- Education -->
-  <section id="education" class="section observe">
-    <h2 class="section-title">التعليم</h2>
-    <p>دبلومة التسويق الشاملة من Mastery Academy</p>
-    <div class="schedule-image">
-      <img src="training-schedule.jpg" alt="جدول التدريب للدبلومة" />
-    </div>
-    <a class="btn primary" href="training-schedule.pdf" download>
-      <span class="material-symbols-outlined">download</span> تحميل الجدول PDF
-    </a>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects" class="section observe">
-    <h2 class="section-title">المشاريع</h2>
-    <div class="mosaic">
-      <div class="mosaic-item">
-        <img src="projects.jpg" alt="مشروع تسويقي" />
-        <div class="overlay">
-          <h3>حملة إطلاق منتج</h3>
-        </div>
+    <!-- Education -->
+    <section id="education" class="section observe">
+      <h2 class="section-title">التعليم</h2>
+      <p>دبلومة التسويق الشاملة من Mastery Academy</p>
+      <div class="schedule-image">
+        <picture>
+          <source type="image/webp" srcset="training-schedule.webp 1x, training-schedule@2x.webp 2x">
+          <img src="training-schedule.jpg" alt="جدول التدريب للدبلومة" loading="lazy" width="800" height="450">
+        </picture>
       </div>
-    </div>
-  </section>
 
-  <!-- Certificates -->
-  <section id="certificates" class="section observe">
-    <h2 class="section-title">الشهادات</h2>
-    <div class="cert-image">
-      <img src="cpd-certificate.jpg" alt="شهادة CPD الرسمية" />
-      <a class="btn primary" href="cpd-certificate.pdf" download>
-        <span class="material-symbols-outlined">download</span> تحميل الشهادة PDF
+      <a class="btn primary" href="training-schedule.pdf" download="training-schedule.pdf" aria-label="تحميل جدول التدريب PDF">
+        <span class="material-symbols-outlined">download</span> تحميل جدول التدريب (PDF)
       </a>
-    </div>
-    <div class="cert-image">
-      <img src="mastery-certificate.jpg" alt="شهادة Mastery Academy" />
-      <a class="btn primary" href="mastery-certificate.pdf" download>
-        <span class="material-symbols-outlined">download</span> تحميل الشهادة PDF
-      </a>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact -->
-  <section id="contact" class="section observe">
-    <h2 class="section-title">تواصل معي</h2>
-    <p><span class="material-symbols-outlined">call</span> <a href="tel:+96891296616">91296616</a></p>
-    <p><span class="material-symbols-outlined">mail</span> <a href="mailto:hussain.marketing@gmail.com">hussain.marketing@gmail.com</a></p>
-    <p><span class="material-symbols-outlined">person</span> <a href="https://instagram.com/senku98" target="_blank">إنستغرام</a></p>
-    <img src="contact.jpg" alt="تواصل" class="shape-image blob" />
-  </section>
+    <!-- Projects -->
+    <section id="projects" class="section observe">
+      <h2 class="section-title">المشاريع</h2>
+      <div class="mosaic">
+        <div class="mosaic-item">
+          <picture>
+            <source type="image/webp" srcset="projects.webp 1x, projects@2x.webp 2x">
+            <img src="projects.jpg" alt="مشروع تسويقي" loading="lazy" width="600" height="400">
+          </picture>
+          <div class="overlay">
+            <h3>حملة إطلاق منتج</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificates -->
+    <section id="certificates" class="section observe">
+      <h2 class="section-title">الشهادات</h2>
+
+      <div class="cert-image">
+        <picture>
+          <source type="image/webp" srcset="cpd-certificate.webp 1x, cpd-certificate@2x.webp 2x">
+          <img src="cpd-certificate.jpg" alt="شهادة CPD الرسمية" loading="lazy" width="1000" height="700">
+        </picture>
+        <a class="btn primary" href="cpd-certificate.pdf" download="cpd-certificate.pdf" aria-label="تحميل شهادة CPD PDF">
+          <span class="material-symbols-outlined">download</span> تحميل شهادة CPD (PDF)
+        </a>
+      </div>
+
+      <div class="cert-image">
+        <picture>
+          <source type="image/webp" srcset="mastery-certificate.webp 1x, mastery-certificate@2x.webp 2x">
+          <img src="mastery-certificate.jpg" alt="شهادة Mastery Academy" loading="lazy" width="1000" height="700">
+        </picture>
+        <a class="btn primary" href="mastery-certificate.pdf" download="mastery-certificate.pdf" aria-label="تحميل شهادة Mastery Academy PDF">
+          <span class="material-symbols-outlined">download</span> تحميل شهادة Mastery Academy (PDF)
+        </a>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section observe">
+      <h2 class="section-title">تواصل معي</h2>
+      <p><span class="material-symbols-outlined" aria-hidden="true">call</span> <a href="tel:+96891296616">+968 91296616</a></p>
+      <p><span class="material-symbols-outlined" aria-hidden="true">mail</span> <a href="mailto:hussain.marketing@gmail.com">hussain.marketing@gmail.com</a></p>
+      <p><span class="material-symbols-outlined" aria-hidden="true">person</span>
+        <a href="https://instagram.com/senku98" target="_blank" rel="noopener noreferrer">إنستغرام</a>
+      </p>
+
+      <picture class="contact-visual">
+        <source type="image/webp" srcset="contact.webp 1x, contact@2x.webp 2x">
+        <img src="contact.jpg" alt="تواصل" class="shape-image blob" loading="lazy" width="600" height="400">
+      </picture>
+    </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="footer-grid">
       <div>
         <h4>الحسين الكلباني</h4>
@@ -158,14 +231,14 @@
       </div>
       <div>
         <h4>تابعني</h4>
-        <a href="https://instagram.com/senku98" target="_blank">
-          <span class="material-symbols-outlined">instagram</span>
+        <a href="https://instagram.com/senku98" target="_blank" rel="noopener noreferrer" aria-label="حساب الإنستغرام">
+          <span class="material-symbols-outlined" aria-hidden="true">instagram</span>
         </a>
       </div>
     </div>
     <div class="copy">&copy; 2026 الحسين بن علي مسعود الكلباني — جميع الحقوق محفوظة</div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
