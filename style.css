@@ -230,3 +230,15 @@ body {
   .section { padding: 60px 16px; }
   .gradient-text { font-size: 28px; }
 }
+
+.card.interactive { position: relative; overflow: hidden; }
+.ripple {
+  position: absolute; width: 12px; height: 12px; border-radius: 50%;
+  background: rgba(255,255,255,.35);
+  transform: translate(-50%, -50%);
+  animation: ripple .6s ease-out forwards;
+}
+@keyframes ripple {
+  from { opacity: .8; transform: translate(-50%, -50%) scale(1); }
+  to { opacity: 0; transform: translate(-50%, -50%) scale(24); }
+}
