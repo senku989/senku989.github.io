@@ -8,13 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Rubik:wght@400;600;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://senku989.github.io/profile/style.css" />
-  <link rel="icon" href="images/profile.jpg" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="profile.jpg" />
 </head>
 <body>
-  <!-- Floating back-to-top -->
-  <button id="backToTop" aria-label="العودة للأعلى">↑</button>
-
   <!-- Navigation -->
   <header class="nav">
     <div class="brand">
@@ -34,62 +31,45 @@
     </nav>
   </header>
 
-  <!-- Hero / About -->
+  <!-- About -->
   <section id="about" class="section hero observe">
     <div class="hero-grid">
       <div class="hero-text card interactive">
         <h1 class="gradient-text">الحسين بن علي مسعود الكلباني</h1>
         <p class="subtitle">متخصص في التسويق الرقمي | دبلومة CDP العالمية</p>
         <p class="bio">
-          أؤمن أن التسويق الذكي يبني علاقة إنسانية طويلة الأمد—يمزج الإبداع بالتحليل ويحوّل الأفكار إلى تأثير ملموس. أصمم استراتيجيات حديثة تُحرك الجمهور وتُعزز قيمة العلامة.
+          أؤمن أن التسويق الذكي يبني علاقة إنسانية طويلة الأمد—يمزج الإبداع بالتحليل ويحوّل الأفكار إلى تأثير ملموس.
         </p>
         <div class="cta-row">
           <a class="btn primary" href="#contact">ابدأ التواصل</a>
-          <button class="btn ghost" data-toggle="#moreAbout">اعرف أكثر</button>
-        </div>
-        <div id="moreAbout" class="collapse">
-          <p>
-            أعمل على حملات متعددة القنوات، تحسين الأداء عبر البيانات، وصناعة محتوى يليق بالعلامة—هدف واحد: نمو مستدام وولاء حقيقي.
-          </p>
         </div>
       </div>
-
       <div class="hero-visual">
-        <!-- Irregular blob mask over profile image -->
-        <div class="blob-wrap">
-          <svg class="blob" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <g transform="translate(300,300)">
-              <path d="M120,-150C160,-120,190,-80,200,-30C210,20,200,80,170,120C140,160,90,180,40,200C-10,220,-60,240,-110,230C-160,220,-210,180,-230,130C-250,80,-240,20,-220,-30C-200,-80,-170,-120,-130,-150C-90,-180,-40,-200,10,-210C60,-220,120,-180,120,-150Z" fill="url(#grad)" />
-              <defs>
-                <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#7C3AED"/>
-                  <stop offset="100%" stop-color="#06B6D4"/>
-                </linearGradient>
-              </defs>
-            </g>
-          </svg>
-          <img src="profile.jpg" alt="صورة الحسين الكلباني" style="width:300px; border-radius:50%;">
-        </div>
+        <img src="profile.jpg" alt="صورة الحسين الكلباني" class="blob-image" />
       </div>
     </div>
   </section>
-<br><br><br>
+
   <!-- Skills -->
   <section id="skills" class="section observe">
-    <h2 class="section-title">المهارات</h2>
-    <p class="section-subtitle">كل مهارة داخل عنصر تفاعلي—تحرك، يضيء، ويتفاعل معك</p>
-    <div class="skills-grid">
-      <div class="skill-chip" data-spark="true"><span>إدارة الحملات</span></div>
-      <div class="skill-chip alt" data-spark="true"><span>تحليل البيانات</span></div>
-      <div class="skill-chip" data-spark="true"><span>التسويق عبر السوشيال</span></div>
-      <div class="skill-chip alt" data-spark="true"><span>بناء العلامة</span></div>
-      <div class="skill-chip" data-spark="true"><span>استراتيجيات المحتوى</span></div>
-      <div class="skill-chip alt" data-spark="true"><span>إعلانات مدفوعة</span></div>
-      <div class="skill-chip" data-spark="true"><span>تحسين الأداء</span></div>
-      <div class="skill-chip alt" data-spark="true"><span>أبحاث الجمهور</span></div>
-    </div>
-    <div class="skills-visual">
-      <img src="images/marketing.jpg" alt="التسويق الرقمي" class="shape-image polygon" />
+    <div class="skills-layout">
+      <div class="skills-text">
+        <h2 class="section-title">المهارات</h2>
+        <p class="section-subtitle">كل مهارة داخل عنصر تفاعلي—تحرك، يضيء، ويتفاعل معك</p>
+        <div class="skills-grid">
+          <div class="skill-chip"><span>إدارة الحملات</span></div>
+          <div class="skill-chip alt"><span>تحليل البيانات</span></div>
+          <div class="skill-chip"><span>التسويق عبر السوشيال</span></div>
+          <div class="skill-chip alt"><span>بناء العلامة</span></div>
+          <div class="skill-chip"><span>استراتيجيات المحتوى</span></div>
+          <div class="skill-chip alt"><span>إعلانات مدفوعة</span></div>
+          <div class="skill-chip"><span>تحسين الأداء</span></div>
+          <div class="skill-chip alt"><span>أبحاث الجمهور</span></div>
+        </div>
+      </div>
+      <div class="skills-visual">
+        <img src="marketing.jpg" alt="التسويق الرقمي" class="shape-image polygon" />
+      </div>
     </div>
   </section>
 
@@ -99,39 +79,15 @@
     <div class="cards-grid">
       <article class="card interactive">
         <h3>حملات متعددة القنوات</h3>
-        <p>تصميم وتنفيذ حملات عبر إنستغرام، تيك توك، وفيسبوك—رسائل متسقة، أهداف واضحة، وقياس دقيق للأثر.</p>
-        <button class="btn link" data-toggle="#exp1">تفاصيل</button>
-        <div id="exp1" class="collapse">
-          <ul>
-            <li>تقسيم الجمهور إلى شرائح دقيقة</li>
-            <li>اختبار A/B للمحتوى والإعلانات</li>
-            <li>لوحات متابعة أداء يومية</li>
-          </ul>
-        </div>
+        <p>تصميم وتنفيذ حملات عبر إنستغرام، تيك توك، وفيسبوك.</p>
       </article>
       <article class="card interactive">
         <h3>تحليل بيانات الأداء</h3>
-        <p>تحويل الأرقام إلى قرارات—تحسين الميزانيات، رفع التحويلات، وتقليل تكلفة الاكتساب.</p>
-        <button class="btn link" data-toggle="#exp2">تفاصيل</button>
-        <div id="exp2" class="collapse">
-          <ul>
-            <li>خرائط حرارة وتتبّع سلوك المستخدم</li>
-            <li>نماذج إسناد متعددة اللمسات</li>
-            <li>تقارير أسبوعية قابلة للتنفيذ</li>
-          </ul>
-        </div>
+        <p>تحويل الأرقام إلى قرارات—تحسين الميزانيات ورفع التحويلات.</p>
       </article>
       <article class="card interactive">
         <h3>بناء الهوية والمحتوى</h3>
-        <p>لغة بصرية وصوت متسق—محتوى يليق بالعلامة ويخلق ولاءً طويل الأمد.</p>
-        <button class="btn link" data-toggle="#exp3">تفاصيل</button>
-        <div id="exp3" class="collapse">
-          <ul>
-            <li>دليل أسلوب شامل للعلامة</li>
-            <li>تقويم محتوى شهري مرن</li>
-            <li>قصص تفاعلية ومحتوى قصير</li>
-          </ul>
-        </div>
+        <p>لغة بصرية وصوت متسق يخلق ولاءً طويل الأمد.</p>
       </article>
     </div>
   </section>
@@ -139,47 +95,18 @@
   <!-- Education -->
   <section id="education" class="section observe">
     <h2 class="section-title">التعليم</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="dot"></div>
-        <div class="content card">
-          <h3>دبلومة التسويق أونلاين — CDP</h3>
-          <p>من أكبر أكاديمية عالمية—منهج حديث، تطبيق عملي، ومشاريع واقعية.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="dot alt"></div>
-        <div class="content card">
-          <h3>دورات مكثفة</h3>
-          <p>سوشيال ميديا، إعلانات مدفوعة، تحليل بيانات، وبناء العلامة.</p>
-        </div>
-      </div>
-    </div>
+    <p>دبلومة التسويق أونلاين — CDP العالمية</p>
+    <p>دورات مكثفة في السوشيال ميديا والتحليل وبناء العلامة.</p>
   </section>
 
   <!-- Projects -->
   <section id="projects" class="section observe">
     <h2 class="section-title">المشاريع</h2>
     <div class="mosaic">
-      <div class="mosaic-item tilt">
-        <img src="images/projects.jpg" alt="مشروع تسويقي" />
+      <div class="mosaic-item">
+        <img src="projects.jpg" alt="مشروع تسويقي" />
         <div class="overlay">
           <h3>حملة إطلاق منتج</h3>
-          <p>استراتيجية محتوى + مؤثرين + إعلانات—نتائج ملموسة.</p>
-        </div>
-      </div>
-      <div class="mosaic-item tilt">
-        <img src="images/marketing.jpg" alt="تحليل بيانات" />
-        <div class="overlay">
-          <h3>تحسين الأداء</h3>
-          <p>خفض تكلفة الاكتساب بنسبة ملحوظة عبر تحليل دقيق.</p>
-        </div>
-      </div>
-      <div class="mosaic-item tilt">
-        <img src="images/profile.jpg" alt="هوية العلامة" />
-        <div class="overlay">
-          <h3>هوية متكاملة</h3>
-          <p>لغة بصرية وصوت متسق يرفع الولاء.</p>
         </div>
       </div>
     </div>
@@ -199,43 +126,17 @@
   <!-- Contact -->
   <section id="contact" class="section observe">
     <h2 class="section-title">تواصل معي</h2>
-    <div class="contact-grid">
-      <div class="card interactive">
-        <h3>مباشر</h3>
-        <p>📞 <a href="tel:+96891296616">91296616</a></p>
-        <p>📧 <a href="mailto:hussain.marketing@gmail.com">hussain.marketing@gmail.com</a></p>
-        <p>📷 <a href="https://instagram.com/senku98" target="_blank">@senku98</a></p>
-      </div>
-      <div class="shape-image blob">
-        <img src="images/contact.jpg" alt="تواصل" />
-      </div>
-    </div>
+    <p>📞 <a href="tel:+96891296616">91296616</a></p>
+    <p>📧 <a href="mailto:hussain.marketing@gmail.com">hussain.marketing@gmail.com</a></p>
+    <p>📷 <a href="https://instagram.com/senku98" target="_blank">@senku98</a></p>
+    <img src="contact.jpg" alt="تواصل" class="shape-image blob" />
   </section>
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="footer-grid">
-      <div>
-        <h4>الحسين الكلباني</h4>
-        <p>تسويق رقمي—استراتيجيات حديثة، تأثير ملموس.</p>
-      </div>
-      <div>
-        <h4>روابط</h4>
-        <ul class="footer-links">
-          <li><a href="#about">من أنا</a></li>
-          <li><a href="#skills">المهارات</a></li>
-          <li><a href="#projects">المشاريع</a></li>
-          <li><a href="#contact">تواصل</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>تابعني</h4>
-        <p><a href="https://instagram.com/senku98" target="_blank">@senku98</a></p>
-      </div>
-    </div>
-    <div class="copy">&copy; 2026 الحسين بن علي مسعود الكلباني — جميع الحقوق محفوظة</div>
+    <p>&copy; 2026 الحسين بن علي مسعود الكلباني — جميع الحقوق محفوظة</p>
   </footer>
 
-  <script src="https://senku989.github.io/profile/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
