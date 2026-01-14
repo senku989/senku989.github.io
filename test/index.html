@@ -3,99 +3,38 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>كيف تحقق 1000$ شهريًا من منتج رقمي — سنكو</title>
-  <meta name="description" content="دليل عملي من الفكرة إلى الأتمتة والدخل المتكرر.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <title>كيف تحقق 1000$ شهريًا من منتج رقمي</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
   <style>
-    /* أساسيات */
-    :root{
-      --bg:#0b1220;
-      --paper:#ffffff;
-      --ink:#0f172a;
-      --muted:#475569;
-      --brand:#0a66c2;
-      --accent:#ff7a59;
-      --gold:#c9a227;
-      --line:#e6e8ee;
-      --card:#f8fafc;
-    }
-    html,body{margin:0;padding:0;background:#f3f5f9;color:var(--ink);font-family:"Noto Naskh Arabic","Segoe UI",Tahoma,system-ui;line-height:1.85;}
-    .container{max-width:920px;margin:auto;padding:24px;}
-    header.hero{background:linear-gradient(135deg,#0a4f8f,#0f6fc2);color:#fff;padding:56px 24px;margin:0 0 24px;border-bottom:6px solid #083b6b;}
-    header.hero .title{font-size:2.2rem;margin:0 0 8px;font-weight:800;}
-    header.hero .subtitle{opacity:.92;margin:0 0 16px;}
-    .cta{display:inline-block;background:#ffd54f;color:#111;padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:700;margin-top:8px;}
-    nav.toc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin:16px 0;}
-    nav.toc h2{margin:0 0 8px;font-size:1.2rem;}
-    nav.toc a{display:block;padding:10px 12px;border-radius:10px;color:#0a66c2;text-decoration:none;}
-    nav.toc a:hover{background:#f0f7ff;}
-    section{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin:18px 0;}
-    section h2{margin:0 0 12px;font-size:1.5rem;color:#0a4f8f;}
-    section h3{margin:18px 0 8px;font-size:1.15rem;color:#0a66c2;}
-    ul,ol{margin:8px 0 12px;padding-inline-start:22px;}
-    .tip{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:12px;margin:12px 0;color:#334155;}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-    .card{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:12px;}
-    .quote{border-right:4px solid #0a66c2;background:#f0f7ff;padding:12px;border-radius:12px;margin:12px 0;color:#083b6b;}
-    .footer{color:#64748b;text-align:center;padding:24px;}
-    .divider{height:1px;background:var(--line);margin:16px 0;}
-    .badge{display:inline-block;background:#0ea5e9;color:#fff;padding:6px 10px;border-radius:999px;font-size:.85rem;margin:4px 0;}
-    .kpi{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0;}
-    .kpi .item{flex:1;min-width:200px;background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:12px;}
-    .num{font-weight:800;color:#0a4f8f;}
-    /* تنقل علوي ثابت */
-    .topbar{position:sticky;top:0;background:#ffffffcc;backdrop-filter:saturate(1.2) blur(6px);border-bottom:1px solid var(--line);z-index:10;}
-    .topbar .wrap{max-width:920px;margin:auto;padding:10px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between;}
-    .topbar a{color:#0a66c2;text-decoration:none;font-weight:700;}
-    /* للطباعة */
-    @media print{
-      header.hero, .topbar, .cta{display:none !important;}
-      body{background:#fff;}
-      section{page-break-inside:avoid;}
-    }
+    body { background-color: #f8f9fa; font-family: "Noto Naskh Arabic", "Segoe UI", Tahoma, sans-serif; line-height: 1.9; }
+    .hero { background: linear-gradient(135deg, #0a4f8f, #0f6fc2); color: #fff; padding: 60px 20px; margin-bottom: 30px; }
+    .hero h1 { font-size: 2.5rem; font-weight: bold; }
+    .hero p { font-size: 1.2rem; opacity: 0.9; }
+    .section { background: #fff; border-radius: 12px; padding: 30px; margin-bottom: 30px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+    .section h2 { color: #0a4f8f; margin-bottom: 20px; }
+    .section h3 { color: #0a66c2; margin-top: 20px; }
+    .btn-cta { background-color: #ffd54f; color: #111; font-weight: bold; border-radius: 10px; padding: 10px 20px; }
+    .toc a { display: block; padding: 8px 12px; color: #0a66c2; text-decoration: none; border-bottom: 1px solid #e2e8f0; }
+    .toc a:hover { background-color: #f0f7ff; }
   </style>
 </head>
 <body>
 
-  <!-- شريط علوي -->
-  <div class="topbar">
-    <div class="wrap">
-      <div>كيف تحقق 1000$ شهريًا — سنكو</div>
-      <div>
-        <a href="#buy">اشترِ الآن</a> ·
-        <a href="#plan30">خطة 30 يومًا</a> ·
-        <a href="#toc">الفهرس</a>
-      </div>
+  <!-- الغلاف -->
+  <div class="hero text-center">
+    <div class="container">
+      <h1>كيف تحقق 1000$ شهريًا من منتج رقمي</h1>
+      <p>دليل عملي من الفكرة إلى الأتمتة والدخل المتكرر</p>
+      <a href="#buy" class="btn btn-cta mt-3">احصل على النسخة الآن</a>
     </div>
   </div>
 
-  <!-- غلاف/هيدر -->
-  <header class="hero">
-    <div class="container">
-      <div class="title">كيف تحقق 1000$ شهريًا من منتج رقمي</div>
-      <div class="subtitle">دليل ذكي من الفكرة إلى الأتمتة والدخل المتكرر — نسخة عملية جاهزة للتنفيذ</div>
-      <a class="cta" href="#buy">احصل على النسخة الآن</a>
-      <div class="kpi">
-        <div class="item"><div class="num">70+</div> صفحة عملية</div>
-        <div class="item"><div class="num">5</div> مراحل تنفيذ</div>
-        <div class="item"><div class="num">3</div> قوالب جاهزة</div>
-      </div>
-    </div>
-  </header>
+  <div class="container">
 
-  <main class="container">
-
-    <!-- حقوق -->
-    <section id="rights">
-      <h2>حقوق الطبع والنشر</h2>
-      <p>عند شراء هذا المنتج، فإنك توافق على عدم نسخه أو إعادة بيعه أو إعادة توزيعه بأي شكل. هذا المنتج مخصص للاستخدام الشخصي فقط. أي خرق سيؤدي إلى الملاحقة القضائية وفق القوانين المعمول بها.</p>
-      <div class="tip">نصيحة: أضف بريد دعم مخصص داخل النسخة المدفوعة لتلقي الاستفسارات بسرعة.</div>
-    </section>
-
-    <!-- فهرس -->
-    <section id="toc">
+    <!-- الفهرس -->
+    <div class="section">
       <h2>الفهرس</h2>
-      <nav class="toc">
+      <div class="toc">
         <a href="#intro">المقدمة</a>
         <a href="#ch1">الفصل 1: اختيار فكرة مربحة</a>
         <a href="#ch2">الفصل 2: إنشاء المنتج الرقمي</a>
@@ -104,289 +43,162 @@
         <a href="#ch5">الفصل 5: الأتمتة والدخل المتكرر</a>
         <a href="#ch6">الفصل 6: أخطاء قاتلة وحلول</a>
         <a href="#plan30">خطة عمل 30 يومًا</a>
-        <a href="#templates">قوالب جاهزة</a>
-        <a href="#email">تسلسل بريد إلكتروني</a>
         <a href="#buy">الشراء والدعم</a>
-      </nav>
-    </section>
+      </div>
+    </div>
 
-    <!-- مقدمة -->
-    <section id="intro">
+    <!-- المقدمة -->
+    <div class="section" id="intro">
       <h2>المقدمة</h2>
       <p>هذا الكتاب ليس تنظيرًا؛ إنه مسار عملي للوصول إلى دخل شهري قدره 1000$ من منتج رقمي واحد. ستتعلم كيف تختار فكرة مطلوبة، تبني منتجًا قابلًا للبيع، تطلقه بذكاء، ثم تجعل المبيعات تعمل تلقائيًا عبر Funnel بسيط ورسائل بريدية محسوبة.</p>
-      <div class="quote">القاعدة الذهبية: القيمة تُقاس بالنتيجة التي يحصل عليها القارئ، لا بعدد الصفحات.</div>
-      <ul>
-        <li><strong>هدف واضح:</strong> منتج واحد يحقق دخلًا متكررًا.</li>
-        <li><strong>تنفيذ سريع:</strong> نسخة أولية خلال أسبوع.</li>
-        <li><strong>تحسين مستمر:</strong> بناءً على تعليقات العملاء.</li>
-      </ul>
-    </section>
+    </div>
 
     <!-- الفصل 1 -->
-    <section id="ch1">
+    <div class="section" id="ch1">
       <h2>الفصل 1: اختيار فكرة مربحة</h2>
       <h3>مصادر الأفكار</h3>
       <ul>
-        <li><strong>مشاكلك الشخصية:</strong> حل طبّقته بنجاح—حوّله إلى منتج.</li>
-        <li><strong>مهاراتك:</strong> تصميم، برمجة، قوالب—اجعلها قابلة للبيع.</li>
-        <li><strong>بحث السوق:</strong> Gumroad, Udemy, Etsy—راقب الطلب والتعليقات.</li>
-        <li><strong>ترجمة/تكييف:</strong> تحويل محتوى ناجح إلى نسخة عربية بإضافة قيمة.</li>
-        <li><strong>دمج ذكي:</strong> أجندة دراسية + قوالب إنتاجية للطلاب.</li>
+        <li>مشاكلك الشخصية</li>
+        <li>مهاراتك وخبراتك</li>
+        <li>بحث السوق عبر Gumroad وUdemy</li>
+        <li>ترجمة أو تكييف محتوى ناجح</li>
+        <li>دمج ذكي بين أدوات مختلفة</li>
       </ul>
-      <h3>تحليل الطلب بسرعة (72 ساعة)</h3>
+      <h3>اختبار الفكرة خلال 72 ساعة</h3>
       <ol>
-        <li><strong>صياغة وعد:</strong> “قالب جاهز لـ[مجال] يوفر عليك [وقت/مال]”.</li>
-        <li><strong>منشور تشويق:</strong> اجمع اهتمامًا أوليًا (اسم + بريد).</li>
-        <li><strong>قياس:</strong> 30 اهتمامًا = تنفيذ، أقل = تعديل الوعد أو السعر.</li>
+        <li>صياغة وعد واضح</li>
+        <li>منشور تشويق + نموذج اهتمام</li>
+        <li>قياس الطلب</li>
       </ol>
-      <div class="tip">استخدم Google Forms لسؤال الجمهور: المشكلة، النتيجة المتوقعة، السعر المقبول.</div>
-    </section>
+    </div>
 
     <!-- الفصل 2 -->
-    <section id="ch2">
+    <div class="section" id="ch2">
       <h2>الفصل 2: إنشاء المنتج الرقمي</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>أنواع المنتجات</h3>
-          <ul>
-            <li><strong>كتاب إلكتروني:</strong> PDF/EPUB—دليل عملي.</li>
-            <li><strong>دورة قصيرة:</strong> فيديو/صوت—نتيجة سريعة.</li>
-            <li><strong>قوالب وأدوات:</strong> Notion/Excel/Canva.</li>
-            <li><strong>تصاميم رقمية:</strong> SVG/PNG للطباعة أو الاستخدام.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>معايير الجودة</h3>
-          <ul>
-            <li><strong>نتيجة قابلة للقياس:</strong> ماذا سيحقق القارئ؟</li>
-            <li><strong>خطوات واضحة:</strong> بدون حشو، أمثلة عملية.</li>
-            <li><strong>تصميم نظيف:</strong> غلاف احترافي، صور توضيحية.</li>
-          </ul>
-        </div>
-      </div>
+      <h3>أنواع المنتجات</h3>
+      <ul>
+        <li>كتب إلكترونية</li>
+        <li>دورات قصيرة</li>
+        <li>قوالب وأدوات</li>
+        <li>تصاميم رقمية</li>
+      </ul>
       <h3>أدوات التنفيذ</h3>
       <ul>
-        <li><strong>كتابة:</strong> Google Docs / Word.</li>
-        <li><strong>تصميم:</strong> Canva / InDesign.</li>
-        <li><strong>فيديو:</strong> OBS / CapCut / Loom.</li>
-        <li><strong>تحويل PDF:</strong> Smallpdf / PDFescape.</li>
+        <li>Google Docs / Canva / OBS / CapCut</li>
       </ul>
       <h3>التسعير الذكي</h3>
       <ul>
-        <li><strong>لا تربط السعر بعدد الصفحات:</strong> القيمة بالنتيجة.</li>
-        <li><strong>نطاقات فعالة:</strong> 19$ أساسي، 29$ مميز مع مكافآت.</li>
-        <li><strong>خيارات متعددة:</strong> نسخة عادية + نسخة مميزة.</li>
+        <li>19$ للنسخة الأساسية</li>
+        <li>29$ للنسخة المميزة</li>
       </ul>
-    </section>
+    </div>
 
     <!-- الفصل 3 -->
-    <section id="ch3">
+    <div class="section" id="ch3">
       <h2>الفصل 3: منصة البيع وصفحة التحويل</h2>
-      <h3>اختيار المنصة</h3>
+      <h3>منصات البيع</h3>
       <ul>
-        <li><strong>Gumroad:</strong> تسليم تلقائي، سهل للمبتدئين.</li>
-        <li><strong>Payhip:</strong> بدائل عمولة، واجهة عربية جزئيًا.</li>
-        <li><strong>Ko-fi:</strong> منتجات بسيطة + تبرعات.</li>
-        <li><strong>Teachable/Thinkific:</strong> للدورات—احترافية.</li>
-        <li><strong>Shopify/WooCommerce:</strong> مرونة كاملة—يتطلب خبرة.</li>
+        <li>Gumroad / Payhip / Ko-fi / Teachable</li>
       </ul>
-      <h3>صفحة بيع تقنع</h3>
+      <h3>صفحة بيع فعالة</h3>
       <ul>
-        <li><strong>عنوان قيمة:</strong> “منتج رقمي واحد = دخل شهري مستمر”.</li>
-        <li><strong>صورة غلاف:</strong> واضحة ومهنية.</li>
-        <li><strong>وصف مفصل:</strong> لمن؟ ماذا سيتعلم؟ النتيجة؟</li>
-        <li><strong>دليل اجتماعي:</strong> مراجعات/ضمان بسيط.</li>
-        <li><strong>CTA واضح:</strong> “اشترِ الآن—ابدأ اليوم”.</li>
+        <li>عنوان جذاب</li>
+        <li>صورة غلاف احترافية</li>
+        <li>وصف مفصل + ضمان + CTA واضح</li>
       </ul>
-      <div class="tip">أضف رسالة شكر تلقائية بعد الدفع + تعليمات التحميل.</div>
-      <h3>حماية المنتج</h3>
-      <ul>
-        <li><strong>روابط مؤقتة:</strong> تنتهي صلاحيتها تلقائيًا.</li>
-        <li><strong>تخصيص النسخة:</strong> اسم المشتري داخل الملف.</li>
-        <li><strong>ملاحظة قانونية:</strong> للاستخدام الشخصي فقط.</li>
-      </ul>
-    </section>
+    </div>
 
     <!-- الفصل 4 -->
-    <section id="ch4">
+    <div class="section" id="ch4">
       <h2>الفصل 4: الإطلاق الذكي</h2>
-      <h3>ما هو الإطلاق؟</h3>
-      <p>فترة تعلن فيها رسميًا عن توفر المنتج لأول مرة، وتحوّل الاهتمام إلى مبيعات عبر حدث محدود.</p>
-      <h3>جدول تشويق (7 أيام)</h3>
-      <ol>
-        <li><strong>اليوم -7:</strong> منشور فضول: “سأجرّب طريقة…”.</li>
-        <li><strong>اليوم -5:</strong> سؤال مباشر عن المشكلة.</li>
-        <li><strong>اليوم -3:</strong> تلميح: “المنتج قريب جدًا…”.</li>
-        <li><strong>اليوم -2:</strong> وعد شخصي: “شيء غيّر حياتي…”.</li>
-        <li><strong>اليوم -1:</strong> عد تنازلي: “غدًا الساعة 20:00…”.</li>
-      </ol>
+      <h3>جدول تشويق 7 أيام</h3>
+      <ul>
+        <li>منشورات فضولية</li>
+        <li>تلميحات تدريجية</li>
+        <li>عد تنازلي</li>
+      </ul>
       <h3>يوم الإطلاق</h3>
       <ul>
-        <li><strong>إعلان رسمي:</strong> ماذا يقدم؟ الفائدة؟ السعر؟ الرابط؟</li>
-        <li><strong>قصص/ستوري:</strong> صور من الداخل + عرض للأوائل.</li>
-        <li><strong>CTA:</strong> “احصل عليه اليوم بسعر خاص”.</li>
+        <li>منشور رسمي + عرض خاص</li>
+        <li>قصص + CTA مباشر</li>
       </ul>
-      <h3>تحفيز الشراء السريع</h3>
-      <ul>
-        <li><strong>عرض محدود:</strong> 48–72 ساعة.</li>
-        <li><strong>ميزة للأوائل:</strong> ملف إضافي/استشارة/دخول مجاني.</li>
-      </ul>
-    </section>
+    </div>
 
     <!-- الفصل 5 -->
-    <section id="ch5">
+    <div class="section" id="ch5">
       <h2>الفصل 5: الأتمتة والدخل المتكرر</h2>
-      <h3>ما معنى الأنظمة؟</h3>
-      <p>تحويل العمليات اليدوية إلى عمليات تعمل تلقائيًا: رسائل، شرح، عروض—ضمن سلسلة منظمة.</p>
-      <h3>البنية الأساسية</h3>
+      <h3>مكونات النظام</h3>
       <ul>
-        <li><strong>صفحة بيع واضحة</strong></li>
-        <li><strong>نموذج جمع إيميلات (Lead Magnet)</strong></li>
-        <li><strong>سلسلة رسائل تلقائية (Email Funnel)</strong></li>
-        <li><strong>منتج جاهز للتسليم الفوري</strong></li>
-        <li><strong>محتوى مجدول ومتكرر</strong></li>
+        <li>صفحة بيع + نموذج إيميل + Funnel</li>
+        <li>أدوات: MailerLite / Systeme.io / Gumroad</li>
       </ul>
-      <h3>Funnel بسيط</h3>
-      <ol>
-        <li>منشور/فيديو يشرح المنتج.</li>
-        <li>رابط هدية مجانية مقابل الإيميل.</li>
-        <li>صفحة بيع + سلسلة إيميلات تقنع بالشراء.</li>
-        <li>صفحة شكر تؤكد الصفقة.</li>
-      </ol>
-      <h3>أدوات الأتمتة</h3>
-      <ul>
-        <li><strong>جمع الإيميلات:</strong> MailerLite / ConvertKit / Brevo.</li>
-        <li><strong>رسائل تلقائية:</strong> Mailchimp / Systeme.io / GetResponse.</li>
-        <li><strong>جدولة محتوى:</strong> Metricool / Buffer / Later.</li>
-        <li><strong>بيع وتسليم:</strong> Gumroad / Payhip.</li>
-      </ul>
-      <div class="tip">أضف إعادة استهداف للعملاء القدامى بعروض مكملة لزيادة السلة.</div>
-    </section>
+    </div>
 
     <!-- الفصل 6 -->
-    <section id="ch6">
+    <div class="section" id="ch6">
       <h2>الفصل 6: أخطاء قاتلة وحلول</h2>
       <ul>
-        <li><strong>انتظار الكمال:</strong> الحل: MVP—أطلق نسخة أولية ثم حسّن.</li>
-        <li><strong>تسويق بلا جمهور:</strong> الحل: بناء اهتمام مسبق وقائمة بريدية.</li>
-        <li><strong>تسعير غير مدروس:</strong> الحل: سعر رمزي أولي + خيارات متعددة.</li>
-        <li><strong>تجاهل المشترين:</strong> الحل: شكر، طلب تقييم، دعم سريع.</li>
+        <li>انتظار الكمال</li>
+        <li>تسويق بلا جمهور</li>
+        <li>تسعير غير مدروس</li>
+        <li>تجاهل المشترين</li>
       </ul>
-      <div class="quote">التقدّم أفضل من الكمال—النسخة الأولى تفتح الباب للتعلم والتحسين.</div>
-    </section>
+    </div>
 
     <!-- خطة 30 يومًا -->
-    <section id="plan30">
-      <h2>خطة عمل 30 يومًا للوصول إلى 1000$</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>الأسبوع 1: الفكرة والاختبار</h3>
-          <ul>
-            <li>صياغة وعد واضح + نموذج اهتمام.</li>
-            <li>منشورات تشويق + قياس الطلب.</li>
-            <li>تثبيت السعر المبدئي (19$/29$).</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>الأسبوع 2: الإنتاج</h3>
-          <ul>
-            <li>كتابة المحتوى + تصميم الغلاف.</li>
-            <li>تحويل إلى PDF + مراجعة.</li>
-            <li>تحضير نسخة HTML Preview.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>الأسبوع 3: المنصة والصفحة</h3>
-          <ul>
-            <li>رفع على Gumroad/Payhip.</li>
-            <li>صفحة بيع مكتملة + CTA.</li>
-            <li>رسالة شكر تلقائية.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>الأسبوع 4: الإطلاق والأتمتة</h3>
-          <ul>
-            <li>جدول تشويق 7 أيام.</li>
-            <li>يوم الإطلاق + عرض للأوائل.</li>
-            <li>تفعيل Funnel البريد.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="tip">هدف الشهر: 50 عملية بيع × متوسط 20$ ≈ 1000$.</div>
-    </section>
-
-    <!-- قوالب جاهزة -->
-    <section id="templates">
-      <h2>قوالب جاهزة</h2>
-      <h3>قالب صفحة بيع</h3>
+    <div class="section" id="plan30">
+      <h2>خطة عمل 30 يومًا</h2>
       <ul>
-        <li><strong>عنوان:</strong> “منتج رقمي واحد—دخل شهري متكرر”.</li>
-        <li><strong>3 فوائد:</strong> نتيجة قابلة للقياس، وقت تنفيذ قصير، أمثلة تطبيق.</li>
-        <li><strong>مراجعات/ضمان:</strong> ثقة + CTA واضح.</li>
+        <li>أسبوع 1: اختيار الفكرة واختبارها</li>
+        <li>أسبوع 2: إنتاج المحتوى</li>
+        <li>أسبوع 3: تجهيز المنصة والصفحة</li>
+        <li>أسبوع 4: الإطلاق + الأتمتة</li>
       </ul>
-      <h3>قالب منشور تشويق</h3>
-      <div class="card">
-        <p>“أشتغل على شيء صغير ممكن يوفّر عليك ساعات أسبوعيًا… لو مهتم اكتب ‘مهتم’ وأرسل لك التفاصيل أولًا.”</p>
-      </div>
-      <h3>قالب رسالة شكر بعد الشراء</h3>
-      <div class="card">
-        <p>“شكرًا لثقتك! تم إرسال رابط التحميل إلى بريدك. لو واجهت أي مشكلة، راسلنا على [بريد الدعم].”</p>
-      </div>
-    </section>
+    </div>
 
-    <!-- تسلسل بريد -->
-    <section id="email">
-      <h2>تسلسل بريد إلكتروني (Email Funnel)</h2>
-      <h3>رسالة 1 — ترحيب</h3>
-      <p>مرحبًا [الاسم]، سعيد بانضمامك! ستصلك رسائل فيها نصائح حصرية وعروض داخلية.</p>
-      <h3>رسالة 2 — مشكلة وحل</h3>
-      <p>هل تواجه [المشكلة]؟ في هذا الدليل أشرح الأسباب الخفية والحل خطوة بخطوة—[رابط].</p>
-      <h3>رسالة 3 — قصة نجاح</h3>
-      <p>[اسم] بدأ مثلك تمامًا—اليوم يحقق دخلًا شهريًا من منتجه الرقمي. التفاصيل هنا—[رابط].</p>
-      <h3>رسالة 4 — عرض محدود</h3>
-      <p>فقط اليوم: عرض خاص للمشتركين الجدد—ينتهي خلال 24 ساعة—[رابط].</p>
-    </section>
-
-    <!-- شراء ودعم -->
-    <section id="buy">
-      <h2>الشراء والدعم</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>نسخة أساسية — 19$</h3>
-          <ul>
-            <li>الكتاب الكامل (PDF).</li>
-            <li>خطة 30 يومًا.</li>
-          </ul>
-          <a class="cta" href="#">اشترِ الآن</a>
+<!-- الشراء والدعم -->
+    <div class="section text-center" id="buy">
+      <h2>احصل على نسختك الآن</h2>
+      <p class="mb-4">اختر النسخة التي تناسبك وابدأ رحلتك نحو الدخل الرقمي المتكرر</p>
+      
+      <div class="row">
+        <!-- النسخة الأساسية -->
+        <div class="col-md-6 mb-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h3 class="card-title">النسخة الأساسية — 19$</h3>
+              <ul class="list-unstyled text-start mt-3">
+                <li>✔ الكتاب الكامل (PDF)</li>
+                <li>✔ خطة عمل 30 يومًا</li>
+              </ul>
+              <a href="#" class="btn btn-primary mt-3">اشترِ الآن</a>
+            </div>
+          </div>
         </div>
-        <div class="card">
-          <h3>نسخة مميزة — 29$</h3>
-          <ul>
-            <li>الكتاب الكامل (PDF).</li>
-            <li>قوالب جاهزة + تسلسل بريد قابل للتعديل.</li>
-            <li>تحديثات مستقبلية.</li>
-          </ul>
-          <a class="cta" href="#">احصل على النسخة المميزة</a>
+        
+        <!-- النسخة المميزة -->
+        <div class="col-md-6 mb-3">
+          <div class="card h-100 shadow-sm border-warning">
+            <div class="card-body">
+              <h3 class="card-title text-warning">النسخة المميزة — 29$</h3>
+              <ul class="list-unstyled text-start mt-3">
+                <li>✔ الكتاب الكامل (PDF)</li>
+                <li>✔ قوالب جاهزة + تسلسل بريد قابل للتعديل</li>
+                <li>✔ تحديثات مستقبلية</li>
+              </ul>
+              <a href="#" class="btn btn-warning mt-3">احصل على النسخة المميزة</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="divider"></div>
-      <p class="footer">© جميع الحقوق محفوظة — سنكو — للاستخدام الشخصي فقط</p>
-    </section>
 
-  </main>
+      <hr class="my-4">
+      <p class="text-muted">© جميع الحقوق محفوظة — سنكو — للاستخدام الشخصي فقط</p>
+    </div>
 
-  <!-- تحسين تجربة القراءة: تنقل سريع -->
-  <script>
-    // تنقل سلس
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
-        const id=a.getAttribute('href').slice(1);
-        const el=document.getElementById(id);
-        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'}); }
-      });
-    });
-    // تلميح للطباعة
-    console.log("لطباعة الكتاب كـPDF: Ctrl/Cmd+P ثم احفظ كـPDF. تأكد من تفعيل خلفيات الخلفية.");
-  </script>
+  </div> <!-- نهاية container -->
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
