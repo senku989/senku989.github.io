@@ -3,21 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>كيف تحقق 1000$ شهريًا من منتج رقمي — كتاب عملي</title>
+  <title>كيف تحقق 1000$ شهريًا من منتج رقمي — النسخة المدفوعة</title>
+  <meta name="description" content="كتاب عملي شامل يعلّمك خطوة بخطوة كيف تبني منتجًا رقميًا يحقق دخلًا شهريًا متكررًا بقيمة 1000$.">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <style>
     body { font-family: "Noto Naskh Arabic","Segoe UI",Tahoma,sans-serif; line-height: 1.95; }
     .hero { padding: 48px 0; }
-    .section { border-radius: 14px; padding: 28px; margin-bottom: 28px; }
+    .section { border-radius: 14px; padding: 28px; margin-bottom: 28px; background: #f8fafc; }
     .section h2 { margin-bottom: 16px; font-weight: 800; }
     .section h3 { margin-top: 18px; font-weight: 700; }
     .lead { font-size: 1.15rem; }
-    .toc a { display: block; padding: 10px 12px; text-decoration: none; border-bottom: 1px solid #e9ecef; }
-    .toc a:hover { background-color: #f0f7ff; }
-    .callout { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 14px; }
-    .quote { border-right: 4px solid #0a66c2; background: #f0f7ff; padding: 12px; border-radius: 12px; }
+    .toc a { display: block; padding: 10px 12px; text-decoration: none; border-bottom: 1px solid #e9ecef; color: #0a66c2; }
+    .toc a:hover { background-color: #eef6ff; }
+    .callout { background: #fff; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 14px; }
+    .quote { border-right: 4px solid #0a66c2; background: #eef6ff; padding: 12px; border-radius: 12px; }
     .img-frame { border: 1px solid #e9ecef; border-radius: 12px; padding: 8px; background: #fff; }
+    .kpi { display: flex; gap: 12px; flex-wrap: wrap; }
+    .kpi .card { flex: 1; min-width: 220px; }
+    .badge-soft { background: #eef6ff; color: #0a66c2; border: 1px solid #cfe2ff; border-radius: 999px; padding: 6px 10px; font-weight: 700; }
+    .step { border-right: 4px solid #16a34a; background: #ecfdf5; padding: 12px; border-radius: 12px; margin-bottom: 12px; }
+    .tip { border-right: 4px solid #f59e0b; background: #fff7ed; padding: 12px; border-radius: 12px; margin-bottom: 12px; }
+    .warn { border-right: 4px solid #ef4444; background: #fee2e2; padding: 12px; border-radius: 12px; margin-bottom: 12px; }
+    .checklist li { margin-bottom: 8px; }
+    .table { background: #fff; }
     /* Dark mode */
     body.dark-mode { background-color: #121212; color: #e0e0e0; }
     body.dark-mode .section { background-color: #1e1e1e; color: #e0e0e0; }
@@ -27,16 +36,19 @@
     body.dark-mode .callout { background: #161616; border-color: #333; }
     body.dark-mode .quote { background: #1b2a3a; border-right-color: #64b5f6; }
     body.dark-mode .img-frame { background: #181818; border-color: #333; }
+    body.dark-mode .table { background: #181818; color: #e0e0e0; }
     /* Print page numbers */
     @page {
       @bottom-center {
         content: "صفحة " counter(page) " من " counter(pages);
       }
+      margin: 20mm;
     }
     @media print {
-      #modeToggle, .navbar, .btn, .hero .btn { display: none !important; }
+      #modeToggle, .navbar, .btn, .hero .btn, .toc { display: none !important; }
       .section { page-break-inside: avoid; }
       body { background: #fff; color: #000; }
+      a { color: #000; text-decoration: none; }
     }
   </style>
 </head>
@@ -45,7 +57,7 @@
   <!-- شريط علوي -->
   <nav class="navbar navbar-expand-lg bg-light border-bottom">
     <div class="container">
-      <span class="navbar-brand fw-bold">كيف تحقق 1000$ شهريًا — كتاب عملي</span>
+      <span class="navbar-brand fw-bold">كيف تحقق 1000$ شهريًا — النسخة المدفوعة</span>
       <div class="ms-auto d-flex gap-2">
         <a href="#toc" class="btn btn-outline-primary btn-sm">الفهرس</a>
         <button id="modeToggle" class="btn btn-secondary btn-sm">تبديل الوضع: داكن / فاتح</button>
@@ -61,241 +73,470 @@
       <div class="img-frame mx-auto mb-3" style="max-width: 520px;">
         <img src="images/cover-canva.png" alt="غلاف الكتاب (صورة خارجية من Canva)" class="img-fluid rounded">
       </div>
+      <div class="kpi">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="fw-bold fs-4 text-primary">60–70</div>
+            <div>صفحة عند الطباعة</div>
+          </div>
+        </div>
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="fw-bold fs-4 text-primary">30</div>
+            <div>يوم خطة تنفيذ</div>
+          </div>
+        </div>
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="fw-bold fs-4 text-primary">10+</div>
+            <div>صور توضيحية</div>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
   <div class="container">
 
+    <!-- الفهرس -->
+    <section class="section" id="toc">
+      <h2>الفهرس</h2>
+      <div class="toc">
+        <a href="#intro">المقدمة</a>
+        <a href="#ch1">الفصل 1: اختيار فكرة مربحة</a>
+        <a href="#ch2">الفصل 2: بناء المنتج الرقمي</a>
+        <a href="#ch3">الفصل 3: منصة البيع وصفحة التحويل</a>
+        <a href="#ch4">الفصل 4: الإطلاق الذكي</a>
+        <a href="#ch5">الفصل 5: الأتمتة والدخل المتكرر</a>
+        <a href="#ch6">الفصل 6: التسعير والعروض والارتقاء بالقيمة</a>
+        <a href="#ch7">الفصل 7: دراسات حالة واقعية</a>
+        <a href="#plan30">خطة عمل 30 يومًا للوصول إلى 1000$</a>
+        <a href="#templates">قوالب جاهزة قابلة للاستخدام</a>
+        <a href="#email">تسلسل بريد إلكتروني مقنع</a>
+        <a href="#faq">أسئلة شائعة وإجابات عملية</a>
+        <a href="#closing">الخاتمة والتوصيات النهائية</a>
+      </div>
+    </section>
+
     <!-- المقدمة -->
-    <section class="section bg-light animate__animated animate__fadeIn" id="intro">
+    <section class="section animate__animated animate__fadeIn" id="intro">
       <h2>المقدمة</h2>
       <p>
-        هذا الكتاب موجّه لكل من يبحث عن مصدر دخل رقمي متكرر. ستتعلم كيف تختار فكرة مربحة،
-        تبني منتجًا رقميًا، تطلقه بذكاء، وتحوّل المبيعات إلى نظام يعمل تلقائيًا. المحتوى
-        غني ومفصل ليصل إلى أكثر من ٦٠ صفحة عند الطباعة، مع أمثلة، قوالب، وصور توضيحية.
+        هذا الكتاب موجّه للقارئ الذي يريد نتيجة واضحة: دخل شهري متكرر بقيمة 1000$ من منتج رقمي واحد. ستجد هنا منهجًا عمليًا يبدأ من اختيار فكرة مربحة، مرورًا ببناء منتج عالي الجودة، وصولًا إلى إطلاق ذكي وأتمتة تجعل المبيعات تعمل تلقائيًا. لا نعتمد على الحظ أو “الضربة”؛ بل على خطوات قابلة للتطبيق، أمثلة واقعية، وقوالب جاهزة تختصر الطريق.
       </p>
-      <div class="quote">القيمة تُقاس بالنتيجة التي يحصل عليها القارئ، لا بعدد الصفحات.</div>
+      <p>
+        ستلاحظ أن المحتوى غني ومفصل، ليس بهدف الإطالة، بل لضمان أن كل نقطة تُشرح بعمق مع أمثلة وتطبيقات. الهدف أن تخرج من هذا الكتاب بخطة واضحة، منتج جاهز، وصفحة بيع مقنعة، وتسلسل بريد إلكتروني يعمل لصالحك حتى أثناء نومك. إذا التزمت بالخطة، ستصل إلى هدفك خلال 30 يومًا أو أقل.
+      </p>
+      <div class="quote">القيمة تُقاس بالنتيجة التي تحصل عليها، لا بعدد الصفحات—لكننا هنا نمنحك الاثنين معًا.</div>
       <div class="img-frame my-3 animate__animated animate__zoomIn">
-        <img src="images/intro-journey.png" alt="رحلة الدخل الرقمي" class="img-fluid rounded">
+        <img src="images/intro-journey.png" alt="رحلة الدخل الرقمي من الفكرة إلى الدخل المتكرر" class="img-fluid rounded">
       </div>
     </section>
 
     <!-- الفصل 1 -->
-    <section class="section bg-light animate__animated animate__fadeIn" id="ch1">
+    <section class="section animate__animated animate__fadeIn" id="ch1">
       <h2>الفصل 1: اختيار فكرة مربحة</h2>
       <p>
-        اختيار الفكرة هو الخطوة الأولى والأكثر أهمية. الفكرة يجب أن تكون نابعة من مشكلة
-        حقيقية أو حاجة واضحة لدى الجمهور. كلما كانت الفكرة مرتبطة بتجربة شخصية أو مهارة
-        عملية، زادت فرص نجاحها. في هذا الفصل سنغوص في تفاصيل توليد الأفكار، اختبارها،
-        وتحويلها إلى منتج رقمي قابل للبيع.
+        الفكرة هي حجر الأساس. الفكرة المربحة ليست مجرد “شيء جديد”، بل وعد واضح بحل مشكلة محددة لجمهور محدد. كلما كان الوعد محددًا، زادت قابلية البيع. مثال: “قالب جاهز لإدارة وقت الطلاب الجامعيين يوفر 3 ساعات أسبوعيًا” أقوى من “قالب إنتاجية عام”. التحديد يخلق الثقة ويقلل التردد.
       </p>
-      <h3>مصادر الأفكار</h3>
-      <ul>
-        <li>مشاكل شخصية واجهتها وحللتها.</li>
-        <li>مهارات عملية يمكن تحويلها إلى دليل أو دورة.</li>
-        <li>مراقبة السوق عبر منصات مثل Gumroad وUdemy.</li>
-        <li>تكييف محتوى عالمي إلى نسخة عربية.</li>
-        <li>دمج حلول متعددة في منتج واحد.</li>
+      <h3>مصادر الأفكار العملية</h3>
+      <ul class="checklist">
+        <li><span class="badge-soft">مشاكل شخصية:</span> حلّ طبّقته على نفسك—يمكن تحويله إلى منتج (دليل/قالب/فيديو).</li>
+        <li><span class="badge-soft">مهارات قابلة للبيع:</span> تصميم، برمجة، كتابة، إدارة وقت—حوّلها إلى منتج صغير يحقق نتيجة.</li>
+        <li><span class="badge-soft">بحث السوق:</span> راقب Gumroad وPayhip وUdemy وEtsy—ما الذي يبيع؟ لماذا؟ ما الثغرات العربية؟</li>
+        <li><span class="badge-soft">تكييف محتوى عالمي:</span> خذ منتجًا ناجحًا عالميًا وأعد صياغته عربيًا مع أمثلة محلية وقوالب جاهزة.</li>
+        <li><span class="badge-soft">دمج ذكي:</span> منتج يجمع دليلًا + قوالب + قائمة أدوات—قيمة أعلى وسعر أفضل.</li>
       </ul>
-      <div class="img-frame my-3 animate__animated animate__zoomIn">
-        <img src="images/idea-brainstorm.png" alt="عصف ذهني للأفكار" class="img-fluid rounded">
+      <h3>اختبار الطلب خلال 72 ساعة</h3>
+      <div class="step">
+        <strong>الخطوة 1:</strong> صياغة وعد محدد: “قالب جاهز لـ[مجال] يوفر عليك [وقت/مال] ويمنحك [نتيجة] خلال [مدة]”.
       </div>
-      <div class="quote">"الفكرة الناجحة ليست مجرد إلهام، بل هي وعد واضح بحل مشكلة محددة."</div>
+      <div class="step">
+        <strong>الخطوة 2:</strong> منشور تشويق في منصاتك: اطلب من المهتمين كتابة “مهتم” + بريدهم. الهدف: 30 اهتمامًا أوليًا.
+      </div>
+      <div class="step">
+        <strong>الخطوة 3:</strong> قياس: إذا وصلت إلى 30 اهتمامًا خلال 72 ساعة—نفّذ. إذا أقل—عدّل الوعد أو السعر أو الجمهور.
+      </div>
+      <div class="tip">استخدم Google Forms لجمع الاهتمام: اسأل عن المشكلة، النتيجة المتوقعة، والسعر المقبول.</div>
+      <div class="img-frame my-3 animate__animated animate__zoomIn">
+        <img src="images/idea-brainstorm.png" alt="عصف ذهني للأفكار مع لوحات لاصقة ومخطط" class="img-fluid rounded">
+      </div>
+      <h3>أمثلة أفكار جاهزة</h3>
+      <ul>
+        <li><strong>قالب إدارة وقت للطلاب:</strong> جدول أسبوعي + تذكيرات + خطة مذاكرة—نتيجة: 3 ساعات موفّرة أسبوعيًا.</li>
+        <li><strong>دليل مختصر للمستقلين:</strong> كيف تحصل على أول 5 عملاء خلال 30 يومًا—نتيجة: دخل أولي سريع.</li>
+        <li><strong>حزمة SVG للطباعة:</strong> تصاميم جاهزة للتيشيرتات—نتيجة: متجر بسيط بمبيعات متكررة.</li>
+      </ul>
+      <div class="warn">تجنّب الأفكار العامة مثل “كيف تكون أفضل”—ابحث عن وعد محدد ونتيجة قابلة للقياس.</div>
     </section>
 
     <!-- الفصل 2 -->
-    <section class="section bg-light animate__animated animate__fadeIn" id="ch2">
+    <section class="section animate__animated animate__fadeIn" id="ch2">
       <h2>الفصل 2: بناء المنتج الرقمي</h2>
       <p>
-        المنتج الرقمي هو جوهر رحلتك نحو الدخل المتكرر. في هذا الفصل ستتعلم كيف تختار نوع
-        المنتج المناسب، كيف تبنيه بجودة عالية، وكيف تضيف قيمة حقيقية للقارئ أو المستخدم.
-        سنستعرض أنواع المنتجات، معايير الجودة، وأدوات التنفيذ.
+        المنتج الرقمي هو جوهر رحلتك. الجودة هنا لا تعني التعقيد، بل وضوح النتيجة وسهولة التطبيق. سنغطي أنواع المنتجات، معايير الجودة، وأدوات التنفيذ، ثم نضع هيكلة محتوى تجعل منتجك مقنعًا ومفيدًا.
       </p>
-      <h3>أنواع المنتجات</h3>
+      <h3>أنواع المنتجات المناسبة</h3>
       <ul>
-        <li>كتاب إلكتروني (PDF/EPUB).</li>
-        <li>دورة قصيرة (فيديو/صوت).</li>
-        <li>قوالب وأدوات (Notion/Excel/Canva).</li>
-        <li>تصاميم رقمية (SVG/PNG).</li>
+        <li><strong>كتاب إلكتروني (PDF/EPUB):</strong> دليل عملي موجّه للنتيجة—سهل الإنتاج والتسليم.</li>
+        <li><strong>دورة قصيرة (فيديو/صوت):</strong> إنجاز سريع ومركّز—يناسب المهارات العملية.</li>
+        <li><strong>قوالب وأدوات (Notion/Excel/Canva):</strong> تطبيق مباشر—قيمة عالية وسهولة بيع.</li>
+        <li><strong>تصاميم رقمية (SVG/PNG):</strong> للطباعة أو الاستخدام—مبيعات متكررة عبر متجر بسيط.</li>
       </ul>
+      <h3>معايير الجودة</h3>
+      <ul class="checklist">
+        <li>نتيجة قابلة للقياس: ماذا سيحقق القارئ؟ خلال كم؟</li>
+        <li>خطوات واضحة بلا حشو فارغ: أمثلة عملية، قوائم، صور.</li>
+        <li>تصميم نظيف: غلاف احترافي، تنسيق مريح، عناوين فرعية.</li>
+        <li>ملحقات: قوالب ورسائل جاهزة تزيد القيمة.</li>
+      </ul>
+      <h3>أدوات التنفيذ</h3>
+      <ul>
+        <li><strong>كتابة:</strong> Google Docs / Word—للتنسيق الأولي.</li>
+        <li><strong>تصميم:</strong> Canva / InDesign—لغلاف وصور.</li>
+        <li><strong>فيديو:</strong> OBS / CapCut / Loom—للدورات القصيرة.</li>
+        <li><strong>تحويل PDF:</strong> Smallpdf / PDFescape—للتصدير النهائي.</li>
+      </ul>
+      <h3>هيكلة المحتوى المقنع</h3>
+      <ol>
+        <li><strong>مقدمة مختصرة:</strong> لمن المنتج؟ لماذا؟ ما النتيجة؟</li>
+        <li><strong>خطوات التنفيذ:</strong> تسلسل واضح مع أمثلة.</li>
+        <li><strong>قائمة أدوات وروابط:</strong> لتسريع التطبيق.</li>
+        <li><strong>ملحقات:</strong> قوالب ورسائل جاهزة.</li>
+      </ol>
       <div class="img-frame my-3 animate__animated animate__zoomIn">
-        <img src="images/product-types.png" alt="أنواع المنتجات الرقمية" class="img-fluid rounded">
+        <img src="images/product-types.png" alt="أيقونات لأنواع المنتجات الرقمية" class="img-fluid rounded">
       </div>
+      <h3>مثال عملي: بناء كتاب PDF خلال أسبوع</h3>
+      <div class="step"><strong>اليوم 1–2:</strong> تحديد الوعد + كتابة مخطط الفصول.</div>
+      <div class="step"><strong>اليوم 3–4:</strong> كتابة المحتوى + أمثلة + صور توضيحية.</div>
+      <div class="step"><strong>اليوم 5:</strong> تصميم الغلاف على Canva + مراجعة.</div>
+      <div class="step"><strong>اليوم 6:</strong> تحويل إلى PDF + اختبار القراءة.</div>
+      <div class="step"><strong>اليوم 7:</strong> رفع على منصة البيع + إعداد صفحة التحويل.</div>
+      <div class="tip">لا تنتظر الكمال—أطلق نسخة أولية ثم حسّن بناءً على تعليقات المشترين.</div>
     </section>
 
     <!-- الفصل 3 -->
-    <section class="section bg-light animate__animated animate__fadeIn" id="ch3">
+    <section class="section animate__animated animate__fadeIn" id="ch3">
       <h2>الفصل 3: منصة البيع وصفحة التحويل</h2>
       <p>
-        المنصة هي المكان الذي سيشتري منه جمهورك المنتج. صفحة البيع هي الواجهة التي تقنع
-        القارئ بالشراء. في هذا الفصل ستتعلم كيف تختار المنصة المناسبة،
-<h3>اختيار المنصة</h3>
+        المنصة هي المكان الذي سيشتري منه جمهورك المنتج. صفحة البيع هي الواجهة التي تقنع القارئ بالشراء. اختيار المنصة المناسبة وصياغة صفحة بيع مقنعة يحددان معدل التحويل—وهنا نضع المعايير والأمثلة.
+      </p>
+      <h3>اختيار المنصة</h3>
       <ul>
-        <li><strong>Gumroad:</strong> تسليم تلقائي، سهولة البدء.</li>
-        <li><strong>Payhip:</strong> عمولات مرنة، واجهة مناسبة.</li>
-        <li><strong>Ko-fi:</strong> منتجات بسيطة + تبرعات.</li>
-        <li><strong>Teachable/Thinkific:</strong> للدورات—احترافية.</li>
-        <li><strong>Shopify/WooCommerce:</strong> مرونة كاملة—يتطلب خبرة.</li>
+        <li><strong>Gumroad:</strong> تسليم تلقائي، سهولة البدء، مناسب للكتب والقوالب.</li>
+        <li><strong>Payhip:</strong> عمولات مرنة، واجهة مناسبة، دعم جيد للمنتجات الرقمية.</li>
+        <li><strong>Ko-fi:</strong> منتجات بسيطة + تبرعات—مناسب للبدايات.</li>
+        <li><strong>Teachable/Thinkific:</strong> للدورات—احترافية مع إدارة طلاب.</li>
+        <li><strong>Shopify/WooCommerce:</strong> مرونة كاملة—يتطلب خبرة تقنية.</li>
       </ul>
       <h3>صفحة بيع تقنع</h3>
-      <p>
-        صفحة البيع هي الواجهة التي تقنع القارئ بالشراء. يجب أن تحتوي على عنوان جذاب،
-        صورة غلاف واضحة، وصف مفصل للفوائد، مراجعات أو ضمان، وزر شراء واضح.
-      </p>
+      <ul class="checklist">
+        <li><strong>عنوان قيمة:</strong> “منتج رقمي واحد = دخل شهري مستمر”.</li>
+        <li><strong>صورة غلاف:</strong> واضحة ومهنية—تزيد الثقة.</li>
+        <li><strong>وصف مفصل:</strong> لمن؟ ماذا سيتعلم؟ النتيجة؟ خلال كم؟</li>
+        <li><strong>دليل اجتماعي:</strong> مراجعات/ضمان بسيط—يقلل التردد.</li>
+        <li><strong>CTA واضح:</strong> “اشترِ الآن—ابدأ اليوم”.</li>
+      </ul>
+      <div class="callout">رسالة شكر تلقائية بعد الدفع + تعليمات التحميل تعزّز الثقة وتقلل الاستفسارات.</div>
+      <h3>حماية المنتج</h3>
+      <ul>
+        <li><strong>روابط مؤقتة:</strong> تنتهي صلاحيتها تلقائيًا.</li>
+        <li><strong>تخصيص النسخة:</strong> اسم المشتري داخل الملف.</li>
+        <li><strong>ملاحظة قانونية:</strong> للاستخدام الشخصي فقط.</li>
+      </ul>
       <div class="img-frame my-3 animate__animated animate__zoomIn">
-        <img src="images/sales-page.png" alt="صفحة بيع جذابة" class="img-fluid rounded">
+        <img src="images/sales-page.png" alt="نموذج صفحة بيع جذابة" class="img-fluid rounded">
       </div>
+      <h3>مثال عملي: صفحة بيع ناجحة</h3>
+      <p>
+        عنوان: “كيف تحقق 1000$ شهريًا من منتج رقمي واحد خلال 30 يومًا”. مقدمة قصيرة توضح النتيجة، صورة غلاف قوية، 3 فوائد رئيسية، مقتطفات من الداخل (صور)، ضمان استرداد بسيط (7 أيام)، وزر شراء واضح. أضف قسم “لمن هذا المنتج؟” و“ماذا ستحصل؟” لتقليل الأسئلة.
+      </p>
     </section>
 
     <!-- الفصل 4 -->
-    <section class="section bg-light animate__animated animate__fadeIn" id="ch4">
+    <section class="section animate__animated animate__fadeIn" id="ch4">
       <h2>الفصل 4: الإطلاق الذكي</h2>
       <p>
-        الإطلاق هو اللحظة التي يتحول فيها المنتج من فكرة إلى واقع. يجب أن يكون مدروسًا،
-        مع خطة تشويق مسبقة، إعلان رسمي، وعرض محدود يحفّز الشراء السريع.
+        الإطلاق هو اللحظة التي يتحول فيها المنتج من فكرة إلى واقع. يجب أن يكون مدروسًا، مع خطة تشويق مسبقة، إعلان رسمي، وعرض محدود يحفّز الشراء السريع. الإطلاق الجيد يخلق موجة أولى من المبيعات ويمنحك زخمًا للتسويق المستمر.
       </p>
       <h3>جدول تشويق (7 أيام)</h3>
       <ol>
-        <li>اليوم -7: منشور فضول.</li>
-        <li>اليوم -5: سؤال مباشر عن المشكلة.</li>
-        <li>اليوم -3: تلميح عن قرب المنتج.</li>
-        <li>اليوم -2: وعد شخصي.</li>
-        <li>اليوم -1: عد تنازلي.</li>
+        <li><strong>اليوم -7:</strong> منشور فضول: “أعمل على شيء صغير قد يوفّر عليك ساعات أسبوعيًا…”.</li>
+        <li><strong>اليوم -5:</strong> سؤال مباشر عن المشكلة: “ما أكثر ما يستهلك وقتك في [مجال]؟”.</li>
+        <li><strong>اليوم -3:</strong> تلميح: “المنتج قريب جدًا…”.</li>
+        <li><strong>اليوم -2:</strong> وعد شخصي: “شيء غيّر طريقة عملي…”.</li>
+        <li><strong>اليوم -1:</strong> عد تنازلي: “غدًا الساعة 20:00…”.</li>
       </ol>
+      <h3>يوم الإطلاق</h3>
+      <ul>
+        <li><strong>إعلان رسمي:</strong> الفائدة، السعر، الرابط.</li>
+        <li><strong>قصص/ستوري:</strong> صور من الداخل + عرض للأوائل.</li>
+        <li><strong>CTA:</strong> “احصل عليه اليوم بسعر خاص”.</li>
+      </ul>
+      <h3>تحفيز الشراء السريع</h3>
+      <ul>
+        <li><strong>عرض محدود:</strong> 48–72 ساعة.</li>
+        <li><strong>ميزة للأوائل:</strong> ملف إضافي/قالب/جلسة قصيرة.</li>
+      </ul>
       <div class="img-frame my-3 animate__animated animate__zoomIn">
-        <img src="images/launch-strategy.png" alt="استراتيجية الإطلاق" class="img-fluid rounded">
+        <img src="images/launch-strategy.png" alt="استراتيجية الإطلاق وخط زمني" class="img-fluid rounded">
       </div>
+      <div class="tip">أعد نشر مراجعات أولية خلال يوم الإطلاق—الدليل الاجتماعي يرفع التحويل.</div>
     </section>
 
     <!-- الفصل 5 -->
-    <section class="section bg-light animate__animated animate__fadeIn" id="ch5">
+    <section class="section animate__animated animate__fadeIn" id="ch5">
       <h2>الفصل 5: الأتمتة والدخل المتكرر</h2>
       <p>
-        الأتمتة هي تحويل العمليات اليدوية إلى نظام يعمل تلقائيًا. هذا يشمل جمع الإيميلات،
-        إرسال رسائل تلقائية، وجدولة محتوى. الهدف هو أن يعمل المنتج حتى وأنت نائم.
+        الأتمتة هي تحويل العمليات اليدوية إلى نظام يعمل تلقائيًا. هذا يشمل جمع الإيميلات، إرسال رسائل تلقائية، وجدولة محتوى. الهدف هو أن يعمل المنتج حتى وأنت نائم. سنبني Funnel بسيطًا وفعالًا.
       </p>
+      <h3>البنية الأساسية</h3>
+      <ul class="checklist">
+        <li>صفحة بيع واضحة ومقنعة.</li>
+        <li>نموذج جمع إيميلات (Lead Magnet) مرتبط بالمنتج.</li>
+        <li>سلسلة رسائل تلقائية (Email Funnel) تقنع بالشراء.</li>
+        <li>منتج جاهز للتسليم الفوري.</li>
+        <li>محتوى مجدول ومتكرر على منصاتك.</li>
+      </ul>
       <h3>Funnel بسيط</h3>
       <ol>
-        <li>منشور/فيديو يشرح المنتج.</li>
+        <li>منشور/فيديو يشرح المنتج ويعرض هدية مجانية.</li>
         <li>رابط هدية مجانية مقابل الإيميل.</li>
-        <li>صفحة بيع + سلسلة إيميلات تقنع بالشراء.</li>
-        <li>صفحة شكر تؤكد الصفقة.</li>
+        <li>صفحة بيع + سلسلة إيميلات تقنع بالشراء خلال 7 أيام.</li>
+        <li>صفحة شكر تؤكد الصفقة وتعرض Upsell.</li>
       </ol>
+      <h3>أدوات الأتمتة</h3>
+      <ul>
+        <li><strong>جمع الإيميلات:</strong> MailerLite / ConvertKit / Brevo.</li>
+        <li><strong>رسائل تلقائية:</strong> Mailchimp / Systeme.io / GetResponse.</li>
+        <li><strong>جدولة محتوى:</strong> Metricool / Buffer / Later.</li>
+        <li><strong>بيع وتسليم:</strong> Gumroad / Payhip.</li>
+      </ul>
+      <div class="callout">أعد استهداف المشترين بعروض مكملة تزيد متوسط السلة—مثال: قوالب إضافية بسعر مخفّض.</div>
       <div class="img-frame my-3 animate__animated animate__zoomIn">
-        <img src="images/automation-funnel.png" alt="مخطط الأتمتة" class="img-fluid rounded">
+        <img src="images/automation-funnel.png" alt="مخطط الأتمتة من الهدية إلى الشراء" class="img-fluid rounded">
       </div>
+      <h3>مثال عملي: Funnel 7 أيام</h3>
+      <ul>
+        <li><strong>اليوم 1:</strong> ترحيب + هدية مجانية + قصة شخصية قصيرة.</li>
+        <li><strong>اليوم 2:</strong> المشكلة الأساسية + لماذا الحل التقليدي لا يعمل.</li>
+        <li><strong>اليوم 3:</strong> عرض المنتج + الفوائد + صور من الداخل.</li>
+        <li><strong>اليوم 4:</strong> قصة نجاح مختصرة + نتائج قابلة للقياس.</li>
+        <li><strong>اليوم 5:</strong> اعتراضات شائعة + ردود مقنعة.</li>
+        <li><strong>اليوم 6:</strong> عرض محدود للمشتركين + مكافأة.</li>
+        <li><strong>اليوم 7:</strong> تذكير بانتهاء العرض + CTA واضح.</li>
+      </ul>
     </section>
 
     <!-- الفصل 6 -->
-    <section class="section bg-light animate__animated animate__fadeIn" id="ch6">
-      <h2>الفصل 6: التسعير والعروض</h2>
+    <section class="section animate__animated animate__fadeIn" id="ch6">
+      <h2>الفصل 6: التسعير والعروض والارتقاء بالقيمة</h2>
       <p>
-        التسعير هو عنصر أساسي في نجاح المنتج. السعر يجب أن يعكس القيمة، ويكون مدروسًا
-        بناءً على السوق والجمهور المستهدف. العروض المحدودة والارتقاء بالقيمة (Upsell)
-        تزيد من الأرباح.
+        التسعير الذكي لا يرتبط بعدد الصفحات، بل بالنتيجة. السعر يجب أن يعكس القيمة المتوقعة والنتيجة التي يحصل عليها القارئ. العروض المحدودة والارتقاء بالقيمة (Upsell/Cross-sell) يرفعان الأرباح دون زيادة الجهد بشكل كبير.
       </p>
+      <h3>التسعير الذكي</h3>
       <ul>
-        <li>19$ للنسخة الأساسية.</li>
-        <li>29$ للنسخة المميزة مع مكافآت.</li>
-        <li>خصومات إطلاق محدودة.</li>
+        <li><strong>نطاقات فعالة:</strong> 19$ أساسي، 29$ مميز مع مكافآت.</li>
+        <li><strong>خيارات متعددة:</strong> نسخة عادية + نسخة مميزة.</li>
+        <li><strong>لا تربط السعر بعدد الصفحات:</strong> اربطه بالنتيجة والوقت الموفر.</li>
+      </ul>
+      <h3>العروض المحدودة</h3>
+      <ul>
+        <li><strong>خصم إطلاق:</strong> 48–72 ساعة.</li>
+        <li><strong>Bonus للأوائل:</strong> ملف إضافي/قالب/جلسة قصيرة.</li>
+      </ul>
+      <h3>الارتقاء بالقيمة</h3>
+      <ul>
+        <li><strong>Upsell:</strong> نسخة مميزة تشمل قوالب ورسائل جاهزة.</li>
+        <li><strong>Cross-sell:</strong> منتج مكمل (قوالب إدارة وقت/متابعة العملاء).</li>
       </ul>
       <div class="img-frame my-3 animate__animated animate__zoomIn">
-        <img src="images/pricing-offers.png" alt="التسعير والعروض" class="img-fluid rounded">
+        <img src="images/pricing-offers.png" alt="التسعير والعروض والارتقاء بالقيمة" class="img-fluid rounded">
       </div>
+      <h3>مثال عملي: باقة مميزة</h3>
+      <p>
+        الكتاب + قوالب جاهزة (Notion/Excel) + تسلسل بريد قابل للتعديل + تحديثات مستقبلية. السعر: 29$. النتيجة: قيمة أعلى، تحويل أفضل، رضا أكبر.
+      </p>
     </section>
 
     <!-- الفصل 7 -->
-    <section class="section bg-light animate__animated animate__fadeIn" id="ch7">
-      <h2>الفصل 7: دراسات حالة مختصرة</h2>
+    <section class="section animate__animated animate__fadeIn" id="ch7">
+      <h2>الفصل 7: دراسات حالة واقعية</h2>
       <p>
-        الأمثلة الواقعية تعزز الثقة. هنا ثلاث دراسات حالة توضح كيف نجح أشخاص بمنتجات
-        بسيطة في تحقيق دخل رقمي متكرر.
+        الأمثلة الواقعية تعزز الثقة. هنا ثلاث دراسات حالة توضح كيف نجح أشخاص بمنتجات بسيطة في تحقيق دخل رقمي متكرر. ركّز على الوعد، التنفيذ السريع، والتحسين المستمر.
       </p>
       <div class="row g-3">
         <div class="col-md-4">
           <div class="card h-100">
             <div class="card-body">
-              <h3>قالب إنتاجية</h3>
-              <p>باع 60 نسخة في شهرين بفضل وضوح الفائدة.</p>
+              <h3>قالب إنتاجية للطلاب</h3>
+              <p>قالب جاهز وفّر 3 ساعات أسبوعيًا—باع 60 نسخة في شهرين بفضل وضوح الفائدة وسعر مناسب.</p>
+              <p>التحسين: إضافة جدول امتحانات + تذكيرات—رفع التحويل 12%.</p>
             </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="card h-100">
             <div class="card-body">
-              <h3>كتاب عملي</h3>
-              <p>باع 50 نسخة في أول شهر بفضل Funnel بسيط.</p>
+              <h3>كتاب عملي مختصر</h3>
+              <p>40 صفحة مركّزة—باع 50 نسخة خلال أول شهر بفضل Funnel بسيط ورسائل مقنعة.</p>
+              <p>التحسين: إضافة قوالب جاهزة—رفع السعر إلى 29$ مع تحويل مستقر.</p>
             </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="card h-100">
             <div class="card-body">
-              <h3>تصاميم رقمية</h3>
-              <p>مبيعات متكررة عبر متجر بسيط.</p>
+              <h3>حزمة SVG للطباعة</h3>
+              <p>تصاميم جاهزة—مبيعات متكررة عبر متجر بسيط على Payhip. إضافة 10 تصاميم جديدة كل شهر حافظت على الزخم.</p>
             </div>
           </div>
         </div>
       </div>
       <div class="img-frame my-3 animate__animated animate__zoomIn">
-        <img src="images/case-studies.png" alt="دراسات حالة" class="img-fluid rounded">
+        <img src="images/case-studies.png" alt="دراسات حالة مختصرة" class="img-fluid rounded">
       </div>
     </section>
 
     <!-- خطة 30 يومًا -->
-    <section class="section bg-light animate__animated animate__fadeIn" id="plan30">
-      <h2>خطة عمل 30 يومًا</h2>
+    <section class="section animate__animated animate__fadeIn" id="plan30">
+      <h2>خطة عمل 30 يومًا للوصول إلى 1000$</h2>
       <p>
-        هذه الخطة الزمنية تساعدك على تنظيم العمل خطوة بخطوة للوصول إلى 1000$ شهريًا.
+        هذه الخطة الزمنية تساعدك على تنظيم العمل خطوة بخطوة للوصول إلى 1000$ شهريًا. التزم بها بصرامة، وقيّم النتائج أسبوعيًا، وعدّل بسرعة.
       </p>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3>الأسبوع 1: الفكرة والاختبار</h3>
+              <ul>
+                <li>صياغة وعد واضح + نموذج اهتمام.</li>
+                <li>منشورات تشويق + قياس الطلب (هدف: 30 اهتمامًا).</li>
+                <li>تثبيت السعر المبدئي (19$/29$).</li>
+                <li>تحديد نوع المنتج (كتاب/قالب/دورة قصيرة).</li>
+              </ul>
+              <div class="tip">إذا لم تصل إلى 30 اهتمامًا—عدّل الوعد أو الجمهور أو السعر.</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3>الأسبوع 2: الإنتاج</h3>
+              <ul>
+                <li>كتابة المحتوى + أمثلة عملية.</li>
+                <li>تصميم الغلاف على Canva + صور توضيحية.</li>
+                <li>تحويل إلى PDF + مراجعة.</li>
+                <li>تحضير نسخة HTML Preview.</li>
+              </ul>
+              <div class="tip">لا تؤجل الإطلاق—نسخة أولية أفضل من نسخة مثالية متأخرة.</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3>الأسبوع 3: المنصة والصفحة</h3>
+              <ul>
+                <li>رفع على Gumroad/Payhip.</li>
+                <li>صفحة بيع مكتملة + CTA واضح.</li>
+                <li>رسالة شكر تلقائية + تعليمات التحميل.</li>
+                <li>إعداد Upsell بسيط.</li>
+              </ul>
+              <div class="tip">أضف صورًا من الداخل—الدليل البصري يرفع التحويل.</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3>الأسبوع 4: الإطلاق والأتمتة</h3>
+              <ul>
+                <li>جدول تشويق 7 أيام.</li>
+                <li>يوم الإطلاق + عرض للأوائل.</li>
+                <li>تفعيل Funnel البريد (7 رسائل).</li>
+                <li>جدولة محتوى أسبوعي.</li>
+              </ul>
+              <div class="tip">هدف الشهر: 50 عملية بيع × متوسط 20$ ≈ 1000$.</div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="img-frame my-3 animate__animated animate__zoomIn">
         <img src="images/30days-plan.png" alt="خطة 30 يومًا" class="img-fluid rounded">
       </div>
     </section>
 
     <!-- قوالب جاهزة -->
-    <section class="section bg-light animate__animated animate__fadeIn" id="templates">
-      <h2>قوالب جاهزة</h2>
-      <p>استخدم هذه القوالب لتسريع التنفيذ:</p>
-      <div class="callout">قالب صفحة بيع: عنوان جذاب + فوائد + CTA واضح.</div>
-      <div class="callout">قالب منشور تشويق: "أعمل على شيء صغير قد يوفّر عليك ساعات أسبوعيًا…"</div>
-      <div class="callout">قالب رسالة شكر: "شكرًا للثقة! تم إرسال رابط التحميل إلى بريدك."</div>
+    <section class="section animate__animated animate__fadeIn" id="templates">
+      <h2>قوالب جاهزة قابلة للاستخدام</h2>
+      <h3>قالب صفحة بيع</h3>
+      <div class="callout">
+        <strong>عنوان:</strong> “منتج رقمي واحد—دخل شهري متكرر”.<br>
+        <strong>3 فوائد:</strong> نتيجة قابلة للقياس، وقت تنفيذ قصير، أمثلة تطبيق.<br>
+        <strong>مراجعات/ضمان:</strong> ثقة + CTA واضح.<br>
+        <strong>CTA:</strong> “اشترِ الآن—ابدأ اليوم”.
+      </div>
+      <h3>قالب منشور تشويق</h3>
+      <div class="callout">
+        “أعمل على شيء صغير قد يوفّر عليك ساعات أسبوعيًا… لو مهتم اكتب ‘مهتم’ وسأرسل التفاصيل أولًا.”
+      </div>
+      <h3>قالب رسالة شكر بعد الشراء</h3>
+      <div class="callout">
+        “شكرًا للثقة! تم إرسال رابط التحميل إلى بريدك. لأي مشكلة، راسلنا على [بريد الدعم].”
+      </div>
+      <h3>قالب Upsell بعد الشراء</h3>
+      <div class="callout">
+        “بما أنك حصلت على الكتاب، يمكنك الآن إضافة القوالب الجاهزة بسعر خاص [X$]—العرض متاح لمدة 48 ساعة فقط.”
+      </div>
     </section>
 
     <!-- تسلسل بريد -->
-    <section class="section bg-light animate__animated animate__fadeIn" id="email">
-      <h2>تسلسل بريد إلكتروني</h2>
-      <p>أربع رسائل تلقائية تقنع القارئ بالشراء:</p>
-      <ol>
-        <li>ترحيب.</li>
-        <li>مشكلة وحل.</li>
-        <li>قصة نجاح.</li>
-        <li>عرض محدود.</li>
-      </ol>
+    <section class="section animate__animated animate__fadeIn" id="email">
+      <h2>تسلسل بريد إلكتروني مقنع (7 رسائل)</h2>
+      <h3>رسالة 1 — ترحيب</h3>
+      <p>مرحبًا، سعيد بانضمامك! ستصل رسائل فيها نصائح حصرية وعروض داخلية. هديتك المجانية هنا: [رابط].</p>
+      <h3>رسالة 2 — المشكلة</h3>
+      <p>هل تواجه [المشكلة]؟ هذا الدليل يشرح الأسباب الخفية والحل خطوة بخطوة—[رابط].</p>
+      <h3>رسالة 3 — الحل</h3>
+      <p>كيف يعمل المنتج؟ ما النتيجة؟ خلال كم؟ صور من الداخل—[رابط].</p>
+      <h3>رسالة 4 — قصة نجاح</h3>
+      <p>قارئ بدأ مثلك تمامًا—اليوم يحقق دخلًا شهريًا من منتجه الرقمي. التفاصيل هنا—[رابط].</p>
+      <h3>رسالة 5 — اعتراضات</h3>
+      <p>“لا أملك وقتًا”—الحل: خطة 30 يومًا. “لا أعرف أين أبدأ”—الحل: القوالب الجاهزة.</p>
+      <h3>رسالة 6 — عرض محدود</h3>
+      <p>فقط اليوم: عرض خاص للمشتركين الجدد—ينتهي خلال 24 ساعة—[رابط].</p>
+      <h3>رسالة 7 — تذكير</h3>
+      <p>ينتهي العرض الليلة—إذا كنت جادًا بشأن دخل رقمي متكرر، هذه فرصتك—[رابط].</p>
     </section>
 
     <!-- أسئلة شائعة -->
-    <section class="section bg-light animate__animated animate__fadeIn" id="faq">
-      <h2>أسئلة شائعة</h2>
+    <section class="section animate__animated animate__fadeIn" id="faq">
+      <h2>أسئلة شائعة وإجابات عملية</h2>
       <h3>هل يلزم جمهور كبير؟</h3>
-      <p>لا، يلزم وعد واضح وخطة إطلاق ذكية.</p>
+      <p>لا—يلزم وعد واضح، اختبار طلب، وخطة إطلاق ذكية. الجمهور ينمو مع المنتج الجيد.</p>
       <h3>هل 1000$ واقعية؟</h3>
-      <p>نعم إذا نُفّذت خطة 30 يومًا بصرامة.</p>
+      <p>نعم إذا نُفّذت خطة 30 يومًا بصرامة، حُسّن المنتج، وبُني Funnel بسيط يعمل تلقائيًا.</p>
+      <h3>هل أبدأ بكتاب أم قالب؟</h3>
+      <p>ابدأ بما يحقق نتيجة أسرع—كتاب عملي أو قالب جاهز—ثم أضف منتجات مكملة.</p>
+      <h3>كيف أحمي المنتج؟</h3>
+      <p>روابط مؤقتة، تخصيص النسخة باسم المشتري، ملاحظة قانونية للاستخدام الشخصي فقط.</p>
     </section>
 
     <!-- خاتمة -->
-    <section class="section bg-light animate__animated animate__fadeIn" id="closing">
-      <h2>الخاتمة</h2>
+    <section class="section animate__animated animate__fadeIn" id="closing">
+      <h2>الخاتمة والتوصيات النهائية</h2>
       <p>
-        منتج رقمي واحد يمكن أن يفتح باب دخل متكرر إذا بُني على وعد واضح، نُفّذ بسرعة،
-        وحُسّن باستمرار. هذا الكتاب يزوّد القارئ بخريطة طريق عملية، قوالب جاهزة، وخطة
-        زمنية قابلة للتطبيق.
+        منتج رقمي واحد يمكن أن يفتح باب دخل متكرر إذا بُني على وعد واضح، نُفّذ بسرعة، وحُسّن باستمرار. هذا الكتاب يزوّدك بخريطة طريق عملية، قوالب جاهزة، وخطة زمنية قابلة للتطبيق. التزم بالخطة، راقب الأرقام، وعدّل بسرعة—ستصل إلى هدفك.
+      </p>
+      <p>
+        تذكّر: لا تحتاج إلى جمهور ضخم، بل إلى وعد واضح ومنتج جيد وصفحة بيع مقنعة. ابدأ اليوم—الزخم يصنع النتائج.
       </p>
     </section>
-</div>
 
-<!-- قسم الشراء والدعم -->
-    <section class="section bg-light text-center animate__animated animate__fadeIn" id="buy">
+    <!-- قسم الشراء والدعم -->
+    <section class="section text-center animate__animated animate__fadeIn" id="buy">
       <h2>احصل على نسختك الآن</h2>
       <p class="mb-4">
         هذا الكتاب هو استثمارك الأول نحو بناء دخل رقمي متكرر. اختر النسخة التي تناسبك وابدأ رحلتك اليوم.
@@ -309,7 +550,7 @@
               <ul class="list-unstyled text-start mt-3">
                 <li>✔ الكتاب الكامل (PDF)</li>
                 <li>✔ خطة عمل 30 يومًا</li>
-                <li>✔ أمثلة عملية</li>
+                <li>✔ أمثلة عملية وصور توضيحية</li>
               </ul>
               <a href="#" class="btn btn-primary mt-3">اشترِ الآن</a>
             </div>
@@ -332,7 +573,7 @@
         </div>
       </div>
       <hr class="my-4">
-      <p class="text-muted">© جميع الحقوق محفوظة — سنكو — للاستخدام الشخصي فقط</p>
+      <p class="text-muted">© جميع الحقوق محفوظة — للاستخدام الشخصي فقط</p>
     </section>
 
   </div> <!-- نهاية container -->
