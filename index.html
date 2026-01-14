@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <title>الحسين بن علي مسعود الكلباني | التسويق الرقمي</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="صفحة التعريف الشخصي للحسين بن علي مسعود الكلباني - متخصص في التسويق الرقمي المعتمد" />
-  
-  <!-- خطوط -->
+  <meta name="description" content="موقع شخصي احترافي للحسين بن علي مسعود الكلباني - متخصص في التسويق الرقمي المعتمد" />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet" />
-  
-  <!-- أيقونات Google Fonts -->
+
+  <!-- Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
@@ -25,8 +25,13 @@
       <span class="logo-dot"></span>
       <span class="brand-text">الحسين الكلباني</span>
     </div>
-    <nav>
-      <ul class="nav-links">
+
+    <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+
+    <nav id="navMenu">
+      <ul>
         <li><a href="#about">من أنا</a></li>
         <li><a href="#skills">المهارات</a></li>
         <li><a href="#experience">الخبرات</a></li>
@@ -35,11 +40,6 @@
         <li><a href="#certificates">الشهادات</a></li>
         <li><a href="#contact">تواصل</a></li>
       </ul>
-      <button class="hamburger" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </nav>
   </header>
 
@@ -53,9 +53,11 @@
           أطمح لتقديم مهاراتي العلمية والتقنية على طبق من ذهب، وتنفيذ حلول تسويق رقمي تحدث فرقًا حقيقيًا على المدى القصير والطويل. أمتلك خبرة في الحملات، التحليل، المحتوى، والتعامل مع العملاء.
         </p>
         <a class="btn primary" href="resume.pdf" download>
-          <span class="material-symbols-outlined">download</span> تحميل السيرة الذاتية PDF
+          <span class="material-symbols-outlined">download</span>
+          تحميل السيرة الذاتية PDF
         </a>
       </div>
+
       <div class="hero-visual">
         <img src="images/profile-traditional.jpg" alt="الحسين الكلباني بالزي العماني" class="blob-image" />
       </div>
@@ -79,6 +81,7 @@
           <div class="skill-chip alt"><span>العمل الجماعي</span></div>
         </div>
       </div>
+
       <div class="skills-visual">
         <img src="images/marketing.jpg" alt="التسويق الرقمي" class="shape-image polygon" />
       </div>
@@ -112,7 +115,8 @@
       <img src="images/training-schedule.jpg" alt="جدول التدريب للدبلومة" />
     </div>
     <a class="btn primary" href="training-schedule.pdf" download>
-      <span class="material-symbols-outlined">download</span> تحميل الجدول PDF
+      <span class="material-symbols-outlined">download</span>
+      تحميل الجدول PDF
     </a>
   </section>
 
@@ -120,7 +124,7 @@
   <section id="projects" class="section observe">
     <h2 class="section-title">المشاريع</h2>
     <div class="mosaic">
-      <div class="mosaic-item tilt">
+      <div class="mosaic-item">
         <img src="images/projects.jpg" alt="مشروع تسويقي" />
         <div class="overlay">
           <h3>حملة إطلاق منتج</h3>
@@ -133,81 +137,74 @@
   <!-- Certificates -->
   <section id="certificates" class="section observe">
     <h2 class="section-title">الشهادات</h2>
-    <div class="cert-grid">
-      <div class="cert-image">
-        <img src="images/cpd-certificate.jpg" alt="شهادة CPD الرسمية" />
-        <a class="btn primary" href="cpd-certificate.pdf" download>
-          <span class="material-symbols-outlined">download</span> تحميل الشهادة PDF
-        </a>
-      </div>
-      <div class="cert-image">
-        <img src="images/mastery-certificate.jpg" alt="شهادة Mastery Academy" />
-        <a class="btn primary" href="mastery-certificate.pdf" download>
-          <span class="material-symbols-outlined">download</span> تحميل الشهادة PDF
-        </a>
-      </div>
+
+    <div class="cert-image">
+      <img src="images/cpd-certificate.jpg" alt="شهادة CPD الرسمية" />
+      <a class="btn primary" href="cpd-certificate.pdf" download>
+        <span class="material-symbols-outlined">download</span>
+        تحميل الشهادة PDF
+      </a>
+    </div>
+
+    <div class="cert-image">
+      <img src="images/mastery-certificate.jpg" alt="شهادة Mastery Academy" />
+      <a class="btn primary" href="mastery-certificate.pdf" download>
+        <span class="material-symbols-outlined">download</span>
+        تحميل الشهادة PDF
+      </a>
     </div>
   </section>
 
   <!-- Contact -->
   <section id="contact" class="section observe">
     <h2 class="section-title">تواصل معي</h2>
-    <div class="social-contact">
-      <a href="https://wa.me/96872751573" target="_blank" class="btn primary">
-        <span class="material-symbols-outlined">chat</span> واتسآب
-      </a>
-      <a href="https://instagram.com/senku98" target="_blank" class="btn primary">
-        <span class="material-symbols-outlined">photo_camera</span> إنستغرام
-      </a>
-      <a href="https://twitter.com/" target="_blank" class="btn primary">
-        <span class="material-symbols-outlined">twitter</span> تويتر
-      </a>
-      <a href="https://www.linkedin.com/" target="_blank" class="btn primary">
-        <span class="material-symbols-outlined">linkedin</span> لينكدإن
-      </a>
-    </div>
+    <p>
+      <span class="material-symbols-outlined">call</span>
+      <a href="tel:+96872751573">72751573</a>
+    </p>
+    <p>
+      <span class="material-symbols-outlined">mail</span>
+      <a href="mailto:alhussain.ali9282@gmail.com">alhussain.ali9282@gmail.com</a>
+    </p>
+    <p>
+      <span class="material-symbols-outlined">photo_camera</span>
+      <a href="https://instagram.com/senku98" target="_blank">إنستغرام</a>
+    </p>
     <img src="images/contact.jpg" alt="تواصل" class="shape-image blob" />
   </section>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-grid">
-      <div class="footer-about">
+      <div>
         <h4>الحسين بن علي مسعود الكلباني</h4>
-        <p>متخصص في التسويق الرقمي، تنفيذ استراتيجيات مبتكرة تؤثر على النتائج بشكل ملموس.</p>
+        <p>متخصص في التسويق الرقمي وصناعة المحتوى، أعمل على بناء استراتيجيات فعالة تحقق نتائج ملموسة.</p>
       </div>
-      <div class="footer-links">
-        <h4>روابط سريعة</h4>
-        <ul>
-          <li><a href="#about">من أنا</a></li>
-          <li><a href="#skills">المهارات</a></li>
-          <li><a href="#experience">الخبرات</a></li>
-          <li><a href="#projects">المشاريع</a></li>
-          <li><a href="#contact">تواصل معي</a></li>
-        </ul>
-      </div>
-      <div class="footer-social">
-        <h4>تواصل معي</h4>
+
+      <div>
+        <h4>التواصل الاجتماعي</h4>
         <div class="social-links">
-          <a href="https://wa.me/96872751573" target="_blank" title="واتسآب"><span class="material-symbols-outlined">chat</span></a>
-          <a href="https://instagram.com/senku98" target="_blank" title="إنستغرام"><span class="material-symbols-outlined">photo_camera</span></a>
-          <a href="https://twitter.com/" target="_blank" title="تويتر"><span class="material-symbols-outlined">twitter</span></a>
-          <a href="https://www.linkedin.com/" target="_blank" title="لينكدإن"><span class="material-symbols-outlined">linkedin</span></a>
+          <a href="https://wa.me/96872751573" target="_blank" aria-label="واتساب">
+            <span class="material-symbols-outlined">chat</span>
+          </a>
+          <a href="https://instagram.com/senku98" target="_blank" aria-label="إنستغرام">
+            <span class="material-symbols-outlined">photo_camera</span>
+          </a>
+          <a href="https://twitter.com" target="_blank" aria-label="تويتر">
+            <span class="material-symbols-outlined">public</span>
+          </a>
+          <a href="https://linkedin.com" target="_blank" aria-label="لينكدإن">
+            <span class="material-symbols-outlined">business</span>
+          </a>
         </div>
       </div>
-      <div class="footer-docs">
-        <h4>مستندات</h4>
-        <ul>
-          <li><a href="resume.pdf" download>تحميل السيرة الذاتية</a></li>
-          <li><a href="cpd-certificate.pdf" download>شهادة CPD</a></li>
-          <li><a href="mastery-certificate.pdf" download>شهادة Mastery Academy</a></li>
-        </ul>
-      </div>
     </div>
-    <div class="copy">&copy; 2026 الحسين بن علي مسعود الكلباني — جميع الحقوق محفوظة</div>
+
+    <div class="copy">
+      &copy; 2026 الحسين بن علي مسعود الكلباني — جميع الحقوق محفوظة
+    </div>
   </footer>
 
-  <button id="backToTop" title="العودة للأعلى">&#8679;</button>
   <script src="script.js"></script>
 </body>
 </html>
