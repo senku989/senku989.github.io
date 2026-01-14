@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="2400" viewBox="0 0 1600 2400">
+  <!-- خلفية بتدرج -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f6fc2"/>
+      <stop offset="100%" stop-color="#0a4f8f"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff7a59"/>
+      <stop offset="100%" stop-color="#ff5c3b"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2dd4bf"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="rgba(0,0,0,0.25)"/>
+    </filter>
+  </defs>
+
+  <!-- الخلفية -->
+  <rect x="0" y="0" width="1600" height="2400" fill="url(#bg)"/>
+
+  <!-- عناصر زخرفية خفيفة -->
+  <circle cx="1400" cy="260" r="60" fill="#7dd3fc" opacity="0.25"/>
+  <circle cx="220" cy="2100" r="80" fill="#fde047" opacity="0.18"/>
+  <circle cx="1450" cy="2100" r="40" fill="#a5b4fc" opacity="0.22"/>
+
+  <!-- عنوان رئيسي -->
+  <g filter="url(#softShadow)">
+    <text x="800" y="420" text-anchor="middle" font-size="96" font-family="Tahoma, 'Segoe UI', system-ui" fill="#ffffff">
+      كيف تحقق
+    </text>
+    <text x="800" y="540" text-anchor="middle" font-size="140" font-family="Tahoma, 'Segoe UI', system-ui" fill="#ffffff" font-weight="700">
+      1000$ شهريًا
+    </text>
+    <text x="800" y="650" text-anchor="middle" font-size="88" font-family="Tahoma, 'Segoe UI', system-ui" fill="#e6f2ff">
+      من منتج رقمي
+    </text>
+  </g>
+
+  <!-- شريط توصيف فرعي -->
+  <g>
+    <rect x="200" y="760" rx="28" ry="28" width="1200" height="140" fill="url(#accent)"/>
+    <text x="800" y="850" text-anchor="middle" font-size="56" font-family="Tahoma, 'Segoe UI', system-ui" fill="#ffffff">
+      دليل ذكي من الفكرة إلى الأتمتة والدخل المتكرر
+    </text>
+  </g>
+
+  <!-- أيقونة كتاب + جهاز لوحي -->
+  <g transform="translate(0, 0)" filter="url(#softShadow)">
+    <!-- كتاب -->
+    <rect x="420" y="980" width="760" height="520" rx="28" ry="28" fill="#ffffff"/>
+    <rect x="420" y="980" width="380" height="520" rx="28" ry="28" fill="#f1f5f9"/>
+    <!-- فواصل صفحات -->
+    <rect x="420" y="980" width="760" height="24" fill="#e2e8f0"/>
+    <!-- جهاز لوحي -->
+    <rect x="900" y="1040" width="240" height="360" rx="24" ry="24" fill="#0f172a"/>
+    <rect x="916" y="1060" width="208" height="12" rx="6" fill="#22d3ee"/>
+    <rect x="916" y="1090" width="208" height="12" rx="6" fill="#94a3b8"/>
+    <rect x="916" y="1120" width="208" height="12" rx="6" fill="#94a3b8"/>
+    <rect x="916" y="1150" width="208" height="12" rx="6" fill="#94a3b8"/>
+    <rect x="916" y="1180" width="208" height="12" rx="6" fill="#94a3b8"/>
+    <rect x="916" y="1210" width="208" height="12" rx="6" fill="#94a3b8"/>
+    <rect x="916" y="1240" width="208" height="12" rx="6" fill="#94a3b8"/>
+    <!-- نجوم صغيرة -->
+    <circle cx="460" cy="1040" r="10" fill="#fde047"/>
+    <circle cx="1160" cy="1460" r="8" fill="#fde047"/>
+  </g>
+
+  <!-- سهم صاعد (نمو الأرباح) -->
+  <g transform="translate(0, 0)" filter="url(#softShadow)">
+    <path d="M 360 1700 L 640 1500 L 860 1600 L 1160 1380" fill="none" stroke="url(#arrowGrad)" stroke-width="22"/>
+    <polygon points="1160,1380 1120,1400 1160,1300 1200,1380" fill="url(#arrowGrad)"/>
+  </g>
+
+  <!-- شارة السعر/النتيجة (اختيارية للغلاف) -->
+  <g>
+    <rect x="1180" y="1720" rx="20" ry="20" width="240" height="120" fill="#0ea5e9" opacity="0.9"/>
+    <text x="1300" y="1796" text-anchor="middle" font-size="52" font-family="Tahoma, 'Segoe UI', system-ui" fill="#ffffff" font-weight="700">
+      1000$ شهريًا
+    </text>
+  </g>
+
+  <!-- اسم المؤلف -->
+  <g>
+    <text x="800" y="2060" text-anchor="middle" font-size="64" font-family="Tahoma, 'Segoe UI', system-ui" fill="#ffffff">
+      سنكو
+    </text>
+    <text x="800" y="2120" text-anchor="middle" font-size="32" font-family="Tahoma, 'Segoe UI', system-ui" fill="#cfe8ff">
+      دليل عملي لبناء دخل رقمي متكرر
+    </text>
+  </g>
+
+  <!-- حقوق -->
+  <text x="800" y="2280" text-anchor="middle" font-size="26" font-family="Tahoma, 'Segoe UI', system-ui" fill="#cbd5e1">
+    © جميع الحقوق محفوظة — للاستخدام الشخصي فقط
+  </text>
+</svg>
