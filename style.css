@@ -52,7 +52,7 @@ a{text-decoration:none;color:inherit;}
   height: 220px;
   position: relative;
   overflow: hidden;
-  border-radius: 20%;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   box-shadow: 0 30px 60px rgba(124,58,237,.25);
 }
 .blob-shape {
