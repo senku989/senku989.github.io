@@ -2,21 +2,26 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>الحسين الكلباني | التسويق الرقمي</title>
-  <meta name="description" content="الحسين بن علي مسعود الكلباني — مسوّق رقمي معتمد، مشاريع، شهادات، خدمات، وأسعار."/>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>الحسين الكلباني | بروفايل شخصي</title>
+  <meta name="description" content="الحسين بن علي مسعود الكلباني — بروفايل شخصي، شهادات، خبرات، مهارات، مشاريع، وجدول التدريب." />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <!-- Navbar -->
   <nav class="nav">
     <div class="brand">
-      <div class="logo-dot"></div>
+      <div class="logo-dot" aria-hidden="true"></div>
       <span class="brand-text">الحسين الكلباني</span>
     </div>
-    <ul class="nav-links">
+
+    <button class="hamburger" aria-label="فتح القائمة" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" role="menu">
       <li><a href="#about">من أنا</a></li>
       <li><a href="#skills">المهارات</a></li>
       <li><a href="#experience">الخبرات</a></li>
@@ -25,312 +30,205 @@
       <li><a href="#projects">المشاريع</a></li>
       <li><a href="#schedule">الجدول</a></li>
       <li><a href="#cv">السيرة الذاتية</a></li>
-      <li><a href="#services">الخدمات</a></li>
-      <li><a href="#pricing">الأسعار</a></li>
-      <li><a href="#testimonials">آراء العملاء</a></li>
-      <li><a href="#timeline">الرحلة المهنية</a></li>
-      <li><a href="#achievements">الإنجازات</a></li>
-      <li><a href="#faq">الأسئلة الشائعة</a></li>
       <li><a href="#contact">تواصل</a></li>
     </ul>
-    <button class="hamburger"><span></span><span></span><span></span></button>
   </nav>
 
   <!-- Hero / About -->
-  <section class="section hero-grid" id="about">
-    <div class="hero-text reveal">
-      <h1 class="highlight">الحسين بن علي مسعود الكلباني</h1>
-      <p>مسوّق رقمي معتمد بدبلوم التسويق الشامل (CPD)، أقدّم حلولًا تسويقية عملية تُحدث فرقًا حقيقيًا على المدى القصير والطويل—من تحليل السوق إلى إطلاق الحملات وإدارة تجربة العملاء.</p>
-      <div class="btn-group">
-        <a href="#services" class="btn primary">استكشف خدماتي</a>
-        <a href="#contact" class="btn secondary">تواصل معي</a>
+  <section class="section hero" id="about">
+    <div class="container hero-grid">
+      <div class="hero-text reveal">
+        <h1 class="highlight">الحسين بن علي مسعود الكلباني</h1>
+        <p>مسوّق رقمي معتمد بدبلوم التسويق الشامل (CPD). أقدّم حلولًا عملية تُحدث فرقًا حقيقيًا—من تحليل السوق إلى إطلاق الحملات وإدارة تجربة العملاء.</p>
+        <ul class="about-list">
+          <li><strong>الهاتف:</strong> +968 72751573</li>
+          <li><strong>الإيميل:</strong> alhussain.ali9282@gmail.com</li>
+          <li><strong>الموقع:</strong> سلطنة عمان</li>
+        </ul>
+        <div class="btn-group">
+          <a href="#projects" class="btn primary">استعرض المشاريع</a>
+          <a href="#contact" class="btn secondary">تواصل معي</a>
+        </div>
       </div>
-      <ul class="about-list">
-        <li><strong>الهاتف:</strong> +968 72751573</li>
-        <li><strong>الإيميل:</strong> alhussain.ali9282@gmail.com</li>
-        <li><strong>الموقع:</strong> سلطنة عمان</li>
-      </ul>
-    </div>
-    <div class="hero-visual reveal">
-      <img src="images/profile.jpg" alt="صورة الحسين الكلباني" class="profile-img"/>
+      <div class="hero-visual reveal">
+        <img src="images/profile.jpg" alt="صورة الحسين الكلباني" class="profile-img" />
+      </div>
     </div>
   </section>
 
   <!-- Skills -->
   <section id="skills" class="section">
-    <h2 class="section-title">المهارات</h2>
-    <p class="section-subtitle">مزيج من المهارات المعرفية والناعمة لصناعة أثر تسويقي واضح.</p>
-    <div class="skills-grid reveal">
-      <span class="skill-chip">تحليل البيانات</span>
-      <span class="skill-chip">كتابة خطة تسويقية</span>
-      <span class="skill-chip">إنشاء محتوى تسويقي</span>
-      <span class="skill-chip">فتح متجر إلكتروني</span>
-      <span class="skill-chip">التعامل مع العملاء الغاضبين</span>
-      <span class="skill-chip">اللغة الفارسية</span>
-      <span class="skill-chip">إدارة الحملات</span>
-      <span class="skill-chip">خدمة العملاء</span>
-      <span class="skill-chip">التسويق عبر السوشيال</span>
-      <span class="skill-chip">تحسين تجربة المستخدم</span>
+    <div class="container">
+      <h2 class="section-title">المهارات</h2>
+      <p class="section-subtitle">مزيج من المهارات المعرفية والناعمة لصناعة أثر تسويقي واضح.</p>
+      <div class="skills-grid reveal">
+        <span class="skill-chip">تحليل البيانات</span>
+        <span class="skill-chip">كتابة خطة تسويقية</span>
+        <span class="skill-chip">إنشاء محتوى تسويقي</span>
+        <span class="skill-chip">فتح متجر إلكتروني</span>
+        <span class="skill-chip">التعامل مع العملاء الغاضبين</span>
+        <span class="skill-chip">اللغة الفارسية</span>
+        <span class="skill-chip">إدارة الحملات</span>
+        <span class="skill-chip">خدمة العملاء</span>
+        <span class="skill-chip">التسويق عبر السوشيال</span>
+        <span class="skill-chip">تحسين تجربة المستخدم</span>
+      </div>
     </div>
   </section>
 
   <!-- Experience -->
   <section id="experience" class="section">
-    <h2 class="section-title">الخبرات</h2>
-    <p class="section-subtitle">خبرات عملية في المبيعات المباشرة، خدمة العملاء، وإطلاق الحملات.</p>
-    <div class="cards-grid reveal">
-      <div class="card">
-        <h3>المبيعات المباشرة</h3>
-        <p>أكثر من 3 سنوات في المبيعات المباشرة، التعامل مع أنظمة الدفع، واستقبال طلبات العملاء وضمان رضاهم.</p>
-      </div>
-      <div class="card">
-        <h3>خدمة العملاء</h3>
-        <p>خبرة عالية في التعامل مع العملاء الغاضبين وحل المشكلات بشكل احترافي وتحويل التجربة إلى ولاء.</p>
-      </div>
-      <div class="card">
-        <h3>إدارة الحملات</h3>
-        <p>تصميم وإطلاق حملات تسويقية عبر منصات متعددة مع قياس الأداء وتحسين النتائج.</p>
-      </div>
-      <div class="card">
-        <h3>القيادة والتسليم</h3>
-        <p>رخصة قيادة وخبرة في التنقل والتوصيل ضمن بيئات عمل مختلفة.</p>
+    <div class="container">
+      <h2 class="section-title">الخبرات</h2>
+      <p class="section-subtitle">خبرات عملية في المبيعات المباشرة، خدمة العملاء، وإطلاق الحملات.</p>
+      <div class="cards-grid reveal">
+        <div class="card">
+          <h3>المبيعات المباشرة</h3>
+          <p>أكثر من 3 سنوات في المبيعات المباشرة، التعامل مع أنظمة الدفع، واستقبال طلبات العملاء وضمان رضاهم.</p>
+        </div>
+        <div class="card">
+          <h3>خدمة العملاء</h3>
+          <p>خبرة عالية في التعامل مع العملاء الغاضبين وحل المشكلات بشكل احترافي وتحويل التجربة إلى ولاء.</p>
+        </div>
+        <div class="card">
+          <h3>إدارة الحملات</h3>
+          <p>تصميم وإطلاق حملات تسويقية عبر منصات متعددة مع قياس الأداء وتحسين النتائج.</p>
+        </div>
+        <div class="card">
+          <h3>القيادة والتسليم</h3>
+          <p>رخصة قيادة وخبرة في التنقل والتوصيل ضمن بيئات عمل مختلفة.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Education -->
   <section id="education" class="section">
-    <h2 class="section-title">التعليم</h2>
-    <p class="section-subtitle">دبلوم معتمد وشهادات موثّقة تعكس التزامي بالتطوير المستمر.</p>
-    <div class="edu-grid reveal">
-      <div class="edu-card">
-        <h3>دبلوم التسويق الشامل</h3>
-        <p>معتمد من معهد CPD الدولي، ماليزيا 2025</p>
-        <a href="files/cpd_certificate.pdf">تحميل الشهادة</a>
-      </div>
-      <div class="edu-card">
-        <h3>اعتماد CPD</h3>
-        <p>50 ساعة تدريبية معتمدة — Mastery Academy (MENA)</p>
-        <a href="files/mastery_certificate.pdf">تحميل الشهادة</a>
+    <div class="container">
+      <h2 class="section-title">التعليم</h2>
+      <p class="section-subtitle">دبلوم معتمد وشهادات موثّقة تعكس التزامي بالتطوير المستمر.</p>
+      <div class="edu-grid reveal">
+        <div class="edu-card">
+          <h3>دبلوم التسويق الشامل</h3>
+          <p>معتمد من معهد CPD الدولي، ماليزيا 2025</p>
+          <a href="files/cpd_certificate.pdf">تحميل الشهادة</a>
+        </div>
+        <div class="edu-card">
+          <h3>اعتماد CPD</h3>
+          <p>50 ساعة تدريبية معتمدة — Mastery Academy (MENA)</p>
+          <a href="files/mastery_certificate.pdf">تحميل الشهادة</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Certificates -->
   <section id="certificates" class="section">
-    <h2 class="section-title">الشهادات</h2>
-    <p class="section-subtitle">توثيق رسمي للمهارات والمعرفة المكتسبة.</p>
-    <div class="cert-grid reveal">
-      <div class="cert-card">
-        <img src="images/cpd_certificate.jpg" alt="شهادة CPD"/>
-        <a href="files/cpd_certificate.pdf">تحميل</a>
-      </div>
-      <div class="cert-card">
-        <img src="images/mastery_certificate.jpg" alt="شهادة Mastery Academy"/>
-        <a href="files/mastery_certificate.pdf">تحميل</a>
+    <div class="container">
+      <h2 class="section-title">الشهادات</h2>
+      <p class="section-subtitle">توثيق رسمي للمهارات والمعرفة المكتسبة.</p>
+      <div class="cert-grid reveal">
+        <div class="cert-card">
+          <img src="images/cpd_certificate.jpg" alt="شهادة CPD" />
+          <a href="files/cpd_certificate.pdf">تحميل</a>
+        </div>
+        <div class="cert-card">
+          <img src="images/mastery_certificate.jpg" alt="شهادة Mastery Academy" />
+          <a href="files/mastery_certificate.pdf">تحميل</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Projects -->
   <section id="projects" class="section">
-    <h2 class="section-title">المشاريع</h2>
-    <p class="section-subtitle">نماذج من أعمالي في التسويق الرقمي وإدارة المحتوى.</p>
-    <div class="mosaic reveal">
-      <div class="mosaic-item tilt">
-        <img src="images/project.jpg" alt="مشروع تسويقي"/>
-        <div class="overlay">مشروع تسويق رقمي متكامل—تحليل، محتوى، وإطلاق حملات</div>
-      </div>
-      <div class="mosaic-item tilt">
-        <img src="images/cv.jpg" alt="عرض السيرة الذاتية"/>
-        <div class="overlay">عرض احترافي للسيرة الذاتية ضمن الهوية الشخصية</div>
+    <div class="container">
+      <h2 class="section-title">المشاريع</h2>
+      <p class="section-subtitle">نماذج من أعمالي في التسويق الرقمي وإدارة المحتوى.</p>
+      <div class="mosaic reveal">
+        <div class="mosaic-item tilt">
+          <img src="images/project.jpg" alt="مشروع تسويقي" />
+          <div class="overlay">مشروع تسويق رقمي متكامل—تحليل، محتوى، وإطلاق حملات</div>
+        </div>
+        <div class="mosaic-item tilt">
+          <img src="images/cv.jpg" alt="عرض السيرة الذاتية" />
+          <div class="overlay">عرض احترافي للسيرة الذاتية ضمن الهوية الشخصية</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Training Schedule -->
   <section id="schedule" class="section">
-    <h2 class="section-title">جدول التدريب</h2>
-    <p class="section-subtitle">خطة تدريبية متكاملة—15 لقاء يغطي التسويق الحديث خطوة بخطوة.</p>
-    <div class="card reveal">
-      <h3>برنامج دبلوم التسويق الشامل</h3>
-      <img src="images/training_schedule.jpg" alt="جدول التدريب التسويقي"/>
+    <div class="container">
+      <h2 class="section-title">جدول التدريب</h2>
+      <p class="section-subtitle">خطة تدريبية متكاملة—15 لقاء يغطي التسويق الحديث خطوة بخطوة.</p>
+      <div class="card reveal">
+        <h3>برنامج دبلوم التسويق الشامل</h3>
+        <img src="images/training_schedule.jpg" alt="جدول التدريب التسويقي" />
+      </div>
     </div>
   </section>
 
   <!-- CV -->
   <section id="cv" class="section">
-    <h2 class="section-title">السيرة الذاتية</h2>
-    <p class="section-subtitle">ملخص مهني واضح ومباشر—جاهز للتحميل والمشاركة.</p>
-    <div class="card reveal">
-      <img src="images/cv.jpg" alt="سيرة ذاتية الحسين الكلباني"/>
-      <a href="files/cv.pdf" class="btn primary">تحميل السيرة الذاتية</a>
-    </div>
-  </section>
-
-  <!-- Services -->
-  <section id="services" class="section">
-    <h2 class="section-title">الخدمات</h2>
-    <p class="section-subtitle">حلول عملية قابلة للتنفيذ—من الاستراتيجية إلى التنفيذ.</p>
-    <div class="cards-grid reveal">
-      <div class="card">
-        <h3>تحليل السوق والمنافسين</h3>
-        <p>تحديد الجمهور المستهدف، قياس المنافسة، واستخراج ميزة تنافسية قابلة للتطبيق.</p>
-      </div>
-      <div class="card">
-        <h3>إطلاق الحملات الإعلانية</h3>
-        <p>إعداد حملات عبر TikTok، Facebook، Instagram، Twitter، وSnapchat مع تتبع الأداء.</p>
-      </div>
-      <div class="card">
-        <h3>إنشاء المحتوى التسويقي</h3>
-        <p>كتابة محتوى إعلاني وقيمي، تصميم رسائل متسقة مع الهوية.</p>
-      </div>
-      <div class="card">
-        <h3>فتح متجر إلكتروني</h3>
-        <p>إعداد المتجر، تنظيم المنتجات، وربط بوابات الدفع مع تجربة مستخدم سلسة.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section id="pricing" class="section">
-    <h2 class="section-title">الأسعار</h2>
-    <p class="section-subtitle">باقات مرنة تناسب احتياجاتك—قابلة للتخصيص حسب المشروع.</p>
-    <div class="cards-grid reveal">
-      <div class="card">
-        <h3>الباقة الأساسية</h3>
-        <p>تحليل أولي + خطة قصيرة + محتوى لـ3 منشورات.</p>
-        <a href="#contact" class="btn secondary">اطلب الآن</a>
-      </div>
-      <div class="card">
-        <h3>الباقة المتقدمة</h3>
-        <p>تحليل شامل + حملة شهرية + تقارير أداء أسبوعية.</p>
-        <a href="#contact" class="btn secondary">اطلب الآن</a>
-      </div>
-      <div class="card">
-        <h3>الباقة المخصصة</h3>
-        <p>حلول حسب الطلب—مشاريع خاصة، متاجر، أو حملات متعددة المنصات.</p>
-        <a href="#contact" class="btn secondary">اطلب الآن</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section id="testimonials" class="section">
-    <h2 class="section-title">آراء العملاء</h2>
-    <p class="section-subtitle">ثقة تُبنى على نتائج ملموسة وتجربة محترفة.</p>
-    <div class="cards-grid reveal">
-      <div class="card">
-        <p>“خدمة ممتازة، نتائج واضحة خلال أسابيع قليلة—التواصل احترافي والاقتراحات عملية.”</p>
-        <span class="badge">عميل قطاع التجزئة</span>
-      </div>
-      <div class="card">
-        <p>“الحملات كانت دقيقة وموجهة—تحسن ملحوظ في التفاعل والمبيعات.”</p>
-        <span class="badge">متجر إلكتروني</span>
-      </div>
-      <div class="card">
-        <p>“محتوى متسق مع الهوية—أفكار مبتكرة وتطبيق سريع.”</p>
-        <span class="badge">شركة ناشئة</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Timeline -->
-  <section id="timeline" class="section">
-    <h2 class="section-title">الرحلة المهنية</h2>
-    <p class="section-subtitle">محطات أساسية شكّلت خبرتي في التسويق.</p>
-    <div class="cards-grid reveal">
-      <div class="card">
-        <h3>2022–2023</h3>
-        <p>مبيعات مباشرة وخدمة العملاء—تأسيس فهم عميق لسلوك المستهلك.</p>
-      </div>
-      <div class="card">
-        <h3>2024</h3>
-        <p>التحول إلى التسويق الرقمي—إطلاق حملات أولية وقياس الأداء.</p>
-      </div>
-      <div class="card">
-        <h3>2025</h3>
-        <p>دبلوم معتمد CPD—توسيع نطاق الخدمات وإدارة مشاريع متعددة.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Achievements -->
-  <section id="achievements" class="section">
-    <h2 class="section-title">الإنجازات</h2>
-    <p class="section-subtitle">أرقام تعكس أثر العمل—قابلة للقياس والتحسين.</p>
-    <div class="cards-grid reveal">
-      <div class="card counter" data-target="50">
-        <h3>+<span class="count">0</span> ساعة تدريب</h3>
-        <p>اعتماد CPD—Mastery Academy</p>
-      </div>
-      <div class="card counter" data-target="15">
-        <h3>+<span class="count">0</span> جلسة تدريب</h3>
-        <p>جدول متكامل يغطي التسويق الحديث</p>
-      </div>
-      <div class="card counter" data-target="20">
-        <h3>+<span class="count">0</span> مشروع</h3>
-        <p>حملات ومحتوى ومتاجر إلكترونية</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="section">
-    <h2 class="section-title">الأسئلة الشائعة</h2>
-    <p class="section-subtitle">إجابات مباشرة على أكثر الأسئلة تكرارًا.</p>
-    <div class="cards-grid reveal">
-      <div class="card">
-        <h3>كيف نبدأ العمل؟</h3>
-        <p>جلسة تعريفية قصيرة لتحديد الأهداف، ثم خطة تنفيذية واضحة مع جدول زمني.</p>
-      </div>
-      <div class="card">
-        <h3>هل الأسعار ثابتة؟</h3>
-        <p>الباقات مرنة وقابلة للتخصيص حسب حجم المشروع والمنصات المطلوبة.</p>
-      </div>
-      <div class="card">
-        <h3>هل توفر تقارير أداء؟</h3>
-        <p>نعم—تقارير أسبوعية أو شهرية حسب الباقة، مع توصيات للتحسين.</p>
+    <div class="container">
+      <h2 class="section-title">السيرة الذاتية</h2>
+      <p class="section-subtitle">ملخص مهني واضح ومباشر—جاهز للتحميل والمشاركة.</p>
+      <div class="card reveal">
+        <img src="images/cv.jpg" alt="سيرة ذاتية الحسين الكلباني" />
+        <a href="files/cv.pdf" class="btn primary">تحميل السيرة الذاتية</a>
       </div>
     </div>
   </section>
 
   <!-- Contact -->
   <section id="contact" class="section">
-    <h2 class="section-title">تواصل معي</h2>
-    <p class="section-subtitle">للاستفسار أو بدء مشروع جديد—اختر وسيلة التواصل المناسبة.</p>
-    <div class="contact-grid reveal">
-      <div class="card">
-        <h3>روابط مباشرة</h3>
-        <div class="footer-social">
+    <div class="container">
+      <h2 class="section-title">تواصل معي</h2>
+      <p class="section-subtitle">للاستفسار أو بدء مشروع جديد—اختر وسيلة التواصل المناسبة.</p>
+
+      <div class="contact-grid reveal">
+        <div class="card">
+          <h3>روابط مباشرة</h3>
           <div class="social-links">
             <a href="https://wa.me/96872751573" class="btn secondary">واتساب</a>
             <a href="mailto:alhussain.ali9282@gmail.com" class="btn secondary">إيميل</a>
             <a href="https://linkedin.com/in/xxxx" class="btn secondary">لينكدإن</a>
           </div>
         </div>
-      </div>
-      <div class="card">
-        <h3>نموذج تواصل</h3>
-        <form class="contact-form" onsubmit="return false;">
-          <label>الاسم</label>
-          <input type="text" placeholder="اكتب اسمك"/>
-          <label>الإيميل</label>
-          <input type="email" placeholder="example@mail.com"/>
-          <label>الرسالة</label>
-          <textarea rows="4" placeholder="اكتب رسالتك"></textarea>
-          <button class="btn primary" id="sendMsg">إرسال</button>
-        </form>
+
+        <div class="card contact-card">
+          <h3>نموذج تواصل</h3>
+          <form class="contact-form" onsubmit="return false;">
+            <div class="form-row">
+              <div class="form-field">
+                <label>الاسم</label>
+                <input type="text" placeholder="اكتب اسمك" required />
+              </div>
+              <div class="form-field">
+                <label>الإيميل</label>
+                <input type="email" placeholder="example@mail.com" required />
+              </div>
+            </div>
+            <div class="form-field">
+              <label>الرسالة</label>
+              <textarea rows="5" placeholder="اكتب رسالتك" required></textarea>
+            </div>
+            <button class="btn primary" id="sendMsg">إرسال</button>
+            <p class="form-hint">لن يتم حفظ بياناتك—هذا نموذج تجريبي للعرض فقط.</p>
+          </form>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="footer-grid">
+    <div class="container footer-grid">
       <div>
         <h4>روابط سريعة</h4>
-        <p>من أنا، المهارات، التعليم، الشهادات، المشاريع، الخدمات، الأسعار</p>
+        <p>من أنا، المهارات، التعليم، الشهادات، المشاريع، الجدول، السيرة الذاتية</p>
       </div>
       <div>
         <h4>معلومات</h4>
@@ -340,15 +238,15 @@
       <div class="footer-social">
         <h4>تابعني</h4>
         <div class="social-links">
-          <a href="#">🐦</a>
-          <a href="#">📸</a>
-          <a href="#">💼</a>
+          <a href="#" aria-label="تويتر">🐦</a>
+          <a href="#" aria-label="إنستغرام">📸</a>
+          <a href="#" aria-label="لينكدإن">💼</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <button id="backToTop">↑</button>
+  <button id="backToTop" aria-label="العودة للأعلى">↑</button>
   <script src="script.js"></script>
 </body>
 </html>
