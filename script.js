@@ -10,7 +10,7 @@ if (hamburger && navLinks) {
     hamburger.classList.toggle('active');
   });
 
-  // إغلاق القائمة عند الضغط على أي رابط
+  // Close menu when clicking a link (mobile)
   navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       navLinks.classList.remove('show');
@@ -23,18 +23,12 @@ if (hamburger && navLinks) {
 // ===== Back to Top =====
 const backToTop = document.getElementById('backToTop');
 const toggleBackToTop = () => {
-  if (window.scrollY > 300) {
-    backToTop.classList.add('show');
-  } else {
-    backToTop.classList.remove('show');
-  }
+  if (window.scrollY > 300) backToTop.classList.add('show');
+  else backToTop.classList.remove('show');
 };
 window.addEventListener('scroll', toggleBackToTop);
 window.addEventListener('load', toggleBackToTop);
-
-backToTop.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 // ===== Reveal Animations =====
 const reveals = document.querySelectorAll('.reveal');
@@ -48,20 +42,6 @@ const revealOnScroll = () => {
 };
 window.addEventListener('scroll', revealOnScroll);
 window.addEventListener('load', revealOnScroll);
-
-// ===== Tilt Effect =====
-const tiltItems = document.querySelectorAll('.tilt');
-tiltItems.forEach(item => {
-  item.addEventListener('mousemove', (e) => {
-    const rect = item.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    item.style.transform = `rotateY(${x * 10}deg) rotateX(${y * 10}deg)`;
-  });
-  item.addEventListener('mouseleave', () => {
-    item.style.transform = 'rotateY(0) rotateX(0)';
-  });
-});
 
 // ===== ScrollSpy =====
 const sections = document.querySelectorAll("section[id]");
