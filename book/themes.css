@@ -1,0 +1,104 @@
+/* أنماط الوضع الفاتح */
+.light-mode {
+    --primary-color: #2563eb;
+    --secondary-color: #1e40af;
+    --accent-color: #3b82f6;
+    --text-color: #1f2937;
+    --text-secondary: #6b7280;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --border-color: #e5e7eb;
+    --border-light: #f1f5f9;
+    --footer-bg: #1e293b;
+    --footer-text: #f1f5f9;
+    --nav-bg-rgb: 248, 250, 252;
+    --primary-rgb: 37, 99, 235;
+    --gradient-start: #2563eb;
+    --gradient-end: #7c3aed;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --hover-bg: #f8fafc;
+}
+
+/* أنماط الوضع الداكن */
+.dark-mode {
+    --primary-color: #60a5fa;
+    --secondary-color: #93c5fd;
+    --accent-color: #3b82f6;
+    --text-color: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --border-color: #334155;
+    --border-light: #475569;
+    --footer-bg: #020617;
+    --footer-text: #cbd5e1;
+    --nav-bg-rgb: 15, 23, 42;
+    --primary-rgb: 96, 165, 250;
+    --gradient-start: #0f172a;
+    --gradient-end: #1e293b;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --hover-bg: #2d3748;
+}
+
+/* تطبيق المتغيرات */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.book-content, .reading-controls, .toc-sidebar {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.navbar {
+    background-color: rgba(var(--nav-bg-rgb), 0.95);
+}
+
+.btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.text-muted {
+    color: var(--text-secondary) !important;
+}
+
+.border-bottom {
+    border-bottom-color: var(--border-color) !important;
+}
+
+.toc-item:hover {
+    background-color: var(--hover-bg);
+}
+
+.progress-bar {
+    background-color: var(--primary-color);
+}
+
+/* تخصيص Bootstrap للوضع الداكن */
+.dark-mode .btn-outline-secondary {
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+.dark-mode .btn-outline-secondary:hover {
+    background-color: var(--border-color);
+    color: var(--text-color);
+}
