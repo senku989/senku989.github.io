@@ -1,104 +1,340 @@
+/* ==============================================
+   أنماط الألوان والثيمات
+   الوضع الفاتح والداكن
+============================================== */
+
 /* أنماط الوضع الفاتح */
 .light-mode {
+    /* الألوان الأساسية */
     --primary-color: #2563eb;
+    --primary-rgb: 37, 99, 235;
     --secondary-color: #1e40af;
     --accent-color: #3b82f6;
+    
+    /* نصوص */
     --text-color: #1f2937;
     --text-secondary: #6b7280;
+    --text-muted: #9ca3af;
+    
+    /* خلفيات */
     --bg-color: #f8fafc;
     --card-bg: #ffffff;
-    --border-color: #e5e7eb;
-    --border-light: #f1f5f9;
+    --nav-bg: #ffffff;
+    --nav-bg-rgb: 255, 255, 255;
     --footer-bg: #1e293b;
     --footer-text: #f1f5f9;
-    --nav-bg-rgb: 248, 250, 252;
-    --primary-rgb: 37, 99, 235;
+    --hover-bg: #f1f5f9;
+    
+    /* حدود */
+    --border-color: #e5e7eb;
+    --border-light: #f1f5f9;
+    --border-dark: #d1d5db;
+    
+    /* تدرجات */
     --gradient-start: #2563eb;
     --gradient-end: #7c3aed;
+    
+    /* ظلال */
     --shadow-color: rgba(0, 0, 0, 0.08);
-    --hover-bg: #f8fafc;
+    --shadow-lg: rgba(0, 0, 0, 0.12);
+    
+    /* عناصر تفاعلية */
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --info-color: #3b82f6;
 }
 
 /* أنماط الوضع الداكن */
 .dark-mode {
+    /* الألوان الأساسية */
     --primary-color: #60a5fa;
+    --primary-rgb: 96, 165, 250;
     --secondary-color: #93c5fd;
     --accent-color: #3b82f6;
+    
+    /* نصوص */
     --text-color: #f1f5f9;
     --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    
+    /* خلفيات */
     --bg-color: #0f172a;
     --card-bg: #1e293b;
-    --border-color: #334155;
-    --border-light: #475569;
+    --nav-bg: #1e293b;
+    --nav-bg-rgb: 30, 41, 59;
     --footer-bg: #020617;
     --footer-text: #cbd5e1;
-    --nav-bg-rgb: 15, 23, 42;
-    --primary-rgb: 96, 165, 250;
+    --hover-bg: #2d3748;
+    
+    /* حدود */
+    --border-color: #334155;
+    --border-light: #475569;
+    --border-dark: #64748b;
+    
+    /* تدرجات */
     --gradient-start: #0f172a;
     --gradient-end: #1e293b;
+    
+    /* ظلال */
     --shadow-color: rgba(0, 0, 0, 0.3);
-    --hover-bg: #2d3748;
+    --shadow-lg: rgba(0, 0, 0, 0.4);
+    
+    /* عناصر تفاعلية */
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --info-color: #3b82f6;
 }
 
-/* تطبيق المتغيرات */
+/* تطبيق المتغيرات على الجسم */
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
 }
 
-.book-content, .reading-controls, .toc-sidebar {
+/* تطبيقات عامة */
+.book-content,
+.reading-controls,
+.reading-controls-bottom,
+.toc-sidebar,
+.search-results-container,
+.appendix-item,
+.modal-content {
     background-color: var(--card-bg);
     color: var(--text-color);
     border-color: var(--border-color);
 }
 
-.navbar {
-    background-color: rgba(var(--nav-bg-rgb), 0.95);
-}
-
-.btn-outline-primary {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-}
-
-.btn-outline-primary:hover {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-
-.btn-primary:hover {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-}
-
+/* النصوص */
 .text-muted {
+    color: var(--text-muted) !important;
+}
+
+.text-secondary {
     color: var(--text-secondary) !important;
+}
+
+/* الحدود */
+.border {
+    border-color: var(--border-color) !important;
 }
 
 .border-bottom {
     border-bottom-color: var(--border-color) !important;
 }
 
-.toc-item:hover {
+.border-top {
+    border-top-color: var(--border-color) !important;
+}
+
+/* الأزرار */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-color: transparent;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.btn-outline-secondary {
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+    background-color: transparent;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
     background-color: var(--hover-bg);
+    border-color: var(--border-dark);
+    color: var(--text-color);
+}
+
+/* شريط التنقل */
+.navbar {
+    background-color: rgba(var(--nav-bg-rgb), 0.98);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* شريط التقدم */
+.progress {
+    background-color: var(--border-light);
 }
 
 .progress-bar {
     background-color: var(--primary-color);
+    background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.15) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%,
+        transparent
+    );
+    background-size: 1rem 1rem;
+    animation: progress-animation 1s linear infinite;
 }
 
-/* تخصيص Bootstrap للوضع الداكن */
-.dark-mode .btn-outline-secondary {
-    color: var(--text-secondary);
+@keyframes progress-animation {
+    0% {
+        background-position: 1rem 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+/* الروابط */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+/* الكروت والعناصر التفاعلية */
+.card {
+    background-color: var(--card-bg);
     border-color: var(--border-color);
 }
 
-.dark-mode .btn-outline-secondary:hover {
-    background-color: var(--border-color);
+.list-group-item {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
     color: var(--text-color);
+}
+
+/* المدخلات والنماذج */
+.form-control,
+.form-select {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--card-bg);
+    border-color: var(--primary-color);
+    color: var(--text-color);
+    box-shadow: 0 0 0 0.25rem rgba(var(--primary-rgb), 0.1);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+/* Modal */
+.modal-header {
+    border-bottom-color: var(--border-color);
+}
+
+.modal-footer {
+    border-top-color: var(--border-color);
+}
+
+/* تنبيهات */
+.alert {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.alert-primary {
+    background-color: rgba(var(--primary-rgb), 0.1);
+    border-color: rgba(var(--primary-rgb), 0.3);
+    color: var(--primary-color);
+}
+
+/* الجداول */
+.table {
+    color: var(--text-color);
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--hover-bg);
+    color: var(--text-color);
+}
+
+/* توسعة للوضع الداكن */
+.dark-mode .navbar-dark .navbar-brand {
+    color: var(--primary-color);
+}
+
+.dark-mode .text-dark {
+    color: var(--text-color) !important;
+}
+
+.dark-mode .bg-light {
+    background-color: var(--card-bg) !important;
+}
+
+.dark-mode .border-light {
+    border-color: var(--border-color) !important;
+}
+
+/* تحسينات للقراءة في الوضع الداكن */
+.dark-mode .book-content {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .chapter-title {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* تحسين التباين للوصولية */
+@media (prefers-contrast: high) {
+    .light-mode {
+        --text-color: #000000;
+        --bg-color: #ffffff;
+        --card-bg: #ffffff;
+        --border-color: #000000;
+    }
+    
+    .dark-mode {
+        --text-color: #ffffff;
+        --bg-color: #000000;
+        --card-bg: #000000;
+        --border-color: #ffffff;
+    }
+}
+
+/* دعم نظام الألوان للجهاز */
+@media (prefers-color-scheme: dark) {
+    body:not(.light-mode) {
+        color-scheme: dark;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body:not(.dark-mode) {
+        color-scheme: light;
+    }
 }
