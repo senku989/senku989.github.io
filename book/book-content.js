@@ -1020,7 +1020,10 @@ const arabicBookContent = [
     }
 ];
 
-// محتوى الكتاب بالإنجليزية - 70 صفحة
+// ==============================================
+// Complete English Book Content (70 pages)
+// ==============================================
+
 const englishBookContent = [
     {
         title: "Chapter 1: Foundations of Digital Wealth - The Philosophy of Financial Transformation",
@@ -1031,19 +1034,1018 @@ const englishBookContent = [
             },
             {
                 type: "paragraph",
-                text: "We are living a unique historical moment in the global economy. According to the World Economic Forum 2025 report, 65% of children entering schools today will work in jobs that don't currently exist. The digital economy will generate $15 trillion in added value by 2030."
+                text: "We are living through a unique historical moment in the global economy. According to the World Economic Forum 2025 report, 65% of children entering schools today will work in jobs that don't currently exist. The digital economy will generate $15 trillion in added value by 2030."
             },
-            // ... المحتوى الكامل بالإنجليزية بنفس التفصيل
+            {
+                type: "paragraph",
+                text: "In the Arab world, 2024 statistics indicate that the digital economy has exceeded $200 billion, with annual growth exceeding 15%. This is not a passing trend, but a radical transformation in the concept of work and wealth."
+            },
+            {
+                type: "subtitle", 
+                text: "1.2 Mental Maps: How the Successful Financial Mind Works"
+            },
+            {
+                type: "paragraph",
+                text: "After studying 500 successful digital entrepreneurs, 7 fundamental mindset principles were identified:"
+            },
+            {
+                type: "list",
+                items: [
+                    "Solution Mindset: Focus on solving problems rather than providing services",
+                    "System Mindset: Building repeatable systems instead of manual work",
+                    "Value Mindset: Measuring every activity by hourly value versus value delivered",
+                    "Rapid Learning Mindset: Mastering a new skill every 90 days",
+                    "Scale Mindset: Designing every project to scale ×10 from the start",
+                    "Community Mindset: Building a relationship base, not just customers",
+                    "Resilience Mindset: Turning failure into analyzable data"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "1.3 Advanced Market Analysis: Free Tools 95% of Competitors Don't Know"
+            },
+            {
+                type: "paragraph",
+                text: "Advanced free research tools that give you a competitive advantage:"
+            },
+            {
+                type: "list",
+                items: [
+                    "Google Trends Filter: Analyzing seasonal trends and repeating patterns",
+                    "AnswerThePublic: Discovering real questions the audience is searching for",
+                    "SparkToro: Analyzing competitors' exact audience (followers, subscribers, visitors)",
+                    "SEMrush Topic Research: Generating content ideas based on search intent",
+                    "Ubersuggest Keyword Magic Tool: Detailed competition difficulty analysis"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "How to use these tools: A practical 5-day plan to get a complete market map for your specialization field."
+            },
+            {
+                type: "subtitle",
+                text: "1.4 90-Day Financial Transformation Plan: From Zero to First $1,000"
+            },
+            {
+                type: "paragraph",
+                text: "Phase 1 (Week 1-4): Research and Strategic Planning"
+            },
+            {
+                type: "list",
+                items: [
+                    "Day 1-3: Identify 3 potential specialized fields based on your skills and passion",
+                    "Day 4-7: In-depth research for each field using advanced research tools",
+                    "Week 2: Competition analysis and identifying market gaps",
+                    "Week 3: Determining initial product/service and designing the offer",
+                    "Week 4: Creating a detailed implementation plan with measurable performance indicators"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Phase 2 (Week 5-8): Building Prototype and Testing"
+            },
+            {
+                type: "list",
+                items: [
+                    "Week 5: Building the core product/service",
+                    "Week 6: Testing on a small group (10-20 people)",
+                    "Week 7: Gathering feedback and improvements",
+                    "Week 8: Experimental launch and measuring results"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "1.5 In-Depth Case Studies: How 5 Ordinary People Became Digital Entrepreneurs"
+            },
+            {
+                type: "paragraph",
+                text: "First Case: Ahmed (28 years old, Accountant)"
+            },
+            {
+                type: "paragraph",
+                text: "Started by offering accounting services to small projects on Upwork earning $300 monthly. Within 6 months, developed an advanced Excel template for small accounting and sold it for $47. After one year, he had 3 digital products generating $4,200 monthly as passive income."
+            },
+            {
+                type: "paragraph",
+                text: "Detailed steps he followed: Analyzing 50 accounting projects on Upwork, identifying recurring problems, building the solution in Excel, free testing on 10 clients, building an email list, launching the product on Gumroad."
+            },
+            {
+                type: "quote",
+                text: "The secret isn't working harder, but working smarter. I found that 20% of my efforts were producing 80% of my results, so I amplified only that 20%.",
+                author: "Ahmed, 28 years old"
+            }
         ]
     },
-    // ... باقي الفصول بالإنجليزية بنفس التفصيل
+    {
+        title: "Chapter 2: Digital Product Engineering - From Idea to $10,000 Monthly",
+        content: [
+            {
+                type: "subtitle",
+                text: "2.1 Digital Product Building Framework: The 7-Stage Methodology"
+            },
+            {
+                type: "paragraph",
+                text: "Stage 1: Discovering Real Pain (Not the Apparent Need)"
+            },
+            {
+                type: "list",
+                items: [
+                    "Deep Interview Technique: Questions revealing unannounced pain",
+                    "Question Platforms Analysis: Quora, Reddit, specialized Facebook communities",
+                    "Competitor Reviews Analysis: Discovering weaknesses in current solutions",
+                    "Directed Surveys: Designing questionnaires reaching fundamental pain"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Stage 2: Designing the Ideal Solution"
+            },
+            {
+                type: "list",
+                items: [
+                    "Customer Journey Maps: Tracking every step from solution awareness to repeated use",
+                    "Rapid Prototypes: Building 3 prototypes in less than 48 hours",
+                    "A/B Testing for Models: Measuring interaction with each model",
+                    "Early Feedback: Gathering comments before investing significant time"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "2.2 High-Profitability Digital Product Types"
+            },
+            {
+                type: "paragraph",
+                text: "First Type: Advanced Educational Products"
+            },
+            {
+                type: "list",
+                items: [
+                    "Interactive Video Courses: With practical exercises and tests",
+                    "Live Training Camps: Duration 4-6 weeks with personal follow-up",
+                    "Interactive Workbooks: With templates and practical applications",
+                    "Monthly Learning Communities: With weekly live sessions"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Second Type: Software and Ready Templates"
+            },
+            {
+                type: "list",
+                items: [
+                    "Advanced Notion Templates: For management and organization systems",
+                    "Specialized Excel/Sheets Systems: For accounting, analysis, planning",
+                    "Professional WordPress Plugins: For specific solutions in specialized fields",
+                    "Ready Automation Tools: For marketing, sales, support processes"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "2.3 Advanced Pricing Strategies: How to Sell Your Product for $997 Instead of $97?"
+            },
+            {
+                type: "paragraph",
+                text: "Tiered Pricing Principle"
+            },
+            {
+                type: "list",
+                items: [
+                    "Basic Tier ($97): Core product with email support",
+                    "Intermediate Tier ($297): Product + monthly consultation sessions",
+                    "Advanced Tier ($597): Product + consultations + customization",
+                    "Premium Tier ($997): All of the above + individual training for 3 months"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Expected Conversion Rate: 70% basic, 20% intermediate, 7% advanced, 3% premium. Means selling 100 copies achieves 97×70 + 297×20 + 597×7 + 997×3 = $34,690."
+            },
+            {
+                type: "subtitle",
+                text: "2.4 Advanced Selling Platforms: More Than Just Gumroad and Teachable"
+            },
+            {
+                type: "paragraph",
+                text: "Platform 1: Podia (For Multiple Products)"
+            },
+            {
+                type: "list",
+                items: [
+                    "Features: Digital products, courses, memberships, live webinars",
+                    "Commission: 0% commission on sales (fixed monthly subscription)",
+                    "Best for: Building a complete educational school",
+                    "Starting Cost: $39 monthly"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Platform 2: ConvertKit Commerce (For Content Creators)"
+            },
+            {
+                type: "list",
+                items: [
+                    "Features: Integrated with email system, recurring sales",
+                    "Commission: 0% commission + 3.5% + 30 cents per transaction",
+                    "Best for: Content sellers via email",
+                    "Starting Cost: Free to start (commission only on sales)"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Platform 3: Self-Hosted WordPress System (For Full Control)"
+            },
+            {
+                type: "list",
+                items: [
+                    "Components: WordPress + membership system (MemberPress) + payment gateway",
+                    "Initial Cost: $300-500 (development and hosting)",
+                    "Monthly Cost: $50-100 (hosting, maintenance, updates)",
+                    "Best for: Long-term projects with large expansion plans"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "2.5 Practical Case Studies: 3 Products Achieving Over $50,000 in 6 Months"
+            },
+            {
+                type: "paragraph",
+                text: "First Product: Content Management System for Bloggers"
+            },
+            {
+                type: "paragraph",
+                text: "After analyzing 200 Arabic blogs, it was discovered that 73% of them find difficulty managing content calendars. A specialized Notion template was developed including:"
+            },
+            {
+                type: "list",
+                items: [
+                    "12-month content calendar",
+                    "Content idea suggestion tool based on keywords",
+                    "Article performance tracking system",
+                    "Ready templates for different content types"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Results: $497 for the full version, 1,470 sales in 6 months, total sales: $730,590."
+            },
+            {
+                type: "paragraph",
+                text: "Detailed implementation steps available in Appendix A."
+            }
+        ]
+    },
+    {
+        title: "Chapter 3: Advanced Affiliate Marketing - Building Passive Income Systems",
+        content: [
+            {
+                type: "subtitle",
+                text: "3.1 Psychology Behind Successful Affiliate Marketing"
+            },
+            {
+                type: "paragraph",
+                text: "Knowledge Gap Theory Principle"
+            },
+            {
+                type: "paragraph",
+                text: "People don't buy products, they buy solutions to knowledge gaps that cause them anxiety. According to a Harvard University study, 68% of purchase decisions stem from the desire to fill a knowledge or emotional gap."
+            },
+            {
+                type: "list",
+                items: [
+                    "Knowledge Gap: 'I don't know how to do X'",
+                    "Emotional Gap: 'I feel dissatisfied because I can't do Y'",
+                    "Social Gap: 'I feel behind others in Z'"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "3.2 Strategies for Choosing High-Commission Products"
+            },
+            {
+                type: "paragraph",
+                text: "Seven Criteria for a Profitable Affiliate Product:"
+            },
+            {
+                type: "list",
+                items: [
+                    "Commission: At least 30% (Best: 50-70%)",
+                    "Price: At least $200 (for 50% commission = $100 per sale)",
+                    "Renewal: Products with monthly or annual subscriptions",
+                    "Demand: Product solving a painful and urgent problem",
+                    "Quality: Product with high ratings (> 4.5/5)",
+                    "Support: Company providing excellent customer support",
+                    "Conversion: High conversion rate (> 3%)"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Top 5 Affiliate Categories for 2026:"
+            },
+            {
+                type: "list",
+                items: [
+                    "SaaS Software for Businesses (30-50% monthly recurring commission)",
+                    "Digital Productivity Tools (40-60% commission)",
+                    "Specialized Educational Courses (50-70% commission)",
+                    "High-Value Consulting Services (20-30% commission per project)",
+                    "Digital Products for Professionals (40-50% commission)"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "3.3 Building Content System That Converts Visitors to Sales"
+            },
+            {
+                type: "paragraph",
+                text: "4-Stage Content Framework:"
+            },
+            {
+                type: "paragraph",
+                text: "Stage 1: Awareness Content"
+            },
+            {
+                type: "list",
+                items: [
+                    "'How-to' articles solving basic problems",
+                    "Short educational videos (3-5 minutes)",
+                    "Infographics explaining basic concepts",
+                    "Podcast: Short episodes answering common questions"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Stage 2: Consideration Content"
+            },
+            {
+                type: "list",
+                items: [
+                    "In-depth product reviews",
+                    "Comparisons between 3-5 competing products",
+                    "Customer success case studies",
+                    "Live webinars answering advanced questions"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Stage 3: Decision Content"
+            },
+            {
+                type: "list",
+                items: [
+                    "Free trial offers",
+                    "Exclusive offers (discounts, additional gifts)",
+                    "Video customer testimonials",
+                    "ROI calculations showing expected returns"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "3.4 Advanced Conversion Techniques That Multiply Your Income 5 Times"
+            },
+            {
+                type: "paragraph",
+                text: "Technique 1: Email Sequence Marketing"
+            },
+            {
+                type: "paragraph",
+                text: "A sequence of 7 messages converting a cold reader into a hot customer:"
+            },
+            {
+                type: "list",
+                items: [
+                    "Message 1 (after 5 minutes): Thanks + valuable free gift",
+                    "Message 2 (after 1 day): Success story of similar customer",
+                    "Message 3 (after 2 days): Solution to common problem",
+                    "Message 4 (after 4 days): Comparison between solutions",
+                    "Message 5 (after 7 days): Special limited-time offer",
+                    "Message 6 (after 10 days): Reminder of offer expiration",
+                    "Message 7 (after 14 days): Personal story + invitation to interact"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Average conversion rate of this sequence: 3.7% (double the global average)."
+            },
+            {
+                type: "subtitle",
+                text: "3.5 Advanced Data Analysis and Tools for Tracking and Improving Performance"
+            },
+            {
+                type: "paragraph",
+                text: "Free and Paid Analysis Tools:"
+            },
+            {
+                type: "list",
+                items: [
+                    "Google Analytics 4: Precise visitor behavior tracking",
+                    "Hotjar: Live screen recordings + heat maps",
+                    "Microsoft Clarity: Free Microsoft tool for screen recordings",
+                    "Kissmetrics: Individual user behavior tracking over time",
+                    "Voluum: Specialized for affiliate marketers (cost: $99 monthly)"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Key Performance Indicators (KPIs) to Track:"
+            },
+            {
+                type: "list",
+                items: [
+                    "Conversion Rate: Target > 3%",
+                    "Average Order Value: Target > $200",
+                    "Customer Acquisition Cost: Target < 30% of commission",
+                    "Customer Lifetime Value: Target > 5× acquisition cost",
+                    "Bounce Rate: Target < 40%"
+                ]
+            }
+        ]
+    },
+    {
+        title: "Chapter 4: Strategic Freelancing - From Freelancer to Digital Agency",
+        content: [
+            {
+                type: "subtitle",
+                text: "4.1 Precise Specialization Framework: How to Be the Best in a Narrow Field?"
+            },
+            {
+                type: "paragraph",
+                text: "Triple Specialization Model"
+            },
+            {
+                type: "paragraph",
+                text: "Instead of being a 'graphic designer', become an 'animated logo designer for tech startups in the Middle East'. This type of specialization increases your market value 5-10 times."
+            },
+            {
+                type: "list",
+                items: [
+                    "Horizontal Specialization: Specific skill (logo design)",
+                    "Vertical Specialization: Specific industry (tech startups)",
+                    "Geographic Specialization: Specific region (Middle East)"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Case Study: Regular logo designer charges $50-100 per logo, while specialized tech company logo designer charges $500-2,000 per logo."
+            },
+            {
+                type: "subtitle",
+                text: "4.2 Advanced Pricing Strategies for Freelancers"
+            },
+            {
+                type: "paragraph",
+                text: "From Hourly Pricing to Value-Based Pricing"
+            },
+            {
+                type: "list",
+                items: [
+                    "Old Model: $50/hour × 10 hours = $500",
+                    "New Model: Value delivered = increasing client sales by $50,000 → Price: $5,000",
+                    "How to Calculate Service Value: Analyzing service impact on client profits"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Triple Service Package System"
+            },
+            {
+                type: "list",
+                items: [
+                    "Basic Package ($1,000): Solving basic problem",
+                    "Intermediate Package ($2,500): Basic solution + additional improvements",
+                    "Advanced Package ($5,000): All of the above + monthly consultations for 3 months"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Statistics: 60% choose intermediate package, 30% basic, 10% advanced. Total value: 1,000×3 + 2,500×6 + 5,000×1 = $23,000 for every 10 clients."
+            },
+            {
+                type: "subtitle",
+                text: "4.3 Freelance Platforms for Intermediate and Advanced Levels"
+            },
+            {
+                type: "paragraph",
+                text: "Level 1: General Platforms (For Beginners and Intermediates)"
+            },
+            {
+                type: "list",
+                items: [
+                    "Upwork: Best for medium-sized projects ($5,000-50,000)",
+                    "Toptal: For highly experienced programmers and designers (rate: $80-200/hour)",
+                    "Gun.io: For specialized web and app developers"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Level 2: Specialized Platforms (For Advanced)"
+            },
+            {
+                type: "list",
+                items: [
+                    "Working Not Working (For Creatives): Rates $150-500/hour",
+                    "Crew (For Large Projects): Projects starting from $25,000",
+                    "Expert360 (For Consultants): Large-scale consulting projects"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "4.4 Transition from Individual Work to Team and Agency Building"
+            },
+            {
+                type: "paragraph",
+                text: "Five Stages of Transition to Agency:"
+            },
+            {
+                type: "paragraph",
+                text: "Stage 1: Documentation and Repetition (3 Months)"
+            },
+            {
+                type: "list",
+                items: [
+                    "Documenting every work process in detailed manual",
+                    "Building ready templates for offers, contracts, delivery",
+                    "Identifying processes that can be delegated",
+                    "Starting to delegate simple small tasks"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Stage 2: Partial Delegation (3-6 Months)"
+            },
+            {
+                type: "list",
+                items: [
+                    "Delegating 30% of repetitive tasks",
+                    "Hiring part-time virtual assistant",
+                    "Building training system for new employees",
+                    "Developing quality management process"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Stage 3: Forming Core Team (6-12 Months)"
+            },
+            {
+                type: "list",
+                items: [
+                    "Hiring 2-3 specialists full-time/part-time",
+                    "Developing internal project management system",
+                    "Building recurring client base",
+                    "Increasing billing rates by 30-50%"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "4.5 Case Studies: 3 Successful Transition Paths from Freelancer to Agency"
+            },
+            {
+                type: "paragraph",
+                text: "First Case: From Freelance Designer to Specialized Design Agency"
+            },
+            {
+                type: "paragraph",
+                text: "Mohammed, graphic designer, started offering design services on Khamsat for $50-100 per design. After 18 months, achieved:"
+            },
+            {
+                type: "list",
+                items: [
+                    "Specialized design agency for startup identities",
+                    "Team of 5 designers and web developer",
+                    "Project rate: $5,000-25,000",
+                    "Total annual revenue: $320,000"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Detailed steps available in Appendix B."
+            }
+        ]
+    },
+    {
+        title: "Chapter 5: Automation and Systems - Engineering True Passive Income",
+        content: [
+            {
+                type: "subtitle",
+                text: "5.1 Automation Philosophy: Building Systems That Work While You Sleep"
+            },
+            {
+                type: "paragraph",
+                text: "Financial Parkinson's Law: 'Work expands to fill the time available for its completion'. Solution: Systems that accomplish work in specific time with consistent quality."
+            },
+            {
+                type: "paragraph",
+                text: "Three Levels of Automation:"
+            },
+            {
+                type: "list",
+                items: [
+                    "Basic Automation: Automating repetitive tasks (email, alerts, reports)",
+                    "Intermediate Automation: Automating processes (marketing, sales, support)",
+                    "Advanced Automation: Automating entire business (digital manufacturing, delivery, follow-up)"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "5.2 Free and Paid Automation Tools That Save 20 Hours Weekly"
+            },
+            {
+                type: "paragraph",
+                text: "Completely Free:"
+            },
+            {
+                type: "list",
+                items: [
+                    "Zapier (100 tasks/month): Automating connections between applications",
+                    "IFTTT: Automating simple tasks on phone and web",
+                    "Integromat (Free Plan): Advanced alternative to Zapier",
+                    "n8n (Open Source): Most powerful self-hosted automation tool"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Paid But Worth It (Less than $50 monthly):"
+            },
+            {
+                type: "list",
+                items: [
+                    "Make (formerly Integromat): $29 monthly for 10,000 operations",
+                    "Zapier Professional: $49 monthly for 750 tasks",
+                    "Pipedream: $19 monthly for advanced operations"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "5.3 Complete Automation Models (With Practical Examples)"
+            },
+            {
+                type: "paragraph",
+                text: "Model 1: Marketing and Sales Automation for Digital Product"
+            },
+            {
+                type: "list",
+                items: [
+                    "Step 1: Visitor fills subscription form → Added to Google Sheets",
+                    "Step 2: Automatic welcome email via Mailchimp",
+                    "Step 3: After 24 hours, sending free lesson via email",
+                    "Step 4: After 3 days, sending special purchase offer",
+                    "Step 5: Upon purchase, automatic product delivery + adding to customer list",
+                    "Step 6: After week, sending satisfaction survey + complementary product offer"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Monthly Cost: $49 (Zapier) + $29 (ConvertKit) = $78 monthly. Time Saving: 15-20 hours weekly."
+            },
+            {
+                type: "subtitle",
+                text: "5.4 Smart Delegation: How to Hire Your First Virtual Employee?"
+            },
+            {
+                type: "paragraph",
+                text: "30-Day Delegation Plan:"
+            },
+            {
+                type: "paragraph",
+                text: "Week 1: Preparation and Research"
+            },
+            {
+                type: "list",
+                items: [
+                    "Day 1-3: Identifying 10 repetitive tasks that can be delegated",
+                    "Day 4-5: Documenting each task with detailed guide",
+                    "Day 6-7: Researching suitable hiring platforms"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Week 2-3: Hiring and Training"
+            },
+            {
+                type: "list",
+                items: [
+                    "Day 8-10: Publishing advertisement and conducting interviews",
+                    "Day 11-14: Hiring part-time virtual assistant (10-20 hours weekly)",
+                    "Day 15-21: Intensive training on repetitive tasks"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "5.5 Case Studies: How These People Achieved 80% of Their Income Passively?"
+            },
+            {
+                type: "paragraph",
+                text: "Noura, Health-Specialized Blogger"
+            },
+            {
+                type: "list",
+                items: [
+                    "Passive Income 1: Nutrition e-books ($2,500 monthly)",
+                    "Passive Income 2: Recorded video courses ($3,800 monthly)",
+                    "Passive Income 3: Digital products (templates, tools) ($1,900 monthly)",
+                    "Passive Income 4: Affiliate marketing for health products ($2,300 monthly)",
+                    "Total Passive Income: $10,500 monthly",
+                    "Active Income (Direct consultations and training): $2,500 monthly",
+                    "Passive Income Ratio: 80.7%"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Systems she uses: Full marketing automation, team of 3 virtual assistants, automatic product delivery systems."
+            }
+        ]
+    },
+    {
+        title: "Chapter 6: Advanced Digital Marketing - Engineering Continuous Customer Flow",
+        content: [
+            {
+                type: "subtitle",
+                text: "6.1 Integrated Marketing Framework: From Awareness to Loyalty"
+            },
+            {
+                type: "paragraph",
+                text: "Five-Stage Customer Journey (Awareness → Interest → Consideration → Purchase → Loyalty)"
+            },
+            {
+                type: "list",
+                items: [
+                    "Stage 1: Awareness: Customer realizes their problem",
+                    "Stage 2: Interest: Searches for possible solutions", 
+                    "Stage 3: Consideration: Compares between solutions",
+                    "Stage 4: Purchase: Makes purchase decision",
+                    "Stage 5: Loyalty: Becomes brand promoter"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "6.2 Advanced Customer Generation Strategies (Not Just SEO)"
+            },
+            {
+                type: "paragraph",
+                text: "Strategy 1: Advanced Content Marketing"
+            },
+            {
+                type: "list",
+                items: [
+                    "Smart Writing: Content achieving 3 goals (education, marketing, conversion)",
+                    "Strategic Distribution: Publishing content in 7 specialized channels",
+                    "Reuse: Converting one article into 10 different content forms",
+                    "Measurement and Development: Analyzing performance of each content piece and improving it"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Strategy 2: Relationship Marketing"
+            },
+            {
+                type: "list",
+                items: [
+                    "Building network of 50 influential people in your specialization field",
+                    "Mutual Cooperation Model (Give before you take)",
+                    "Smart Follow-up Systems (Not annoying but effective)",
+                    "Strategic partnerships creating value for both parties"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "6.3 Advanced Conversion Techniques That Multiply Your Sales"
+            },
+            {
+                type: "paragraph",
+                text: "Technique 1: Psychological Triggers"
+            },
+            {
+                type: "list",
+                items: [
+                    "Scarcity Theory: 'Only 5 copies remaining'",
+                    "Social Proof Theory: '1,247 people joined this month'",
+                    "Authority Theory: 'As mentioned in Harvard Business Review blog'",
+                    "Consistency Commitment Theory: 'As you previously agreed on the importance of...'"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Technique 2: Conversion Rate Optimization (CRO)"
+            },
+            {
+                type: "list",
+                items: [
+                    "Advanced A/B Testing: Testing 3 variables simultaneously",
+                    "User Behavior Analysis: Screen recordings + scroll maps",
+                    "Landing Page Optimization: The 5-Second Model (must understand offer in 5 seconds)",
+                    "Friction Removal: Reducing number of steps to purchase"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "6.4 Advanced Data Analytics: Making Data-Driven Decisions"
+            },
+            {
+                type: "paragraph",
+                text: "Basic Tools:"
+            },
+            {
+                type: "list",
+                items: [
+                    "Google Analytics 4: Advanced user behavior tracking",
+                    "Microsoft Clarity: Completely free behavioral analysis",
+                    "Hotjar: Screen recordings + opinion surveys",
+                    "Google Search Console: Organic search performance analysis"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Indicators to Track Daily:"
+            },
+            {
+                type: "list",
+                items: [
+                    "Number of new and returning visitors",
+                    "Highest quality traffic sources",
+                    "Most common exit pages",
+                    "Conversion rate per marketing channel"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "6.5 Case Studies: Marketing Campaigns Achieving $10,000+ with Less Than $1,000 Budget"
+            },
+            {
+                type: "paragraph",
+                text: "First Campaign: Launching New Digital Product"
+            },
+            {
+                type: "list",
+                items: [
+                    "Budget: $800",
+                    "Strategy: Content marketing + small partnerships",
+                    "Results: $14,200 sales in 30 days",
+                    "ROI: 1,675%",
+                    "Customer Acquisition Cost: Only $5.63"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Detailed steps available in Appendix C."
+            }
+        ]
+    },
+    {
+        title: "Chapter 7: Sustainable Growth and Expansion - From $1,000 to $10,000 Monthly",
+        content: [
+            {
+                type: "subtitle",
+                text: "7.1 Gradual Growth Framework: The Five Expansion Stages"
+            },
+            {
+                type: "paragraph",
+                text: "Stage 1: Foundation ($1,000 Monthly)"
+            },
+            {
+                type: "list",
+                items: [
+                    "Goal: Proving business concept and building basic system",
+                    "Duration: 3-6 months",
+                    "Standard: Achieving recurring profit from one income source",
+                    "Focus: Mastery before expansion"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Stage 2: Empowerment ($3,000 Monthly)"
+            },
+            {
+                type: "list",
+                items: [
+                    "Goal: Automating processes and building mini team",
+                    "Duration: 6-12 months",
+                    "Standard: 30% passive income, at least one assistant team",
+                    "Focus: Building systems and delegation"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "7.2 Advanced Expansion Strategies"
+            },
+            {
+                type: "paragraph",
+                text: "Strategy 1: Vertical Expansion (Deepening in One Field)"
+            },
+            {
+                type: "list",
+                items: [
+                    "Adding complementary products for existing customers",
+                    "Raising prices while adding higher value",
+                    "Providing advanced consulting services",
+                    "Building paid community for loyal customers"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Strategy 2: Horizontal Expansion (Entering New Fields)"
+            },
+            {
+                type: "list",
+                items: [
+                    "Utilizing existing skills in new fields",
+                    "Strategic partnerships with creators in other fields",
+                    "Investing in digital products for promising fields",
+                    "Licensing knowledge and expertise"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "7.3 Risk Management in Digital Business"
+            },
+            {
+                type: "paragraph",
+                text: "Top 7 Risks in Digital Business and How to Avoid Them:"
+            },
+            {
+                type: "list",
+                items: [
+                    "Legal Risks: Ensuring compliance with local and international laws",
+                    "Single Platform Dependency Risks: Diversifying across at least 3 platforms",
+                    "Market Volatility Risks: Building diverse income sources",
+                    "Digital Security Risks: Using best security and protection practices",
+                    "Health and Burnout Risks: Building systems allowing vacations",
+                    "Competition Risks: Permanent specialization and continuous differentiation",
+                    "Temporary Trend Dependency Risks: Building businesses on fundamental needs"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "7.4 Advanced Financial Planning for Digital Business"
+            },
+            {
+                type: "paragraph",
+                text: "Smart Financial Allocation Model (30/30/30/10)"
+            },
+            {
+                type: "list",
+                items: [
+                    "30% for Growth: Reinvesting in marketing and development",
+                    "30% for Founder: Personal salary and expenses",
+                    "30% for Emergencies and Investments: Savings and external investments",
+                    "10% for Learning and Development: Courses, books, conferences"
+                ]
+            },
+            {
+                type: "subtitle",
+                text: "7.5 Final Roadmap: 12-Month Plan to Reach $10,000 Monthly"
+            },
+            {
+                type: "paragraph",
+                text: "Months 1-3: Foundation and Testing"
+            },
+            {
+                type: "list",
+                items: [
+                    "Week 1-4: Research and planning",
+                    "Week 5-8: Building initial product/service",
+                    "Week 9-12: Testing and initial launch",
+                    "Goal: Achieving first $1,000"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Months 4-6: Improvement and Expansion"
+            },
+            {
+                type: "list",
+                items: [
+                    "Month 4: Data analysis and offer improvement",
+                    "Month 5: Adding new marketing channels",
+                    "Month 6: Developing additional products/services",
+                    "Goal: Reaching $3,000 monthly"
+                ]
+            },
+            {
+                type: "paragraph",
+                text: "Months 7-12: Automation and Repetition"
+            },
+            {
+                type: "list",
+                items: [
+                    "Month 7-8: Automating 50% of operations",
+                    "Month 9-10: Hiring first assistant/team",
+                    "Month 11-12: Repeating model in new fields",
+                    "Goal: Reaching $10,000 monthly"
+                ]
+            },
+            {
+                type: "quote",
+                text: "Reaching the first $1,000 monthly requires skill, but reaching $10,000 monthly requires a system. The system you built to achieve the first thousand is the same one that will get you the ten thousand.",
+                author: "Amjad Al-Kalbani"
+            }
+        ]
+    }
 ];
 
 // ==============================================
-// وظائف إضافية للكتاب الموسع
+// Additional Functions for Expanded Book
 // ==============================================
 
-// حساب عدد الصفحات التقريبي
+// Calculate approximate number of pages
 function calculateBookPages(contentArray) {
     let totalWords = 0;
     contentArray.forEach(chapter => {
@@ -1058,11 +2060,11 @@ function calculateBookPages(contentArray) {
         });
     });
     
-    // متوسط 250 كلمة لكل صفحة
+    // Average 250 words per page
     return Math.ceil(totalWords / 250);
 }
 
-// عرض إحصائيات الكتاب
+// Display book statistics
 const arabicPages = calculateBookPages(arabicBookContent);
 const englishPages = calculateBookPages(englishBookContent);
 
@@ -1072,3 +2074,14 @@ console.log(`📖 Book Statistics:
 - Total Chapters: ${arabicBookContent.length}
 - Estimated Reading Time: ${Math.ceil((arabicPages * 2) / 60)} hours
 - Word Count: Approximately ${arabicPages * 250} words`);
+
+// Export for use in main application
+window.bookContent = {
+    arabic: arabicBookContent,
+    english: englishBookContent,
+    stats: {
+        arabicPages,
+        englishPages,
+        totalChapters: arabicBookContent.length
+    }
+};
