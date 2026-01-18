@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كيف تحقق 1000$ شهريًا - أمجد الكلباني</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- الأنماط المخصصة -->
+    <link rel="stylesheet" href="themes.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- الخطوط -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="light-mode">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-journal-bookmark-fill me-2"></i>
+                <span class="book-title">الطريق إلى 1000$</span>
+            </a>
+            
+            <div class="d-flex align-items-center">
+                <!-- تبديل اللغة -->
+                <div class="language-switcher me-3">
+                    <button id="langToggle" class="btn btn-sm lang-btn">
+                        <span class="lang-text">EN</span>
+                        <i class="bi bi-translate ms-1"></i>
+                    </button>
+                </div>
+                
+                <!-- تبديل الوضع -->
+                <div class="theme-switcher">
+                    <button id="themeToggle" class="btn btn-sm theme-btn">
+                        <i class="bi bi-sun-fill sun-icon"></i>
+                        <i class="bi bi-moon-fill moon-icon"></i>
+                    </button>
+                </div>
+                
+                <!-- فهرس الكتاب -->
+                <button class="btn btn-outline-primary ms-3" id="tocToggle">
+                    <i class="bi bi-list"></i>
+                    <span class="d-none d-md-inline">فهرس</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- الفهرس الجانبي -->
+    <aside class="toc-sidebar" id="tocSidebar">
+        <div class="toc-header">
+            <h5><i class="bi bi-bookmark"></i> فهرس الكتاب</h5>
+            <button class="btn-close" id="tocClose"></button>
+        </div>
+        <div class="toc-content" id="tocContent">
+            <!-- سيتم ملؤه بالجافاسكريبت -->
+        </div>
+    </aside>
+
+    <!-- غلاف الكتاب -->
+    <header class="book-cover">
+        <div class="cover-overlay"></div>
+        <div class="container cover-content">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-8">
+                    <span class="badge bg-primary mb-3">الإصدار الأول 2026</span>
+                    <h1 class="display-3 fw-bold mb-4" id="bookTitle">الطريق العملي إلى 1000$ شهريًا</h1>
+                    <p class="lead mb-4" id="bookSubtitle">دليل المتقنين للدخل الرقمي المستدام</p>
+                    
+                    <div class="author-info d-flex align-items-center mb-5">
+                        <div class="author-avatar me-3">
+                            <div class="avatar-placeholder">
+                                <i class="bi bi-person-circle"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">أمجد الكلباني</h5>
+                            <p class="text-muted mb-0">خبير الاقتصاد الرقمي والتحول المالي</p>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-buttons">
+                        <button class="btn btn-primary btn-lg me-3" id="startReadingBtn">
+                            <i class="bi bi-book me-2"></i>
+                            ابدأ القراءة الآن
+                        </button>
+                        <button class="btn btn-outline-light btn-lg" id="buyBookBtn">
+                            <i class="bi bi-cart3 me-2"></i>
+                            شراء الكتاب (19$)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <i class="bi bi-chevron-double-down"></i>
+        </div>
+    </header>
+
+    <!-- منطقة القراءة الرئيسية -->
+    <main class="book-reader" id="bookReader">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 col-xl-8">
+                    <!-- عناصر التحكم بالصفحات -->
+                    <div class="reading-controls sticky-top">
+                        <div class="controls-inner">
+                            <button class="btn btn-outline-secondary" id="prevPage">
+                                <i class="bi bi-chevron-right"></i>
+                                السابقة
+                            </button>
+                            
+                            <div class="page-info">
+                                <span id="currentPage">1</span> / <span id="totalPages">1</span>
+                            </div>
+                            
+                            <button class="btn btn-outline-secondary" id="nextPage">
+                                التالية
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+                            
+                            <div class="progress-container ms-4">
+                                <div class="progress" style="height: 6px; width: 120px;">
+                                    <div id="readingProgress" class="progress-bar" role="progressbar"></div>
+                                </div>
+                                <small class="text-muted">التقدم</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- محتوى الكتاب -->
+                    <div class="book-content" id="bookContent">
+                        <!-- سيتم ملؤه بالجافاسكريبت -->
+                    </div>
+                    
+                    <!-- عناصر التحكم السفلية -->
+                    <div class="reading-controls-bottom mt-5">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-primary" id="prevChapter">
+                                <i class="bi bi-arrow-right-short"></i>
+                                الفصل السابق
+                            </button>
+                            
+                            <div class="d-flex">
+                                <button class="btn btn-sm btn-outline-secondary me-2" id="fontDecrease">
+                                    <i class="bi bi-dash-lg"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary" id="fontIncrease">
+                                    <i class="bi bi-plus-lg"></i>
+                                </button>
+                            </div>
+                            
+                            <button class="btn btn-outline-primary" id="nextChapter">
+                                الفصل التالي
+                                <i class="bi bi-arrow-left-short"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- فوتر -->
+    <footer class="book-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>حقوق النشر</h5>
+                    <p>© 2026 أمجد الكلباني. جميع الحقوق محفوظة.</p>
+                    <p>يُمنع نسخ أو توزيع هذا الكتاب دون إذن كتابي من المؤلف.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <h5>تواصل مع المؤلف</h5>
+                    <div class="social-links">
+                        <a href="#" class="btn btn-outline-light btn-sm me-2">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm me-2">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm">
+                            <i class="bi bi-envelope"></i>
+                        </a>
+                    </div>
+                    <p class="mt-3">amjad@1000book.com</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="book-content.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
