@@ -1,0 +1,297 @@
+/* الأنماط العامة للكتاب */
+:root {
+    --font-size-base: 1rem;
+    --line-height-base: 1.8;
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    line-height: var(--line-height-base);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    padding-top: 70px;
+}
+
+/* شريط التنقل */
+.navbar {
+    backdrop-filter: blur(10px);
+    background-color: rgba(var(--nav-bg-rgb), 0.95);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+    transition: all var(--transition-speed);
+    z-index: 1030;
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    color: var(--primary-color) !important;
+}
+
+/* أزرار التبديل */
+.lang-btn, .theme-btn {
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    transition: all var(--transition-speed);
+    border: 1px solid var(--border-color);
+}
+
+.theme-btn .sun-icon {
+    display: block;
+}
+
+.theme-btn .moon-icon {
+    display: none;
+}
+
+.dark-mode .theme-btn .sun-icon {
+    display: none;
+}
+
+.dark-mode .theme-btn .moon-icon {
+    display: block;
+}
+
+/* غلاف الكتاب */
+.book-cover {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    color: white;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.cover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.cover-content {
+    position: relative;
+    z-index: 2;
+    padding: 6rem 0;
+}
+
+.author-avatar .avatar-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+    font-size: 1.5rem;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* منطقة القراءة */
+.book-reader {
+    padding: 4rem 0;
+    min-height: 100vh;
+}
+
+.reading-controls {
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color);
+}
+
+.controls-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.page-info {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    min-width: 80px;
+    text-align: center;
+}
+
+/* محتوى الكتاب */
+.book-content {
+    background: var(--card-bg);
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    margin-bottom: 3rem;
+    border: 1px solid var(--border-color);
+}
+
+.chapter {
+    margin-bottom: 4rem;
+    page-break-inside: avoid;
+}
+
+.chapter:last-child {
+    margin-bottom: 0;
+}
+
+.chapter-title {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--primary-color);
+    position: relative;
+}
+
+.chapter-title::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    right: 0;
+    width: 100px;
+    height: 3px;
+    background: var(--accent-color);
+}
+
+.section-title {
+    color: var(--secondary-color);
+    margin: 2rem 0 1rem 0;
+    font-weight: 600;
+}
+
+/* الفهرس الجانبي */
+.toc-sidebar {
+    position: fixed;
+    top: 0;
+    left: -350px;
+    width: 320px;
+    height: 100vh;
+    background: var(--card-bg);
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.15);
+    z-index: 1040;
+    transition: left var(--transition-speed);
+    border-left: 1px solid var(--border-color);
+}
+
+.toc-sidebar.active {
+    left: 0;
+}
+
+.toc-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toc-content {
+    padding: 1.5rem;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+
+.toc-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-light);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toc-item:hover {
+    color: var(--primary-color);
+    padding-right: 10px;
+}
+
+.toc-item.active {
+    color: var(--primary-color);
+    font-weight: 600;
+    border-right: 3px solid var(--primary-color);
+    background: rgba(var(--primary-rgb), 0.05);
+}
+
+/* فوتر */
+.book-footer {
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 3rem 0;
+    margin-top: 4rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* تأثيرات الصفحة */
+.page {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.page.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    position: absolute;
+    pointer-events: none;
+}
+
+/* التجاوب */
+@media (max-width: 768px) {
+    .cover-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .book-content {
+        padding: 2rem 1.5rem;
+    }
+    
+    .controls-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .toc-sidebar {
+        width: 280px;
+        left: -280px;
+    }
+    
+    .reading-controls {
+        position: static !important;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .chapter-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-title {
+        font-size: 1.4rem;
+    }
+    
+    body {
+        padding-top: 60px;
+    }
+}
