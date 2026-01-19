@@ -3,346 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="كتاب إلكتروني متكامل يرشدك إلى تحقيق 1000$ شهريًا عبر الإنترنت">
-    <meta name="author" content="أمجد الكلباني">
-    <meta name="keywords" content="دخل رقمي, عمل حر, منتجات رقمية, تسويق بالعمولة, تحقيق دخل">
-    
-    <title>الطريق إلى 1000$ شهريًا - أمجد الكلباني (2026)</title>
-    
-    <!-- Bootstrap 5 CSS -->
+    <title>الطريق إلى 1000$ شهريًا - ابدأ رحلتك نحو الحرية المالية</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    
-    <!-- الأنماط المخصصة -->
-    <link rel="stylesheet" href="themes.css">
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- الخطوط -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Open Graph tags -->
-    <meta property="og:title" content="الطريق إلى 1000$ شهريًا">
-    <meta property="og:description" content="كتاب إلكتروني متكامل لتحقيق الدخل الرقمي">
-    <meta property="og:type" content="book">
-    <meta property="og:locale" content="ar_AR">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #10b981; /* لون أخضر مريح ويدل على النجاح */
+            --dark-green: #059669;
+            --light-bg: #f8fafc;
+        }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--light-bg);
+            color: #1f2937;
+            line-height: 1.8;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 0;
+            border-radius: 0 0 2rem 2rem;
+        }
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background-color: rgba(16, 185, 129, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--primary-green);
+            font-size: 1.8rem;
+        }
+        .guarantee-badge {
+            background: linear-gradient(to right, #fbbf24, #f59e0b);
+            color: #78350f;
+            font-weight: bold;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+        .cta-button {
+            background-color: var(--primary-green);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            margin: 1rem 0.5rem;
+        }
+        .cta-button:hover {
+            background-color: var(--dark-green);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+            color: white;
+        }
+        .payhip-button-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript" src="https://payhip.com/payhip.js" defer></script>
 </head>
-<body class="light-mode">
-    <!-- شريط التنقل العلوي -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">
-                <i class="bi bi-journal-bookmark-fill me-2"></i>
-                <span class="book-title">الطريق إلى 1000$</span>
-            </a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="navbar-nav ms-auto">
-                    <div class="d-flex align-items-center">
-                        <!-- حقل البحث -->
-                        <div class="search-container me-3 d-none d-md-block">
-                            <input type="search" id="bookSearch" class="form-control form-control-sm" 
-                                   placeholder="بحث في الكتاب..." aria-label="Search">
-                        </div>
-                        
-                        <!-- تبديل اللغة -->
-                        <div class="language-switcher me-3">
-                            <button id="langToggle" class="btn btn-sm lang-btn" title="تبديل اللغة">
-                                <span class="lang-text">EN</span>
-                                <i class="bi bi-translate ms-1"></i>
-                            </button>
-                        </div>
-                        
-                        <!-- تبديل الوضع -->
-                        <div class="theme-switcher me-3">
-                            <button id="themeToggle" class="btn btn-sm theme-btn" title="تبديل الوضع">
-                                <i class="bi bi-sun-fill sun-icon"></i>
-                                <i class="bi bi-moon-fill moon-icon"></i>
-                            </button>
-                        </div>
-                        
-                        <!-- فهرس الكتاب -->
-                        <button class="btn btn-outline-primary btn-sm" id="tocToggle">
-                            <i class="bi bi-list"></i>
-                            <span class="d-none d-md-inline">فهرس</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- نتائج البحث -->
-    <div id="searchResults" class="search-results-container d-none"></div>
-
-    <!-- الفهرس الجانبي -->
-    <aside class="toc-sidebar" id="tocSidebar">
-        <div class="toc-header">
-            <h5><i class="bi bi-bookmark"></i> فهرس الكتاب</h5>
-            <button class="btn-close" id="tocClose"></button>
-        </div>
-        <div class="toc-content" id="tocContent">
-            <!-- سيتم ملؤه بالجافاسكريبت -->
-        </div>
-    </aside>
-
-    <!-- غلاف الكتاب -->
-    <header class="book-cover" id="bookCover">
-        <div class="cover-overlay"></div>
-        <div class="container cover-content">
-            <div class="row align-items-center min-vh-100">
-                <div class="col-lg-8">
-                    <span class="badge bg-primary mb-3">الإصدار الأول 2026</span>
-                    <h1 class="display-3 fw-bold mb-4" id="bookTitle">الطريق العملي إلى 1000$ شهريًا</h1>
-                    <p class="lead mb-4" id="bookSubtitle">دليل المتقنين للدخل الرقمي المستدام</p>
-                    
-                    <div class="author-info d-flex align-items-center mb-5">
-                        <div class="author-avatar me-3">
-                            <div class="avatar-placeholder">
-                                <i class="bi bi-person-circle"></i>
-                            </div>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">أمجد الكلباني</h5>
-                            <p class="text-muted mb-0">خبير الاقتصاد الرقمي والتحول المالي</p>
-                        </div>
-                    </div>
-                    
-                    <div class="cta-buttons">
-                        <button class="btn btn-primary btn-lg me-3" id="startReadingBtn">
-                            <i class="bi bi-book me-2"></i>
-                            ابدأ القراءة الآن
-                        </button>
-                        <button class="btn btn-outline-light btn-lg" id="buyBookBtn">
-                            <i class="bi bi-cart3 me-2"></i>
-                            شراء الكتاب (19$)
-                        </button>
-                    </div>
-                    
-                    <div class="book-stats mt-5">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="stat-item">
-                                    <h4>70+</h4>
-                                    <p>صفحة من المحتوى العملي</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="stat-item">
-                                    <h4>7</h4>
-                                    <p>فصول متكاملة</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="stat-item">
-                                    <h4>25+</h4>
-                                    <p>استراتيجية متقدمة</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="scroll-indicator">
-            <i class="bi bi-chevron-double-down"></i>
-        </div>
-    </header>
-
-    <!-- منطقة القراءة الرئيسية -->
-    <main class="book-reader" id="bookReader">
+<body>
+    <!-- قسم البطل الرئيسي -->
+    <section class="hero-section text-center">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-10 col-xl-8">
-                    <!-- عناصر التحكم بالصفحات -->
-                    <div class="reading-controls">
-                        <div class="controls-inner">
-                            <div class="navigation-buttons">
-                                <button class="btn btn-outline-secondary" id="prevPage" title="الصفحة السابقة">
-                                    <i class="bi bi-chevron-right"></i>
-                                    السابقة
-                                </button>
-                                
-                                <div class="page-info">
-                                    الفصل <span id="currentChapter">1</span> | 
-                                    صفحة <span id="currentPage">1</span> من <span id="totalPages">70</span>
-                                </div>
-                                
-                                <button class="btn btn-outline-secondary" id="nextPage" title="الصفحة التالية">
-                                    التالية
-                                    <i class="bi bi-chevron-left"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="progress-container">
-                                <div class="progress-label">
-                                    <small>التقدم في الكتاب</small>
-                                    <span id="progressPercentage">0%</span>
-                                </div>
-                                <div class="progress">
-                                    <div id="readingProgress" class="progress-bar" role="progressbar"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-10">
+                    <span class="guarantee-badge">كتاب يغير قواعد اللعبة - أكثر من 70 صفحة من الاستراتيجيات المجربة</span>
+                    <h1 class="display-4 fw-bold mb-4">هل أنت مستعد لكسر حاجز الـ <span class="text-warning">1000$</span> شهريًا عبر الإنترنت؟</h1>
+                    <p class="lead mb-5" style="font-size: 1.4rem;">اكتشف <strong>الطريق العملي</strong> الذي أخفاه "الخبراء". هذا ليس مجرد كتاب، بل هو <strong>خريطة تنفيذية</strong> من تأليف <strong>أمجد الكلباني</strong> تنتقل بك من الصفر إلى دخل رقمي مستدام في 90 يومًا.</p>
                     
-                    <!-- محتوى الكتاب -->
-                    <div class="book-content" id="bookContent">
-                        <!-- سيتم ملؤه بالجافاسكريبت -->
-                    </div>
-                    
-                    <!-- عناصر التحكم السفلية -->
-                    <div class="reading-controls-bottom">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="chapter-nav">
-                                <button class="btn btn-outline-primary" id="prevChapter">
-                                    <i class="bi bi-arrow-right-short"></i>
-                                    الفصل السابق
-                                </button>
-                            </div>
-                            
-                            <div class="reading-tools">
-                                <div class="btn-group" role="group">
-                                    <button class="btn btn-outline-secondary" id="fontDecrease" title="تصغير الخط">
-                                        <i class="bi bi-dash-lg"></i>
-                                    </button>
-                                    <button class="btn btn-outline-secondary" id="fontReset" title="استعادة الخط الافتراضي">
-                                        <i class="bi bi-fonts"></i>
-                                    </button>
-                                    <button class="btn btn-outline-secondary" id="fontIncrease" title="تكبير الخط">
-                                        <i class="bi bi-plus-lg"></i>
-                                    </button>
-                                </div>
-                                
-                                <button class="btn btn-outline-secondary ms-3" id="bookmarkBtn" title="إضافة إشارة مرجعية">
-                                    <i class="bi bi-bookmark"></i>
-                                </button>
-                                
-                                <button class="btn btn-outline-secondary ms-2" id="printBtn" title="طباعة الفصل">
-                                    <i class="bi bi-printer"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="chapter-nav">
-                                <button class="btn btn-outline-primary" id="nextChapter">
-                                    الفصل التالي
-                                    <i class="bi bi-arrow-left-short"></i>
-                                </button>
-                            </div>
+                    <div class="row justify-content-center text-start mt-5">
+                        <div class="col-md-8 col-lg-6">
+                            <ul class="list-unstyled" style="font-size: 1.1rem;">
+                                <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i> <strong>7 فصول عملية:</strong> من فلسفة الدخل الرقمي إلى هندسة الأنظمة الآلية.</li>
+                                <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i> <strong>خطط 90 يوم:</strong> خطوات يومية وأسبوعية قابلة للتنفيذ فورًا.</li>
+                                <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i> <strong>أدوات مجانية سرية:</strong> لا يعرفها 95% من المنافسين.</li>
+                                <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i> <strong>نماذج تسعير متقدمة:</strong> لبيع منتجك بـ 997$ بدلاً من 97$.</li>
+                                <li class="mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i> <strong>دراسات حالة عربية حقيقية:</strong> كيف حقق آخرون 4,200$ شهريًا كدخل سلبي.</li>
+                            </ul>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- الملاحق -->
-    <section class="appendices-section" id="appendicesSection">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10 col-xl-8">
-                    <h2 class="section-title text-center mb-5">الملاحق والموارد الإضافية</h2>
-                    <div class="row" id="appendicesList">
-                        <!-- سيتم ملؤه بالجافاسكريبت -->
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- فوتر -->
-    <footer class="book-footer">
+    <!-- قسم الدعوة للإجراء الرئيسية -->
+    <section class="py-6">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h5 class="footer-title">عن الكتاب</h5>
-                    <p>كتاب "الطريق العملي إلى 1000$ شهريًا" هو دليل متكامل يرشدك خطوة بخطوة لبناء مصادر دخل رقمية مستدامة.</p>
-                    <div class="copyright">
-                        <p class="mb-0">© 2026 أمجد الكلباني. جميع الحقوق محفوظة.</p>
-                        <p class="small">يُمنع نسخ أو توزيع هذا الكتاب دون إذن كتابي من المؤلف.</p>
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold mb-4">استثمر في مستقبلك الرقمي اليوم</h2>
+                    <p class="fs-5 mb-4">سعر الكتاب <del class="text-muted">49$</del> <br> <span class="display-6 fw-bold text-danger">19$ فقط</span> <br> <small class="text-muted">(سعر مخفض للإطلاق الأول)</small></p>
+                    
+                    <div class="payhip-button-container">
+                        <!-- زر Payhip - استخدم السمة "green" كما اقترحت -->
+                        <a href="https://payhip.com/b/4K0bD" class="payhip-buy-button cta-button" data-theme="green" data-product="4K0bD">
+                            <i class="bi bi-lock-fill me-2"></i> احصل على الكتاب الآن - دفع آمن
+                        </a>
+                        <script type="text/javascript" src="https://payhip.com/payhip.js"></script>
                     </div>
-                </div>
-                
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h5 class="footer-title">روابط سريعة</h5>
-                    <ul class="footer-links">
-                        <li><a href="#bookCover">الغلاف</a></li>
-                        <li><a href="#bookReader">بدء القراءة</a></li>
-                        <li><a href="#appendicesSection">الملاحق</a></li>
-                        <li><button class="btn-link" id="showToc">عرض الفهرس</button></li>
-                    </ul>
-                </div>
-                
-                <div class="col-lg-4">
-                    <h5 class="footer-title">تواصل مع المؤلف</h5>
-                    <div class="social-links mb-3">
-                        <a href="mailto:amjad@1000book.com" class="btn btn-outline-light btn-sm me-2" title="البريد الإلكتروني">
-                            <i class="bi bi-envelope"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-light btn-sm me-2" title="تويتر">
-                            <i class="bi bi-twitter"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-light btn-sm me-2" title="لينكد إن">
-                            <i class="bi bi-linkedin"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-light btn-sm" title="يوتيوب">
-                            <i class="bi bi-youtube"></i>
-                        </a>
-                    </div>
-                    <p class="contact-info">
-                        <i class="bi bi-envelope me-2"></i>wwwamjadcom909@gmail.com<br>
-                        <i class="bi bi-globe me-2"></i>https://senku989.github.io/book/#bookCover
-                    </p>
+                    
+                    <p class="text-muted mt-3"><i class="bi bi-shield-check text-success me-1"></i> شراء آمن • وصول فوري • تحديثات مجانية • ضمان استرداد لمدة 30 يوم</p>
                 </div>
             </div>
-            
-            <div class="footer-bottom text-center mt-4 pt-3 border-top">
-                <p class="small mb-0">هذا الكتاب مقدم كموقع إلكتروني تفاعلي للقراءة والتعلّم</p>
+        </div>
+    </section>
+
+    <!-- قسم ماذا سوف تتعلم -->
+    <section class="py-6 bg-white">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5">ماذا ستجد داخل الكتاب؟</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3 text-center">
+                    <div class="feature-icon">
+                        <i class="bi bi-lightbulb"></i>
+                    </div>
+                    <h5>أسس العقلية</h5>
+                    <p class="text-muted">7 مبادئ عقلية للمستقل الناجح وكيفية تبنيها.</p>
+                </div>
+                <div class="col-md-6 col-lg-3 text-center">
+                    <div class="feature-icon">
+                        <i class="bi bi-box-seam"></i>
+                    </div>
+                    <h5>منتجات رقمية ذكية</h5>
+                    <p class="text-muted">بناء منتجات تحقق 10,000$ وخطط تسعير متدرجة.</p>
+                </div>
+                <div class="col-md-6 col-lg-3 text-center">
+                    <div class="feature-icon">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+                    <h5>تسويق بالعمولة</h5>
+                    <p class="text-muted">استراتيجيات متقدمة لبناء دخل سلبي حقيقي.</p>
+                </div>
+                <div class="col-md-6 col-lg-3 text-center">
+                    <div class="feature-icon">
+                        <i class="bi bi-gear"></i>
+                    </div>
+                    <h5>أتمتة كاملة</h5>
+                    <p class="text-muted">أنظمة توفر 20 ساعة أسبوعيًا وتحرر وقتك.</p>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <!-- قسم الضمان والندرة -->
+    <section class="py-6" style="background-color: #fef3c7;">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-9">
+                    <h3 class="fw-bold mb-4"><i class="bi bi-clock-history text-warning me-2"></i> تحذير: العرض محدود</h3>
+                    <p class="fs-5">لضمان جودة الدعم والتجربة لكل قارئ، <strong>سيتم رفع السعر إلى 29$</strong> بعد بيع أول 1000 نسخة. هذا ليس تكتيكًا تسويقيًا، بل التزام منا تجاه تقديم قيمة استثنائية لكل مشترك.</p>
+                    <p class="fs-5 mt-4">إذا لم تجد في هذا الكتاب قيمة تفوق قيمة استثمارك بعد 30 يومًا من التطبيق، <strong>فسنقوم برد كامل مالك بدون أي أسئلة</strong>.</p>
+                    <a href="https://payhip.com/b/4K0bD" class="cta-button mt-3">
+                        <i class="bi bi-arrow-right-circle me-2"></i> لا تفوت الفرصة، ابدأ الآن
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-4 text-center text-muted border-top">
+        <div class="container">
+            <p>© 2026 أمجد الكلباني. جميع الحقوق محفوظة. | <a href="privacy.html" class="text-decoration-none">سياسة الخصوصية</a> | <a href="terms.html" class="text-decoration-none">الشروط والأحكام</a></p>
+            <p class="small">هذه الصفحة هي مدخل إلى كتاب "الطريق العملي إلى 1000$ شهريًا". عملية الشراء تتم عبر منصة Payhip الآمنة.</p>
         </div>
     </footer>
 
-    <!-- Modal لشراء الكتاب -->
-    <div class="modal fade" id="purchaseModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">شراء الكتاب الرقمي</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="text-center mb-4">
-                        <h4 class="text-primary">الطريق العملي إلى 1000$ شهريًا</h4>
-                        <p class="text-muted">بسعر خاص: <span class="fw-bold fs-4">19$</span> فقط</p>
-                    </div>
-                    <div class="purchase-features">
-                        <ul>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> وصول فوري إلى الكتاب الكامل</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> تحديثات مجانية لمدة سنة</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> قوالب عملية للتحميل</li>
-                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> دعم عبر البريد الإلكتروني</li>
-                        </ul>
-                    </div>
-                    <div class="text-center mt-4">
-                        <button class="btn btn-primary btn-lg" id="confirmPurchase">
-                            <i class="bi bi-lock-fill me-2"></i>
-                            شراء الآن عبر الدفع الآمن
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="book-content.js"></script>
-    <script src="script.js"></script>
 </body>
 </html>
