@@ -3,135 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كتاب: الطريق إلى 1000$ شهريًا - مكتبتك</title>
-    <!-- سيتم إضافة جميع روابط الأنماط والإعدادات الخاصة بكتابك التفاعلي هنا -->
+    <title>كتاب 1000$ شهريًا - أمجد الكلباني</title>
+    
+    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- الأنماط المخصصة -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- الخطوط -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- يمكنك إضافة themes.css و style.css الخاصين بك هنا لاحقًا -->
-    <style>
-        /* أنماط مؤقتة للهيكل الأساسي */
-        body {
-            font-family: 'Cairo', sans-serif;
-            padding-top: 20px;
-            background-color: #f8f9fa;
-        }
-        .book-container {
-            background: white;
-            border-radius: 1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            min-height: 80vh;
-            padding: 2rem;
-        }
-        #auth-check-message {
-            min-height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
-    <!-- Firebase SDK للتحقق من الحالة -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyBICzx31xe84VL1ApfnZcMv7WpeGKMLGDc",
-            authDomain: "mybook-27306.firebaseapp.com",
-            projectId: "mybook-27306",
-            storageBucket: "mybook-27306.firebasestorage.app",
-            messagingSenderId: "1036259156306",
-            appId: "1:1036259156306:web:91fc319f437cc498c89a8b",
-            measurementId: "G-13XTR0FJV2"
-        };
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-
-        // مراقبة حالة المصادقة
-        onAuthStateChanged(auth, (user) => {
-            const authCheckElement = document.getElementById('auth-check-message');
-            const bookContentElement = document.getElementById('secured-book-content');
-            
-            if (user) {
-                // 👤 المستخدم مسجل الدخول
-                console.log("المستخدم مسجل الدخول:", user.email);
-                if(authCheckElement) authCheckElement.style.display = 'none';
-                if(bookContentElement) bookContentElement.style.display = 'block';
-                
-                // هنا يمكنك الآن تحميل واجهة كتابك التفاعلية الكاملة بأمان
-                loadBookInterface();
-            } else {
-                // ❌ لا يوجد مستخدم مسجل
-                console.log("لا يوجد مستخدم مسجل. يتم التوجيه إلى صفحة تسجيل الدخول.");
-                if(authCheckElement) {
-                    authCheckElement.innerHTML = `
-                        <div class="text-center">
-                            <i class="bi bi-shield-lock display-1 text-warning mb-3"></i>
-                            <h3 class="mb-3">يجب تسجيل الدخول للوصول إلى هذا المحتوى</h3>
-                            <p class="mb-4">هذا الكتاب متاح فقط للأعضاء الذين قاموا بالشراء.</p>
-                            <a href="login.html" class="btn btn-primary btn-lg">
-                                <i class="bi bi-box-arrow-in-right me-2"></i> الانتقال إلى صفحة تسجيل الدخول
-                            </a>
-                        </div>
-                    `;
-                }
-                if(bookContentElement) bookContentElement.style.display = 'none';
-                
-                // توجيه تلقائي بعد بضع ثوان
-                setTimeout(() => {
-                    window.location.href = "login.html";
-                }, 4000);
-            }
-        });
-
-        function loadBookInterface() {
-            // ✅ هذه الوظيفة ستقوم بتحميل كل كود كتابك التفاعلي
-            // بما في ذلك نظام الفصول، تبديل الوضع، الفهرس، إلخ.
-            // يمكنك نسخ ولصق محتوى ملف book.html القديم الخاص بك هنا،
-            // أو تحميله عبر fetch() من ملف منفصل.
-            
-            const container = document.getElementById('secured-book-content');
-            if(container) {
-                container.innerHTML = `
-                    <div class="text-center py-5">
-                        <h1 class="mb-4"><i class="bi bi-journal-bookmark-fill text-primary me-2"></i> الطريق العملي إلى 1000$ شهريًا</h1>
-                        <p class="lead">مرحبًا بعودتك! استمتع بقراءة كتابك.</p>
-                        <hr class="my-5">
-                        <p class="text-muted">سيتم تحميل واجهة القراءة الكاملة هنا...</p>
-                        <p><a href="#" onclick="logoutUser()" class="btn btn-outline-secondary"><i class="bi bi-box-arrow-right me-2"></i>تسجيل الخروج</a></p>
-                    </div>
-                `;
-                // هنا يمكنك استدعاء الدوال الأخرى التي تبني الكتاب التفاعلي
-            }
-        }
-
-        // دالة تسجيل الخروج (مثال)
-        window.logoutUser = async function() {
-            import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
-            const auth = getAuth();
-            await signOut(auth);
-            window.location.href = 'index.html';
-        };
-    </script>
 </head>
-<body>
-    <div class="container">
-        <div id="auth-check-message">
-            <!-- ستظهر رسالة "جاري التحقق..." هنا مؤقتًا -->
-            <div class="text-center">
-                <div class="spinner-border text-primary mb-3" role="status">
-                    <span class="visually-hidden">جاري التحميل...</span>
-                </div>
-                <h4>جاري التحقق من صلاحية وصولك إلى الكتاب...</h4>
+<body class="light-mode">
+    <!-- شريط التنقل البسيط -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-book"></i> كتاب 1000$ شهريًا
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <button class="btn btn-sm btn-outline-primary me-2" id="themeToggle">
+                            <i class="bi bi-moon"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-sm btn-outline-secondary" id="langToggle">
+                            EN
+                        </button>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
 
-        <!-- هذا القسم سيظهر فقط للمستخدمين المسجلين -->
-        <div id="secured-book-content" style="display: none;">
-            <!-- هنا سيتم تحميل كتابك التفاعلي الكامل -->
+    <!-- المحتوى الرئيسي -->
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h1 class="card-title text-center mb-4">الطريق العملي إلى 1000$ شهريًا</h1>
+                        <h3 class="card-subtitle text-center text-muted mb-4">أمجد الكلباني - 2026</h3>
+                        
+                        <!-- الفهرس -->
+                        <div class="table-of-contents mb-5">
+                            <h4 class="border-bottom pb-2">فهرس الكتاب</h4>
+                            <div id="tocList" class="list-group">
+                                <!-- سيتم ملؤه بالجافاسكريبت -->
+                            </div>
+                        </div>
+                        
+                        <!-- محتوى الكتاب -->
+                        <div id="bookContent" class="book-content">
+                            <!-- سيتم ملؤه بالجافاسكريبت -->
+                        </div>
+                        
+                        <!-- عناصر التحكم -->
+                        <div class="reading-controls mt-5 pt-3 border-top">
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-primary" id="prevBtn">
+                                        <i class="bi bi-chevron-right"></i> السابق
+                                    </button>
+                                </div>
+                                <div class="col text-center">
+                                    <span id="pageInfo">صفحة 1 من 70</span>
+                                </div>
+                                <div class="col text-end">
+                                    <button class="btn btn-primary" id="nextBtn">
+                                        التالي <i class="bi bi-chevron-left"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- الفوتر -->
+    <footer class="footer mt-5 py-4 bg-light">
+        <div class="container">
+            <p class="text-center text-muted mb-0">
+                © 2026 أمجد الكلباني. جميع الحقوق محفوظة.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- ملف جافا سكريبت مبسط -->
+    <script>
+        // الحالة الأساسية
+        const BookApp = {
+            currentPage: 1,
+            totalPages: 70,
+            currentChapter: 0,
+            isDarkMode: false,
+            isEnglish: false,
+            
+            init: function() {
+                console.log('بدء تحميل الكتاب...');
+                this.loadContent();
+                this.setupEventListeners();
+                this.updateUI();
+            },
+            
+            loadContent: function() {
+                // محتوى مبسط للكتاب
+                const chapters = [
+                    {
+                        title: "الفصل الأول: مقدمة في الدخل الرقمي",
+                        content: `
+                            <h2>الفصل الأول: مقدمة في الدخل الرقمي</h2>
+                            <p>في هذا الفصل، سنتعرف على أساسيات الدخل الرقمي ولماذا أصبح مهماً في عصرنا الحالي.</p>
+                            <h3>1.1 ما هو الدخل الرقمي؟</h3>
+                            <p>الدخل الرقمي هو أي دخل يتم تحقيقه عبر الإنترنت، سواء كان من خلال:</p>
+                            <ul>
+                                <li>بيع المنتجات الرقمية</li>
+                                <li>التسويق بالعمولة</li>
+                                <li>العمل الحر</li>
+                                <li>تقديم الخدمات عبر الإنترنت</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        title: "الفصل الثاني: المنتجات الرقمية",
+                        content: `
+                            <h2>الفصل الثاني: المنتجات الرقمية</h2>
+                            <p>تعلم كيفية إنشاء وبيع المنتجات الرقمية التي تحقق دخلاً مستمراً.</p>
+                        `
+                    }
+                ];
+                
+                // تحميل الفهرس
+                const tocList = document.getElementById('tocList');
+                tocList.innerHTML = '';
+                
+                chapters.forEach((chapter, index) => {
+                    const item = document.createElement('a');
+                    item.href = '#';
+                    item.className = 'list-group-item list-group-item-action';
+                    item.textContent = `${index + 1}. ${chapter.title}`;
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.loadChapter(index);
+                    });
+                    tocList.appendChild(item);
+                });
+                
+                // تحميل الفصل الأول
+                this.loadChapter(0);
+            },
+            
+            loadChapter: function(index) {
+                this.currentChapter = index;
+                const chapters = [
+                    {
+                        title: "الفصل الأول: مقدمة في الدخل الرقمي",
+                        content: `
+                            <h2>الفصل الأول: مقدمة في الدخل الرقمي</h2>
+                            <p>مرحباً بك في رحلتك نحو تحقيق 1000$ شهرياً. هذا ليس مجرد حلم، بل هو هدف واقعي يمكن تحقيقه إذا اتبعت الخطوات الصحيحة.</p>
+                            
+                            <h3>1.1 لماذا الدخل الرقمي؟</h3>
+                            <p>في عام 2026، أصبح الاقتصاد الرقمي يمثل أكثر من 40% من الاقتصاد العالمي. الأسباب التي تجعل الدخل الرقمي خياراً ذكياً:</p>
+                            <ul>
+                                <li><strong>المرونة:</strong> العمل من أي مكان وفي أي وقت</li>
+                                <li><strong>التكلفة المنخفضة:</strong> لا تحتاج إلى رأس مال كبير للبدء</li>
+                                <li><strong>الوصول العالمي:</strong> يمكنك الوصول إلى عملاء من جميع أنحاء العالم</li>
+                                <li><strong>الدخل المستمر:</strong> بعض المنتجات الرقمية تحقق دخلاً لسنوات</li>
+                            </ul>
+                            
+                            <h3>1.2 خرائط طريق عملية</h3>
+                            <p>هناك ثلاث طرق رئيسية لتحقيق 1000$ شهرياً:</p>
+                            <ol>
+                                <li>بيع المنتجات الرقمية (كتب، دورات، قوالب)</li>
+                                <li>التسويق بالعمولة (الترويج لمنتجات الآخرين)</li>
+                                <li>العمل الحر (تقديم خدماتك المهارية)</li>
+                            </ol>
+                            
+                            <div class="alert alert-info mt-4">
+                                <i class="bi bi-lightbulb"></i>
+                                <strong>نصيحة سريعة:</strong> ابدأ بطريقة واحدة فقط وأتقنها قبل الانتقال إلى الطريقة التالية.
+                            </div>
+                        `
+                    },
+                    {
+                        title: "الفصل الثاني: المنتجات الرقمية المربحة",
+                        content: `
+                            <h2>الفصل الثاني: المنتجات الرقمية المربحة</h2>
+                            <p>المنتجات الرقمية هي واحدة من أفضل طرق تحقيق الدخل السلبي. إليك دليلك الشامل:</p>
+                            
+                            <h3>2.1 أنواع المنتجات الرقمية</h3>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>نوع المنتج</th>
+                                        <th>متوسط السعر</th>
+                                        <th>صعوبة الإنشاء</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>الكتب الإلكترونية</td>
+                                        <td>10-50$</td>
+                                        <td>سهل</td>
+                                    </tr>
+                                    <tr>
+                                        <td>الدورات التدريبية</td>
+                                        <td>100-500$</td>
+                                        <td>متوسط</td>
+                                    </tr>
+                                    <tr>
+                                        <td>القوالب الجاهزة</td>
+                                        <td>20-200$</td>
+                                        <td>متوسط</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        `
+                    }
+                ];
+                
+                const contentDiv = document.getElementById('bookContent');
+                if (chapters[index]) {
+                    contentDiv.innerHTML = chapters[index].content;
+                }
+                
+                this.updateUI();
+            },
+            
+            setupEventListeners: function() {
+                document.getElementById('prevBtn').addEventListener('click', () => {
+                    if (this.currentChapter > 0) {
+                        this.currentChapter--;
+                        this.loadChapter(this.currentChapter);
+                    }
+                });
+                
+                document.getElementById('nextBtn').addEventListener('click', () => {
+                    if (this.currentChapter < 1) { // لدينا فصلين فقط في هذا المثال
+                        this.currentChapter++;
+                        this.loadChapter(this.currentChapter);
+                    }
+                });
+                
+                document.getElementById('themeToggle').addEventListener('click', () => {
+                    this.toggleTheme();
+                });
+                
+                document.getElementById('langToggle').addEventListener('click', () => {
+                    this.toggleLanguage();
+                });
+            },
+            
+            toggleTheme: function() {
+                this.isDarkMode = !this.isDarkMode;
+                document.body.classList.toggle('dark-mode', this.isDarkMode);
+                document.body.classList.toggle('light-mode', !this.isDarkMode);
+                
+                const icon = document.querySelector('#themeToggle i');
+                icon.classList.toggle('bi-moon', !this.isDarkMode);
+                icon.classList.toggle('bi-sun', this.isDarkMode);
+            },
+            
+            toggleLanguage: function() {
+                this.isEnglish = !this.isEnglish;
+                const btn = document.getElementById('langToggle');
+                btn.textContent = this.isEnglish ? 'AR' : 'EN';
+                
+                // في التطبيق الكامل، هنا ستغير كل النصوص
+                alert(this.isEnglish ? 'سيتم تحويل المحتوى للإنجليزية في الإصدار الكامل' : 'سيتم تحويل المحتوى للعربية في الإصدار الكامل');
+            },
+            
+            updateUI: function() {
+                document.getElementById('pageInfo').textContent = 
+                    `صفحة ${this.currentChapter + 1} من ${this.totalPages}`;
+                
+                // تحديث حالة الأزرار
+                document.getElementById('prevBtn').disabled = this.currentChapter === 0;
+                document.getElementById('nextBtn').disabled = this.currentChapter === 1;
+                
+                // تحديث الفهرس النشط
+                const tocItems = document.querySelectorAll('#tocList .list-group-item');
+                tocItems.forEach((item, index) => {
+                    item.classList.toggle('active', index === this.currentChapter);
+                });
+            }
+        };
+        
+        // بدء التطبيق عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            BookApp.init();
+        });
+    </script>
 </body>
 </html>
