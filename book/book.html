@@ -3,24 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كتاب 1000$ شهريًا - أمجد الكلباني</title>
-    
-    <!-- Bootstrap 5 -->
+    <title>الكتاب - طريقك إلى 1000$ شهريًا</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    
-    <!-- الأنماط المخصصة -->
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- الخطوط -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="light-mode">
-    <!-- شريط التنقل البسيط -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="bi bi-book"></i> كتاب 1000$ شهريًا
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-book-open"></i> كتاب 1000$ شهريًا
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -28,57 +22,93 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <button class="btn btn-sm btn-outline-primary me-2" id="themeToggle">
-                            <i class="bi bi-moon"></i>
-                        </button>
+                        <a class="nav-link" href="index.html">الرئيسية</a>
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-sm btn-outline-secondary" id="langToggle">
-                            EN
-                        </button>
+                        <span class="nav-link" id="userEmail"></span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light" href="#" onclick="logout()">تسجيل الخروج</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- المحتوى الرئيسي -->
+    <!-- محتوى الكتاب -->
     <div class="container mt-5 pt-5">
         <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <div class="card shadow-lg">
-                    <div class="card-body">
-                        <h1 class="card-title text-center mb-4">الطريق العملي إلى 1000$ شهريًا</h1>
-                        <h3 class="card-subtitle text-center text-muted mb-4">أمجد الكلباني - 2026</h3>
-                        
-                        <!-- الفهرس -->
-                        <div class="table-of-contents mb-5">
-                            <h4 class="border-bottom pb-2">فهرس الكتاب</h4>
-                            <div id="tocList" class="list-group">
-                                <!-- سيتم ملؤه بالجافاسكريبت -->
+            <div class="col-lg-3 d-none d-lg-block">
+                <!-- الفهرس الجانبي -->
+                <div class="sticky-top" style="top: 80px;">
+                    <div class="card toc-card">
+                        <div class="card-header">
+                            <h5 class="mb-0"><i class="fas fa-list"></i> فهرس الكتاب</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="tableOfContents" class="toc-list">
+                                <!-- سيتم ملؤه بواسطة script.js -->
                             </div>
                         </div>
-                        
-                        <!-- محتوى الكتاب -->
-                        <div id="bookContent" class="book-content">
-                            <!-- سيتم ملؤه بالجافاسكريبت -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <!-- رسالة للمستخدمين غير المشترين -->
+                <div id="previewMessage" class="alert alert-info d-none">
+                    <h4><i class="fas fa-eye"></i> العرض التجريبي</h4>
+                    <p>أنت الآن تشاهد <strong>عينة محدودة</strong> من الكتاب. لقراءة المحتوى الكامل (أكثر من 70 صفحة)، يرجى <a href="login.html?action=payment" class="alert-link">شراء الكتاب</a>.</p>
+                </div>
+
+                <!-- عناصر التحكم في القراءة -->
+                <div class="reading-controls card mb-4">
+                    <div class="card-body py-3">
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <button class="btn btn-outline-primary" id="prevChapter"><i class="fas fa-arrow-right"></i> الفصل السابق</button>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <h5 class="mb-0" id="currentChapterTitle">الفصل الأول</h5>
+                                <small class="text-muted" id="pageInfo">صفحة 1 من 70</small>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <button class="btn btn-outline-primary" id="nextChapter">الفصل التالي <i class="fas fa-arrow-left"></i></button>
+                            </div>
                         </div>
-                        
-                        <!-- عناصر التحكم -->
-                        <div class="reading-controls mt-5 pt-3 border-top">
-                            <div class="row">
-                                <div class="col">
-                                    <button class="btn btn-primary" id="prevBtn">
-                                        <i class="bi bi-chevron-right"></i> السابق
-                                    </button>
+                    </div>
+                </div>
+
+                <!-- منطقة عرض الكتاب -->
+                <div class="book-content card shadow-lg">
+                    <div class="card-body p-4 p-md-5">
+                        <div id="bookContent">
+                            <!-- سيتم ملؤه بواسطة script.js -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- أدوات إضافية -->
+                <div class="reading-tools mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <div class="btn-group" role="group">
+                                        <button class="btn btn-outline-secondary" id="fontDecrease"><i class="fas fa-minus"></i></button>
+                                        <button class="btn btn-outline-secondary" id="fontReset">حجم الخط</button>
+                                        <button class="btn btn-outline-secondary" id="fontIncrease"><i class="fas fa-plus"></i></button>
+                                    </div>
+                                    <div class="form-check form-check-inline ms-3">
+                                        <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                                        <label class="form-check-label" for="darkModeToggle">الوضع الداكن</label>
+                                    </div>
                                 </div>
-                                <div class="col text-center">
-                                    <span id="pageInfo">صفحة 1 من 70</span>
-                                </div>
-                                <div class="col text-end">
-                                    <button class="btn btn-primary" id="nextBtn">
-                                        التالي <i class="bi bi-chevron-left"></i>
-                                    </button>
+                                <div class="col-md-6 text-end">
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar" id="readingProgress" role="progressbar"></div>
+                                    </div>
+                                    <small class="text-muted">التقدم في القراءة: <span id="progressPercent">0%</span></small>
                                 </div>
                             </div>
                         </div>
@@ -88,222 +118,57 @@
         </div>
     </div>
 
-    <!-- الفوتر -->
-    <footer class="footer mt-5 py-4 bg-light">
-        <div class="container">
-            <p class="text-center text-muted mb-0">
-                © 2026 أمجد الكلباني. جميع الحقوق محفوظة.
-            </p>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- ملف جافا سكريبت مبسط -->
+    <script src="book-content.js"></script>
+    <script src="script.js"></script>
     <script>
-        // الحالة الأساسية
-        const BookApp = {
-            currentPage: 1,
-            totalPages: 70,
-            currentChapter: 0,
-            isDarkMode: false,
-            isEnglish: false,
+        // عند تحميل الصفحة، نتحقق من حالة المستخدم
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('book_user'));
+            const userEmailElement = document.getElementById('userEmail');
             
-            init: function() {
-                console.log('بدء تحميل الكتاب...');
-                this.loadContent();
-                this.setupEventListeners();
-                this.updateUI();
-            },
-            
-            loadContent: function() {
-                // محتوى مبسط للكتاب
-                const chapters = [
-                    {
-                        title: "الفصل الأول: مقدمة في الدخل الرقمي",
-                        content: `
-                            <h2>الفصل الأول: مقدمة في الدخل الرقمي</h2>
-                            <p>في هذا الفصل، سنتعرف على أساسيات الدخل الرقمي ولماذا أصبح مهماً في عصرنا الحالي.</p>
-                            <h3>1.1 ما هو الدخل الرقمي؟</h3>
-                            <p>الدخل الرقمي هو أي دخل يتم تحقيقه عبر الإنترنت، سواء كان من خلال:</p>
-                            <ul>
-                                <li>بيع المنتجات الرقمية</li>
-                                <li>التسويق بالعمولة</li>
-                                <li>العمل الحر</li>
-                                <li>تقديم الخدمات عبر الإنترنت</li>
-                            </ul>
-                        `
-                    },
-                    {
-                        title: "الفصل الثاني: المنتجات الرقمية",
-                        content: `
-                            <h2>الفصل الثاني: المنتجات الرقمية</h2>
-                            <p>تعلم كيفية إنشاء وبيع المنتجات الرقمية التي تحقق دخلاً مستمراً.</p>
-                        `
-                    }
-                ];
+            if (user && user.email) {
+                userEmailElement.textContent = user.email;
                 
-                // تحميل الفهرس
-                const tocList = document.getElementById('tocList');
-                tocList.innerHTML = '';
-                
-                chapters.forEach((chapter, index) => {
-                    const item = document.createElement('a');
-                    item.href = '#';
-                    item.className = 'list-group-item list-group-item-action';
-                    item.textContent = `${index + 1}. ${chapter.title}`;
-                    item.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        this.loadChapter(index);
-                    });
-                    tocList.appendChild(item);
-                });
-                
-                // تحميل الفصل الأول
-                this.loadChapter(0);
-            },
-            
-            loadChapter: function(index) {
-                this.currentChapter = index;
-                const chapters = [
-                    {
-                        title: "الفصل الأول: مقدمة في الدخل الرقمي",
-                        content: `
-                            <h2>الفصل الأول: مقدمة في الدخل الرقمي</h2>
-                            <p>مرحباً بك في رحلتك نحو تحقيق 1000$ شهرياً. هذا ليس مجرد حلم، بل هو هدف واقعي يمكن تحقيقه إذا اتبعت الخطوات الصحيحة.</p>
-                            
-                            <h3>1.1 لماذا الدخل الرقمي؟</h3>
-                            <p>في عام 2026، أصبح الاقتصاد الرقمي يمثل أكثر من 40% من الاقتصاد العالمي. الأسباب التي تجعل الدخل الرقمي خياراً ذكياً:</p>
-                            <ul>
-                                <li><strong>المرونة:</strong> العمل من أي مكان وفي أي وقت</li>
-                                <li><strong>التكلفة المنخفضة:</strong> لا تحتاج إلى رأس مال كبير للبدء</li>
-                                <li><strong>الوصول العالمي:</strong> يمكنك الوصول إلى عملاء من جميع أنحاء العالم</li>
-                                <li><strong>الدخل المستمر:</strong> بعض المنتجات الرقمية تحقق دخلاً لسنوات</li>
-                            </ul>
-                            
-                            <h3>1.2 خرائط طريق عملية</h3>
-                            <p>هناك ثلاث طرق رئيسية لتحقيق 1000$ شهرياً:</p>
-                            <ol>
-                                <li>بيع المنتجات الرقمية (كتب، دورات، قوالب)</li>
-                                <li>التسويق بالعمولة (الترويج لمنتجات الآخرين)</li>
-                                <li>العمل الحر (تقديم خدماتك المهارية)</li>
-                            </ol>
-                            
-                            <div class="alert alert-info mt-4">
-                                <i class="bi bi-lightbulb"></i>
-                                <strong>نصيحة سريعة:</strong> ابدأ بطريقة واحدة فقط وأتقنها قبل الانتقال إلى الطريقة التالية.
-                            </div>
-                        `
-                    },
-                    {
-                        title: "الفصل الثاني: المنتجات الرقمية المربحة",
-                        content: `
-                            <h2>الفصل الثاني: المنتجات الرقمية المربحة</h2>
-                            <p>المنتجات الرقمية هي واحدة من أفضل طرق تحقيق الدخل السلبي. إليك دليلك الشامل:</p>
-                            
-                            <h3>2.1 أنواع المنتجات الرقمية</h3>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>نوع المنتج</th>
-                                        <th>متوسط السعر</th>
-                                        <th>صعوبة الإنشاء</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>الكتب الإلكترونية</td>
-                                        <td>10-50$</td>
-                                        <td>سهل</td>
-                                    </tr>
-                                    <tr>
-                                        <td>الدورات التدريبية</td>
-                                        <td>100-500$</td>
-                                        <td>متوسط</td>
-                                    </tr>
-                                    <tr>
-                                        <td>القوالب الجاهزة</td>
-                                        <td>20-200$</td>
-                                        <td>متوسط</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        `
-                    }
-                ];
-                
-                const contentDiv = document.getElementById('bookContent');
-                if (chapters[index]) {
-                    contentDiv.innerHTML = chapters[index].content;
+                // إذا كان المستخدم قد دفع، نعرض المحتوى الكامل
+                if (user.hasPaid) {
+                    loadFullBook();
+                    document.getElementById('previewMessage').classList.add('d-none');
+                } else {
+                    // إذا لم يدفع، نعرض العينة المجانية
+                    loadPreview();
+                    document.getElementById('previewMessage').classList.remove('d-none');
                 }
-                
-                this.updateUI();
-            },
-            
-            setupEventListeners: function() {
-                document.getElementById('prevBtn').addEventListener('click', () => {
-                    if (this.currentChapter > 0) {
-                        this.currentChapter--;
-                        this.loadChapter(this.currentChapter);
-                    }
-                });
-                
-                document.getElementById('nextBtn').addEventListener('click', () => {
-                    if (this.currentChapter < 1) { // لدينا فصلين فقط في هذا المثال
-                        this.currentChapter++;
-                        this.loadChapter(this.currentChapter);
-                    }
-                });
-                
-                document.getElementById('themeToggle').addEventListener('click', () => {
-                    this.toggleTheme();
-                });
-                
-                document.getElementById('langToggle').addEventListener('click', () => {
-                    this.toggleLanguage();
-                });
-            },
-            
-            toggleTheme: function() {
-                this.isDarkMode = !this.isDarkMode;
-                document.body.classList.toggle('dark-mode', this.isDarkMode);
-                document.body.classList.toggle('light-mode', !this.isDarkMode);
-                
-                const icon = document.querySelector('#themeToggle i');
-                icon.classList.toggle('bi-moon', !this.isDarkMode);
-                icon.classList.toggle('bi-sun', this.isDarkMode);
-            },
-            
-            toggleLanguage: function() {
-                this.isEnglish = !this.isEnglish;
-                const btn = document.getElementById('langToggle');
-                btn.textContent = this.isEnglish ? 'AR' : 'EN';
-                
-                // في التطبيق الكامل، هنا ستغير كل النصوص
-                alert(this.isEnglish ? 'سيتم تحويل المحتوى للإنجليزية في الإصدار الكامل' : 'سيتم تحويل المحتوى للعربية في الإصدار الكامل');
-            },
-            
-            updateUI: function() {
-                document.getElementById('pageInfo').textContent = 
-                    `صفحة ${this.currentChapter + 1} من ${this.totalPages}`;
-                
-                // تحديث حالة الأزرار
-                document.getElementById('prevBtn').disabled = this.currentChapter === 0;
-                document.getElementById('nextBtn').disabled = this.currentChapter === 1;
-                
-                // تحديث الفهرس النشط
-                const tocItems = document.querySelectorAll('#tocList .list-group-item');
-                tocItems.forEach((item, index) => {
-                    item.classList.toggle('active', index === this.currentChapter);
-                });
+            } else {
+                // إذا لم يكن مسجل دخول، نعيده إلى صفحة التسجيل
+                window.location.href = 'login.html';
             }
-        };
-        
-        // بدء التطبيق عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', () => {
-            BookApp.init();
         });
+
+        function loadFullBook() {
+            // هنا نستخدم محتوى الكتاب الكامل من book-content.js
+            // نعرض كل الفصول
+            const bookData = arabicBookContent;
+            displayBookContent(bookData);
+        }
+
+        function loadPreview() {
+            // نعرض فقط الفصل الأول (مقتطفات) للعرض التجريبي
+            const previewData = [arabicBookContent[0]];
+            // قد نحدد عدد فقرات أقل للعرض التجريبي
+            displayBookContent(previewData, true);
+        }
+
+        function displayBookContent(bookData, isPreview = false) {
+            // دالة لعرض محتوى الكتاب في الصفحة
+            // سيتم تنفيذها في script.js
+            window.BookApp.init(bookData, isPreview);
+        }
+
+        function logout() {
+            localStorage.removeItem('book_user');
+            window.location.href = 'index.html';
+        }
     </script>
 </body>
 </html>
