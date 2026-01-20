@@ -3,252 +3,426 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كتاب 1000$ شهريًا - القراءة</title>
+    <title>الطريق إلى 1000$ شهريًا | الكتاب</title>
     
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
-    
-    <!-- Bootstrap 5 -->
+    <!-- Bootstrap 5 & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     
+    <!-- الأنماط -->
+    <link rel="stylesheet" href="style.css">
+    
     <!-- الخطوط -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- أنيميشن -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- الأنماط -->
-    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <!-- شريط التنقل العلوي -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+<body class="light-mode">
+    <!-- شاشة التحميل -->
+    <div id="loadingScreen" class="d-flex justify-content-center align-items-center" 
+         style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-color); z-index: 9999;">
+        <div class="text-center">
+            <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">جاري التحميل...</span>
+            </div>
+            <h4 class="text-primary">جاري تحميل الكتاب...</h4>
+            <p class="text-muted">قد تستغرق العملية بضع ثوانٍ</p>
+        </div>
+    </div>
+
+    <!-- شريط التنقل للكتاب -->
+    <nav class="navbar navbar-expand-lg py-3" style="background: var(--card-bg);">
         <div class="container">
             <a class="navbar-brand" href="index.html">
                 <i class="bi bi-journal-bookmark-fill"></i>
-                <span class="brand-text">كتاب 1000$ شهريًا</span>
+                <span>الطريق إلى 1000$</span>
             </a>
             
             <div class="d-flex align-items-center">
-                <div class="user-info me-3 d-none" id="userInfo">
-                    <span id="userName"></span>
-                    <span class="badge bg-success ms-2 d-none" id="premiumBadge">مشترك</span>
+                <!-- عناصر التحكم -->
+                <div class="btn-group me-3" role="group">
+                    <button class="btn btn-sm btn-outline-secondary" id="fontDecrease" title="تصغير الخط">
+                        <i class="bi bi-dash-lg"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary" id="fontReset" title="الخط الافتراضي">
+                        <i class="bi bi-fonts"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary" id="fontIncrease" title="تكبير الخط">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
                 </div>
                 
-                <button class="btn btn-outline-light btn-sm me-2" id="themeToggle">
+                <button class="btn btn-sm btn-outline-primary me-2" id="themeToggle">
                     <i class="bi bi-moon"></i>
                 </button>
                 
-                <button class="btn btn-outline-light btn-sm" onclick="logout()">
-                    <i class="bi bi-box-arrow-right"></i>
+                <button class="btn btn-sm btn-outline-secondary me-2" id="bookmarkBtn" title="حفظ مكان القراءة">
+                    <i class="bi bi-bookmark"></i>
+                </button>
+                
+                <button class="btn btn-sm btn-outline-secondary" id="printBtn" title="طباعة الفصل">
+                    <i class="bi bi-printer"></i>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- رسالة للمستخدمين غير المشترين -->
-    <div class="preview-alert alert alert-warning d-none" id="previewAlert">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <i class="bi bi-info-circle"></i>
-                    <strong>عرض تجريبي:</strong> أنت تشاهد نسخة محدودة من الكتاب. <a href="purchase.html" class="alert-link">اشترِ الكتاب الكامل</a> للوصول إلى 70 صفحة متقدمة.
-                </div>
-                <button type="button" class="btn-close" onclick="closePreviewAlert()"></button>
+    <!-- فهرس الكتاب الجانبي -->
+    <aside class="toc-sidebar card" style="position: fixed; left: 20px; top: 100px; width: 300px; z-index: 100;">
+        <div class="card-body">
+            <h5 class="card-title mb-3">
+                <i class="bi bi-list me-2"></i>
+                فهرس الكتاب
+            </h5>
+            <div class="toc-content" style="max-height: 70vh; overflow-y: auto;">
+                <!-- سيتم ملؤه بالجافاسكريبت -->
             </div>
         </div>
-    </div>
+    </aside>
 
-    <!-- منطقة القراءة الرئيسية -->
-    <div class="reading-container">
+    <!-- محتوى الكتاب الرئيسي -->
+    <main class="container mt-5 pt-3" style="margin-right: 350px;">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <!-- شريط التقدم -->
+                <div class="card mb-4">
+                    <div class="card-body py-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="progress" style="height: 8px; flex-grow: 1;">
+                                <div id="readingProgress" class="progress-bar" 
+                                     style="width: 0%; background: var(--gradient-primary);"></div>
+                            </div>
+                            <div class="ms-3">
+                                <small class="text-muted" id="progressText">0% مكتمل</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- منطقة محتوى الكتاب -->
+                <div id="bookContent" class="book-content" style="display: none;">
+                    <!-- سيتم ملؤه بالجافاسكريبت -->
+                </div>
+                
+                <!-- رسالة عدم التصريح -->
+                <div id="unauthorizedMessage" class="card text-center py-5" style="display: none;">
+                    <div class="card-body">
+                        <i class="bi bi-shield-lock text-danger" style="font-size: 4rem;"></i>
+                        <h3 class="mt-4 mb-3">غير مصرح بالوصول</h3>
+                        <p class="text-muted mb-4">
+                            يبدو أنك لا تملك صلاحية الوصول إلى هذا الكتاب.<br>
+                            يرجى شراء الكتاب للحصول على رابط الوصول الخاص بك.
+                        </p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="index.html" class="btn btn-primary">
+                                <i class="bi bi-arrow-left me-2"></i>
+                                العودة للصفحة الرئيسية
+                            </a>
+                            <button class="btn btn-success buy-btn">
+                                <i class="bi bi-cart3 me-2"></i>
+                                شراء الكتاب الآن
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- التنقل بين الفصول -->
+                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                    <button class="btn btn-outline-primary" id="prevChapter">
+                        <i class="bi bi-arrow-right me-2"></i>
+                        الفصل السابق
+                    </button>
+                    
+                    <div class="text-center">
+                        <small class="text-muted" id="chapterInfo">الفصل 1 من 7</small>
+                    </div>
+                    
+                    <button class="btn btn-outline-primary" id="nextChapter">
+                        الفصل التالي
+                        <i class="bi bi-arrow-left ms-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="mt-5 py-4" style="background: var(--card-bg); border-top: 1px solid var(--border-color); margin-right: 350px;">
         <div class="container">
             <div class="row">
-                <!-- الشريط الجانبي -->
-                <div class="col-lg-3 col-xl-2 d-none d-lg-block">
-                    <div class="sidebar" id="sidebar">
-                        <div class="sidebar-header">
-                            <h5><i class="bi bi-list"></i> فهرس الكتاب</h5>
-                        </div>
-                        <div class="sidebar-content" id="tableOfContents">
-                            <!-- سيتم ملؤه بالجافاسكريبت -->
-                        </div>
-                    </div>
+                <div class="col-md-6">
+                    <p class="mb-0 text-muted">
+                        © 2026 أمجد الكلباني. جميع الحقوق محفوظة.<br>
+                        <small>هذا الكتاب محمي بحقوق الملكية الفكرية.</small>
+                    </p>
                 </div>
-                
-                <!-- المحتوى الرئيسي -->
-                <div class="col-lg-9 col-xl-8">
-                    <div class="book-wrapper">
-                        <!-- عناصر التحكم العلوية -->
-                        <div class="reading-controls-top">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="reading-info">
-                                    <h4 id="currentChapterTitle">جاري التحميل...</h4>
-                                    <div class="reading-stats">
-                                        <span id="currentPage">1</span> من <span id="totalPages">70</span> صفحة
-                                        <span class="separator">•</span>
-                                        <span id="readingTime">قراءة 5 دقائق</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="reading-tools">
-                                    <div class="btn-group" role="group">
-                                        <button class="btn btn-outline-secondary" id="fontDecrease">
-                                            <i class="bi bi-dash-lg"></i>
-                                        </button>
-                                        <button class="btn btn-outline-secondary" id="fontSizeDisplay">
-                                            16px
-                                        </button>
-                                        <button class="btn btn-outline-secondary" id="fontIncrease">
-                                            <i class="bi bi-plus-lg"></i>
-                                        </button>
-                                    </div>
-                                    
-                                    <button class="btn btn-outline-secondary ms-2" id="fullscreenToggle">
-                                        <i class="bi bi-arrows-fullscreen"></i>
-                                    </button>
-                                    
-                                    <button class="btn btn-outline-secondary ms-2" id="searchToggle">
-                                        <i class="bi bi-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <!-- شريط التقدم -->
-                            <div class="progress-container mt-3">
-                                <div class="progress" style="height: 6px;">
-                                    <div class="progress-bar" id="readingProgressBar" role="progressbar"></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- محتوى الكتاب -->
-                        <div class="book-content" id="bookContent">
-                            <!-- سيتم ملؤه بالجافاسكريبت -->
-                        </div>
-                        
-                        <!-- عناصر التحكم السفلية -->
-                        <div class="reading-controls-bottom">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <button class="btn btn-outline-primary" id="prevChapterBtn">
-                                    <i class="bi bi-chevron-right"></i> الفصل السابق
-                                </button>
-                                
-                                <div class="chapter-nav">
-                                    <button class="btn btn-outline-secondary" id="prevPageBtn">
-                                        <i class="bi bi-chevron-right"></i>
-                                    </button>
-                                    <span class="mx-3">الفصل <span id="chapterNumber">1</span></span>
-                                    <button class="btn btn-outline-secondary" id="nextPageBtn">
-                                        <i class="bi bi-chevron-left"></i>
-                                    </button>
-                                </div>
-                                
-                                <button class="btn btn-outline-primary" id="nextChapterBtn">
-                                    الفصل التالي <i class="bi bi-chevron-left"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- ملاحظات وإشارات مرجعية -->
-                <div class="col-xl-2 d-none d-xl-block">
-                    <div class="sidebar-right">
-                        <div class="sidebar-header">
-                            <h5><i class="bi bi-bookmark"></i> الإشارات المرجعية</h5>
-                        </div>
-                        <div class="sidebar-content" id="bookmarksList">
-                            <p class="text-muted text-center">لا توجد إشارات مرجعية</p>
-                        </div>
-                    </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0 text-muted">
+                        <small>
+                            <i class="bi bi-lock me-1"></i>
+                            جلسة القراءة آمنة ومشفرة
+                        </small>
+                    </p>
                 </div>
             </div>
         </div>
-    </div>
+    </footer>
 
-    <!-- Modal للبحث -->
-    <div class="modal fade" id="searchModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">بحث في الكتاب</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group mb-3">
-                        <input type="text" id="searchInput" class="form-control" placeholder="اكتب كلمة للبحث...">
-                        <button class="btn btn-primary" id="searchButton">
-                            <i class="bi bi-search"></i> بحث
-                        </button>
-                    </div>
-                    <div id="searchResults"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scripts -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="firebase-config.js"></script>
+    
+    <!-- محتوى الكتاب -->
     <script src="book-content.js"></script>
+    
+    <!-- ملف JavaScript الرئيسي -->
     <script src="script.js"></script>
     
+    <!-- كود خاص بصفحة الكتاب -->
     <script>
-        // تهيئة التطبيق الرئيسي
-        document.addEventListener('DOMContentLoaded', async function() {
-            // التحقق من المصادقة
-            const user = await firebaseAuth.getCurrentUser();
-            
-            if (!user) {
-                window.location.href = 'login.html';
-                return;
+        class BookReader {
+            constructor() {
+                this.currentChapter = 0;
+                this.fontSize = 16;
+                this.bookmarks = [];
+                this.lastScrollPosition = 0;
             }
             
-            // التحقق من حالة الدفع
-            const hasPaid = await firebaseAuth.checkPayment(user.uid);
-            const isPreview = new URLSearchParams(window.location.search).has('preview');
+            init() {
+                this.loadBookContent();
+                this.setupBookListeners();
+                this.setupReadingProgress();
+                this.restoreReadingState();
+            }
             
-            // عرض اسم المستخدم
-            document.getElementById('userName').textContent = user.email;
-            document.getElementById('userInfo').classList.remove('d-none');
+            loadBookContent() {
+                // استيراد محتوى الكتاب من book-content.js
+                if (typeof arabicBookContent !== 'undefined') {
+                    this.displayChapters(arabicBookContent);
+                }
+            }
             
-            if (hasPaid) {
-                document.getElementById('premiumBadge').classList.remove('d-none');
+            displayChapters(chapters) {
+                const contentDiv = document.getElementById('bookContent');
+                const tocDiv = document.querySelector('.toc-content');
+                
+                contentDiv.innerHTML = '';
+                tocDiv.innerHTML = '';
+                
+                chapters.forEach((chapter, index) => {
+                    // إضافة الفصل للمحتوى
+                    const chapterDiv = this.createChapterElement(chapter, index);
+                    contentDiv.appendChild(chapterDiv);
+                    
+                    // إضافة الفصل للفهرس
+                    this.addToTOC(chapter.title, index, tocDiv);
+                });
+                
+                // إظهار المحتوى
+                contentDiv.style.display = 'block';
+                document.getElementById('loadingScreen').style.display = 'none';
+                
+                // تحديث التقدم
+                this.updateProgress();
+            }
+            
+            createChapterElement(chapter, index) {
+                const div = document.createElement('div');
+                div.className = 'chapter mb-5';
+                div.id = `chapter-${index}`;
+                div.dataset.chapter = index;
+                
+                let content = `<h2 class="chapter-title mb-4">${chapter.title}</h2>`;
+                
+                chapter.content.forEach(section => {
+                    if (section.type === 'paragraph') {
+                        content += `<p class="mb-4">${section.text}</p>`;
+                    } else if (section.type === 'subtitle') {
+                        content += `<h3 class="section-title mb-3">${section.text}</h3>`;
+                    } else if (section.type === 'list') {
+                        content += `<ul class="mb-4">`;
+                        section.items.forEach(item => {
+                            content += `<li class="mb-2">${item}</li>`;
+                        });
+                        content += `</ul>`;
+                    }
+                });
+                
+                div.innerHTML = content;
+                return div;
+            }
+            
+            addToTOC(title, index, container) {
+                const item = document.createElement('a');
+                item.href = `#chapter-${index}`;
+                item.className = 'd-block py-2 text-decoration-none text-muted';
+                item.innerHTML = `
+                    <i class="bi bi-bookmark me-2"></i>
+                    ${index + 1}. ${title}
+                `;
+                
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.scrollToChapter(index);
+                });
+                
+                container.appendChild(item);
+            }
+            
+            setupBookListeners() {
+                // تغيير حجم الخط
+                document.getElementById('fontIncrease').addEventListener('click', () => {
+                    this.fontSize = Math.min(24, this.fontSize + 1);
+                    this.updateFontSize();
+                });
+                
+                document.getElementById('fontDecrease').addEventListener('click', () => {
+                    this.fontSize = Math.max(12, this.fontSize - 1);
+                    this.updateFontSize();
+                });
+                
+                document.getElementById('fontReset').addEventListener('click', () => {
+                    this.fontSize = 16;
+                    this.updateFontSize();
+                });
+                
+                // التنقل بين الفصول
+                document.getElementById('prevChapter').addEventListener('click', () => {
+                    this.navigateChapter(-1);
+                });
+                
+                document.getElementById('nextChapter').addEventListener('click', () => {
+                    this.navigateChapter(1);
+                });
+                
+                // الإشارات المرجعية
+                document.getElementById('bookmarkBtn').addEventListener('click', () => {
+                    this.toggleBookmark();
+                });
+                
+                // الطباعة
+                document.getElementById('printBtn').addEventListener('click', () => {
+                    window.print();
+                });
+            }
+            
+            updateFontSize() {
+                document.querySelector('.book-content').style.fontSize = `${this.fontSize}px`;
+                localStorage.setItem('book_font_size', this.fontSize);
+            }
+            
+            navigateChapter(direction) {
+                const chapters = document.querySelectorAll('.chapter');
+                const newIndex = this.currentChapter + direction;
+                
+                if (newIndex >= 0 && newIndex < chapters.length) {
+                    this.currentChapter = newIndex;
+                    this.scrollToChapter(this.currentChapter);
+                    this.updateChapterInfo();
+                }
+            }
+            
+            scrollToChapter(index) {
+                const chapter = document.getElementById(`chapter-${index}`);
+                if (chapter) {
+                    window.scrollTo({
+                        top: chapter.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    this.currentChapter = index;
+                    this.saveReadingState();
+                    this.updateChapterInfo();
+                }
+            }
+            
+            updateChapterInfo() {
+                const totalChapters = document.querySelectorAll('.chapter').length;
+                document.getElementById('chapterInfo').textContent = 
+                    `الفصل ${this.currentChapter + 1} من ${totalChapters}`;
+            }
+            
+            setupReadingProgress() {
+                window.addEventListener('scroll', () => {
+                    this.updateProgress();
+                    this.saveReadingState();
+                });
+            }
+            
+            updateProgress() {
+                const chapters = document.querySelectorAll('.chapter');
+                const viewportHeight = window.innerHeight;
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - viewportHeight;
+                
+                if (docHeight > 0) {
+                    const scrollPercent = (scrollTop / docHeight) * 100;
+                    document.getElementById('readingProgress').style.width = `${scrollPercent}%`;
+                    document.getElementById('progressText').textContent = 
+                        `${Math.round(scrollPercent)}% مكتمل`;
+                }
+            }
+            
+            toggleBookmark() {
+                const currentChapter = this.currentChapter;
+                const chapterTitle = document.querySelector(`#chapter-${currentChapter} h2`)?.textContent;
+                
+                if (chapterTitle) {
+                    const bookmark = {
+                        chapter: currentChapter,
+                        title: chapterTitle,
+                        timestamp: new Date().toISOString(),
+                        scrollPosition: window.scrollY
+                    };
+                    
+                    this.bookmarks.push(bookmark);
+                    localStorage.setItem('book_bookmarks', JSON.stringify(this.bookmarks));
+                    
+                    AppState.showNotification('تم حفظ مكان القراءة', 'success');
+                }
+            }
+            
+            saveReadingState() {
+                const state = {
+                    chapter: this.currentChapter,
+                    scrollPosition: window.scrollY,
+                    fontSize: this.fontSize,
+                    timestamp: new Date().toISOString()
+                };
+                
+                localStorage.setItem('reading_state', JSON.stringify(state));
+            }
+            
+            restoreReadingState() {
+                const savedState = localStorage.getItem('reading_state');
+                if (savedState) {
+                    const state = JSON.parse(savedState);
+                    this.currentChapter = state.chapter || 0;
+                    this.fontSize = state.fontSize || 16;
+                    
+                    this.updateFontSize();
+                    this.updateChapterInfo();
+                    
+                    // تأخير التمرير حتى يتم تحميل المحتوى
+                    setTimeout(() => {
+                        window.scrollTo(0, state.scrollPosition || 0);
+                    }, 100);
+                }
+            }
+        }
+        
+        // تهيئة قارئ الكتاب عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            // التحقق من صلاحية التوكن أولاً
+            if (AppState.userToken) {
+                // في الإصدار الحقيقي، هنا سيتم التحقق من الخادم
+                const bookReader = new BookReader();
+                bookReader.init();
             } else {
-                // عرض التنبيه للمستخدمين غير المشترين
-                document.getElementById('previewAlert').classList.remove('d-none');
+                // إظهار رسالة عدم التصريح
+                document.getElementById('loadingScreen').style.display = 'none';
+                document.getElementById('unauthorizedMessage').style.display = 'block';
+                document.querySelector('.toc-sidebar').style.display = 'none';
+                document.querySelector('main').style.marginRight = '0';
+                document.querySelector('footer').style.marginRight = '0';
             }
-            
-            // تهيئة الكتاب
-            const bookApp = new BookApp();
-            bookApp.init({
-                userId: user.uid,
-                hasPaid: hasPaid,
-                isPreview: isPreview || !hasPaid
-            });
-            
-            // تهيئة الأنيميشن
-            AOS.init({
-                duration: 800,
-                once: true
-            });
         });
-        
-        // تسجيل الخروج
-        async function logout() {
-            await firebaseAuth.logout();
-            window.location.href = 'index.html';
-        }
-        
-        // إغلاق تنبيه العرض التجريبي
-        function closePreviewAlert() {
-            document.getElementById('previewAlert').classList.add('d-none');
-        }
     </script>
 </body>
 </html>
