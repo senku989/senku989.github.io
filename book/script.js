@@ -1,584 +1,438 @@
 // ==============================================
-// تطبيق الكتاب الإلكتروني الرئيسي
+// نظام الكتاب الإلكتروني الموحد
+// إصدار 2026 - أمجد الكلباني
 // ==============================================
 
-class BookApp {
-    constructor() {
-        this.currentChapter = 0;
-        this.currentPage = 1;
-        this.fontSize = 16;
-        this.isDarkMode = false;
-        this.isFullscreen = false;
-        this.bookmarks = [];
-        this.userId = null;
-        this.hasPaid = false;
-        this.isPreview = false;
-        
-        // محتوى الكتاب
-        this.bookData = arabicBookContent; // من book-content.js
-    }
+// الحالة العامة للتطبيق
+const AppState = {
+    isDarkMode: false,
+    isEnglish: false,
+    currentPage: 'home',
+    userToken: null,
+    bookAccess: false,
     
-    async init(config) {
-        this.userId = config.userId;
-        this.hasPaid = config.hasPaid;
-        this.isPreview = config.isPreview;
+    // تهيئة التطبيق
+    init() {
+        console.log('🚀 تهيئة تطبيق الكتاب...');
         
-        // إذا كان عرض تجريبي ولم يدفع، نعرض فصول محدودة
-        if (this.isPreview && !this.hasPaid) {
-            this.bookData = this.getPreviewContent();
-        }
+        // تحميل الحالة المحفوظة
+        this.loadSavedState();
         
-        // إعداد واجهة المستخدم
-        this.setupUI();
+        // إعداد المستمعين
         this.setupEventListeners();
-        this.loadChapter(0);
-        this.renderTableOfContents();
         
-        // تحميل التفضيلات المحفوظة
-        this.loadPreferences();
+        // التحقق من التوكن إن وجد
+        this.checkTokenOnLoad();
         
-        console.log('📚 تطبيق الكتاب جاهز:', {
-            chapters: this.bookData.length,
-            isPreview: this.isPreview,
-            hasPaid: this.hasPaid
-        });
-    }
+        // إعداد تأثيرات التمرير
+        this.setupScrollEffects();
+        
+        // إعداد الأنيميشن
+        this.setupAnimations();
+        
+        console.log('✅ التطبيق جاهز');
+    },
     
-    // الحصول على محتوى العرض التجريبي
-    getPreviewContent() {
-        // عرض الفصل الأول فقط مع جزء من المحتوى
-        const previewData = [this.bookData[0]];
-        
-        // تقليل محتوى الفصل الأول للعرض التجريبي
-        previewData[0].content = previewData[0].content.slice(0, 3); // أول 3 أقسام فقط
-        
-        return previewData;
-    }
-    
-    setupUI() {
-        // تحديث معلومات الصفحات
-        document.getElementById('totalPages').textContent = this.bookData.length;
-        
-        // تحديث حجم الخط
-        this.updateFontSizeDisplay();
-        
-        // تطبيق الوضع الحالي
-        this.applyDarkMode();
-    }
-    
-    setupEventListeners() {
-        // التنقل بين الفصول
-        document.getElementById('prevChapterBtn').addEventListener('click', () => {
-            this.prevChapter();
-        });
-        
-        document.getElementById('nextChapterBtn').addEventListener('click', () => {
-            this.nextChapter();
-        });
-        
-        // التنقل بين الصفحات
-        document.getElementById('prevPageBtn').addEventListener('click', () => {
-            this.prevPage();
-        });
-        
-        document.getElementById('nextPageBtn').addEventListener('click', () => {
-            this.nextPage();
-        });
-        
-        // تغيير حجم الخط
-        document.getElementById('fontDecrease').addEventListener('click', () => {
-            this.changeFontSize(-1);
-        });
-        
-        document.getElementById('fontIncrease').addEventListener('click', () => {
-            this.changeFontSize(1);
-        });
-        
-        // الوضع الداكن
-        document.getElementById('themeToggle').addEventListener('click', () => {
-            this.toggleDarkMode();
-        });
-        
-        // ملء الشاشة
-        document.getElementById('fullscreenToggle').addEventListener('click', () => {
-            this.toggleFullscreen();
-        });
-        
-        // البحث
-        document.getElementById('searchToggle').addEventListener('click', () => {
-            this.showSearchModal();
-        });
-        
-        document.getElementById('searchButton').addEventListener('click', () => {
-            this.searchBook();
-        });
-        
-        document.getElementById('searchInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                this.searchBook();
-            }
-        });
-        
-        // اختصارات لوحة المفاتيح
-        document.addEventListener('keydown', (e) => {
-            this.handleKeyboardShortcuts(e);
-        });
-        
-        // حفظ مكان القراءة عند التمرير
-        let scrollTimeout;
-        window.addEventListener('scroll', () => {
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                this.saveReadingPosition();
-            }, 1000);
-        });
-    }
-    
-    loadChapter(chapterIndex) {
-        if (chapterIndex < 0 || chapterIndex >= this.bookData.length) return;
-        
-        this.currentChapter = chapterIndex;
-        const chapter = this.bookData[chapterIndex];
-        
-        // تحديث العنوان
-        document.getElementById('currentChapterTitle').textContent = chapter.title;
-        document.getElementById('chapterNumber').textContent = chapterIndex + 1;
-        
-        // عرض المحتوى
-        this.renderChapterContent(chapter);
-        
-        // تحديث الفهرس النشط
-        this.updateActiveTocItem();
-        
-        // تحديث شريط التقدم
-        this.updateProgressBar();
-        
-        // حفظ مكان القراءة
-        this.saveReadingPosition();
-        
-        // إضافة أنيميشن
-        const contentDiv = document.getElementById('bookContent');
-        contentDiv.style.opacity = '0';
-        contentDiv.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-            contentDiv.style.transition = 'all 0.5s ease';
-            contentDiv.style.opacity = '1';
-            contentDiv.style.transform = 'translateY(0)';
-        }, 50);
-    }
-    
-    renderChapterContent(chapter) {
-        const contentDiv = document.getElementById('bookContent');
-        let html = `<h1 class="chapter-main-title">${chapter.title}</h1>`;
-        
-        chapter.content.forEach((section, index) => {
-            const sectionId = `section-${this.currentChapter}-${index}`;
-            
-            switch(section.type) {
-                case 'subtitle':
-                    html += `<h2 id="${sectionId}" class="section-subtitle">${section.text}</h2>`;
-                    break;
-                    
-                case 'paragraph':
-                    html += `<p id="${sectionId}" class="section-paragraph">${section.text}</p>`;
-                    break;
-                    
-                case 'list':
-                    html += `<div id="${sectionId}" class="section-list">
-                        <ul>${section.items.map(item => `<li>${item}</li>`).join('')}</ul>
-                    </div>`;
-                    break;
-                    
-                case 'quote':
-                    html += `<blockquote id="${sectionId}" class="section-quote">
-                        <p>${section.text}</p>
-                        ${section.author ? `<footer>${section.author}</footer>` : ''}
-                    </blockquote>`;
-                    break;
-            }
-        });
-        
-        contentDiv.innerHTML = html;
-        
-        // تطبيق حجم الخط الحالي
-        contentDiv.style.fontSize = `${this.fontSize}px`;
-    }
-    
-    renderTableOfContents() {
-        const tocDiv = document.getElementById('tableOfContents');
-        let html = '';
-        
-        this.bookData.forEach((chapter, index) => {
-            html += `
-                <div class="toc-item ${index === this.currentChapter ? 'active' : ''}" 
-                     data-chapter="${index}" 
-                     onclick="bookApp.loadChapter(${index})">
-                    <div class="toc-item-number">${index + 1}</div>
-                    <div class="toc-item-title">${chapter.title}</div>
-                    ${this.isPreview && !this.hasPaid && index > 0 ? 
-                      '<span class="toc-lock"><i class="bi bi-lock"></i></span>' : ''}
-                </div>
-            `;
-        });
-        
-        tocDiv.innerHTML = html;
-    }
-    
-    updateActiveTocItem() {
-        const items = document.querySelectorAll('.toc-item');
-        items.forEach((item, index) => {
-            item.classList.toggle('active', index === this.currentChapter);
-        });
-    }
-    
-    updateProgressBar() {
-        const progress = ((this.currentChapter + 1) / this.bookData.length) * 100;
-        document.getElementById('readingProgressBar').style.width = `${progress}%`;
-    }
-    
-    prevChapter() {
-        if (this.currentChapter > 0) {
-            this.loadChapter(this.currentChapter - 1);
-        } else {
-            this.showNotification('هذا هو الفصل الأول', 'info');
-        }
-    }
-    
-    nextChapter() {
-        if (this.currentChapter < this.bookData.length - 1) {
-            // التحقق إذا كان الفصل التالي متاحاً للعرض التجريبي
-            if (this.isPreview && !this.hasPaid && this.currentChapter >= 0) {
-                this.showPurchasePrompt();
-                return;
-            }
-            this.loadChapter(this.currentChapter + 1);
-        } else {
-            this.showNotification('هذا هو الفصل الأخير', 'info');
-        }
-    }
-    
-    prevPage() {
-        // محاكاة صفحات داخل الفصل
-        if (this.currentPage > 1) {
-            this.currentPage--;
-            this.updatePageInfo();
-            this.scrollToTop();
-        }
-    }
-    
-    nextPage() {
-        // محاكاة صفحات داخل الفصل
-        const pagesPerChapter = Math.ceil(this.bookData[this.currentChapter].content.length / 3);
-        if (this.currentPage < pagesPerChapter) {
-            this.currentPage++;
-            this.updatePageInfo();
-            this.scrollToTop();
-        } else {
-            this.nextChapter();
-        }
-    }
-    
-    updatePageInfo() {
-        const pagesPerChapter = Math.ceil(this.bookData[this.currentChapter].content.length / 3);
-        document.getElementById('currentPage').textContent = this.currentPage;
-        
-        // حساب وقت القراءة
-        const wordsPerPage = 250;
-        const readingSpeed = 200; // كلمة في الدقيقة
-        const estimatedMinutes = Math.ceil((pagesPerChapter * wordsPerPage) / readingSpeed);
-        document.getElementById('readingTime').textContent = `قراءة ${estimatedMinutes} دقائق`;
-    }
-    
-    changeFontSize(delta) {
-        this.fontSize = Math.max(12, Math.min(24, this.fontSize + delta));
-        document.getElementById('bookContent').style.fontSize = `${this.fontSize}px`;
-        this.updateFontSizeDisplay();
-        this.savePreferences();
-    }
-    
-    updateFontSizeDisplay() {
-        document.getElementById('fontSizeDisplay').textContent = `${this.fontSize}px`;
-    }
-    
-    toggleDarkMode() {
-        this.isDarkMode = !this.isDarkMode;
-        this.applyDarkMode();
-        this.savePreferences();
-    }
-    
-    applyDarkMode() {
+    // تحميل الحالة المحفوظة
+    loadSavedState() {
+        // تحميل الوضع الداكن
+        this.isDarkMode = localStorage.getItem('darkMode') === 'true';
         if (this.isDarkMode) {
             document.body.classList.add('dark-mode');
-            document.querySelector('#themeToggle i').className = 'bi bi-sun';
-        } else {
-            document.body.classList.remove('dark-mode');
-            document.querySelector('#themeToggle i').className = 'bi bi-moon';
         }
-    }
+        
+        // تحميل اللغة
+        this.isEnglish = localStorage.getItem('language') === 'en';
+        
+        // تحميل التوكن إذا كان في localStorage
+        this.userToken = localStorage.getItem('book_token') || 
+                        this.getTokenFromURL();
+    },
     
-    toggleFullscreen() {
-        if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen().catch(err => {
-                console.error(`Error attempting to enable fullscreen: ${err.message}`);
+    // الحصول على التوكن من الرابط
+    getTokenFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get('token');
+        
+        if (token) {
+            // حفظ التوكن في localStorage
+            localStorage.setItem('book_token', token);
+            
+            // تنظيف الرابط من التوكن
+            const cleanURL = window.location.pathname;
+            window.history.replaceState({}, document.title, cleanURL);
+            
+            return token;
+        }
+        
+        return null;
+    },
+    
+    // التحقق من التوكن عند التحميل
+    async checkTokenOnLoad() {
+        if (this.userToken && window.location.pathname.includes('book.html')) {
+            await this.validateToken(this.userToken);
+        }
+    },
+    
+    // التحقق من صلاحية التوكن
+    async validateToken(token) {
+        try {
+            // إظهار حالة التحميل
+            this.showLoading('جاري التحقق من صلاحية الوصول...');
+            
+            // في الإنتاج، استبدل هذا بالاتصال بخادمك
+            const response = await fetch('https://your-server.com/validate-token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ token })
             });
-            this.isFullscreen = true;
-            document.querySelector('#fullscreenToggle i').className = 'bi bi-fullscreen-exit';
-        } else {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-                this.isFullscreen = false;
-                document.querySelector('#fullscreenToggle i').className = 'bi bi-arrows-fullscreen';
+            
+            const data = await response.json();
+            
+            if (data.access) {
+                this.bookAccess = true;
+                this.showBookContent();
+            } else {
+                this.redirectToUnauthorized();
             }
+            
+        } catch (error) {
+            console.error('خطأ في التحقق من التوكن:', error);
+            this.showError('حدث خطأ في التحقق. يرجى المحاولة لاحقاً.');
         }
-    }
+    },
     
-    showSearchModal() {
-        const modal = new bootstrap.Modal(document.getElementById('searchModal'));
-        modal.show();
-    }
-    
-    searchBook() {
-        const query = document.getElementById('searchInput').value.trim();
-        if (!query) return;
+    // إعداد مستمعي الأحداث
+    setupEventListeners() {
+        // تبديل الوضع الداكن
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => this.toggleDarkMode());
+        }
         
-        const results = [];
+        // تبديل اللغة
+        const langToggle = document.getElementById('langToggle');
+        if (langToggle) {
+            langToggle.addEventListener('click', () => this.toggleLanguage());
+        }
         
-        this.bookData.forEach((chapter, chapterIndex) => {
-            chapter.content.forEach((section, sectionIndex) => {
-                let text = '';
-                if (section.type === 'paragraph') {
-                    text = section.text;
-                } else if (section.type === 'list') {
-                    text = section.items.join(' ');
-                } else if (section.type === 'subtitle') {
-                    text = section.text;
-                }
-                
-                if (text.toLowerCase().includes(query.toLowerCase())) {
-                    results.push({
-                        chapterIndex,
-                        chapterTitle: chapter.title,
-                        sectionIndex,
-                        preview: this.highlightText(text, query),
-                        type: section.type
-                    });
-                }
+        // زر شراء الكتاب
+        const buyButtons = document.querySelectorAll('.buy-btn');
+        buyButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.handlePurchase();
             });
         });
         
-        this.displaySearchResults(results);
-    }
-    
-    highlightText(text, query) {
-        const regex = new RegExp(`(${query})`, 'gi');
-        return text.replace(regex, '<mark>$1</mark>');
-    }
-    
-    displaySearchResults(results) {
-        const resultsDiv = document.getElementById('searchResults');
+        // تأثيرات المرور على البطاقات
+        const cards = document.querySelectorAll('.card, .feature-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
         
-        if (results.length === 0) {
-            resultsDiv.innerHTML = '<p class="text-muted text-center">لم يتم العثور على نتائج</p>';
-            return;
+        // تأثيرات الإدخال
+        const inputs = document.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', () => {
+                if (!input.value) {
+                    input.parentElement.classList.remove('focused');
+                }
+            });
+        });
+    },
+    
+    // تبديل الوضع الداكن
+    toggleDarkMode() {
+        this.isDarkMode = !this.isDarkMode;
+        document.body.classList.toggle('dark-mode', this.isDarkMode);
+        localStorage.setItem('darkMode', this.isDarkMode);
+        
+        // تحديث زر الوضع
+        const themeBtn = document.getElementById('themeToggle');
+        if (themeBtn) {
+            const icon = themeBtn.querySelector('i');
+            icon.className = this.isDarkMode ? 'bi bi-sun' : 'bi bi-moon';
+            themeBtn.setAttribute('title', this.isDarkMode ? 'الوضع الفاتح' : 'الوضع الداكن');
+        }
+    },
+    
+    // تبديل اللغة
+    toggleLanguage() {
+        this.isEnglish = !this.isEnglish;
+        localStorage.setItem('language', this.isEnglish ? 'en' : 'ar');
+        
+        // تحديث زر اللغة
+        const langBtn = document.getElementById('langToggle');
+        if (langBtn) {
+            langBtn.textContent = this.isEnglish ? 'AR' : 'EN';
         }
         
-        let html = '<div class="search-results-list">';
-        results.slice(0, 10).forEach(result => {
-            html += `
-                <div class="search-result-item" onclick="bookApp.goToSection(${result.chapterIndex}, ${result.sectionIndex})">
-                    <h6>${result.chapterTitle}</h6>
-                    <p class="result-preview">${result.preview.substring(0, 150)}...</p>
-                </div>
+        // إشعار (في الإصدار الكامل، هنا سيتم تحويل كل النصوص)
+        this.showNotification(
+            this.isEnglish ? 
+            'Language will be changed in the full version' : 
+            'سيتم تغيير اللغة في الإصدار الكامل',
+            'info'
+        );
+    },
+    
+    // معالجة الشراء
+    handlePurchase() {
+        // في الإنتاج، هذا سيوجه إلى Payhip
+        const payhipLink = 'https://payhip.com/b/YOUR_PRODUCT_ID';
+        
+        // فتح نافذة جديدة للدفع
+        window.open(payhipLink, '_blank');
+        
+        // تتبع حدث الشراء (افتراضي)
+        this.trackEvent('purchase_intent', {
+            product_id: 'book-1000-monthly',
+            price: 19,
+            currency: 'USD'
+        });
+    },
+    
+    // إعداد تأثيرات التمرير
+    setupScrollEffects() {
+        let lastScroll = 0;
+        const navbar = document.querySelector('.navbar');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            // إخفاء/إظهار شريط التنقل
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            
+            lastScroll = currentScroll;
+            
+            // تأثيرات الكشف عند التمرير
+            this.handleScrollReveal();
+        });
+    },
+    
+    // كشف العناصر عند التمرير
+    handleScrollReveal() {
+        const elements = document.querySelectorAll('.reveal-text');
+        
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (elementTop < windowHeight - 100) {
+                element.classList.add('visible');
+            }
+        });
+    },
+    
+    // إعداد الأنيميشن
+    setupAnimations() {
+        // أنيميشن الدخول للعناصر
+        const animatedElements = document.querySelectorAll('.card, .feature-card, .pricing-card');
+        
+        animatedElements.forEach((element, index) => {
+            element.style.animationDelay = `${index * 0.1}s`;
+            element.classList.add('fadeInUp');
+        });
+        
+        // أنيميشن التأثيرات
+        this.setupParticleEffect();
+    },
+    
+    // تأثيرات الجسيمات (للصفحة الرئيسية)
+    setupParticleEffect() {
+        if (!document.querySelector('.particles-container')) return;
+        
+        const container = document.querySelector('.particles-container');
+        const particleCount = 30;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // إعداد عشوائي
+            const size = Math.random() * 20 + 5;
+            const duration = Math.random() * 10 + 10;
+            const delay = Math.random() * 5;
+            
+            particle.style.cssText = `
+                width: ${size}px;
+                height: ${size}px;
+                background: var(--gradient-primary);
+                border-radius: 50%;
+                position: absolute;
+                top: ${Math.random() * 100}%;
+                left: ${Math.random() * 100}%;
+                opacity: ${Math.random() * 0.3 + 0.1};
+                animation: float ${duration}s ease-in-out ${delay}s infinite;
             `;
-        });
-        html += '</div>';
-        
-        resultsDiv.innerHTML = html;
-    }
-    
-    goToSection(chapterIndex, sectionIndex) {
-        this.loadChapter(chapterIndex);
-        
-        // التمرير إلى القسم المحدد
-        setTimeout(() => {
-            const sectionId = `section-${chapterIndex}-${sectionIndex}`;
-            const element = document.getElementById(sectionId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                element.classList.add('highlight-section');
-                setTimeout(() => {
-                    element.classList.remove('highlight-section');
-                }, 2000);
-            }
             
-            // إغلاق modal البحث
-            bootstrap.Modal.getInstance(document.getElementById('searchModal')).hide();
-        }, 500);
-    }
-    
-    handleKeyboardShortcuts(e) {
-        // تجاهل الاختصارات إذا كان المستخدم يكتب في حقل نصي
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-        
-        switch(e.key) {
-            case 'ArrowRight':
-            case 'ArrowDown':
-                e.preventDefault();
-                this.nextPage();
-                break;
-                
-            case 'ArrowLeft':
-            case 'ArrowUp':
-                e.preventDefault();
-                this.prevPage();
-                break;
-                
-            case 'd':
-            case 'D':
-                if (e.ctrlKey) {
-                    e.preventDefault();
-                    this.toggleDarkMode();
-                }
-                break;
-                
-            case 'f':
-            case 'F':
-                if (e.ctrlKey) {
-                    e.preventDefault();
-                    this.toggleFullscreen();
-                }
-                break;
-                
-            case ' ':
-                e.preventDefault();
-                this.nextPage();
-                break;
+            container.appendChild(particle);
         }
-    }
+    },
     
-    scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    
-    saveReadingPosition() {
-        if (!this.userId) return;
-        
-        const readingPosition = {
-            chapter: this.currentChapter,
-            page: this.currentPage,
-            timestamp: new Date().toISOString()
-        };
-        
-        localStorage.setItem(`book_progress_${this.userId}`, JSON.stringify(readingPosition));
-    }
-    
-    loadReadingPosition() {
-        if (!this.userId) return;
-        
-        const saved = localStorage.getItem(`book_progress_${this.userId}`);
-        if (saved) {
-            const position = JSON.parse(saved);
-            this.currentChapter = position.chapter || 0;
-            this.currentPage = position.page || 1;
+    // عرض محتوى الكتاب
+    showBookContent() {
+        // إخفاء شاشة التحميل
+        const loadingScreen = document.getElementById('loadingScreen');
+        if (loadingScreen) {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 300);
         }
-    }
-    
-    savePreferences() {
-        const preferences = {
-            fontSize: this.fontSize,
-            darkMode: this.isDarkMode
-        };
         
-        localStorage.setItem('book_preferences', JSON.stringify(preferences));
-    }
-    
-    loadPreferences() {
-        const saved = localStorage.getItem('book_preferences');
-        if (saved) {
-            const preferences = JSON.parse(saved);
-            this.fontSize = preferences.fontSize || 16;
-            this.isDarkMode = preferences.darkMode || false;
-            
-            // تطبيق التفضيلات
-            document.getElementById('bookContent').style.fontSize = `${this.fontSize}px`;
-            this.updateFontSizeDisplay();
-            this.applyDarkMode();
+        // عرض محتوى الكتاب
+        const bookContent = document.getElementById('bookContent');
+        if (bookContent) {
+            bookContent.style.display = 'block';
+            bookContent.classList.add('visible');
         }
-    }
+    },
     
-    showPurchasePrompt() {
-        const modalHTML = `
-            <div class="modal fade" id="purchaseModal" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">ترقية إلى النسخة الكاملة</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body text-center">
-                            <i class="bi bi-lock" style="font-size: 3rem; color: #ffc107;"></i>
-                            <h4 class="my-3">الوصول مقيد</h4>
-                            <p>أنت تشاهد النسخة التجريبية المجانية. لقراءة الفصول المتبقية (أكثر من 70 صفحة متقدمة)، يرجى ترقية حسابك.</p>
-                            <div class="price-display my-4">
-                                <span class="original-price">39$</span>
-                                <span class="current-price">19$</span>
-                                <span class="discount-badge">خصم 50%</span>
-                            </div>
-                            <button class="btn btn-primary btn-lg w-100" onclick="window.location.href='purchase.html'">
-                                <i class="bi bi-bag-check"></i> ترقية الآن بـ 19$
-                            </button>
-                        </div>
-                    </div>
-                </div>
+    // تحويل إلى صفحة غير مصرح
+    redirectToUnauthorized() {
+        if (!window.location.pathname.includes('unauthorized.html')) {
+            window.location.href = 'unauthorized.html';
+        }
+    },
+    
+    // عرض حالة التحميل
+    showLoading(message) {
+        const loadingEl = document.getElementById('loadingState') || this.createLoadingElement();
+        loadingEl.innerHTML = `
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p>${message}</p>
+            </div>
+        `;
+        loadingEl.style.display = 'flex';
+    },
+    
+    // إنشاء عنصر التحميل
+    createLoadingElement() {
+        const loadingEl = document.createElement('div');
+        loadingEl.id = 'loadingState';
+        loadingEl.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        `;
+        document.body.appendChild(loadingEl);
+        return loadingEl;
+    },
+    
+    // إخفاء التحميل
+    hideLoading() {
+        const loadingEl = document.getElementById('loadingState');
+        if (loadingEl) {
+            loadingEl.style.display = 'none';
+        }
+    },
+    
+    // عرض إشعار
+    showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <div class="notification-content">
+                <i class="bi ${type === 'success' ? 'bi-check-circle' : 
+                               type === 'error' ? 'bi-exclamation-circle' : 
+                               'bi-info-circle'}"></i>
+                <span>${message}</span>
+                <button class="notification-close">&times;</button>
             </div>
         `;
         
-        // إضافة الـ modal إلى الصفحة
-        if (!document.getElementById('purchaseModal')) {
-            document.body.insertAdjacentHTML('beforeend', modalHTML);
-        }
-        
-        // عرض الـ modal
-        const modal = new bootstrap.Modal(document.getElementById('purchaseModal'));
-        modal.show();
-    }
-    
-    showNotification(message, type = 'info') {
-        // إنشاء عنصر الإشعار
-        const notification = document.createElement('div');
-        notification.className = `notification alert alert-${type} alert-dismissible fade show`;
-        notification.innerHTML = `
-            ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        `;
-        
-        // إضافة الأنماط
         notification.style.cssText = `
             position: fixed;
-            top: 80px;
+            top: 20px;
             right: 20px;
-            z-index: 9999;
-            min-width: 300px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            animation: slideIn 0.3s ease;
+            background: ${type === 'success' ? '#10b981' : 
+                        type === 'error' ? '#ef4444' : 
+                        '#3b82f6'};
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease-out;
         `;
         
-        // إضافة للإشعار
         document.body.appendChild(notification);
         
-        // إزالة الإشعار تلقائياً بعد 3 ثوان
+        // زر الإغلاق
+        notification.querySelector('.notification-close').addEventListener('click', () => {
+            notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+            setTimeout(() => notification.remove(), 300);
+        });
+        
+        // إزالة تلقائية بعد 5 ثوان
         setTimeout(() => {
             if (notification.parentNode) {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    notification.parentNode.removeChild(notification);
-                }, 300);
+                notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+                setTimeout(() => notification.remove(), 300);
             }
-        }, 3000);
+        }, 5000);
+    },
+    
+    // عرض خطأ
+    showError(message) {
+        this.showNotification(message, 'error');
+    },
+    
+    // تتبع الأحداث
+    trackEvent(eventName, data = {}) {
+        // في الإنتاج، أضف كود Google Analytics أو أي خدمة تتبع هنا
+        console.log(`📊 Event: ${eventName}`, data);
+    },
+    
+    // توليد التوكن العشوائي (للاستخدام في Backend)
+    generateToken() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let token = '';
+        
+        for (let i = 0; i < 64; i++) {
+            token += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        
+        return token;
     }
-}
+};
 
-// إنشاء نسخة عالمية من التطبيق
-const bookApp = new BookApp();
-window.bookApp = bookApp;
+// تهيئة التطبيق عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+    AppState.init();
+});
+
+// دعم لـ Turbo/SR.js (للصفحات الديناميكية)
+if (typeof Turbo !== 'undefined') {
+    document.addEventListener('turbo:load', () => {
+        AppState.init();
+    });
+}
