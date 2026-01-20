@@ -3,115 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تم تأكيد شرائك بنجاح! - شكرًا لك</title>
+    <title>شكراً لشرائك الكتاب!</title>
+    
+    <!-- Bootstrap 5 & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
-        .success-card {
-            background: white;
-            border-radius: 1.5rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            max-width: 800px;
-        }
-        .confetti {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background-color: #f0db4f;
-            border-radius: 50%;
-            opacity: 0;
-        }
-        .btn-success-custom {
-            background: linear-gradient(to right, #10b981, #059669);
-            border: none;
-            padding: 1rem 3rem;
-            font-size: 1.2rem;
-            border-radius: 0.75rem;
-            transition: all 0.3s;
-        }
-        .btn-success-custom:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
-        }
-    </style>
+    
+    <!-- الأنماط -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- الخطوط -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="py-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="success-card p-4 p-md-5 text-center">
-                    <div class="mb-4">
-                        <div class="d-inline-block p-4 rounded-circle bg-success bg-opacity-10">
-                            <i class="bi bi-check2-circle display-1 text-success"></i>
+<body class="light-mode">
+    <!-- تأثيرات الخلفية -->
+    <div class="particles-container" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1;"></div>
+    
+    <div class="container min-vh-100 d-flex align-items-center justify-content-center">
+        <div class="card shadow-lg border-0" style="max-width: 600px; border-radius: 25px;">
+            <div class="card-body p-5 text-center">
+                <!-- أيقونة النجاح -->
+                <div class="success-icon mb-4">
+                    <div style="width: 100px; height: 100px; margin: 0 auto; background: var(--gradient-success); 
+                              border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-check-lg text-white" style="font-size: 3rem;"></i>
+                    </div>
+                </div>
+                
+                <h1 class="text-gradient mb-3">تم الشراء بنجاح! 🎉</h1>
+                
+                <p class="lead text-muted mb-4">
+                    شكراً لثقتك بنا. تم تأكيد عملية الشراء بنجاح.
+                </p>
+                
+                <!-- تفاصيل الشراء -->
+                <div class="purchase-details card mb-4" style="background: var(--border-light);">
+                    <div class="card-body">
+                        <h5 class="mb-3">تفاصيل طلبك:</h5>
+                        <div class="row text-start">
+                            <div class="col-6">
+                                <p class="mb-2"><strong>المنتج:</strong></p>
+                                <p class="mb-2"><strong>السعر:</strong></p>
+                                <p class="mb-2"><strong>رقم الطلب:</strong></p>
+                                <p class="mb-2"><strong>التاريخ:</strong></p>
+                            </div>
+                            <div class="col-6 text-muted">
+                                <p class="mb-2">الطريق إلى 1000$ شهريًا</p>
+                                <p class="mb-2">19 دولار أمريكي</p>
+                                <p class="mb-2" id="orderId">جاري التحميل...</p>
+                                <p class="mb-0" id="orderDate">جاري التحميل...</p>
+                            </div>
                         </div>
                     </div>
-                    
-                    <h1 class="fw-bold text-success mb-3">تم تأكيد عملية الشراء بنجاح! 🎉</h1>
-                    <h3 class="mb-4">مرحبًا بك في رحلة الـ 1000$ شهريًا، <span id="userName">المُبادر</span>!</h3>
-                    
-                    <p class="lead mb-4">تهانينا الحارة على هذه الخطوة الذكية نحو مستقبلك الرقمي. لقد قمت للتو باستثمار في أهم أصل في القرن الحادي والعشرين: <strong>معرفتك</strong>.</p>
-                    
-                    <div class="alert alert-info text-start mb-5">
-                        <h5><i class="bi bi-info-circle me-2"></i>معلومات وصولك:</h5>
-                        <ul class="mb-0">
-                            <li>تم إرسال رسالة تأكيد تحتوي على رابط الوصول إلى <strong>حسابك الخاص</strong> إلى بريدك الإلكتروني.</li>
-                            <li>يمكنك الوصول إلى الكتاب من أي جهاز بمجرد تسجيل الدخول.</li>
-                            <li>لديك الآن وصول مدى الحياة إلى الكتاب وجميع التحديثات المستقبلية.</li>
-                        </ul>
+                </div>
+                
+                <!-- رسالة مهمة -->
+                <div class="alert alert-info mb-4">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>مهم:</strong> سيصلك رابط الوصول إلى بريدك الإلكتروني خلال دقائق. 
+                    يمكنك أيضاً استخدام الرابط أدناه.
+                </div>
+                
+                <!-- رابط الكتاب -->
+                <div class="book-link-section mb-4">
+                    <h5 class="mb-3">رابط الوصول إلى الكتاب:</h5>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="bookLink" 
+                               value="https://your-username.github.io/book?token=..." readonly>
+                        <button class="btn btn-primary" onclick="copyBookLink()">
+                            <i class="bi bi-copy me-2"></i>نسخ
+                        </button>
                     </div>
+                    <small class="text-muted mt-2 d-block">
+                        <i class="bi bi-shield-lock me-1"></i>
+                        هذا الرابط خاص بك ولا تشاركه مع أحد
+                    </small>
+                </div>
+                
+                <!-- زر الوصول المباشر -->
+                <div class="d-grid gap-3 mt-4">
+                    <a href="book.html" class="btn btn-primary btn-lg">
+                        <i class="bi bi-book me-2"></i>
+                        الوصول إلى الكتاب الآن
+                    </a>
                     
-                    <div class="d-grid gap-3 d-md-flex justify-content-md-center mb-5">
-                        <!-- هذا الزر سيوجه المستخدم إلى صفحة الكتاب المحمية -->
-                        <a href="book.html" class="btn btn-success-custom btn-lg me-md-3">
-                            <i class="bi bi-book me-2"></i> ابدأ قراءة الكتاب الآن
-                        </a>
-                        <a href="mailto:support@yourdomain.com" class="btn btn-outline-secondary btn-lg">
-                            <i class="bi bi-envelope me-2"></i> التواصل مع الدعم
-                        </a>
+                    <a href="index.html" class="btn btn-outline-primary">
+                        <i class="bi bi-house me-2"></i>
+                        العودة للصفحة الرئيسية
+                    </a>
+                </div>
+                
+                <!-- معلومات إضافية -->
+                <div class="mt-5 pt-4 border-top">
+                    <h6 class="mb-3">معلومات مهمة:</h6>
+                    <div class="row text-start">
+                        <div class="col-md-6">
+                            <p class="small text-muted">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                يمكنك الوصول من أي جهاز
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="small text-muted">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                تحديثات مجانية لمدة سنة
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="small text-muted">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                دعم عبر البريد الإلكتروني
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="small text-muted">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                وصول فوري مدى الحياة
+                            </p>
+                        </div>
                     </div>
-                    
-                    <div class="border-top pt-4 mt-4">
-                        <h5 class="mb-3">📚 نصيحة قبل أن تبدأ:</h5>
-                        <p class="mb-0">لا تحاول تطبيق كل شيء في يوم واحد. خصص ساعة يوميًا للقراءة والتطبيق العملي. <strong>الاستمرارية</strong> هي سر نجاح أي نظام. نتمنى لك رحلة مليئة بالإنجازات!</p>
-                        <p class="mt-3 text-muted"><em>— أمجد الكلباني</em></p>
-                    </div>
-                    
-                    <p class="text-muted mt-5 small">سيتم توجيهك تلقائيًا إلى صفحة الكتاب خلال <span id="countdown">10</span> ثانية.</p>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        // عداد للتوجيه التلقائي بعد 10 ثوان
-        let seconds = 10;
-        const countdownElement = document.getElementById('countdown');
-        const countdownInterval = setInterval(() => {
-            seconds--;
-            countdownElement.textContent = seconds;
-            if (seconds <= 0) {
-                clearInterval(countdownInterval);
-                window.location.href = 'book.html'; // التوجيه إلى صفحة الكتاب
-            }
-        }, 1000);
-
-        // (مستوى متقدم) في حالة ربط Payhip مع Firebase:
-        // يمكنك محاولة استخراج معرف المستخدم أو البريد الإلكتروني من query parameters
-        // إذا أرسلهم Payhip إلى صفحة النجاح، واستخدامهم للتسجيل التلقائي.
-        // مثال مبسط:
-        // const urlParams = new URLSearchParams(window.location.search);
-        // const customerEmail = urlParams.get('email');
-        // if(customerEmail) { /* استدعاء دالة Firebase للتسجيل/تسجيل الدخول */ }
-    </script>
+    
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- ملف JavaScript الرئيسي -->
+    <script src="script.js"></script>
+    
+    <!-- كود خاص بصفحة النجاح -->
+    <script>
+        // توليد تفاصيل الطلب
+        function generateOrderDetails() {
+            // في الإصدار الحقيقي، هذه البيانات ستأتي من Payhip webhook
+            
+            // توليد رقم طلب عشوائي
+            const orderId = 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            document.getElementById('orderId').textContent = orderId;
+            
+            // التاريخ الحالي
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('ar-SA') + ' ' + now.toLocaleTimeString('ar-SA');
+            document.getElementById('orderDate').textContent = dateStr;
+            
+            // توليد رابط الكتاب مع التوكن
+            // في الإصدار الحقيقي، التوكن سيأتي من Backend
+            const token = AppState.generateToken();
+            const bookLink = `${window.location.origin}/book.html?token=${token}`;
+            document.getElementById('bookLink').value = bookLink;
+            
+            // حفظ التوكن مؤقتاً للوصول الفوري
+            localStorage.setItem('temp_token', token);
+            
+            // تتبع حدث الشراء الناجح
+            AppState.trackEvent('purchase_success', {
+                order_id: orderId,
+                amount: 19,
+                currency: 'USD'
+            });
+        }
+        
+        // نسخ رابط الكتاب
+        function copyBookLink() {
+            const bookLinkInput = document.getElementById('bookLink');
+            bookLinkInput.select();
+            bookLinkInput.setSelectionRange(0, 99999);
+            
+            navigator.clipboard.writeText(bookLinkInput.value)
+                .then(() => {
+                    AppState.showNotification('تم نسخ الرابط بنجاح', 'success');
+                })
+                .catch(err => {
+                    AppState.showNotification('حدث خطأ أثناء النسخ', 'error');
+                });
+        }
+        
+        // تأثيرات الجسيمات
+        function setupParticles() {
+            const container = document.querySelector('.particles-container');
+            const colors = ['#667eea', '#764ba2', '#10b981', '#f59e0b'];
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 15 + 5;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const duration = Math.random() * 10 + 10;
+                const delay = Math.random() * 5;
+                
+                particle.style.cssText = `
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: ${color};
+                    border-radius: 50%;
+                    position: absolute;
+                    top: ${Math.random() * 100}%;
+                    left: ${Math.random() * 100}%;
+                    opacity: ${Math.random() * 0.3 + 0.1};
+                    animation: float ${duration}s ease-in-out ${delay}s infinite;
+                `;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            AppState.init();
+            generateOrderDetails();
+            setupParticles();
+            
+            // إضافة تأثيرات إضافية
+            setTimeout(() => {
+                document.querySelector('.success-icon').classList.add('animate__animated', 'animate__bounce');
+            }, 500);
+        });
+    </script>
 </body>
 </html>
