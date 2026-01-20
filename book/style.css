@@ -1,119 +1,302 @@
-/* أنماط أساسية */
 :root {
     --primary-color: #2563eb;
     --secondary-color: #1e40af;
-    --bg-color: #ffffff;
-    --text-color: #333333;
-    --card-bg: #ffffff;
-    --border-color: #e0e0e0;
+    --accent-color: #3b82f6;
+    --light-color: #f8fafc;
+    --dark-color: #0f172a;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --gray-color: #64748b;
 }
 
-/* الوضع الداكن */
-.dark-mode {
-    --primary-color: #60a5fa;
-    --secondary-color: #93c5fd;
-    --bg-color: #1a1a1a;
-    --text-color: #f0f0f0;
-    --card-bg: #2d2d2d;
-    --border-color: #444444;
-}
-
+/* أنماط عامة */
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
     font-family: 'Cairo', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* شريط التنقل */
+.navbar {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
     transition: all 0.3s ease;
 }
 
-/* بطاقة الكتاب */
-.card {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    min-height: 80vh;
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
 }
 
+/* الهيرو */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 8rem 0 5rem;
+    margin-top: 76px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero .lead {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.hero .author {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* كتاب متحرك */
+.book-cover-animation {
+    position: relative;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.book-cover {
+    width: 300px;
+    height: 400px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.book-cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 1;
+}
+
+.book-title {
+    font-size: 3rem;
+    font-weight: 800;
+    text-align: center;
+    z-index: 2;
+    line-height: 1.2;
+}
+
+.book-author {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    z-index: 2;
+}
+
+/* بطاقات المميزات */
+.feature-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+/* بطاقة التسعير */
+.pricing-card {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.pricing-card:hover {
+    transform: scale(1.03);
+}
+
+.pricing-card .card-body {
+    padding: 3rem;
+}
+
+.pricing-card .price {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 1.5rem 0;
+}
+
+/* صفحة تسجيل الدخول */
+.login-page {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-card {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+/* صفحة الكتاب */
 .book-content {
-    line-height: 1.8;
-    font-size: 1.1rem;
-    padding: 20px 0;
+    min-height: 70vh;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.toc-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.toc-list {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.toc-list a {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-right: 3px solid transparent;
+}
+
+.toc-list a:hover, .toc-list a.active {
+    background-color: rgba(37, 99, 235, 0.1);
+    border-right-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* أدوات القراءة */
+.reading-controls {
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* الفوتر */
+.footer {
+    background-color: var(--dark-color);
+    color: white;
+    margin-top: 5rem;
+}
+
+/* محتوى الكتاب داخل الصفحة */
+.book-content h1 {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
 }
 
 .book-content h2 {
-    color: var(--primary-color);
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+    color: var(--secondary-color);
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    padding-right: 1rem;
+    border-right: 4px solid var(--accent-color);
 }
 
 .book-content h3 {
-    color: var(--secondary-color);
-    margin-top: 25px;
-    margin-bottom: 15px;
+    color: var(--dark-color);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.book-content p {
+    margin-bottom: 1.5rem;
+    text-align: justify;
 }
 
 .book-content ul, .book-content ol {
-    padding-right: 20px;
-    margin-bottom: 20px;
+    padding-right: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .book-content li {
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
 }
 
-/* الفهرس */
-.table-of-contents {
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid var(--border-color);
-}
-
-.list-group-item {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    border-color: var(--border-color);
-    text-align: right;
-    padding: 12px 15px;
-    transition: all 0.3s;
-}
-
-.list-group-item:hover {
-    background-color: rgba(var(--primary-color), 0.1);
-    transform: translateX(-5px);
-}
-
-.list-group-item.active {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: white;
-}
-
-/* عناصر التحكم */
-.reading-controls {
-    padding: 20px;
-    background: var(--card-bg);
-    border-radius: 10px;
-}
-
-#pageInfo {
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-/* جدول */
-.table {
-    color: var(--text-color);
-}
-
-.table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, 0.05);
-}
-
-.dark-mode .table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-/* تنبيه */
-.alert {
+.book-content blockquote {
     border-right: 4px solid var(--primary-color);
+    padding-right: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--gray-color);
+}
+
+/* الوضع الداكن */
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+
+body.dark-mode .card {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+}
+
+body.dark-mode .book-content {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero .lead {
+        font-size: 1.2rem;
+    }
+    
+    .book-cover {
+        width: 250px;
+        height: 350px;
+    }
+    
+    .book-title {
+        font-size: 2.5rem;
+    }
+    
+    .book-author {
+        font-size: 1.2rem;
+    }
 }
