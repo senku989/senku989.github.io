@@ -1,306 +1,114 @@
 /* ==============================================
    أنماط الألوان والثيمات
-   الوضع الفاتح والداكن
+   تصميم عصري مع تباين عالي للقراءة
 ============================================== */
 
-/* أنماط الوضع الفاتح */
+/* ===== الوضع الفاتح (الافتراضي) ===== */
 .light-mode {
     /* الألوان الأساسية */
     --primary-color: #2563eb;
     --primary-rgb: 37, 99, 235;
     --secondary-color: #1e40af;
     --accent-color: #3b82f6;
-    
-    /* نصوص */
-    --text-color: #1f2937;
-    --text-secondary: #6b7280;
-    --text-muted: #9ca3af;
-    
-    /* خلفيات */
-    --bg-color: #f8fafc;
-    --card-bg: #ffffff;
-    --nav-bg: #ffffff;
-    --nav-bg-rgb: 255, 255, 255;
-    --footer-bg: #1e293b;
-    --footer-text: #f1f5f9;
-    --hover-bg: #f1f5f9;
-    
-    /* حدود */
-    --border-color: #e5e7eb;
-    --border-light: #f1f5f9;
-    --border-dark: #d1d5db;
-    
-    /* تدرجات */
-    --gradient-start: #2563eb;
-    --gradient-end: #7c3aed;
-    
-    /* ظلال */
-    --shadow-color: rgba(0, 0, 0, 0.08);
-    --shadow-lg: rgba(0, 0, 0, 0.12);
-    
-    /* عناصر تفاعلية */
     --success-color: #10b981;
     --warning-color: #f59e0b;
     --danger-color: #ef4444;
     --info-color: #3b82f6;
+    
+    /* النصوص */
+    --text-color: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --text-light: #94a3b8;
+    
+    /* الخلفيات */
+    --bg-color: #ffffff;
+    --card-bg: #f8fafc;
+    --nav-bg: #ffffff;
+    --nav-bg-rgb: 255, 255, 255;
+    --footer-bg: #f1f5f9;
+    --hover-bg: #f1f5f9;
+    --code-bg: #f1f5f9;
+    
+    /* الحدود */
+    --border-color: #e2e8f0;
+    --border-light: #f1f5f9;
+    --border-dark: #cbd5e1;
+    --border-radius: 10px;
+    
+    /* التدرجات */
+    --gradient-primary: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+    --gradient-secondary: linear-gradient(135deg, #f97316 0%, #eab308 100%);
+    --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    
+    /* الظلال */
+    --shadow-color: rgba(15, 23, 42, 0.08);
+    --shadow-light: rgba(15, 23, 42, 0.04);
+    --shadow-lg: rgba(15, 23, 42, 0.12);
+    --shadow-xl: rgba(15, 23, 42, 0.16);
+    
+    /* تأثيرات */
+    --overlay-light: rgba(255, 255, 255, 0.8);
+    --overlay-dark: rgba(15, 23, 42, 0.5);
 }
 
-/* أنماط الوضع الداكن */
+/* ===== الوضع الداكن ===== */
 .dark-mode {
     /* الألوان الأساسية */
     --primary-color: #60a5fa;
     --primary-rgb: 96, 165, 250;
     --secondary-color: #93c5fd;
     --accent-color: #3b82f6;
+    --success-color: #34d399;
+    --warning-color: #fbbf24;
+    --danger-color: #f87171;
+    --info-color: #60a5fa;
     
-    /* نصوص */
+    /* النصوص */
     --text-color: #f1f5f9;
     --text-secondary: #cbd5e1;
     --text-muted: #94a3b8;
+    --text-light: #64748b;
     
-    /* خلفيات */
+    /* الخلفيات */
     --bg-color: #0f172a;
     --card-bg: #1e293b;
     --nav-bg: #1e293b;
     --nav-bg-rgb: 30, 41, 59;
     --footer-bg: #020617;
-    --footer-text: #cbd5e1;
     --hover-bg: #2d3748;
+    --code-bg: #2d3748;
     
-    /* حدود */
+    /* الحدود */
     --border-color: #334155;
     --border-light: #475569;
     --border-dark: #64748b;
+    --border-radius: 10px;
     
-    /* تدرجات */
-    --gradient-start: #0f172a;
-    --gradient-end: #1e293b;
+    /* التدرجات */
+    --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+    --gradient-secondary: linear-gradient(135deg, #f97316 0%, #eab308 100%);
+    --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
     
-    /* ظلال */
+    /* الظلال */
     --shadow-color: rgba(0, 0, 0, 0.3);
+    --shadow-light: rgba(0, 0, 0, 0.2);
     --shadow-lg: rgba(0, 0, 0, 0.4);
+    --shadow-xl: rgba(0, 0, 0, 0.5);
     
-    /* عناصر تفاعلية */
-    --success-color: #10b981;
-    --warning-color: #f59e0b;
-    --danger-color: #ef4444;
-    --info-color: #3b82f6;
+    /* تأثيرات */
+    --overlay-light: rgba(30, 41, 59, 0.8);
+    --overlay-dark: rgba(0, 0, 0, 0.7);
 }
 
-/* تطبيق المتغيرات على الجسم */
+/* ===== تطبيق المتغيرات ===== */
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* تطبيقات عامة */
-.book-content,
-.reading-controls,
-.reading-controls-bottom,
-.toc-sidebar,
-.search-results-container,
-.appendix-item,
-.modal-content {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    border-color: var(--border-color);
-}
-
-/* النصوص */
-.text-muted {
-    color: var(--text-muted) !important;
-}
-
-.text-secondary {
-    color: var(--text-secondary) !important;
-}
-
-/* الحدود */
-.border {
-    border-color: var(--border-color) !important;
-}
-
-.border-bottom {
-    border-bottom-color: var(--border-color) !important;
-}
-
-.border-top {
-    border-top-color: var(--border-color) !important;
-}
-
-/* الأزرار */
-.btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: white;
-}
-
-.btn-primary:hover,
-.btn-primary:focus {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
-}
-
-.btn-outline-primary {
-    color: var(--primary-color);
-    border-color: var(--primary-color);
-    background-color: transparent;
-}
-
-.btn-outline-primary:hover,
-.btn-outline-primary:focus {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: white;
-}
-
-.btn-outline-secondary {
-    color: var(--text-secondary);
-    border-color: var(--border-color);
-    background-color: transparent;
-}
-
-.btn-outline-secondary:hover,
-.btn-outline-secondary:focus {
-    background-color: var(--hover-bg);
-    border-color: var(--border-dark);
-    color: var(--text-color);
-}
-
-/* شريط التنقل */
-.navbar {
-    background-color: rgba(var(--nav-bg-rgb), 0.98);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-
-/* شريط التقدم */
-.progress {
-    background-color: var(--border-light);
-}
-
-.progress-bar {
-    background-color: var(--primary-color);
-    background-image: linear-gradient(
-        45deg,
-        rgba(255, 255, 255, 0.15) 25%,
-        transparent 25%,
-        transparent 50%,
-        rgba(255, 255, 255, 0.15) 50%,
-        rgba(255, 255, 255, 0.15) 75%,
-        transparent 75%,
-        transparent
-    );
-    background-size: 1rem 1rem;
-    animation: progress-animation 1s linear infinite;
-}
-
-@keyframes progress-animation {
-    0% {
-        background-position: 1rem 0;
-    }
-    100% {
-        background-position: 0 0;
-    }
-}
-
-/* الروابط */
-a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-a:hover {
-    color: var(--secondary-color);
-    text-decoration: underline;
-}
-
-/* الكروت والعناصر التفاعلية */
-.card {
-    background-color: var(--card-bg);
-    border-color: var(--border-color);
-}
-
-.list-group-item {
-    background-color: var(--card-bg);
-    border-color: var(--border-color);
-    color: var(--text-color);
-}
-
-/* المدخلات والنماذج */
-.form-control,
-.form-select {
-    background-color: var(--card-bg);
-    border-color: var(--border-color);
-    color: var(--text-color);
-}
-
-.form-control:focus,
-.form-select:focus {
-    background-color: var(--card-bg);
-    border-color: var(--primary-color);
-    color: var(--text-color);
-    box-shadow: 0 0 0 0.25rem rgba(var(--primary-rgb), 0.1);
-}
-
-.form-control::placeholder {
-    color: var(--text-muted);
-}
-
-/* Modal */
-.modal-header {
-    border-bottom-color: var(--border-color);
-}
-
-.modal-footer {
-    border-top-color: var(--border-color);
-}
-
-/* تنبيهات */
-.alert {
-    background-color: var(--card-bg);
-    border-color: var(--border-color);
-    color: var(--text-color);
-}
-
-.alert-primary {
-    background-color: rgba(var(--primary-rgb), 0.1);
-    border-color: rgba(var(--primary-rgb), 0.3);
-    color: var(--primary-color);
-}
-
-/* الجداول */
-.table {
-    color: var(--text-color);
-}
-
-.table-hover tbody tr:hover {
-    background-color: var(--hover-bg);
-    color: var(--text-color);
-}
-
-/* توسعة للوضع الداكن */
-.dark-mode .navbar-dark .navbar-brand {
-    color: var(--primary-color);
-}
-
-.dark-mode .text-dark {
-    color: var(--text-color) !important;
-}
-
-.dark-mode .bg-light {
-    background-color: var(--card-bg) !important;
-}
-
-.dark-mode .border-light {
-    border-color: var(--border-color) !important;
-}
-
-/* تحسينات للقراءة في الوضع الداكن */
+/* ===== تحسينات الوضع الداكن للقراءة ===== */
 .dark-mode .book-content {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
@@ -309,24 +117,33 @@ a:hover {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* تحسين التباين للوصولية */
+.dark-mode .chapter-paragraph {
+    line-height: 2.2;
+    letter-spacing: -0.01em;
+}
+
+/* ===== تحسين التباين للوصولية ===== */
 @media (prefers-contrast: high) {
     .light-mode {
         --text-color: #000000;
+        --text-secondary: #333333;
         --bg-color: #ffffff;
         --card-bg: #ffffff;
         --border-color: #000000;
+        --primary-color: #0000ff;
     }
     
     .dark-mode {
         --text-color: #ffffff;
+        --text-secondary: #cccccc;
         --bg-color: #000000;
         --card-bg: #000000;
         --border-color: #ffffff;
+        --primary-color: #00ffff;
     }
 }
 
-/* دعم نظام الألوان للجهاز */
+/* ===== دعم نظام الألوان للجهاز ===== */
 @media (prefers-color-scheme: dark) {
     body:not(.light-mode) {
         color-scheme: dark;
@@ -337,4 +154,55 @@ a:hover {
     body:not(.dark-mode) {
         color-scheme: light;
     }
+}
+
+/* ===== ألوان الحالة ===== */
+.text-success {
+    color: var(--success-color) !important;
+}
+
+.text-warning {
+    color: var(--warning-color) !important;
+}
+
+.text-danger {
+    color: var(--danger-color) !important;
+}
+
+.text-info {
+    color: var(--info-color) !important;
+}
+
+/* ===== خلفيات الحالة ===== */
+.bg-success {
+    background-color: var(--success-color) !important;
+}
+
+.bg-warning {
+    background-color: var(--warning-color) !important;
+}
+
+.bg-danger {
+    background-color: var(--danger-color) !important;
+}
+
+.bg-info {
+    background-color: var(--info-color) !important;
+}
+
+/* ===== حدود الحالة ===== */
+.border-success {
+    border-color: var(--success-color) !important;
+}
+
+.border-warning {
+    border-color: var(--warning-color) !important;
+}
+
+.border-danger {
+    border-color: var(--danger-color) !important;
+}
+
+.border-info {
+    border-color: var(--info-color) !important;
 }
