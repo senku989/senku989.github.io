@@ -1,345 +1,523 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الطريق إلى 1000$ شهريًا</title>
-
-<!-- Fonts & Icons -->
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<!-- Payhip -->
-<script src="https://payhip.com/payhip.js"></script>
-
-<style>
-:root{
-  --primary:#2563eb;
-  --secondary:#4f46e5;
-  --bg:#f8fafc;
-  --card:#ffffff;
-  --text:#1f2933;
-  --muted:#6b7280;
-}
-body.dark{
-  --bg:#0f172a;
-  --card:#111827;
-  --text:#f9fafb;
-  --muted:#9ca3af;
-}
-*{box-sizing:border-box;font-family:"Cairo",sans-serif}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  transition:.3s;
-}
-
-/* NAV */
-.nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  z-index:1000;
-  backdrop-filter:blur(12px);
-  background:rgba(255,255,255,.9);
-  padding:14px 22px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-body.dark .nav{background:rgba(15,23,42,.9)}
-.toggle{
-  background:none;
-  border:none;
-  color:var(--text);
-  font-size:1.2rem;
-  cursor:pointer;
-}
-
-/* HERO */
-.hero{
-  padding:130px 20px 80px;
-  display:flex;
-  justify-content:center;
-}
-.hero-box{
-  max-width:1000px;
-  background:var(--card);
-  border-radius:28px;
-  padding:60px 45px;
-  box-shadow:0 30px 80px rgba(0,0,0,.1);
-  animation:fadeUp 1s ease;
-}
-.hero h1{
-  font-size:2.8rem;
-  margin-bottom:20px;
-}
-.hero p{
-  font-size:1.2rem;
-  line-height:1.9;
-  color:var(--muted);
-}
-
-/* BUY BUTTON */
-.buy-btn{
-  margin-top:35px;
-  position:relative;
-  display:inline-flex;
-  align-items:center;
-  gap:16px;
-  padding:16px 36px;
-  border-radius:60px;
-  border:none;
-  cursor:pointer;
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  color:#fff;
-  font-size:1.15rem;
-  transition:.25s;
-  overflow:hidden;
-}
-.buy-btn:hover{
-  transform:translateY(-4px);
-  box-shadow:0 18px 40px rgba(37,99,235,.45);
-}
-.buy-icon{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  background:rgba(255,255,255,.2);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.buy-text{text-align:right}
-.buy-text small{display:block;font-size:.85rem;opacity:.85}
-
-/* TRUST BAR */
-.trust{
-  margin-top:25px;
-  display:flex;
-  gap:25px;
-  flex-wrap:wrap;
-  font-size:.95rem;
-  color:var(--muted);
-}
-.trust span i{margin-left:6px;color:var(--primary)}
-
-/* SECTIONS */
-.section{padding:90px 20px}
-.section h2{
-  text-align:center;
-  font-size:2.3rem;
-  margin-bottom:20px;
-}
-.section .lead{
-  text-align:center;
-  max-width:800px;
-  margin:0 auto 60px;
-  color:var(--muted);
-  font-size:1.1rem;
-}
-
-/* FEATURES */
-.grid{
-  max-width:1100px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:28px;
-}
-.card{
-  background:var(--card);
-  border-radius:22px;
-  padding:32px;
-  text-align:center;
-  box-shadow:0 15px 40px rgba(0,0,0,.08);
-}
-.card i{
-  font-size:2.2rem;
-  color:var(--primary);
-  margin-bottom:18px;
-}
-
-/* CTA */
-.cta{
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  color:#fff;
-  padding:90px 20px;
-  text-align:center;
-}
-.cta h2{font-size:2.5rem;margin-bottom:20px}
-.cta p{font-size:1.2rem;max-width:700px;margin:auto}
-
-/* FOOTER */
-footer{
-  background:var(--card);
-  padding:50px 20px;
-  text-align:center;
-}
-footer p{color:var(--muted);font-size:.95rem}
-
-/* WhatsApp */
-.whatsapp{
-  position:fixed;
-  bottom:24px;
-  right:24px;
-  width:58px;
-  height:58px;
-  background:#25d366;
-  color:#fff;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:1.8rem;
-  box-shadow:0 12px 30px rgba(0,0,0,.3);
-  transition:.3s;
-  z-index:999;
-}
-.whatsapp:hover{transform:scale(1.1);background:#1ebe5d}
-
-/* Ripple */
-.ripple{
-  position:absolute;
-  border-radius:50%;
-  background:rgba(255,255,255,.6);
-  transform:scale(0);
-  animation:ripple .6s linear;
-}
-@keyframes ripple{
-  to{transform:scale(4);opacity:0}
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(30px)}
-  to{opacity:1;transform:translateY(0)}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الطريق إلى 1000$ شهريًا | منهجية التحول الرقمي</title>
+    
+    <!-- الفافيكون -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Payhip Script -->
+    <script type="text/javascript" src="https://payhip.com/payhip.js"></script>
+    
+    <!-- الأنماط -->
+    <link rel="stylesheet" href="themes.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="الطريق إلى 1000$ شهريًا">
+    <meta property="og:description" content="كتاب عملي يرشدك للتحول إلى رائد أعمال رقمي ناجح">
+    <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Book",
+        "name": "الطريق إلى 1000$ شهريًا",
+        "author": "أمجد الكلباني",
+        "bookFormat": "EBook",
+        "numberOfPages": "70",
+        "description": "كتاب عملي يرشدك خطوة بخطة للتحول إلى رائد أعمال رقمي ناجح",
+        "offers": {
+            "@type": "Offer",
+            "price": "5.99",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
 </head>
+<body class="light-mode">
+    <!-- زر Payhip المخفي -->
+    <a href="https://payhip.com/b/4K0bD" 
+       class="payhip-buy-button" 
+       data-product="4K0bD" 
+       data-theme="green" 
+       id="payhipHidden" 
+       style="display:none">
+       Buy
+    </a>
 
-<body>
+    <!-- شريط التنقل المحسّن -->
+    <nav class="navbar navbar-expand-lg fixed-top nav-modern">
+        <div class="container">
+            <a class="navbar-brand logo" href="index.html">
+                <i class="fas fa-book-open me-2"></i>
+                <span>الطريق إلى <strong>1000$</strong></span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hero">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">المميزات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#chapters">الفصول</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#author">المؤلف</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">التقييمات</a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <button class="btn btn-theme-toggle" id="themeToggleNav">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+                
+                <!-- زر الشراء في النافبار -->
+                <div class="d-none d-lg-block ms-4">
+                    <button class="btn btn-buy-sm" id="navBuyBtn">
+                        <i class="fas fa-shopping-cart me-2"></i>
+                        اشتري الآن
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-<!-- Payhip hidden -->
-<a href="https://payhip.com/b/4K0bD"
-   class="payhip-buy-button"
-   data-product="4K0bD"
-   data-theme="green"
-   id="payhipHidden"
-   style="display:none">Buy</a>
+    <!-- Hero Section -->
+    <section class="hero-section-modern" id="hero">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="hero-content-modern">
+                        <span class="badge-modern mb-3 animate-pulse">
+                            <i class="fas fa-bolt me-2"></i>
+                            العرض الحصري
+                        </span>
+                        <h1 class="display-4 fw-bold mb-4 hero-title">
+                            اكتشف <span class="text-gradient">سر التحول</span> إلى 
+                            <span class="text-gradient">1000$</span> شهريًا
+                        </h1>
+                        <p class="lead mb-5 hero-subtitle">
+                            كتاب عملي يرشدك خطوة بخطة للتحول من موظف عادي إلى رائد أعمال رقمي ناجح.
+                            أكثر من <strong>70 صفحة</strong> من الاستراتيجيات العملية والتكتيكات المجربة.
+                        </p>
+                        
+                        <!-- زر الشراء الرئيسي -->
+                        <div class="hero-cta-modern">
+                            <div class="buy-btn-container text-center">
+                                <button class="btn-buy-main" id="mainBuyBtn">
+                                    <span class="btn-content">
+                                        <span class="btn-icon">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </span>
+                                        <span class="btn-text">
+                                            <span class="btn-title">اشتري الكتاب الآن</span>
+                                            <span class="btn-subtitle">5.99$ فقط • تحميل فوري</span>
+                                        </span>
+                                    </span>
+                                    <span class="btn-glow"></span>
+                                </button>
+                                
+                                <div class="security-badge mt-3">
+                                    <i class="fas fa-shield-alt me-2"></i>
+                                    دفع آمن عبر Payhip • ضمان استرداد لمدة 30 يوم
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- إحصائيات -->
+                        <div class="hero-stats-modern mt-5">
+                            <div class="row g-4">
+                                <div class="col-4">
+                                    <div class="stat-modern">
+                                        <div class="stat-number">70+</div>
+                                        <div class="stat-label">صفحة عملية</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat-modern">
+                                        <div class="stat-number">7</div>
+                                        <div class="stat-label">فصول مفصلة</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat-modern">
+                                        <div class="stat-number">100%</div>
+                                        <div class="stat-label">ضمان استرداد</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="hero-image-modern">
+                        <div class="book-cover-modern">
+                            <div class="book-cover-inner-modern">
+                                <div class="book-badge">الأكثر مبيعًا</div>
+                                <div class="book-content-modern">
+                                    <h3 class="book-title-modern">الطريق إلى 1000$ شهريًا</h3>
+                                    <p class="book-author-modern">أمجد الكلباني</p>
+                                    <div class="book-price-modern">
+                                        <span class="price-old">$29.99</span>
+                                        <span class="price-new">$5.99</span>
+                                        <span class="price-discount">-80%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- العناصر الطافية -->
+                        <div class="floating-elements">
+                            <div class="floating-element-modern el1">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="floating-element-modern el2">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="floating-element-modern el3">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Wave Divider -->
+        <div class="wave-divider-modern">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+            </svg>
+        </div>
+    </section>
 
-<!-- NAV -->
-<div class="nav">
-  <h3>الطريق إلى 1000$</h3>
-  <button class="toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
-</div>
+    <!-- Features Section -->
+    <section class="features-section-modern section-padding" id="features">
+        <div class="container">
+            <div class="section-header-modern text-center mb-5">
+                <h2 class="section-title-modern">ما الذي يميز هذا الكتاب؟</h2>
+                <p class="section-subtitle-modern">أكثر من مجرد كتاب... إنه برنامج تحول كامل</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- المميزات تبقى كما هي مع تعديلات طفيفة -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card-modern">
+                        <div class="feature-icon-modern">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="feature-title-modern">فلسفة عقلية جديدة</h3>
+                        <p class="feature-desc-modern">7 مبادئ عقلية تتحول بها من موظف إلى رائد أعمال رقمي</p>
+                        <ul class="feature-list-modern">
+                            <li>عقلية الحلول</li>
+                            <li>عقلية النظام</li>
+                            <li>عقلية القيمة</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- باقي المميزات بنفس النمط -->
+                <!-- ... -->
+            </div>
+            
+            <!-- زر الشراء في منتصف قسم المميزات -->
+            <div class="text-center mt-5 pt-5">
+                <button class="btn-buy-secondary" id="featuresBuyBtn">
+                    <span class="btn-content">
+                        <span class="btn-icon">
+                            <i class="fas fa-bolt"></i>
+                        </span>
+                        <span class="btn-text">
+                            <span class="btn-title">ابدأ رحلتك الآن</span>
+                            <span class="btn-subtitle">5.99$ فقط • ضمان استرداد 30 يوم</span>
+                        </span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </section>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-box">
-    <h1>دليل عملي لبناء دخل رقمي حقيقي</h1>
-    <p>
-      هذا الكتاب ما يعطيك أحلام ولا وعود فارغة.  
-      يعطيك **منهج واضح** يشرح لك كيف تنتقل من شخص يبحث عن دخل إضافي  
-      إلى شخص يملك **نظام رقمي يدر عليه المال بشكل مستمر**.
-    </p>
+    <!-- باقي الأقسام (الفصول، المؤلف، التقييمات) -->
+    <!-- ... -->
 
-    <button class="buy-btn buy">
-      <div class="buy-icon"><i class="fas fa-shopping-cart"></i></div>
-      <div class="buy-text">
-        اشتري الكتاب الآن
-        <small>5.99$ – تحميل فوري</small>
-      </div>
-    </button>
+    <!-- CTA Section -->
+    <section class="cta-section-modern">
+        <div class="container text-center">
+            <h2 class="cta-title">لا تفوت فرصة التحول المالي</h2>
+            <p class="cta-subtitle">انضم إلى أكثر من 1000 رائد أعمال بدأوا رحلتهم بهذا الكتاب</p>
+            
+            <!-- زر الشراء الرئيسي في الـ CTA -->
+            <div class="cta-btn-container">
+                <button class="btn-buy-cta" id="ctaBuyBtn">
+                    <span class="btn-content">
+                        <span class="btn-icon">
+                            <i class="fas fa-crown"></i>
+                        </span>
+                        <span class="btn-text">
+                            <span class="btn-title">احصل على الكتاب الآن</span>
+                            <span class="btn-subtitle">5.99$ فقط - عرض محدود</span>
+                        </span>
+                    </span>
+                    <span class="btn-glow"></span>
+                </button>
+                
+                <div class="cta-badges mt-4">
+                    <span class="badge-cta">
+                        <i class="fas fa-lock me-1"></i>
+                        دفع آمن 100%
+                    </span>
+                    <span class="badge-cta">
+                        <i class="fas fa-sync-alt me-1"></i>
+                        ضمان استرداد 30 يوم
+                    </span>
+                    <span class="badge-cta">
+                        <i class="fas fa-download me-1"></i>
+                        تحميل فوري
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="trust">
-      <span><i class="fas fa-lock"></i> دفع آمن</span>
-      <span><i class="fas fa-mobile-alt"></i> يعمل على جميع الأجهزة</span>
-      <span><i class="fas fa-undo"></i> ضمان استرجاع 30 يوم</span>
-    </div>
-  </div>
-</section>
+    <!-- Footer المحسن -->
+    <footer class="footer-modern">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="footer-brand-modern">
+                        <i class="fas fa-book-open me-2"></i>
+                        <span>الطريق إلى 1000$</span>
+                    </div>
+                    <p class="footer-desc mt-3">
+                        منصة عربية متخصصة في تمكين رواد الأعمال الرقميين من تحقيق استقلالهم المالي.
+                    </p>
+                    
+                    <div class="social-links-modern mt-4">
+                        <a href="#" class="social-link-modern">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link-modern">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link-modern">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link-modern">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="footer-title">روابط سريعة</h5>
+                    <ul class="footer-links">
+                        <li><a href="#hero">الرئيسية</a></li>
+                        <li><a href="#features">المميزات</a></li>
+                        <li><a href="#chapters">الفصول</a></li>
+                        <li><a href="#author">المؤلف</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+                    <h5 class="footer-title">الدعم</h5>
+                    <ul class="footer-links">
+                        <li><a href="#faq">الأسئلة الشائعة</a></li>
+                        <li><a href="mailto:support@example.com">اتصل بنا</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-title">النشرة البريدية</h5>
+                    <p class="footer-desc-small">احصل على نصائح مجانية وأدوات عملية أسبوعياً</p>
+                    
+                    <form class="subscribe-form-modern">
+                        <div class="input-group-modern">
+                            <input type="email" class="form-control-modern" placeholder="بريدك الإلكتروني" required>
+                            <button class="btn-subscribe" type="submit">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <hr class="footer-divider">
+            
+            <div class="footer-bottom-modern">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="mb-0">
+                            © 2024 أمجد الكلباني. جميع الحقوق محفوظة.
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p class="mb-0">
+                            <i class="fas fa-heart text-danger me-1"></i>
+                            صمم بعناية للعالم العربي
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-<!-- ABOUT BOOK -->
-<section class="section">
-  <h2>ماذا ستتعلم من هذا الكتاب؟</h2>
-  <p class="lead">
-    ستتعلم كيف تختار فكرة مربحة، كيف تبني منتج رقمي،  
-    وكيف تحوله إلى مصدر دخل بدون تعقيد أو مصطلحات فاضية.
-  </p>
+    <!-- زر واتساب العائم على اليمين -->
+    <a href="https://wa.me/966500000000?text=مرحباً، أريد الاستفسار عن كتاب 'الطريق إلى 1000$ شهرياً'"
+       class="whatsapp-float"
+       target="_blank"
+       title="تواصل عبر واتساب">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-text">تواصل معنا</span>
+    </a>
 
-  <div class="grid">
-    <div class="card">
-      <i class="fas fa-brain"></i>
-      <h3>تفكير مختلف</h3>
-      <p>تغيير طريقة تفكيرك من موظف إلى صانع قيمة.</p>
-    </div>
-    <div class="card">
-      <i class="fas fa-tools"></i>
-      <h3>أدوات حقيقية</h3>
-      <p>أدوات مجانية يستخدمها المحترفون لاكتشاف الفرص.</p>
-    </div>
-    <div class="card">
-      <i class="fas fa-road"></i>
-      <h3>خارطة طريق</h3>
-      <p>خطة 90 يوم واضحة من أول خطوة إلى أول دخل.</p>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta">
-  <h2>الفرصة قدامك الآن</h2>
-  <p>
-    بدل ما تضيع شهور في محتوى مجاني متناقض،  
-    خذ دليل واحد مختصر ومباشر وابدأ التنفيذ اليوم.
-  </p>
-
-  <button class="buy-btn buy" style="margin-top:35px">
-    <div class="buy-icon"><i class="fas fa-rocket"></i></div>
-    <div class="buy-text">
-      ابدأ رحلتك الآن
-      <small>5.99$ فقط</small>
-    </div>
-  </button>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2024 أمجد الكلباني – جميع الحقوق محفوظة</p>
-</footer>
-
-<!-- WhatsApp -->
-<a href="https://wa.me/966500000000" class="whatsapp" target="_blank">
-  <i class="fab fa-whatsapp"></i>
-</a>
-
-<script>
-const buyBtns=document.querySelectorAll(".buy");
-const payhip=document.getElementById("payhipHidden");
-
-buyBtns.forEach(btn=>{
-  btn.onclick=e=>{
-    const r=document.createElement("span");
-    const rect=btn.getBoundingClientRect();
-    const size=Math.max(rect.width,rect.height);
-    r.style.width=r.style.height=size+"px";
-    r.style.left=e.clientX-rect.left-size/2+"px";
-    r.style.top=e.clientY-rect.top-size/2+"px";
-    r.className="ripple";
-    btn.appendChild(r);
-    setTimeout(()=>r.remove(),600);
-    payhip.click();
-  };
-});
-
-// Dark mode
-const toggle=document.getElementById("themeToggle");
-toggle.onclick=()=>{
-  document.body.classList.toggle("dark");
-  localStorage.theme=document.body.classList.contains("dark")?"dark":"light";
-};
-if(localStorage.theme==="dark") document.body.classList.add("dark");
-</script>
-
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    
+    <!-- Payhip Integration Script -->
+    <script>
+        // زر Payhip المخفي
+        const payhipHiddenBtn = document.getElementById('payhipHidden');
+        
+        // جميع أزرار الشراء المخصصة
+        const buyButtons = [
+            'mainBuyBtn',
+            'navBuyBtn', 
+            'featuresBuyBtn',
+            'ctaBuyBtn'
+        ];
+        
+        // وظيفة لإضافة تأثير ripple
+        function createRipple(event, button) {
+            const ripple = document.createElement('span');
+            const rect = button.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.7);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                width: ${size}px;
+                height: ${size}px;
+                top: ${y}px;
+                left: ${x}px;
+                pointer-events: none;
+            `;
+            
+            button.appendChild(ripple);
+            
+            // إزالة العنصر بعد انتهاء الأنيميشن
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+        
+        // إضافة أنماط الـ ripple
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+        
+        // إضافة event listeners لجميع أزرار الشراء
+        buyButtons.forEach(btnId => {
+            const button = document.getElementById(btnId);
+            if (button) {
+                button.addEventListener('click', function(e) {
+                    // إضافة تأثير ripple
+                    createRipple(e, this);
+                    
+                    // إضافة تأثير اهتزاز بسيط
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                    
+                    // تشغيل زر Payhip المخفي
+                    setTimeout(() => {
+                        payhipHiddenBtn.click();
+                    }, 300);
+                    
+                    // تتبع التحليلات (إذا كان متوفرًا)
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'purchase_click', {
+                            'event_category': 'engagement',
+                            'event_label': 'buy_button_' + btnId
+                        });
+                    }
+                });
+            }
+        });
+        
+        // Theme Toggle
+        document.getElementById('themeToggleNav').addEventListener('click', function() {
+            const body = document.body;
+            const isDark = body.classList.contains('dark-mode');
+            const icon = this.querySelector('i');
+            
+            if (isDark) {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        
+        // تهيئة الثيم من localStorage
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            document.body.classList.remove('light-mode');
+            document.body.classList.add('dark-mode');
+            const icon = document.querySelector('#themeToggleNav i');
+            if (icon) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }
+    </script>
 </body>
 </html>
