@@ -48,165 +48,228 @@
     }
     </script>
     
-    <!-- أنماط إضافية لأزرار Payhip -->
     <style>
-        .payhip-btn-container {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .payhip-custom-btn {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        /* أنماط إضافية للتصميم الجديد */
+        .android-btn {
+            text-decoration: none !important;
+            border-radius: 50px;
+            padding: 12px 28px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             border: none;
-            color: white;
-            padding: 16px 36px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
             position: relative;
             overflow: hidden;
-            min-width: 220px;
         }
         
-        .payhip-custom-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 25px rgba(16, 185, 129, 0.4);
-            background: linear-gradient(135deg, #0da271 0%, #047852 100%);
+        .android-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            text-decoration: none !important;
         }
         
-        .payhip-custom-btn:active {
+        .android-btn:active {
             transform: translateY(-1px);
         }
         
-        .payhip-custom-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transform: translateX(-100%);
-        }
-        
-        .payhip-custom-btn:hover::after {
-            animation: shimmer 1.5s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        
-        .payhip-price-tag {
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            background: #ef4444;
+        .android-btn-primary {
+            background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
             color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 800;
-            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+        }
+        
+        .android-btn-outline {
+            background: transparent;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+        }
+        
+        .android-btn-outline:hover {
+            background: #2563eb;
+            color: white;
+        }
+        
+        /* تأثير Ripple */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        /* تحسينات للفوتر */
+        .footer-link {
+            text-decoration: none !important;
+            color: inherit;
+            padding: 8px 16px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 2px;
+        }
+        
+        .footer-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            text-decoration: none !important;
+        }
+        
+        /* زر الواتساب العائم */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+            text-decoration: none !important;
+        }
+        
+        .whatsapp-float:hover {
+            background: #128C7E;
+            transform: scale(1.1);
+            text-decoration: none !important;
+            color: white;
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* تحسين شريط التنقل */
+        .navbar-blur {
+            background: rgba(var(--nav-bg-rgb), 0.95) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+        
+        /* Animation Classes */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out;
+        }
+        
+        .pulse {
             animation: pulse 2s infinite;
         }
         
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
         
-        .payhip-feature-btn {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            border: none;
-            color: white;
-            padding: 14px 28px;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            width: 100%;
-            margin-top: 15px;
+        /* تحسينات للوضع الداكن */
+        .dark-mode .accordion-button {
+            background-color: var(--card-bg) !important;
+            color: var(--text-color) !important;
         }
         
-        .payhip-feature-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        .dark-mode .accordion-button:not(.collapsed) {
+            background-color: var(--hover-bg) !important;
+            color: var(--primary-color) !important;
         }
         
-        .payhip-cta-btn {
-            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-            border: none;
-            color: white;
-            padding: 18px 40px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+        .dark-mode .accordion-body {
+            background-color: var(--card-bg) !important;
+            color: var(--text-color) !important;
         }
         
-        .payhip-cta-btn:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(139, 92, 246, 0.4);
-            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+        /* تحسينات للروابط */
+        a {
+            text-decoration: none !important;
+            position: relative;
         }
         
-        .payhip-original-btn {
-            display: none !important;
-        }
-        
-        /* تحسينات للعرض على الجوال */
-        @media (max-width: 768px) {
-            .payhip-custom-btn {
-                padding: 14px 24px;
-                font-size: 1rem;
-                min-width: 200px;
-            }
-            
-            .payhip-price-tag {
-                font-size: 0.75rem;
-                padding: 3px 8px;
-            }
-            
-            .payhip-cta-btn {
-                padding: 16px 30px;
-                font-size: 1.1rem;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .payhip-custom-btn {
-                padding: 12px 20px;
-                min-width: 180px;
-            }
-            
-            .payhip-feature-btn {
-                padding: 12px 20px;
-                font-size: 0.9rem;
-            }
-        }
-        
-        /* تأثيرات للفصل بين الزر الأصلي والمخصص */
-        .payhip-original-btn {
-            opacity: 0;
-            height: 0;
-            width: 0;
-            overflow: hidden;
+        .link-hover-effect::after {
+            content: '';
             position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            right: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .link-hover-effect:hover::after {
+            width: 100%;
         }
     </style>
 </head>
 <body class="light-mode">
+    <!-- زر الواتساب العائم -->
+    <a href="https://wa.me/966500000000?text=مرحبًا، أريد الاستفسار عن كتاب الطريق إلى 1000$ شهريًا" 
+       class="whatsapp-float" 
+       target="_blank"
+       title="تواصل معنا على واتساب">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <!-- شريط التنقل -->
-    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-blur" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-book-open me-2"></i>
-                <span>الطريق إلى 1000$</span>
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="fas fa-book-open me-2 text-primary"></i>
+                <span class="fw-bold">الطريق إلى 1000$</span>
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -216,22 +279,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#features">المميزات</a>
+                        <a class="nav-link android-btn-outline mx-1" href="#features">المميزات</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#chapters">الفصول</a>
+                        <a class="nav-link android-btn-outline mx-1" href="#chapters">الفصول</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#pricing">احصل عليه</a>
+                        <a class="nav-link android-btn-outline mx-1" href="#pricing">الشراء</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#author">المؤلف</a>
+                        <a class="nav-link android-btn-outline mx-1" href="#author">المؤلف</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#faq">الأسئلة</a>
+                        <a class="nav-link android-btn-outline mx-1" href="#faq">الأسئلة</a>
                     </li>
                     <li class="nav-item ms-2">
-                        <button class="btn btn-outline-primary" id="themeToggleNav">
+                        <button class="btn android-btn-outline" id="themeToggleNav">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
@@ -241,12 +304,12 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section" id="hero">
+    <section class="hero-section fade-in" id="hero">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-5 mb-lg-0">
-                    <div class="hero-content">
-                        <span class="badge bg-primary mb-3 animate-pulse">الإصدار 2.0 - سعر خاص</span>
+                    <div class="hero-content fade-in-up">
+                        <span class="badge bg-primary mb-3 pulse" style="font-size: 1rem;">الإصدار 2.0 - محدث 2024</span>
                         <h1 class="display-4 fw-bold mb-4">
                             اكتشف <span class="text-gradient">الطريق</span> إلى
                             <span class="text-gradient">1000$</span> شهريًا
@@ -254,57 +317,59 @@
                         <p class="lead mb-5">
                             كتاب عملي يرشدك خطوة بخطة للتحول من موظف عادي إلى رائد أعمال رقمي ناجح.
                             أكثر من <strong>70 صفحة</strong> من الاستراتيجيات العملية والتكتيكات المجربة.
-                            <span class="text-success fw-bold">بسعر 5.99$ فقط!</span>
                         </p>
                         
-                        <div class="hero-cta">
-                            <!-- زر Payhip الجذاب في الهيرو -->
-                            <div class="payhip-btn-container mb-3">
-                                <!-- زر Payhip الأصلي (مخفي) -->
+                        <!-- زر Payhip مع تصميم مخصص -->
+                        <div class="hero-cta mb-5 fade-in-up" style="animation-delay: 0.2s;">
+                            <div class="payhip-btn-container">
                                 <a href="https://payhip.com/b/4K0bD" 
-                                   class="payhip-buy-button payhip-original-btn" 
-                                   data-product="4K0bD" 
-                                   data-theme="dark">
+                                   class="payhip-buy-button" 
+                                   data-theme="green" 
+                                   data-product="4K0bD"
+                                   style="display: none;">
                                     اشتري الآن
                                 </a>
                                 
-                                <!-- زر مخصص جميل -->
-                                <button class="btn btn-primary btn-lg me-3 payhip-custom-btn" id="payhipHeroBtn">
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <i class="fas fa-shopping-cart me-2"></i>
-                                        <div class="text-start">
-                                            <div class="fw-bold">شراء الكتاب الآن</div>
-                                            <small class="opacity-75">5.99$ فقط - احصل عليه فوراً</small>
-                                        </div>
+                                <!-- تصميم زر مخصص -->
+                                <div class="custom-payhip-btn android-btn android-btn-primary d-inline-flex align-items-center p-0 overflow-hidden" 
+                                     style="font-size: 1.2rem; height: 60px;">
+                                    <div class="bg-success d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                        <i class="fas fa-shopping-cart fa-lg"></i>
                                     </div>
-                                    <span class="payhip-price-tag">عرض خاص!</span>
-                                </button>
+                                    <div class="px-4 text-center">
+                                        <div class="fw-bold">اشتري الكتاب الآن</div>
+                                        <small class="opacity-90">5.99$ فقط - دفع آمن</small>
+                                    </div>
+                                </div>
                             </div>
-                            
-                            <a href="#features" class="btn btn-outline-primary btn-lg">
+                        </div>
+                        
+                        <!-- زر فيديو التعريف -->
+                        <div class="fade-in-up" style="animation-delay: 0.3s;">
+                            <a href="#features" class="android-btn android-btn-outline">
                                 <i class="fas fa-play-circle me-2"></i>
                                 شاهد فيديو التعريف
                             </a>
                         </div>
                         
-                        <div class="hero-stats mt-5">
+                        <div class="hero-stats mt-5 pt-4 fade-in-up" style="animation-delay: 0.4s;">
                             <div class="row">
                                 <div class="col-4">
                                     <div class="stat">
-                                        <h3>70+</h3>
-                                        <p>صفحة عملية</p>
+                                        <h3 class="text-gradient">70+</h3>
+                                        <p class="text-muted">صفحة عملية</p>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="stat">
-                                        <h3>5.99$</h3>
-                                        <p>سعر خاص محدود</p>
+                                        <h3 class="text-gradient">7</h3>
+                                        <p class="text-muted">فصول مفصلة</p>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="stat">
-                                        <h3>100%</h3>
-                                        <p>ضمان استرداد</p>
+                                        <h3 class="text-gradient">100%</h3>
+                                        <p class="text-muted">ضمان استرداد</p>
                                     </div>
                                 </div>
                             </div>
@@ -313,30 +378,22 @@
                 </div>
                 
                 <div class="col-lg-6">
-                    <div class="hero-image">
+                    <div class="hero-image slide-in-right">
                         <div class="book-cover">
                             <div class="book-cover-inner">
                                 <div class="book-title">
-                                    <h3>الطريق إلى 1000$ شهريًا</h3>
-                                    <p>أمجد الكلباني</p>
+                                    <h3 class="fw-bold">الطريق إلى 1000$ شهريًا</h3>
+                                    <p class="text-muted">أمجد الكلباني</p>
+                                    <div class="mt-4">
+                                        <span class="badge bg-success fs-6">الإصدار الرقمي</span>
+                                        <span class="badge bg-primary fs-6 ms-2">محدث 2024</span>
+                                    </div>
                                 </div>
-                                <div class="book-price">5.99$</div>
-                                <div class="book-discount">
-                                    <span class="original-price">29.99$</span>
-                                    <span class="discount-badge">-80%</span>
+                                <div class="book-price">
+                                    <small class="d-block opacity-75">سعر خاص</small>
+                                    5.99$
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- Floating Elements -->
-                        <div class="floating-element element-1">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="floating-element element-2">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
-                        <div class="floating-element element-3">
-                            <i class="fas fa-coins"></i>
                         </div>
                     </div>
                 </div>
@@ -354,13 +411,14 @@
     <!-- Features Section -->
     <section class="features-section section-padding" id="features">
         <div class="container">
-            <div class="section-header text-center mb-5">
+            <div class="section-header text-center mb-5 fade-in-up">
                 <h2 class="section-title">ما الذي يميز هذا الكتاب؟</h2>
-                <p class="section-subtitle">أكثر من مجرد كتاب... إنه برنامج تحول كامل <span class="text-success fw-bold">بسعر 5.99$ فقط!</span></p>
+                <p class="section-subtitle">أكثر من مجرد كتاب... إنه برنامج تحول كامل</p>
             </div>
             
             <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
+                <!-- سيتم إضافة بطاقات الميزات هنا -->
+                <div class="col-lg-4 col-md-6 fade-in-up" style="animation-delay: 0.1s;">
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-brain"></i>
@@ -372,23 +430,10 @@
                             <li>عقلية النظام</li>
                             <li>عقلية القيمة</li>
                         </ul>
-                        
-                        <!-- زر Payhip في بطاقة الميزات -->
-                        <div class="payhip-btn-container">
-                            <a href="https://payhip.com/b/4K0bD" 
-                               class="payhip-buy-button payhip-original-btn" 
-                               data-product="4K0bD">
-                                اشتري الآن
-                            </a>
-                            <button class="btn payhip-feature-btn" data-feature="mindset">
-                                <i class="fas fa-lock me-2"></i>
-                                احصل على هذا الفصل بـ 5.99$
-                            </button>
-                        </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 fade-in-up" style="animation-delay: 0.2s;">
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-tools"></i>
@@ -400,23 +445,10 @@
                             <li>AnswerThePublic</li>
                             <li>SparkToro</li>
                         </ul>
-                        
-                        <!-- زر Payhip في بطاقة الميزات -->
-                        <div class="payhip-btn-container">
-                            <a href="https://payhip.com/b/4K0bD" 
-                               class="payhip-buy-button payhip-original-btn" 
-                               data-product="4K0bD">
-                                اشتري الآن
-                            </a>
-                            <button class="btn payhip-feature-btn" data-feature="tools">
-                                <i class="fas fa-download me-2"></i>
-                                حمّل الأدوات بـ 5.99$
-                            </button>
-                        </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 fade-in-up" style="animation-delay: 0.3s;">
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-road"></i>
@@ -428,125 +460,8 @@
                             <li>مرحلة بناء النموذج الأولي</li>
                             <li>مرحلة الإطلاق والتوسع</li>
                         </ul>
-                        
-                        <!-- زر Payhip في بطاقة الميزات -->
-                        <div class="payhip-btn-container">
-                            <a href="https://payhip.com/b/4K0bD" 
-                               class="payhip-buy-button payhip-original-btn" 
-                               data-product="4K0bD">
-                                اشتري الآن
-                            </a>
-                            <button class="btn payhip-feature-btn" data-feature="roadmap">
-                                <i class="fas fa-map me-2"></i>
-                                ابدأ رحلتك بـ 5.99$
-                            </button>
-                        </div>
                     </div>
                 </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-shopping-bag"></i>
-                        </div>
-                        <h3>هندسة المنتجات الرقمية</h3>
-                        <p>من الفكرة إلى 10,000$ شهرياً</p>
-                        <ul class="feature-list">
-                            <li>أنواع المنتجات عالية الربحية</li>
-                            <li>استراتيجيات تسعير متقدمة</li>
-                            <li>منصات البيع العالمية</li>
-                        </ul>
-                        
-                        <!-- زر Payhip في بطاقة الميزات -->
-                        <div class="payhip-btn-container">
-                            <a href="https://payhip.com/b/4K0bD" 
-                               class="payhip-buy-button payhip-original-btn" 
-                               data-product="4K0bD">
-                                اشتري الآن
-                            </a>
-                            <button class="btn payhip-feature-btn" data-feature="products">
-                                <i class="fas fa-box-open me-2"></i>
-                                تعلم الهندسة بـ 5.99$
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-user-tie"></i>
-                        </div>
-                        <h3>العمل الحر الاستراتيجي</h3>
-                        <p>من المستقل إلى الوكالة الرقمية</p>
-                        <ul class="feature-list">
-                            <li>إطار التخصص الدقيق</li>
-                            <li>استراتيجيات تسعير متقدمة</li>
-                            <li>منصات العمل الحر العالمية</li>
-                        </ul>
-                        
-                        <!-- زر Payhip في بطاقة الميزات -->
-                        <div class="payhip-btn-container">
-                            <a href="https://payhip.com/b/4K0bD" 
-                               class="payhip-buy-button payhip-original-btn" 
-                               data-product="4K0bD">
-                                اشتري الآن
-                            </a>
-                            <button class="btn payhip-feature-btn" data-feature="freelancing">
-                                <i class="fas fa-user-check me-2"></i>
-                                احترف العمل الحر بـ 5.99$
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <h3>أنظمة الأتمتة المتقدمة</h3>
-                        <p>بناء أنظمة تعمل عندما تكون نائماً</p>
-                        <ul class="feature-list">
-                            <li>أدوات أتمتة مجانية ومدفوعة</li>
-                            <li>نماذج أتمتة متكاملة</li>
-                            <li>التفويض الذكي</li>
-                        </ul>
-                        
-                        <!-- زر Payhip في بطاقة الميزات -->
-                        <div class="payhip-btn-container">
-                            <a href="https://payhip.com/b/4K0bD" 
-                               class="payhip-buy-button payhip-original-btn" 
-                               data-product="4K0bD">
-                                اشتري الآن
-                            </a>
-                            <button class="btn payhip-feature-btn" data-feature="automation">
-                                <i class="fas fa-cogs me-2"></i>
-                                أتمت عملك بـ 5.99$
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Call to Action بعد الميزات -->
-            <div class="text-center mt-5 pt-5">
-                <h3 class="mb-4">كل هذه المميزات وأكثر بـ <span class="text-success fw-bold">5.99$ فقط!</span></h3>
-                <div class="payhip-btn-container d-inline-block">
-                    <a href="https://payhip.com/b/4K0bD" 
-                       class="payhip-buy-button payhip-original-btn" 
-                       data-product="4K0bD">
-                        اشتري الآن
-                    </a>
-                    <button class="btn payhip-cta-btn" id="payhipFeaturesBtn">
-                        <i class="fas fa-gem me-2"></i>
-                        احصل على الكتاب الكامل الآن - 5.99$
-                    </button>
-                </div>
-                <p class="text-muted mt-3">
-                    <i class="fas fa-shield-alt me-1"></i>
-                    دفع آمن ومشفر • وصول فوري • تحديثات مجانية
-                </p>
             </div>
         </div>
     </section>
@@ -554,15 +469,15 @@
     <!-- Chapters Section -->
     <section class="chapters-section section-padding" id="chapters">
         <div class="container">
-            <div class="section-header text-center mb-5">
+            <div class="section-header text-center mb-5 fade-in-up">
                 <h2 class="section-title">فصول الكتاب السبعة</h2>
-                <p class="section-subtitle">70 صفحة من المحتوى العملي المتخصص <span class="text-success fw-bold">بسعر 5.99$ فقط!</span></p>
+                <p class="section-subtitle">70 صفحة من المحتوى العملي المتخصص</p>
             </div>
             
             <div class="chapters-timeline">
                 <div class="timeline">
                     <!-- Chapter 1 -->
-                    <div class="timeline-item">
+                    <div class="timeline-item fade-in-up">
                         <div class="timeline-content">
                             <div class="chapter-number">01</div>
                             <h3>أسس الثروة الرقمية</h3>
@@ -576,7 +491,7 @@
                     </div>
                     
                     <!-- Chapter 2 -->
-                    <div class="timeline-item">
+                    <div class="timeline-item fade-in-up" style="animation-delay: 0.1s;">
                         <div class="timeline-content">
                             <div class="chapter-number">02</div>
                             <h3>هندسة المنتجات الرقمية</h3>
@@ -589,121 +504,115 @@
                         </div>
                     </div>
                     
-                    <!-- زر الشراء بعد عرض الفصول -->
-                    <div class="text-center mt-5 pt-4">
-                        <div class="payhip-btn-container">
-                            <a href="https://payhip.com/b/4K0bD" 
-                               class="payhip-buy-button payhip-original-btn" 
-                               data-product="4K0bD">
-                                اشتري الآن
-                            </a>
-                            <button class="btn btn-success btn-lg px-5" id="payhipChaptersBtn">
-                                <i class="fas fa-book-open me-2"></i>
-                                احصل على جميع الفصول بـ 5.99$
-                            </button>
-                        </div>
-                        <p class="text-muted mt-3">
-                            <small><i class="fas fa-clock me-1"></i> وصول فوري بعد الدفع</small>
-                        </p>
+                    <!-- Show more button -->
+                    <div class="text-center mt-5 fade-in-up" style="animation-delay: 0.2s;">
+                        <a href="#pricing" class="android-btn android-btn-primary">
+                            <i class="fas fa-book me-2"></i>
+                            اشتري الكتاب لمشاهدة جميع الفصول
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Get Book Section -->
+    <!-- Pricing Section -->
     <section class="pricing-section section-padding" id="pricing">
         <div class="container">
-            <div class="section-header text-center mb-5">
+            <div class="section-header text-center mb-5 fade-in-up">
                 <h2 class="section-title">احصل على الكتاب الآن</h2>
-                <p class="section-subtitle">استثمر 5.99$ في مستقبلك الرقمي واحصل على قيمة تتجاوز السعر</p>
+                <p class="section-subtitle">استثمر 5.99$ في مستقبلك الرقمي</p>
             </div>
             
             <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="special-offer-card text-center">
-                        <div class="offer-header mb-4">
-                            <span class="badge bg-danger mb-3" style="font-size: 1.1rem; padding: 8px 20px;">
-                                <i class="fas fa-bolt me-2"></i>عرض خاص لفترة محدودة
-                            </span>
-                            <h2 class="display-5 fw-bold mb-3">الكتاب الكامل بـ 5.99$ فقط</h2>
-                            <p class="lead mb-4">بدلاً من <del class="text-muted">29.99$</del> <span class="text-success fw-bold">وفرت 24$!</span></p>
+                <div class="col-lg-8 col-md-10">
+                    <div class="pricing-card premium text-center fade-in-up">
+                        <div class="pricing-badge pulse">العرض الحصري</div>
+                        <div class="pricing-header">
+                            <h3>الكتاب الرقمي الكامل</h3>
+                            <div class="price mt-4 mb-3">
+                                <span class="currency">$</span>
+                                <span class="amount display-2 fw-bold">5.99</span>
+                                <span class="period d-block mt-2">للمرة الواحدة</span>
+                            </div>
+                            <p class="text-muted">وصول مدى الحياة مع تحديثات مجانية</p>
                         </div>
                         
-                        <div class="offer-features mb-5">
-                            <div class="row">
-                                <div class="col-md-6 mb-4">
-                                    <div class="feature-item">
-                                        <i class="fas fa-check-circle text-success fa-2x mb-3"></i>
-                                        <h4>الكتاب الإلكتروني الكامل</h4>
-                                        <p>70 صفحة من المحتوى العملي</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="feature-item">
-                                        <i class="fas fa-check-circle text-success fa-2x mb-3"></i>
-                                        <h4>تحديثات مجانية</h4>
-                                        <p>لمدة سنة كاملة</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="feature-item">
-                                        <i class="fas fa-check-circle text-success fa-2x mb-3"></i>
-                                        <h4>وصل فوري</h4>
-                                        <p>بعد ثوانٍ من الدفع</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="feature-item">
-                                        <i class="fas fa-check-circle text-success fa-2x mb-3"></i>
-                                        <h4>ضمان استرداد</h4>
-                                        <p>30 يوم استرداد بدون أسئلة</p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="pricing-features mb-5">
+                            <ul class="list-unstyled">
+                                <li class="py-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    الكتاب الإلكتروني الكامل (70 صفحة)
+                                </li>
+                                <li class="py-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    تحديثات مجانية لمدة سنة
+                                </li>
+                                <li class="py-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    إمكانية القراءة على جميع الأجهزة
+                                </li>
+                                <li class="py-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    الدعم الفني عبر البريد الإلكتروني
+                                </li>
+                                <li class="py-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    ضمان استرداد الأموال 30 يوم
+                                </li>
+                            </ul>
                         </div>
                         
                         <!-- زر Payhip الرئيسي -->
                         <div class="payhip-btn-container mb-4">
-                            <!-- زر Payhip الأصلي -->
                             <a href="https://payhip.com/b/4K0bD" 
-                               class="payhip-buy-button payhip-original-btn" 
-                               data-product="4K0bD" 
-                               data-theme="green">
+                               class="payhip-buy-button" 
+                               data-theme="green" 
+                               data-product="4K0bD"
+                               style="display: none;">
                                 اشتري الآن
                             </a>
                             
-                            <!-- زرنا المخصص -->
-                            <button class="btn btn-primary btn-lg payhip-cta-btn" id="payhipMainBtn" style="padding: 20px 50px; font-size: 1.3rem;">
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-lock me-3 fa-lg"></i>
-                                    <div class="text-start">
-                                        <div class="fw-bold">شراء الكتاب الآن - 5.99$</div>
-                                        <small class="opacity-90">دفع آمن عبر Payhip</small>
-                                    </div>
+                            <div class="custom-payhip-btn android-btn android-btn-primary d-inline-flex align-items-center justify-content-center"
+                                 style="height: 60px; width: 100%; max-width: 300px; font-size: 1.2rem;">
+                                <i class="fas fa-lock me-2"></i>
+                                <div class="text-center">
+                                    <div class="fw-bold">شراء آمن عبر Payhip</div>
+                                    <small class="opacity-90">5.99$ - دفع آمن</small>
                                 </div>
-                            </button>
+                            </div>
                         </div>
                         
-                        <!-- طرق الدفع -->
-                        <div class="payment-methods mb-4">
-                            <p class="text-muted mb-2">نقبل جميع وسائل الدفع:</p>
-                            <div class="d-flex justify-content-center gap-3">
+                        <p class="text-muted small mt-3">
+                            <i class="fas fa-shield-alt me-1"></i>
+                            الدفع آمن ومشفر بالكامل. نستخدم Payhip المعتمد عالميًا
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- طرق الدفع -->
+            <div class="row mt-5 fade-in-up" style="animation-delay: 0.1s;">
+                <div class="col-12">
+                    <div class="text-center">
+                        <h5 class="mb-4">طرق الدفع المدعومة</h5>
+                        <div class="d-flex justify-content-center flex-wrap gap-3">
+                            <div class="payment-method">
                                 <i class="fab fa-cc-visa fa-2x text-primary"></i>
+                                <small class="d-block mt-1">Visa</small>
+                            </div>
+                            <div class="payment-method">
                                 <i class="fab fa-cc-mastercard fa-2x text-danger"></i>
+                                <small class="d-block mt-1">Mastercard</small>
+                            </div>
+                            <div class="payment-method">
                                 <i class="fab fa-cc-paypal fa-2x text-info"></i>
+                                <small class="d-block mt-1">PayPal</small>
+                            </div>
+                            <div class="payment-method">
                                 <i class="fab fa-apple-pay fa-2x"></i>
-                                <i class="fab fa-google-pay fa-2x text-success"></i>
+                                <small class="d-block mt-1">Apple Pay</small>
                             </div>
-                        </div>
-                        
-                        <!-- عرض ضمان الاسترداد -->
-                        <div class="guarantee-box">
-                            <div class="guarantee-icon">
-                                <i class="fas fa-shield-alt fa-3x text-primary"></i>
-                            </div>
-                            <h4 class="mt-3 mb-2">ضمان استرداد الأموال لمدة 30 يوم</h4>
-                            <p class="text-muted">إذا لم تحقق قيمة من الكتاب، سنعيد لك 5.99$ كاملة دون أي أسئلة.</p>
                         </div>
                     </div>
                 </div>
@@ -714,10 +623,12 @@
     <!-- Author Section -->
     <section class="author-section section-padding" id="author">
         <div class="container">
-            <div class="row align-items-center">
+            <div class="row align-items-center fade-in-up">
                 <div class="col-lg-4 mb-5 mb-lg-0">
                     <div class="author-image">
-                        <img src="https://via.placeholder.com/400x500/2563eb/ffffff?text=أمجد+الكلباني" alt="أمجد الكلباني" class="img-fluid rounded-3">
+                        <img src="https://via.placeholder.com/400x500/2563eb/ffffff?text=أمجد+الكلباني" 
+                             alt="أمجد الكلباني" 
+                             class="img-fluid rounded-3 shadow-lg">
                     </div>
                 </div>
                 
@@ -752,23 +663,10 @@
                                 </div>
                                 <div class="col-sm-6 mb-3">
                                     <div class="stat">
-                                        <h4>5.99$</h4>
-                                        <p>سعر الكتاب الخاص</p>
+                                        <h4>25+</h4>
+                                        <p>ورشة عمل أونلاين</p>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <!-- زر الشراء في قسم المؤلف -->
-                            <div class="payhip-btn-container mt-4">
-                                <a href="https://payhip.com/b/4K0bD" 
-                                   class="payhip-buy-button payhip-original-btn" 
-                                   data-product="4K0bD">
-                                    اشتري الآن
-                                </a>
-                                <button class="btn btn-outline-primary btn-lg" id="payhipAuthorBtn">
-                                    <i class="fas fa-graduation-cap me-2"></i>
-                                    تعلم من خبرتي بـ 5.99$
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -780,24 +678,24 @@
     <!-- FAQ Section -->
     <section class="faq-section section-padding" id="faq">
         <div class="container">
-            <div class="section-header text-center mb-5">
+            <div class="section-header text-center mb-5 fade-in-up">
                 <h2 class="section-title">الأسئلة الشائعة</h2>
                 <p class="section-subtitle">إجابات على أكثر الأسئلة تداولاً</p>
             </div>
             
-            <div class="row justify-content-center">
+            <div class="row justify-content-center fade-in-up" style="animation-delay: 0.1s;">
                 <div class="col-lg-10">
                     <div class="accordion" id="faqAccordion">
                         <!-- Question 1 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                    هل حقاً سعر الكتاب 5.99$ فقط؟
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    هل أحتاج إلى خبرة سابقة للاستفادة من الكتاب؟
                                 </button>
                             </h2>
-                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    نعم! هذا سعر خاص لفترة محدودة. القيمة الحقيقية للكتاب 29.99$ ولكن نقدمه الآن بـ 5.99$ فقط لمساعدة أكبر عدد ممكن على بدء رحلتهم الرقمية.
+                                    لا، الكتاب مصمم ليكون مناسباً للمبتدئين تماماً. يبدأ من الصفر ويرشدك خطوة بخطوة. كل فصل يبني على الذي قبله، حتى تصل إلى النتائج المرجوة.
                                 </div>
                             </div>
                         </div>
@@ -806,12 +704,12 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                    كيف يمكنني الدفع والحصول على الكتاب؟
+                                    ما هي مدة الوصول إلى الكتاب؟
                                 </button>
                             </h2>
                             <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    انقر على أي زر "شراء الكتاب" وسيتم توجيهك إلى بوابة دفع آمنة عبر Payhip. بعد اكتمال الدفع (5.99$)، ستتلقى رابط الوصول إلى الكتاب فوراً في بريدك الإلكتروني.
+                                    الوصول مدى الحياة! بمجرد الشراء، تحصل على رابط وصول دائم للكتاب مع جميع التحديثات المستقبلية مجاناً لمدة سنة كاملة.
                                 </div>
                             </div>
                         </div>
@@ -820,12 +718,12 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                    ما هي مدة الوصول إلى الكتاب؟
+                                    كيف يمكنني الدفع؟
                                 </button>
                             </h2>
                             <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    الوصول مدى الحياة! بمجرد الشراء، تحصل على رابط وصول دائم للكتاب مع جميع التحديثات المستقبلية مجاناً لمدة سنة كاملة.
+                                    نقبل جميع وسائل الدفع الإلكترونية: البطاقات الائتمانية (فيزا، ماستركارد)، PayPal، Apple Pay، Google Pay. الدفع آمن ومشفر بالكامل عبر نظام Payhip.
                                 </div>
                             </div>
                         </div>
@@ -839,7 +737,7 @@
                             </h2>
                             <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    نقدم ضمان استرداد أموال لمدة 30 يوماً. إذا لم تكن راضياً عن الكتاب لأي سبب، يمكنك طلب استرداد كامل لمبلغ 5.99$ دون أي أسئلة.
+                                    نقدم ضمان استرداد أموال لمدة 30 يوماً. إذا لم تكن راضياً عن الكتاب لأي سبب، يمكنك طلب استرداد كامل لمبلغ الشراء دون أي أسئلة.
                                 </div>
                             </div>
                         </div>
@@ -860,430 +758,271 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- زر الشراء بعد الأسئلة -->
-            <div class="text-center mt-5 pt-5">
-                <h3 class="mb-4">لا توجد مخاطرة! جرب الكتاب بـ 5.99$ مع ضمان استرداد 30 يوم</h3>
-                <div class="payhip-btn-container">
-                    <a href="https://payhip.com/b/4K0bD" 
-                       class="payhip-buy-button payhip-original-btn" 
-                       data-product="4K0bD">
-                        اشتري الآن
-                    </a>
-                    <button class="btn btn-success btn-lg px-5" id="payhipFaqBtn">
-                        <i class="fas fa-hand-holding-usd me-2"></i>
-                        اشترِ بدون مخاطرة - 5.99$
-                    </button>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section">
+    <section class="cta-section fade-in">
         <div class="container text-center">
             <h2 class="display-5 fw-bold mb-4">ابدأ رحلتك نحو الاستقلال المالي اليوم</h2>
-            <p class="lead mb-5">انضم إلى أكثر من 1000 رائد أعمال بدأوا رحلتهم بهذا الكتاب<br>
-            <span class="text-success fw-bold">بسعر 5.99$ فقط - عرض لفترة محدودة!</span></p>
+            <p class="lead mb-5">انضم إلى أكثر من 1000 رائد أعمال بدأوا رحلتهم بهذا الكتاب</p>
             
-            <!-- زر الشراء النهائي -->
+            <!-- زر CTA الرئيسي -->
             <div class="payhip-btn-container">
                 <a href="https://payhip.com/b/4K0bD" 
-                   class="payhip-buy-button payhip-original-btn" 
-                   data-product="4K0bD" 
-                   data-theme="dark">
+                   class="payhip-buy-button" 
+                   data-theme="green" 
+                   data-product="4K0bD"
+                   style="display: none;">
                     اشتري الآن
                 </a>
-                <button class="btn btn-primary btn-lg px-5 payhip-cta-btn" id="payhipFinalBtn" style="padding: 20px 60px;">
-                    <i class="fas fa-rocket me-2"></i>
-                    ابدأ رحلتك الآن - 5.99$ فقط!
-                </button>
+                
+                <div class="custom-payhip-btn android-btn android-btn-primary d-inline-flex align-items-center justify-content-center"
+                     style="height: 70px; width: 100%; max-width: 350px; font-size: 1.3rem;">
+                    <i class="fas fa-rocket me-3"></i>
+                    <div class="text-center">
+                        <div class="fw-bold">ابدأ رحلتك الآن</div>
+                        <small class="opacity-90">5.99$ - استثمر في مستقبلك</small>
+                    </div>
+                </div>
             </div>
-            
-            <p class="text-muted mt-4">
-                <small><i class="fas fa-lock me-1"></i> دفع آمن • <i class="fas fa-bolt me-1"></i> وصول فوري • <i class="fas fa-sync-alt me-1"></i> تحديثات مجانية</small>
-            </p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer fade-in">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <div class="footer-brand">
-                        <i class="fas fa-book-open me-2"></i>
-                        <span>الطريق إلى 1000$</span>
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8 col-md-10">
+                    <div class="footer-brand mb-4">
+                        <i class="fas fa-book-open me-2 fa-2x text-primary"></i>
+                        <span class="fw-bold fs-3">الطريق إلى 1000$</span>
                     </div>
-                    <p class="mt-3">منصة عربية متخصصة في تمكين رواد الأعمال الرقميين من تحقيق استقلالهم المالي.</p>
+                    <p class="mb-4">منصة عربية متخصصة في تمكين رواد الأعمال الرقميين من تحقيق استقلالهم المالي.</p>
                     
-                    <!-- زر الشراء في الفوتر -->
-                    <div class="payhip-btn-container mt-3">
-                        <a href="https://payhip.com/b/4K0bD" 
-                           class="payhip-buy-button payhip-original-btn" 
-                           data-product="4K0bD">
-                            اشتري الآن
+                    <div class="social-links mb-4">
+                        <a href="#" class="footer-link android-btn-outline mx-1">
+                            <i class="fab fa-twitter"></i>
+                            تويتر
                         </a>
-                        <button class="btn btn-outline-success btn-sm" id="payhipFooterBtn">
-                            <i class="fas fa-cart-plus me-1"></i>
-                            شراء الكتاب (5.99$)
-                        </button>
+                        <a href="#" class="footer-link android-btn-outline mx-1">
+                            <i class="fab fa-facebook"></i>
+                            فيسبوك
+                        </a>
+                        <a href="#" class="footer-link android-btn-outline mx-1">
+                            <i class="fab fa-linkedin"></i>
+                            لينكد إن
+                        </a>
+                        <a href="#" class="footer-link android-btn-outline mx-1">
+                            <i class="fab fa-youtube"></i>
+                            يوتيوب
+                        </a>
                     </div>
                     
-                    <div class="social-links mt-4">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    <div class="footer-links mb-4">
+                        <a href="#features" class="footer-link mx-2">المميزات</a>
+                        <a href="#chapters" class="footer-link mx-2">الفصول</a>
+                        <a href="#pricing" class="footer-link mx-2">الشراء</a>
+                        <a href="#author" class="footer-link mx-2">المؤلف</a>
+                        <a href="#faq" class="footer-link mx-2">الأسئلة</a>
                     </div>
-                </div>
-                
-                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
-                    <h5>روابط سريعة</h5>
-                    <ul>
-                        <li><a href="#features">المميزات</a></li>
-                        <li><a href="#chapters">الفصول</a></li>
-                        <li><a href="#pricing">احصل عليه</a></li>
-                        <li><a href="#author">المؤلف</a></li>
-                    </ul>
-                </div>
-                
-                <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
-                    <h5>الدعم</h5>
-                    <ul>
-                        <li><a href="#faq">الأسئلة الشائعة</a></li>
-                        <li><a href="#">اتصل بنا</a></li>
-                        <li><a href="#">سياسة الخصوصية</a></li>
-                        <li><a href="#">شروط الاستخدام</a></li>
-                    </ul>
-                </div>
-                
-                <div class="col-lg-3 col-md-4">
-                    <h5>الاشتراك في النشرة</h5>
-                    <p>احصل على نصائح مجانية وأدوات عملية أسبوعياً</p>
                     
-                    <form class="subscribe-form">
-                        <div class="input-group">
-                            <input type="email" class="form-control" placeholder="بريدك الإلكتروني">
-                            <button class="btn btn-primary" type="submit">
+                    <div class="support-links mb-4">
+                        <a href="#" class="footer-link mx-2 small">اتصل بنا</a>
+                        <a href="#" class="footer-link mx-2 small">سياسة الخصوصية</a>
+                        <a href="#" class="footer-link mx-2 small">شروط الاستخدام</a>
+                        <a href="#" class="footer-link mx-2 small">الدعم الفني</a>
+                    </div>
+                    
+                    <!-- نموذج الاشتراك -->
+                    <div class="subscribe-form mt-4">
+                        <h5 class="mb-3">اشترك في النشرة البريدية</h5>
+                        <p class="text-muted small mb-3">احصل على نصائح مجانية وأدوات عملية أسبوعياً</p>
+                        
+                        <form class="d-flex justify-content-center gap-2">
+                            <input type="email" 
+                                   class="form-control" 
+                                   placeholder="بريدك الإلكتروني"
+                                   style="max-width: 300px;">
+                            <button class="btn android-btn-primary" type="submit">
                                 <i class="fas fa-paper-plane"></i>
+                                اشتراك
                             </button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
             
             <hr class="my-5">
             
-            <div class="footer-bottom">
+            <div class="footer-bottom text-center">
                 <div class="row">
-                    <div class="col-md-6">
-                        <p class="mb-0">&copy; 2024 أمجد الكلباني. جميع الحقوق محفوظة.</p>
-                    </div>
-                    <div class="col-md-6 text-md-end">
-                        <p class="mb-0">مصمم بـ <i class="fas fa-heart text-danger"></i> للعالم العربي</p>
+                    <div class="col-12">
+                        <p class="mb-2">&copy; 2024 أمجد الكلباني. جميع الحقوق محفوظة.</p>
+                        <p class="mb-0">
+                            <small class="text-muted">
+                                مصمم بـ <i class="fas fa-heart text-danger"></i> للعالم العربي
+                            </small>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Buy Modal -->
-    <div class="modal fade" id="buyModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">إكمال عملية الشراء</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="selected-plan text-center mb-4">
-                        <h4 class="text-success mb-2">الطريق إلى 1000$ شهريًا</h4>
-                        <div class="price display-6 fw-bold">5.99$</div>
-                        <p class="text-muted">سعر خاص لفترة محدودة</p>
-                    </div>
-                    
-                    <div class="payment-options">
-                        <div class="alert alert-success">
-                            <i class="fas fa-bolt me-2"></i>
-                            سيتم توجيهك إلى بوابة دفع Payhip الآمنة لإكمال عملية الشراء
-                        </div>
-                        
-                        <!-- زر Payhip في المودال -->
-                        <div class="payhip-btn-container w-100 mb-3">
-                            <a href="https://payhip.com/b/4K0bD" 
-                               class="payhip-buy-button payhip-original-btn" 
-                               data-product="4K0bD">
-                                اشتري الآن
-                            </a>
-                            <button class="btn btn-success w-100 py-3" id="payhipModalBtn">
-                                <i class="fas fa-lock me-2"></i>
-                                الدفع الآمن الآن - 5.99$
-                            </button>
-                        </div>
-                        
-                        <div class="text-center">
-                            <small class="text-muted">
-                                <i class="fas fa-shield-alt me-1"></i>
-                                دفع مشفر وآمن • 
-                                <i class="fas fa-redo me-1"></i>
-                                ضمان استرداد 30 يوم
-                            </small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="script.js"></script>
     
-    <!-- Payhip Integration Script -->
     <script>
-        // تهيئة جميع أزرار Payhip
-        function initializePayhipButtons() {
-            console.log('تهيئة أزرار Payhip...');
-            
-            // انتظر حتى يتم تحميل مكتبة Payhip
-            if (typeof Payhip !== 'undefined') {
-                Payhip.init();
-                console.log('مكتبة Payhip تم تحميلها بنجاح');
-            } else {
-                console.log('جاري انتظار تحميل مكتبة Payhip...');
-                setTimeout(initializePayhipButtons, 500);
-            }
-        }
-        
-        // معالج لأزرار الشراء المخصصة
-        function setupPayhipButtons() {
-            // جميع أزرار الشراء المخصصة
-            const payhipButtons = [
-                'payhipHeroBtn',
-                'payhipFeaturesBtn',
-                'payhipChaptersBtn',
-                'payhipMainBtn',
-                'payhipAuthorBtn',
-                'payhipFaqBtn',
-                'payhipFinalBtn',
-                'payhipFooterBtn',
-                'payhipModalBtn'
-            ];
-            
-            // معالج الحدث لجميع الأزرار
-            payhipButtons.forEach(buttonId => {
-                const button = document.getElementById(buttonId);
-                if (button) {
-                    button.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        
-                        // عرض رسالة تأكيد
-                        const confirmBuy = confirm('سيتم توجيهك إلى بوابة الدفع الآمنة لشراء الكتاب بـ 5.99$\n\nهل تريد المتابعة؟');
-                        
-                        if (confirmBuy) {
-                            // البحث عن زر Payhip الأصلي المرتبط
-                            const container = this.closest('.payhip-btn-container');
-                            const originalButton = container.querySelector('.payhip-buy-button');
-                            
-                            if (originalButton) {
-                                // محاكاة النقر على الزر الأصلي
-                                originalButton.click();
-                            } else {
-                                // إذا لم يكن هناك زر أصلي، استخدم الرابط المباشر
-                                window.open('https://payhip.com/b/4K0bD', '_blank');
-                            }
-                            
-                            // تتبع الحدث (لأغراض التحليل)
-                            trackPurchaseEvent(buttonId);
-                        }
-                    });
-                }
-            });
-            
-            // أزرار الميزات الفردية
-            const featureButtons = document.querySelectorAll('[data-feature]');
-            featureButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const feature = this.getAttribute('data-feature');
-                    const modal = new bootstrap.Modal(document.getElementById('buyModal'));
-                    
-                    // تحديث نص المودال بناءً على الميزة
-                    const featureNames = {
-                        'mindset': 'فلسفة العقلية الجديدة',
-                        'tools': 'أدوات البحث المتقدمة',
-                        'roadmap': 'خارطة الطريق 90 يوم',
-                        'products': 'هندسة المنتجات الرقمية',
-                        'freelancing': 'العمل الحر الاستراتيجي',
-                        'automation': 'أنظمة الأتمتة المتقدمة'
-                    };
-                    
-                    const modalTitle = document.querySelector('#buyModal .selected-plan h4');
-                    if (modalTitle && featureNames[feature]) {
-                        modalTitle.textContent = featureNames[feature];
-                    }
-                    
-                    modal.show();
-                    trackFeatureClick(feature);
-                });
-            });
-            
-            console.log(`تم إعداد ${payhipButtons.length} زر شراء`);
-        }
-        
-        // تتبع أحداث الشراء
-        function trackPurchaseEvent(buttonId) {
-            console.log(`تم النقر على زر الشراء: ${buttonId}`);
-            
-            // يمكنك إضافة Google Analytics هنا
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'begin_checkout', {
-                    'currency': 'USD',
-                    'value': 5.99,
-                    'items': [{
-                        'item_id': '4K0bD',
-                        'item_name': 'الطريق إلى 1000$ شهريًا',
-                        'price': 5.99,
-                        'quantity': 1
-                    }]
-                });
-            }
-            
-            // عرض رسالة تحميل
-            showLoadingMessage();
-        }
-        
-        // تتبع النقر على الميزات
-        function trackFeatureClick(feature) {
-            console.log(`النقر على الميزة: ${feature}`);
-            
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'select_content', {
-                    'content_type': 'feature',
-                    'item_id': feature
-                });
-            }
-        }
-        
-        // عرض رسالة تحميل
-        function showLoadingMessage() {
-            const loadingMsg = document.createElement('div');
-            loadingMsg.id = 'payhip-loading';
-            loadingMsg.innerHTML = `
-                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99999; display: flex; align-items: center; justify-content: center;">
-                    <div class="text-center text-white p-5" style="background: var(--card-bg); border-radius: 15px; max-width: 400px;">
-                        <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;" role="status"></div>
-                        <h4 class="mb-3">جاري التوجيه إلى بوابة الدفع...</h4>
-                        <p>سيتم توجيهك إلى صفحة الدفع الآمنة خلال ثوانٍ</p>
-                        <small class="text-muted">إذا لم يتم التوجيه تلقائياً، <a href="https://payhip.com/b/4K0bD" class="text-primary">انقر هنا</a></small>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(loadingMsg);
-            
-            // إزالة الرسالة بعد 5 ثوانٍ
-            setTimeout(() => {
-                const loadingElement = document.getElementById('payhip-loading');
-                if (loadingElement) {
-                    loadingElement.remove();
-                }
-            }, 5000);
-        }
-        
-        // إعداد Theme toggle
-        document.getElementById('themeToggleNav').addEventListener('click', function() {
-            document.body.classList.toggle('light-mode');
-            document.body.classList.toggle('dark-mode');
-            const icon = this.querySelector('i');
-            icon.classList.toggle('fa-moon');
-            icon.classList.toggle('fa-sun');
-        });
-        
-        // تهيئة كل شيء عند تحميل الصفحة
+        // تفعيل Payhip buttons
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('جاري تهيئة منصة الكتاب...');
-            
-            // تهيئة أزرار Payhip
-            initializePayhipButtons();
-            setupPayhipButtons();
-            
-            // إعداد العد التنازلي للعرض
-            setupCountdown();
-            
-            console.log('تم تحميل الصفحة بنجاح!');
-        });
-        
-        // إعداد العد التنازلي للعرض الخاص
-        function setupCountdown() {
-            const countdownElement = document.createElement('div');
-            countdownElement.id = 'countdown-timer';
-            countdownElement.innerHTML = `
-                <div style="position: fixed; bottom: 100px; left: 20px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; padding: 15px 20px; border-radius: 10px; box-shadow: 0 5px 20px rgba(239, 68, 68, 0.3); z-index: 999; max-width: 250px; animation: pulse 2s infinite;">
-                    <div class="text-center">
-                        <h6 class="mb-2"><i class="fas fa-clock me-2"></i>العرض ينتهي خلال:</h6>
-                        <div id="countdown" class="display-6 fw-bold">24:00:00</div>
-                        <small>سعر خاص 5.99$ لفترة محدودة</small>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(countdownElement);
-            
-            // بدء العد التنازلي (24 ساعة)
-            let countdownTime = 24 * 60 * 60; // 24 ساعة بالثواني
-            
-            function updateCountdown() {
-                const hours = Math.floor(countdownTime / 3600);
-                const minutes = Math.floor((countdownTime % 3600) / 60);
-                const seconds = countdownTime % 60;
-                
-                document.getElementById('countdown').textContent = 
-                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                
-                if (countdownTime > 0) {
-                    countdownTime--;
-                    setTimeout(updateCountdown, 1000);
-                } else {
-                    countdownElement.style.display = 'none';
-                }
-            }
-            
-            updateCountdown();
-            
-            // إخفاء العد التنازلي عند التمرير
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 300) {
-                    countdownElement.style.opacity = '0.8';
-                    countdownElement.style.transform = 'scale(0.95)';
-                } else {
-                    countdownElement.style.opacity = '1';
-                    countdownElement.style.transform = 'scale(1)';
-                }
+            // إضافة تأثير Ripple للأزرار
+            document.querySelectorAll('.android-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // إضافة تأثير Ripple
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                    `;
+                    ripple.classList.add('ripple');
+                    
+                    this.appendChild(ripple);
+                    
+                    // إزالة العنصر بعد انتهاء التأثير
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                    
+                    // إذا كان زر Payhip مخصص، فتح رابط Payhip
+                    if (this.classList.contains('custom-payhip-btn')) {
+                        e.preventDefault();
+                        window.open('https://payhip.com/b/4K0bD', '_blank');
+                    }
+                });
             });
-        }
-        
-        // إعداد المودال
-        const buyModal = document.getElementById('buyModal');
-        if (buyModal) {
-            buyModal.addEventListener('show.bs.modal', function(event) {
-                console.log('فتح نافذة الشراء...');
-            });
-        }
-        
-        // مؤشرات الأداء
-        window.addEventListener('load', function() {
-            const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
-            console.log(`زمن تحميل الصفحة: ${loadTime}ms`);
             
-            // تتبع زمن تحميل الصفحة
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'timing_complete', {
-                    'name': 'load',
-                    'value': loadTime,
-                    'event_category': 'Page Load'
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggleNav');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('light-mode');
+                    document.body.classList.toggle('dark-mode');
+                    const icon = this.querySelector('i');
+                    icon.classList.toggle('fa-moon');
+                    icon.classList.toggle('fa-sun');
+                    
+                    // حفظ التفضيل
+                    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
                 });
             }
+            
+            // تحميل تفضيل الثيم
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.remove('light-mode');
+                document.body.classList.add('dark-mode');
+                const icon = document.querySelector('#themeToggleNav i');
+                if (icon) icon.classList.replace('fa-moon', 'fa-sun');
+            }
+            
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+            
+            // مراقبة العناصر لإضافة animation
+            document.querySelectorAll('.fade-in-up, .fade-in, .slide-in-right').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Smooth scroll للروابط الداخلية
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // إضافة Active state للروابط أثناء التمرير
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('#mainNav .nav-link');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= (sectionTop - 100)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // تفعيل أزرار Payhip المخفية
+            const payhipButtons = document.querySelectorAll('.payhip-buy-button');
+            payhipButtons.forEach(button => {
+                button.style.display = 'inline-block';
+            });
+            
+            // تحسين شريط التنقل عند التمرير
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('mainNav');
+                if (window.scrollY > 100) {
+                    nav.classList.add('navbar-scrolled');
+                } else {
+                    nav.classList.remove('navbar-scrolled');
+                }
+            });
+        });
+        
+        // Animation on scroll
+        window.addEventListener('scroll', () => {
+            const elements = document.querySelectorAll('.fade-in-up, .fade-in, .slide-in-right');
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (position < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
         });
     </script>
 </body>
