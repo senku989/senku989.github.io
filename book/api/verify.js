@@ -1,85 +1,122 @@
-// ملف: /api/verify.js
-const admin = require('firebase-admin');
+// ==============================================
+// API: Token Verification
+// Secure token validation with rate limiting and CORS
+// ==============================================
 
-// تهيئة Firebase Admin SDK
-const initializeFirebase = () => {
-    if (!admin.apps.length) {
-        admin.initializeApp({
-            credential: admin.credential.cert({
-                projectId: process.env.FIREBASE_PROJECT_ID,
-                clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-                privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
-            }),
-            databaseURL: process.env.FIREBASE_DB_URL
-        });
-    }
-    return admin.database();
-};
+const { FirebaseService, securityMiddleware } = require('../firebase.js');
 
 module.exports = async (req, res) => {
-    // تمكين CORS
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-    );
+    // Configure CORS based on environment
+    const allowedOrigins = process.env.NODE_ENV === 'production'
+        ? (process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [])
+        : ['http://localhost:3000', 'http://localhost:5000'];
     
-    // معالجة طلبات OPTIONS
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Vary', 'Origin');
+    
+    // Handle preflight requests
     if (req.method === 'OPTIONS') {
         res.status(200).end();
         return;
     }
     
-    // التحقق من أن الطلب هو POST
+    // Apply rate limiting in production
+    if (process.env.NODE_ENV === 'production') {
+        const rateLimit = securityMiddleware.rateLimit({
+            windowMs: 15 * 60 * 1000, // 15 minutes
+            max: 100 // limit each IP to 100 requests per windowMs
+        });
+        
+        try {
+            await new Promise((resolve, reject) => {
+                rateLimit(req, res, (err) => {
+                    if (err) reject(err);
+                    else resolve();
+                });
+            });
+        } catch (error) {
+            return res.status(429).json({
+                error: 'Too Many Requests',
+                message: 'Rate limit exceeded. Please try again later.'
+            });
+        }
+    }
+    
+    // Only accept POST requests
     if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
+        return res.status(405).json({
+            error: 'Method Not Allowed',
+            message: 'Only POST requests are accepted'
+        });
     }
     
     try {
+        // Parse request body
         const { token } = req.body;
         
+        // Validate token presence
         if (!token) {
-            return res.status(400).json({ error: 'Token is required' });
+            return res.status(400).json({
+                access: false,
+                error: 'Token Required',
+                message: 'Token is required for verification'
+            });
         }
         
-        // تهيئة Firebase
-        const database = initializeFirebase();
-        
-        // التحقق من التوكن في قاعدة البيانات
-        const snapshot = await database.ref(`access_tokens/${token}`).once('value');
-        const tokenData = snapshot.val();
-        
-        if (!tokenData) {
-            return res.status(404).json({ access: false, error: 'Token not found' });
+        // Validate token format (basic validation)
+        if (typeof token !== 'string' || token.length !== 64) {
+            return res.status(400).json({
+                access: false,
+                error: 'Invalid Token Format',
+                message: 'Token must be a 64-character string'
+            });
         }
         
-        // التحقق من صلاحية التوكن
-        if (!tokenData.active) {
-            return res.status(403).json({ access: false, error: 'Token is inactive' });
+        // Verify token with Firebase
+        const verificationResult = await FirebaseService.verifyAccessToken(token);
+        
+        if (!verificationResult.valid) {
+            return res.status(401).json({
+                access: false,
+                error: verificationResult.error || 'Invalid Token',
+                message: 'Token verification failed'
+            });
         }
         
-        // التحقق من تاريخ الانتهاء
-        if (tokenData.expires_at && Date.now() > tokenData.expires_at) {
-            await database.ref(`access_tokens/${token}`).update({ active: false });
-            return res.status(403).json({ access: false, error: 'Token has expired' });
-        }
+        // Log successful verification (without sensitive data)
+        console.log(`Token verified successfully for: ${verificationResult.data.email}`);
         
-        // التوكن صالح
-        return res.status(200).json({ 
+        // Return success response
+        return res.status(200).json({
             access: true,
-            email: tokenData.email,
-            order_id: tokenData.order_id,
-            created_at: tokenData.created_at
+            message: 'Token verified successfully',
+            data: {
+                email: verificationResult.data.email,
+                order_id: verificationResult.data.order_id,
+                created_at: verificationResult.data.created_at,
+                expires_at: verificationResult.data.expires_at
+            }
         });
         
     } catch (error) {
-        console.error('Error verifying token:', error);
-        return res.status(500).json({ 
-            access: false, 
-            error: 'Internal server error',
-            details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        console.error('Token verification error:', error);
+        
+        // Don't expose internal errors in production
+        const errorMessage = process.env.NODE_ENV === 'development'
+            ? error.message
+            : 'Internal server error';
+        
+        return res.status(500).json({
+            access: false,
+            error: 'Internal Server Error',
+            message: errorMessage
         });
     }
 };
