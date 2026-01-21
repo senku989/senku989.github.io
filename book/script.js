@@ -1,22 +1,23 @@
 // ==============================================
-// ملف JavaScript الرئيسي - Digital Book Platform
-// شامل لجميع الوظائف والتأثيرات
+// ملف JavaScript المحسن
+// تحسينات الأداء والتجربة
 // ==============================================
 
-class AppState {
+class ModernAppState {
     constructor() {
-        this.currentPage = 'index';
         this.userToken = null;
         this.theme = localStorage.getItem('theme') || 'light';
-        this.notifications = [];
+        this.scrollPosition = 0;
         this.init();
     }
     
     init() {
         this.loadTheme();
-        this.setupGlobalListeners();
-        this.checkAuth();
-        this.setupServiceWorker();
+        this.setupSmoothScrolling();
+        this.setupScrollEffects();
+        this.setupAnimations();
+        this.setupIntersectionObserver();
+        this.setupPerformanceMonitoring();
     }
     
     loadTheme() {
@@ -27,9 +28,12 @@ class AppState {
             this.theme = savedTheme;
         }
         
-        // Update theme toggle button
-        const themeToggle = document.getElementById('themeToggle') || 
-                           document.getElementById('themeToggleNav');
+        // تحديث أيقونة الثيم
+        this.updateThemeIcon();
+    }
+    
+    updateThemeIcon() {
+        const themeToggle = document.getElementById('themeToggleNav');
         if (themeToggle) {
             const icon = themeToggle.querySelector('i');
             if (icon) {
@@ -38,258 +42,147 @@ class AppState {
         }
     }
     
-    setupGlobalListeners() {
-        // Theme toggle
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('#themeToggle') || e.target.closest('#themeToggleNav')) {
-                this.toggleTheme();
-            }
-        });
-        
+    setupSmoothScrolling() {
         // Smooth scroll for anchor links
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a[href^="#"]');
-            if (link) {
+            if (link && link.getAttribute('href') !== '#') {
                 e.preventDefault();
                 const targetId = link.getAttribute('href');
-                if (targetId === '#') return;
-                
                 const targetElement = document.querySelector(targetId);
+                
                 if (targetElement) {
-                    const offset = 80;
-                    const targetPosition = targetElement.offsetTop - offset;
+                    const headerHeight = document.querySelector('.nav-modern').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - headerHeight;
                     
                     window.scrollTo({
                         top: targetPosition,
                         behavior: 'smooth'
                     });
+                    
+                    // Update URL without page reload
+                    history.pushState(null, null, targetId);
                 }
             }
         });
-        
-        // Scroll to top button
-        const scrollToTopBtn = document.createElement('button');
-        scrollToTopBtn.id = 'scrollToTop';
-        scrollToTopBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
-        scrollToTopBtn.style.cssText = `
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 15px var(--shadow-color);
-        `;
-        document.body.appendChild(scrollToTopBtn);
-        
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+    }
+    
+    setupScrollEffects() {
+        let lastScroll = 0;
+        const navbar = document.querySelector('.nav-modern');
         
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                scrollToTopBtn.style.opacity = '1';
-                scrollToTopBtn.style.transform = 'translateY(0)';
+            const currentScroll = window.pageYOffset;
+            
+            // Hide/show navbar on scroll
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                navbar.style.transform = 'translateY(-100%)';
             } else {
-                scrollToTopBtn.style.opacity = '0';
-                scrollToTopBtn.style.transform = 'translateY(20px)';
+                navbar.style.transform = 'translateY(0)';
             }
-        });
-        
-        // Handle buy buttons
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('.buy-btn') && !e.target.closest('#buyModal')) {
-                e.preventDefault();
-                // In production, this would redirect to payment gateway
-                this.showNotification('سيتم توجيهك إلى بوابة الدفع الآمنة', 'info');
-            }
-        });
-        
-        // Initialize tooltips
-        this.initTooltips();
-    }
-    
-    toggleTheme() {
-        this.theme = this.theme === 'light' ? 'dark' : 'light';
-        
-        document.body.classList.remove('light-mode', 'dark-mode');
-        document.body.classList.add(this.theme + '-mode');
-        
-        localStorage.setItem('theme', this.theme);
-        
-        // Update icon
-        const themeToggle = document.getElementById('themeToggle') || 
-                           document.getElementById('themeToggleNav');
-        if (themeToggle) {
-            const icon = themeToggle.querySelector('i');
-            if (icon) {
-                icon.className = this.theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-            }
-        }
-        
-        this.showNotification(`تم التبديل إلى الوضع ${this.theme === 'dark' ? 'الداكن' : 'الفاتح'}`, 'info');
-    }
-    
-    checkAuth() {
-        this.userToken = localStorage.getItem('bookAccessToken');
-        return !!this.userToken;
-    }
-    
-    async verifyToken() {
-        if (!this.userToken) return false;
-        
-        try {
-            const response = await fetch('/api/verify', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ token: this.userToken })
-            });
             
-            const result = await response.json();
-            return result.access === true;
-        } catch (error) {
-            console.error('Token verification failed:', error);
-            return false;
-        }
+            // Add shadow on scroll
+            if (currentScroll > 50) {
+                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+            
+            lastScroll = currentScroll;
+            this.scrollPosition = currentScroll;
+        });
     }
     
-    saveToken(token) {
-        this.userToken = token;
-        localStorage.setItem('bookAccessToken', token);
-    }
-    
-    clearToken() {
-        this.userToken = null;
-        localStorage.removeItem('bookAccessToken');
-        localStorage.removeItem('reading_state');
-        localStorage.removeItem('book_bookmarks');
-    }
-    
-    showNotification(message, type = 'info') {
-        const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
-        notification.innerHTML = `
-            <i class="fas fa-${type === 'success' ? 'check-circle' : 
-                                type === 'warning' ? 'exclamation-triangle' : 
-                                type === 'error' ? 'times-circle' : 'info-circle'} me-2"></i>
-            ${message}
-        `;
+    setupAnimations() {
+        // Initialize AOS-like animations
+        const animatedElements = document.querySelectorAll('.feature-card-modern, .stat-modern, .book-cover-modern');
         
-        // Apply styles
-        notification.style.cssText = `
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background: var(--card-bg);
-            color: var(--text-color);
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px var(--shadow-lg);
-            border-right: 4px solid var(--${type}-color);
-            z-index: 10000;
-            animation: slideIn 0.3s ease;
-            max-width: 400px;
-            font-weight: 500;
-        `;
-        
-        document.body.appendChild(notification);
-        
-        // Remove after 3 seconds
-        setTimeout(() => {
-            notification.style.animation = 'fadeOut 0.3s ease forwards';
+        animatedElements.forEach((element, index) => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            
             setTimeout(() => {
-                if (notification.parentNode) {
-                    document.body.removeChild(notification);
-                }
-            }, 300);
-        }, 3000);
-        
-        this.notifications.push(notification);
-    }
-    
-    initTooltips() {
-        const tooltipElements = document.querySelectorAll('[title]');
-        tooltipElements.forEach(element => {
-            element.addEventListener('mouseenter', (e) => {
-                const tooltip = document.createElement('div');
-                tooltip.className = 'custom-tooltip';
-                tooltip.textContent = element.getAttribute('title');
-                tooltip.style.cssText = `
-                    position: absolute;
-                    background: var(--card-bg);
-                    color: var(--text-color);
-                    padding: 6px 12px;
-                    border-radius: 6px;
-                    font-size: 0.85rem;
-                    white-space: nowrap;
-                    z-index: 10000;
-                    box-shadow: 0 4px 15px var(--shadow-color);
-                    border: 1px solid var(--border-color);
-                    transform: translateY(-100%) translateX(-50%);
-                    top: -10px;
-                    left: 50%;
-                `;
-                
-                document.body.appendChild(tooltip);
-                
-                const rect = element.getBoundingClientRect();
-                tooltip.style.left = rect.left + (rect.width / 2) + 'px';
-                tooltip.style.top = rect.top - 10 + 'px';
-                
-                element._tooltip = tooltip;
-            });
-            
-            element.addEventListener('mouseleave', () => {
-                if (element._tooltip) {
-                    element._tooltip.remove();
-                    delete element._tooltip;
-                }
-            });
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }, 100 + (index * 100));
         });
     }
     
-    setupServiceWorker() {
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').then(
-                    (registration) => {
-                        console.log('ServiceWorker registered:', registration);
-                    },
-                    (error) => {
-                        console.log('ServiceWorker registration failed:', error);
-                    }
-                );
+    setupIntersectionObserver() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
             });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.feature-card-modern, .stat-modern').forEach(el => {
+            observer.observe(el);
+        });
+    }
+    
+    setupPerformanceMonitoring() {
+        // Track page load performance
+        window.addEventListener('load', () => {
+            if (window.performance) {
+                const timing = performance.getEntriesByType('navigation')[0];
+                if (timing) {
+                    const loadTime = timing.domContentLoadedEventEnd - timing.fetchStart;
+                    console.log(`Page loaded in ${Math.round(loadTime)}ms`);
+                    
+                    if (loadTime > 3000) {
+                        console.warn('Page load time is high, consider optimization');
+                    }
+                }
+            }
+        });
+        
+        // Monitor memory usage
+        if (performance.memory) {
+            setInterval(() => {
+                const usedMB = performance.memory.usedJSHeapSize / 1048576;
+                const totalMB = performance.memory.totalJSHeapSize / 1048576;
+                
+                if (usedMB > totalMB * 0.8) {
+                    console.warn('High memory usage detected:', usedMB.toFixed(2), 'MB');
+                }
+            }, 30000);
         }
     }
     
-    // Analytics
-    trackEvent(category, action, label) {
-        if (typeof gtag !== 'undefined') {
-            gtag('event', action, {
-                'event_category': category,
-                'event_label': label
-            });
-        }
-        
-        // Log to console in development
-        if (process.env.NODE_ENV === 'development') {
-            console.log(`[Analytics] ${category} - ${action}: ${label}`);
-        }
+    // Utility functions
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
     }
     
     // Form validation
@@ -298,14 +191,11 @@ class AppState {
         return re.test(email);
     }
     
-    validatePassword(password) {
-        return password.length >= 8;
-    }
-    
-    // Local storage utilities
-    setLocalData(key, data) {
+    // Local storage with compression
+    setCompressedData(key, data) {
         try {
-            localStorage.setItem(key, JSON.stringify(data));
+            const compressed = JSON.stringify(data);
+            localStorage.setItem(key, compressed);
             return true;
         } catch (error) {
             console.error('Error saving to localStorage:', error);
@@ -313,7 +203,7 @@ class AppState {
         }
     }
     
-    getLocalData(key) {
+    getCompressedData(key) {
         try {
             const data = localStorage.getItem(key);
             return data ? JSON.parse(data) : null;
@@ -323,103 +213,77 @@ class AppState {
         }
     }
     
-    // Network status
-    isOnline() {
-        return navigator.onLine;
-    }
-    
-    setupOfflineDetection() {
+    // Network status monitoring
+    setupNetworkMonitor() {
         window.addEventListener('online', () => {
-            this.showNotification('تم استعادة الاتصال بالإنترنت', 'success');
+            this.showToast('تم استعادة الاتصال بالإنترنت', 'success');
         });
         
         window.addEventListener('offline', () => {
-            this.showNotification('فقدت الاتصال بالإنترنت', 'warning');
+            this.showToast('فقدت الاتصال بالإنترنت', 'warning');
         });
     }
     
-    // Performance monitoring
-    measurePageLoad() {
-        window.addEventListener('load', () => {
-            if (window.performance) {
-                const timing = performance.timing;
-                const loadTime = timing.loadEventEnd - timing.navigationStart;
-                
-                this.trackEvent('Performance', 'Page Load', `${loadTime}ms`);
-                
-                if (loadTime > 3000) {
-                    console.warn(`Page load time is high: ${loadTime}ms`);
-                }
-            }
+    // Toast notifications
+    showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 
+                              type === 'warning' ? 'exclamation-triangle' : 
+                              type === 'error' ? 'times-circle' : 'info-circle'}"></i>
+            <span>${message}</span>
+        `;
+        
+        document.body.appendChild(toast);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            toast.classList.add('fade-out');
+            setTimeout(() => {
+                document.body.removeChild(toast);
+            }, 300);
+        }, 3000);
+    }
+    
+    // Error handling
+    setupErrorHandling() {
+        window.addEventListener('error', (event) => {
+            console.error('Global error:', event.error);
+            this.showToast('حدث خطأ غير متوقع', 'error');
+        });
+        
+        window.addEventListener('unhandledrejection', (event) => {
+            console.error('Unhandled promise rejection:', event.reason);
+            this.showToast('حدث خطأ في العملية', 'error');
         });
     }
 }
 
 // Initialize the app
-const appState = new AppState();
+const modernApp = new ModernAppState();
 
-// Global helper functions
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    };
-}
-
-// Export for use in other modules
-window.AppState = appState;
-window.debounce = debounce;
-window.throttle = throttle;
+// Global exports
+window.ModernApp = modernApp;
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Add CSS animations
+    console.log('%c📚 الطريق إلى 1000$ - الإصدار المحسن\n%cتم التحميل بنجاح', 
+        'color: #2563eb; font-size: 16px; font-weight: bold;',
+        'color: #10b981; font-size: 12px;'
+    );
+    
+    // Add CSS for animations
     const style = document.createElement('style');
     style.textContent = `
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes fadeOut {
-            from {
-                opacity: 1;
-                transform: translateX(0);
-            }
-            to {
-                opacity: 0;
-                transform: translateX(100%);
-            }
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
         }
         
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -427,45 +291,62 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-        .animate-fade-in-up {
-            animation: fadeInUp 0.5s ease;
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--shadow-lg);
+            border-right: 4px solid var(--primary-color);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease;
+            max-width: 400px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .toast-success {
+            border-right-color: var(--success-color);
+        }
+        
+        .toast-warning {
+            border-right-color: var(--warning-color);
+        }
+        
+        .toast-error {
+            border-right-color: var(--danger-color);
+        }
+        
+        .toast.fade-out {
+            animation: slideOutRight 0.3s ease forwards;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
         }
     `;
     document.head.appendChild(style);
-    
-    // Track page view
-    if (typeof gtag !== 'undefined') {
-        gtag('config', 'GA_MEASUREMENT_ID', {
-            'page_title': document.title,
-            'page_location': window.location.href,
-            'page_path': window.location.pathname
-        });
-    }
-    
-    // Log page load
-    console.log(`%c📚 الطريق إلى 1000$ شهريًا\n%cالإصدار 2.0 | منصة بيع الكتب الرقمية`, 
-        'color: #2563eb; font-size: 16px; font-weight: bold;',
-        'color: #64748b; font-size: 12px;'
-    );
 });
-
-// Error handling
-window.addEventListener('error', (event) => {
-    console.error('Global error:', event.error);
-    appState.trackEvent('Errors', 'JavaScript Error', event.message);
-    
-    // Don't show error notification for minor errors
-    if (!event.message.includes('ResizeObserver') && 
-        !event.message.includes('undefined')) {
-        appState.showNotification('حدث خطأ غير متوقع. يرجى تحديث الصفحة.', 'error');
-    }
-});
-
-// Unhandled promise rejections
-window.addEventListener('unhandledrejection', (event) => {
-    console.error('Unhandled promise rejection:', event.reason);
-    appState.trackEvent('Errors', 'Promise Rejection', event.reason?.message || 'Unknown');
-});
-
-// Export for modules
-export { appState, debounce, throttle };
