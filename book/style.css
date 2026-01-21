@@ -1,354 +1,430 @@
 /* ==============================================
-   ملف الأنماط الرئيسي - Digital Book Platform
-   تصميم عصري عربي متجاوب بالكامل
+   ملف الأنماط الرئيسي المحسن
+   تصميم عصري عربي متكامل
 ============================================== */
 
-/* ===== إعادة الضبط الأساسي ===== */
-*, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ===== شريط التنقل المحسن ===== */
+.nav-modern {
+    background: rgba(var(--nav-bg-rgb), 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(var(--border-color-rgb), 0.1);
+    padding: 20px 0;
+    transition: all 0.3s ease;
 }
 
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 80px;
-}
-
-body {
-    font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.8;
-    direction: rtl;
-    overflow-x: hidden;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* ===== الأنماط العامة ===== */
-a {
+.nav-modern .logo {
+    font-size: 1.6rem;
+    font-weight: 700;
     color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
 }
 
-a:hover {
-    color: var(--secondary-color);
-    text-decoration: underline;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-}
-
-.section-padding {
-    padding: 80px 0;
-}
-
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    color: var(--text-color);
-    position: relative;
-    display: inline-block;
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    right: 0;
-    width: 80px;
-    height: 4px;
-    background: var(--gradient-primary);
-    border-radius: 2px;
-}
-
-.section-subtitle {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    margin-bottom: 3rem;
-}
-
-.text-gradient {
+.nav-modern .logo i {
+    font-size: 2rem;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-.btn {
-    padding: 12px 28px;
-    border-radius: 10px;
+.nav-modern .nav-link {
     font-weight: 600;
-    font-size: 1rem;
+    padding: 8px 20px;
+    margin: 0 5px;
+    border-radius: 12px;
+    color: var(--text-color);
     transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    border: 2px solid transparent;
     position: relative;
-    overflow: hidden;
 }
 
-.btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px var(--shadow-color);
+.nav-modern .nav-link:hover {
+    color: var(--primary-color);
+    background: rgba(var(--primary-rgb), 0.1);
+    transform: translateY(-2px);
 }
 
-.btn::after {
+.nav-modern .nav-link::after {
     content: '';
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-}
-
-.btn:hover::after {
-    transform: translateX(0);
-}
-
-.btn-primary {
+    bottom: -5px;
+    right: 20px;
+    width: 0;
+    height: 3px;
     background: var(--gradient-primary);
-    color: white;
-    border: none;
+    border-radius: 2px;
+    transition: width 0.3s ease;
 }
 
-.btn-outline-primary {
-    background: transparent;
-    color: var(--primary-color);
+.nav-modern .nav-link:hover::after {
+    width: calc(100% - 40px);
+}
+
+.btn-theme-toggle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(var(--primary-rgb), 0.1);
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-theme-toggle:hover {
+    background: rgba(var(--primary-rgb), 0.2);
+    transform: rotate(30deg);
     border-color: var(--primary-color);
 }
 
-.btn-outline-primary:hover {
-    background: var(--primary-color);
-    color: white;
-}
-
-.btn-lg {
-    padding: 16px 36px;
-    font-size: 1.1rem;
-}
-
-/* ===== شريط التنقل ===== */
-#mainNav {
-    background: rgba(var(--nav-bg-rgb), 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 2px 20px var(--shadow-color);
-    padding: 15px 0;
-    transition: all 0.3s ease;
-    z-index: 1000;
-}
-
-#mainNav .navbar-brand {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--primary-color);
-}
-
-#mainNav .navbar-brand i {
-    font-size: 1.8rem;
-    vertical-align: middle;
-}
-
-#mainNav .nav-link {
-    font-weight: 600;
-    padding: 8px 16px;
-    margin: 0 4px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-#mainNav .nav-link:hover {
-    background: var(--hover-bg);
-    color: var(--primary-color);
-}
-
-.navbar-toggler {
-    border: none;
-    padding: 8px;
-    font-size: 1.2rem;
-    color: var(--text-color);
-}
-
-/* ===== قسم الهيرو ===== */
-.hero-section {
+.btn-buy-sm {
     background: var(--gradient-primary);
     color: white;
-    padding: 140px 0 100px;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(var(--primary-rgb), 0.3);
+}
+
+.btn-buy-sm:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(var(--primary-rgb), 0.4);
+}
+
+/* ===== Hero Section المحسن ===== */
+.hero-section-modern {
+    background: linear-gradient(135deg, 
+        rgba(var(--primary-rgb), 0.1) 0%, 
+        rgba(var(--accent-rgb), 0.05) 100%);
+    padding: 160px 0 100px;
     position: relative;
     overflow: hidden;
 }
 
-.hero-section::before {
-    content: '';
+.hero-overlay {
     position: absolute;
     top: 0;
     right: 0;
     width: 100%;
     height: 100%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="%23ffffff" opacity="0.1"/></svg>');
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="%232563eb" opacity="0.05"/></svg>');
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 2;
-}
-
-.hero-content h1 {
+.hero-title {
     font-size: 3.5rem;
     font-weight: 900;
     line-height: 1.2;
     margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--text-color) 0%, var(--primary-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.hero-content .lead {
+.hero-subtitle {
     font-size: 1.3rem;
-    opacity: 0.9;
-    margin-bottom: 2rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 600px;
 }
 
-.badge {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-    font-weight: 600;
+.badge-modern {
+    display: inline-flex;
+    align-items: center;
+    background: var(--gradient-primary);
+    color: white;
+    padding: 8px 20px;
     border-radius: 50px;
-}
-
-.animate-pulse {
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-}
-
-.hero-stats {
-    display: flex;
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.stat h3 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 5px;
-}
-
-.stat p {
+    font-weight: 600;
     font-size: 0.9rem;
-    opacity: 0.8;
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
 }
 
-/* تصميم غلاف الكتاب */
-.book-cover {
+/* ===== أزرار الشراء المخصصة ===== */
+.btn-buy-main, .btn-buy-secondary, .btn-buy-cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 22px 50px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    background: var(--gradient-primary);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(var(--primary-rgb), 0.4);
+    text-decoration: none;
+    min-width: 300px;
+}
+
+.btn-buy-main {
+    padding: 25px 60px;
+    font-size: 1.3rem;
+    border-radius: 25px;
+    box-shadow: 0 15px 50px rgba(var(--primary-rgb), 0.5);
+}
+
+.btn-buy-main:hover, .btn-buy-secondary:hover, .btn-buy-cta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(var(--primary-rgb), 0.6);
+}
+
+.btn-buy-main:active, .btn-buy-secondary:active, .btn-buy-cta:active {
+    transform: translateY(-2px);
+}
+
+.btn-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-buy-main:hover .btn-icon {
+    transform: rotate(15deg) scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.btn-text {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.btn-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.btn-subtitle {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.btn-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.btn-buy-main:hover .btn-glow {
+    opacity: 1;
+    animation: glow-pulse 2s infinite;
+}
+
+@keyframes glow-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+.buy-btn-container {
+    position: relative;
+    display: inline-block;
+}
+
+.buy-btn-container::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    bottom: -20px;
+    left: -20px;
+    background: var(--gradient-primary);
+    border-radius: 35px;
+    z-index: -1;
+    opacity: 0.2;
+    filter: blur(20px);
+    animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.4; }
+}
+
+.security-badge {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* ===== كتاب الهيرو ===== */
+.book-cover-modern {
     position: relative;
     perspective: 1000px;
 }
 
-.book-cover-inner {
-    background: white;
-    border-radius: 20px;
+.book-cover-inner-modern {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-radius: 25px;
     padding: 40px;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-    transform: rotateY(-10deg) rotateX(5deg);
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: rotateY(-15deg) rotateX(5deg);
     transition: transform 0.5s ease;
     position: relative;
     overflow: hidden;
 }
 
-.book-cover-inner::before {
+.book-cover-inner-modern::before {
     content: '';
     position: absolute;
     top: 0;
     right: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+    background: linear-gradient(45deg, 
+        transparent 30%, 
+        rgba(255, 255, 255, 0.05) 50%, 
+        transparent 70%);
     animation: shimmer 3s infinite;
 }
 
-@keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-.book-title h3 {
-    color: #1e293b;
-    font-size: 1.8rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-}
-
-.book-title p {
-    color: #64748b;
-    font-size: 1.1rem;
-}
-
-.book-price {
+.book-badge {
     position: absolute;
-    bottom: 30px;
-    left: 30px;
+    top: 20px;
+    left: 20px;
     background: var(--gradient-primary);
     color: white;
-    padding: 12px 24px;
-    border-radius: 10px;
-    font-size: 1.5rem;
-    font-weight: 800;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 2;
 }
 
-/* العناصر الطافية */
-.floating-element {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    background: white;
+.book-content-modern {
+    position: relative;
+    z-index: 2;
+}
+
+.book-title-modern {
+    color: white;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.book-author-modern {
+    color: #94a3b8;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.book-price-modern {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.price-old {
+    color: #94a3b8;
+    text-decoration: line-through;
+    font-size: 1.2rem;
+}
+
+.price-new {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.price-discount {
+    background: #10b981;
+    color: white;
+    padding: 4px 12px;
     border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* ===== العناصر الطافية ===== */
+.floating-element-modern {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background: var(--card-bg);
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: var(--primary-color);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    animation: float 6s ease-in-out infinite;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    animation: float-modern 6s ease-in-out infinite;
+    z-index: 10;
 }
 
-.element-1 {
-    top: 20%;
-    left: 10%;
+.el1 {
+    top: 10%;
+    left: 5%;
     animation-delay: 0s;
 }
 
-.element-2 {
+.el2 {
     top: 50%;
-    right: 15%;
+    right: 10%;
     animation-delay: 2s;
 }
 
-.element-3 {
+.el3 {
     bottom: 20%;
-    left: 20%;
+    left: 15%;
     animation-delay: 4s;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+@keyframes float-modern {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg); 
+    }
+    50% { 
+        transform: translateY(-25px) rotate(10deg); 
+    }
 }
 
-.wave-divider {
+/* ===== Wave Divider ===== */
+.wave-divider-modern {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -357,7 +433,7 @@ a:hover {
     line-height: 0;
 }
 
-.wave-divider svg {
+.wave-divider-modern svg {
     position: relative;
     display: block;
     width: calc(100% + 1.3px);
@@ -365,385 +441,67 @@ a:hover {
     fill: var(--bg-color);
 }
 
-/* ===== قسم المميزات ===== */
-.feature-card {
-    background: var(--card-bg);
-    border-radius: 20px;
-    padding: 40px 30px;
-    height: 100%;
-    border: 1px solid var(--border-color);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px var(--shadow-lg);
-    border-color: var(--primary-color);
-}
-
-.feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 4px;
-    background: var(--gradient-primary);
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-}
-
-.feature-card:hover::before {
-    transform: translateX(0);
-}
-
-.feature-icon {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-}
-
-.feature-card h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-    color: var(--text-color);
-}
-
-.feature-card p {
-    color: var(--text-secondary);
-    margin-bottom: 20px;
-}
-
-.feature-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.feature-list li {
-    padding: 8px 0;
-    border-bottom: 1px dashed var(--border-light);
-    color: var(--text-color);
-    position: relative;
-    padding-right: 25px;
-}
-
-.feature-list li::before {
-    content: '✓';
-    position: absolute;
-    right: 0;
-    color: var(--success-color);
-    font-weight: bold;
-}
-
-/* ===== الجدول الزمني للفصول ===== */
-.chapters-timeline {
-    position: relative;
-}
-
-.timeline {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    right: 50%;
-    transform: translateX(50%);
-    width: 4px;
-    height: 100%;
-    background: var(--gradient-primary);
-    border-radius: 2px;
-}
-
-.timeline-item {
-    margin-bottom: 50px;
-    position: relative;
-}
-
-.timeline-item:nth-child(odd) .timeline-content {
-    margin-right: calc(50% + 30px);
-    text-align: right;
-}
-
-.timeline-item:nth-child(even) .timeline-content {
-    margin-left: calc(50% + 30px);
-    text-align: right;
-}
-
-.timeline-content {
-    background: var(--card-bg);
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 10px 30px var(--shadow-color);
-    border: 1px solid var(--border-color);
-    position: relative;
-}
-
-.timeline-content::before {
-    content: '';
-    position: absolute;
-    top: 30px;
-    width: 20px;
-    height: 20px;
-    background: var(--gradient-primary);
-    border-radius: 50%;
-    box-shadow: 0 0 0 4px var(--card-bg);
-}
-
-.timeline-item:nth-child(odd) .timeline-content::before {
-    left: -40px;
-}
-
-.timeline-item:nth-child(even) .timeline-content::before {
-    right: -40px;
-}
-
-.chapter-number {
-    font-size: 3rem;
-    font-weight: 800;
-    color: var(--primary-color);
-    opacity: 0.2;
-    position: absolute;
-    top: -20px;
-    left: 20px;
-}
-
-.timeline-content h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: var(--text-color);
-}
-
-.timeline-content ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 15px;
-}
-
-.timeline-content ul li {
-    padding: 5px 0;
-    color: var(--text-secondary);
-    position: relative;
-    padding-right: 20px;
-}
-
-.timeline-content ul li::before {
-    content: '•';
-    position: absolute;
-    right: 0;
-    color: var(--primary-color);
-    font-weight: bold;
-}
-
-/* ===== قسم التسعير ===== */
-.pricing-card {
-    background: var(--card-bg);
-    border-radius: 20px;
-    padding: 40px 30px;
-    border: 2px solid var(--border-color);
-    transition: all 0.3s ease;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-.pricing-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px var(--shadow-lg);
-}
-
-.pricing-card.premium {
-    border-color: var(--primary-color);
-    transform: scale(1.05);
-}
-
-.pricing-badge {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background: var(--gradient-primary);
+/* ===== زر واتساب العائم على اليمين ===== */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #25D366;
     color: white;
-    padding: 6px 15px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.pricing-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.pricing-header h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-    color: var(--text-color);
-}
-
-.price {
-    font-size: 3rem;
-    font-weight: 800;
-    color: var(--primary-color);
-}
-
-.currency {
-    font-size: 2rem;
-    vertical-align: top;
-}
-
-.period {
-    font-size: 1rem;
-    color: var(--text-muted);
-    font-weight: 400;
-}
-
-.pricing-features {
-    margin-bottom: 30px;
-}
-
-.pricing-features ul {
-    list-style: none;
-    padding: 0;
-}
-
-.pricing-features ul li {
-    padding: 12px 0;
-    border-bottom: 1px dashed var(--border-light);
-    color: var(--text-color);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    gap: 10px;
-}
-
-.pricing-features ul li i {
-    font-size: 1.1rem;
-}
-
-.pricing-features ul li i.fa-check-circle {
-    color: var(--success-color);
-}
-
-.pricing-features ul li i.fa-times-circle {
-    color: var(--danger-color);
-    opacity: 0.5;
-}
-
-.guarantee-box {
-    background: var(--card-bg);
-    border-radius: 15px;
-    padding: 30px;
-    border: 2px dashed var(--primary-color);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.guarantee-icon {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 15px;
-}
-
-/* ===== قسم المؤلف ===== */
-.author-image img {
-    border-radius: 20px;
-    box-shadow: 0 20px 40px var(--shadow-lg);
-    transition: transform 0.3s ease;
-}
-
-.author-image img:hover {
-    transform: scale(1.02);
-}
-
-.author-name {
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-}
-
-.author-bio p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--text-color);
-    margin-bottom: 20px;
-}
-
-.author-stats .stat {
-    text-align: center;
-    padding: 20px;
-    background: var(--card-bg);
-    border-radius: 15px;
-    border: 1px solid var(--border-color);
-}
-
-.author-stats h4 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--primary-color);
-    margin-bottom: 5px;
-}
-
-.author-stats p {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin: 0;
-}
-
-/* ===== الأسئلة الشائعة ===== */
-.accordion-item {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    margin-bottom: 15px;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    text-decoration: none;
     overflow: hidden;
 }
 
-.accordion-button {
-    background: var(--card-bg);
-    color: var(--text-color);
+.whatsapp-float:hover {
+    width: 180px;
+    border-radius: 30px;
+    background: #128C7E;
+    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-float i {
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover i {
+    margin-left: 10px;
+}
+
+.whatsapp-text {
+    position: absolute;
+    right: 70px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 0.9rem;
     font-weight: 600;
-    padding: 20px;
-    border: none;
-    text-align: right;
-    box-shadow: none;
 }
 
-.accordion-button:not(.collapsed) {
-    background: var(--hover-bg);
-    color: var(--primary-color);
+.whatsapp-float:hover .whatsapp-text {
+    opacity: 1;
+    right: 20px;
 }
 
-.accordion-button::after {
-    margin-right: auto;
-    margin-left: 0;
-}
-
-.accordion-body {
-    padding: 20px;
-    color: var(--text-color);
-    line-height: 1.8;
-    border-top: 1px solid var(--border-color);
-}
-
-/* ===== قسم CTA ===== */
-.cta-section {
+/* ===== CTA Section المحسن ===== */
+.cta-section-modern {
     background: var(--gradient-primary);
     color: white;
     padding: 100px 0;
-    text-align: center;
     position: relative;
     overflow: hidden;
 }
 
-.cta-section::before {
+.cta-section-modern::before {
     content: '';
     position: absolute;
     top: 0;
@@ -755,7 +513,7 @@ a:hover {
     background-size: cover;
 }
 
-.cta-section h2 {
+.cta-title {
     font-size: 3rem;
     font-weight: 800;
     margin-bottom: 20px;
@@ -763,22 +521,56 @@ a:hover {
     z-index: 2;
 }
 
-.cta-section p {
+.cta-subtitle {
     font-size: 1.3rem;
     opacity: 0.9;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     position: relative;
     z-index: 2;
 }
 
-/* ===== الفوتر ===== */
-.footer {
+.cta-btn-container {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-buy-cta {
+    background: white;
+    color: var(--primary-color);
+    min-width: 350px;
+}
+
+.btn-buy-cta .btn-icon {
+    background: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary-color);
+}
+
+.cta-badges {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.badge-cta {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    backdrop-filter: blur(10px);
+}
+
+/* ===== Footer المحسن ===== */
+.footer-modern {
     background: var(--card-bg);
     padding: 80px 0 30px;
     border-top: 1px solid var(--border-color);
 }
 
-.footer-brand {
+.footer-brand-modern {
     font-size: 1.8rem;
     font-weight: 800;
     color: var(--primary-color);
@@ -787,547 +579,205 @@ a:hover {
     margin-bottom: 20px;
 }
 
-.footer h5 {
+.footer-brand-modern i {
+    font-size: 2.2rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.footer-desc {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 300px;
+}
+
+.footer-title {
     font-size: 1.2rem;
     font-weight: 700;
     margin-bottom: 20px;
     color: var(--text-color);
 }
 
-.footer ul {
+.footer-links {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
-.footer ul li {
+.footer-links li {
     margin-bottom: 12px;
 }
 
-.footer ul li a {
+.footer-links a {
     color: var(--text-secondary);
     transition: color 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.footer ul li a:hover {
+.footer-links a:hover {
     color: var(--primary-color);
+    transform: translateX(-5px);
 }
 
-.social-links {
+.footer-links a::before {
+    content: '←';
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.footer-links a:hover::before {
+    opacity: 1;
+}
+
+.social-links-modern {
     display: flex;
     gap: 15px;
 }
 
-.social-links a {
+.social-link-modern {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     background: var(--hover-bg);
     border-radius: 50%;
     color: var(--text-color);
     font-size: 1.2rem;
     transition: all 0.3s ease;
+    text-decoration: none;
 }
 
-.social-links a:hover {
-    background: var(--primary-color);
-    color: white;
-    transform: translateY(-3px);
-}
-
-.subscribe-form .input-group {
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-}
-
-.subscribe-form input {
-    border: none;
-    padding: 12px 15px;
-    background: var(--card-bg);
-    color: var(--text-color);
-}
-
-.subscribe-form input:focus {
-    box-shadow: none;
-    background: var(--card-bg);
-}
-
-.subscribe-form button {
-    border: none;
-    padding: 0 20px;
-    background: var(--primary-color);
-    color: white;
-}
-
-.footer-bottom {
-    padding-top: 30px;
-    border-top: 1px solid var(--border-color);
-    margin-top: 50px;
-}
-
-/* ===== أنماط صفحة الكتاب ===== */
-.book-navbar {
-    background: var(--card-bg);
-    box-shadow: 0 2px 20px var(--shadow-color);
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.reading-progress-container {
-    background: var(--card-bg);
-    padding: 15px 0;
-    border-bottom: 1px solid var(--border-color);
-    position: sticky;
-    top: 70px;
-    z-index: 999;
-}
-
-.book-container {
-    min-height: calc(100vh - 200px);
-    padding-top: 30px;
-}
-
-.sidebar-wrapper {
-    position: sticky;
-    top: 140px;
-    height: calc(100vh - 160px);
-}
-
-.toc-sidebar {
-    background: var(--card-bg);
-    border-radius: 15px;
-    border: 1px solid var(--border-color);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.toc-content {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding: 15px;
-}
-
-.toc-item {
-    padding: 12px 15px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    color: var(--text-color);
-    border-right: 3px solid transparent;
-    transition: all 0.3s ease;
-}
-
-.toc-item:hover {
-    background: var(--hover-bg);
-    border-right-color: var(--primary-color);
-    padding-right: 20px;
-}
-
-.toc-number {
-    width: 30px;
-    height: 30px;
-    background: var(--hover-bg);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    margin-left: 10px;
-    flex-shrink: 0;
-}
-
-.book-reader {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.book-header {
-    margin-bottom: 50px;
-}
-
-.book-title {
-    font-size: 3rem;
-    font-weight: 800;
-    color: var(--text-color);
-    margin-bottom: 10px;
-}
-
-.book-author {
-    font-size: 1.3rem;
-}
-
-.book-content {
-    font-size: 18px;
-    line-height: 2;
-    transition: font-size 0.3s ease;
-}
-
-.chapter {
-    margin-bottom: 80px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.chapter:last-child {
-    border-bottom: none;
-}
-
-.chapter-title {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--text-color);
-    margin-bottom: 30px;
-    position: relative;
-    padding-bottom: 15px;
-}
-
-.chapter-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 100px;
-    height: 4px;
+.social-link-modern:hover {
     background: var(--gradient-primary);
-    border-radius: 2px;
+    color: white;
+    transform: translateY(-3px) rotate(5deg);
 }
 
-.chapter-number {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    opacity: 0.3;
-    margin-left: 15px;
+.subscribe-form-modern {
+    margin-top: 20px;
 }
 
-.chapter-paragraph {
-    margin-bottom: 30px;
-    text-align: justify;
-    text-justify: inter-word;
+.input-group-modern {
+    display: flex;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid var(--border-color);
+    transition: border-color 0.3s ease;
 }
 
-.section-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    margin: 40px 0 20px;
-    padding-right: 15px;
-    border-right: 4px solid var(--primary-color);
+.input-group-modern:focus-within {
+    border-color: var(--primary-color);
 }
 
-.chapter-list {
-    padding-right: 25px;
-    margin-bottom: 30px;
-}
-
-.chapter-list li {
-    margin-bottom: 15px;
-    position: relative;
-    padding-right: 10px;
-}
-
-.chapter-list li::before {
-    content: '•';
-    color: var(--primary-color);
-    font-weight: bold;
-    position: absolute;
-    right: -15px;
-}
-
-.quote-block {
-    background: var(--hover-bg);
-    border-radius: 15px;
-    padding: 30px;
-    margin: 40px 0;
-    border-right: 4px solid var(--primary-color);
-    position: relative;
-}
-
-.quote-block::before {
-    content: '"';
-    position: absolute;
-    top: -20px;
-    right: 30px;
-    font-size: 4rem;
-    color: var(--primary-color);
-    opacity: 0.3;
-    font-family: serif;
-}
-
-.quote-content {
-    font-size: 1.2rem;
-    font-style: italic;
-    line-height: 1.8;
-    color: var(--text-color);
-    margin-bottom: 15px;
-}
-
-.quote-author {
-    font-weight: 600;
-    color: var(--primary-color);
-    text-align: left;
-}
-
-.chapter-navigation {
-    padding: 30px 0;
-    border-top: 1px solid var(--border-color);
-}
-
-.reading-stats {
-    background: var(--card-bg);
-    border-radius: 15px;
-    border: 1px solid var(--border-color);
-}
-
-.stat-item h4 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--primary-color);
-    margin-bottom: 5px;
-}
-
-.book-footer {
-    background: var(--card-bg);
-    padding: 30px 0;
-    border-top: 1px solid var(--border-color);
-    margin-top: 50px;
-}
-
-/* Loading Screen */
-.loading-screen {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
+.form-control-modern {
+    flex-grow: 1;
+    border: none;
+    padding: 12px 20px;
     background: var(--bg-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    transition: opacity 0.3s ease;
-}
-
-.loading-content {
-    text-align: center;
-}
-
-.loading-content .spinner-border {
-    width: 4rem;
-    height: 4rem;
-}
-
-/* Unauthorized Message */
-.unauthorized-message {
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Notifications */
-.notification {
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
-    background: var(--card-bg);
-    padding: 15px 25px;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px var(--shadow-lg);
-    border-right: 4px solid var(--primary-color);
-    z-index: 10000;
-    animation: slideIn 0.3s ease;
-    max-width: 400px;
-}
-
-.notification-success {
-    border-right-color: var(--success-color);
-}
-
-.notification-error {
-    border-right-color: var(--danger-color);
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-.fade-out {
-    animation: fadeOut 0.3s ease forwards;
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    to {
-        opacity: 0;
-        transform: translateX(100%);
-    }
-}
-
-/* Modal */
-.modal-content {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 15px;
-}
-
-.modal-header {
-    border-bottom: 1px solid var(--border-color);
-    padding: 20px;
-}
-
-.modal-title {
-    font-weight: 700;
     color: var(--text-color);
+    font-family: 'Cairo', sans-serif;
 }
 
-.modal-body {
-    padding: 20px;
+.form-control-modern:focus {
+    outline: none;
 }
 
-/* ===== التجاوب ===== */
+.btn-subscribe {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0 25px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-subscribe:hover {
+    background: var(--secondary-color);
+}
+
+.footer-divider {
+    border-color: var(--border-color);
+    margin: 50px 0 30px;
+    opacity: 0.5;
+}
+
+.footer-bottom-modern {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* ===== Responsive Design ===== */
 @media (max-width: 992px) {
-    .hero-content h1 {
+    .hero-title {
         font-size: 2.8rem;
     }
     
-    .section-title {
-        font-size: 2rem;
+    .btn-buy-main {
+        min-width: 250px;
+        padding: 20px 40px;
     }
     
-    .timeline::before {
-        right: 30px;
-    }
-    
-    .timeline-item:nth-child(odd) .timeline-content,
-    .timeline-item:nth-child(even) .timeline-content {
-        margin-right: 60px;
-        margin-left: 0;
-        text-align: right;
-    }
-    
-    .timeline-item:nth-child(odd) .timeline-content::before,
-    .timeline-item:nth-child(even) .timeline-content::before {
-        right: -40px;
-        left: auto;
-    }
-    
-    .pricing-card.premium {
-        transform: scale(1);
-    }
-    
-    .book-title {
-        font-size: 2.5rem;
-    }
-    
-    .sidebar-wrapper {
-        display: none;
-    }
-    
-    .book-reader {
-        padding: 0 15px;
+    .book-cover-inner-modern {
+        transform: rotateY(-5deg) rotateX(5deg);
     }
 }
 
 @media (max-width: 768px) {
-    .hero-section {
-        padding: 120px 0 80px;
+    .hero-section-modern {
+        padding: 140px 0 80px;
     }
     
-    .hero-content h1 {
+    .hero-title {
         font-size: 2.2rem;
     }
     
-    .hero-stats {
-        flex-direction: column;
-        gap: 20px;
+    .cta-title {
+        font-size: 2.2rem;
     }
     
-    .section-padding {
-        padding: 60px 0;
+    .btn-buy-main, .btn-buy-cta {
+        min-width: 100%;
+        padding: 20px;
     }
     
-    .btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
     }
     
-    .book-content {
-        font-size: 16px;
-    }
-    
-    .chapter-title {
-        font-size: 1.8rem;
+    .whatsapp-float:hover {
+        width: 160px;
     }
 }
 
 @media (max-width: 576px) {
-    .hero-content h1 {
+    .hero-title {
         font-size: 1.8rem;
     }
     
-    .section-title {
-        font-size: 1.8rem;
+    .btn-title {
+        font-size: 1.2rem;
     }
     
-    .cta-section h2 {
-        font-size: 2rem;
+    .btn-subtitle {
+        font-size: 0.8rem;
     }
     
-    .book-title {
-        font-size: 2rem;
+    .cta-badges {
+        flex-direction: column;
+        align-items: center;
     }
     
-    .chapter-title {
-        font-size: 1.5rem;
-    }
-    
-    .book-content {
-        font-size: 15px;
-        line-height: 1.8;
-    }
-}
-
-@media print {
-    .book-navbar,
-    .reading-progress-container,
-    .sidebar-wrapper,
-    .chapter-navigation,
-    .book-footer,
-    .btn {
-        display: none !important;
-    }
-    
-    .book-container {
-        padding: 0;
-    }
-    
-    .book-reader {
-        max-width: 100%;
-        padding: 0;
-    }
-    
-    .book-content {
-        font-size: 14pt;
-        line-height: 1.6;
-    }
-    
-    body {
-        background: white !important;
-        color: black !important;
+    .footer-modern {
+        padding: 60px 0 20px;
     }
 }
