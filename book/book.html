@@ -3,161 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الطريق إلى 1000$ شهريًا | الكتاب</title>
+    <title>قراءة الكتاب | الطريق إلى 1000$ شهريًا</title>
     
-    <!-- Bootstrap 5 & Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    
-    <!-- الأنماط -->
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- الخطوط -->
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="themes.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Book Specific Styles -->
+    <style>
+        .book-reader {
+            transition: all 0.3s ease;
+        }
+        
+        .chapter-transition {
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .highlight {
+            background-color: rgba(255, 230, 0, 0.3);
+            transition: background-color 0.3s ease;
+        }
+        
+        .bookmark-indicator {
+            position: absolute;
+            left: -20px;
+            color: var(--primary-color);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .chapter:hover .bookmark-indicator {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body class="light-mode">
-    <!-- شاشة التحميل -->
-    <div id="loadingScreen" class="d-flex justify-content-center align-items-center" 
-         style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-color); z-index: 9999;">
-        <div class="text-center">
-            <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;" role="status">
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">جاري التحميل...</span>
             </div>
-            <h4 class="text-primary">جاري تحميل الكتاب...</h4>
+            <h4 class="mt-3">جاري تحميل الكتاب...</h4>
             <p class="text-muted">قد تستغرق العملية بضع ثوانٍ</p>
+            <div class="progress mt-3" style="width: 200px;">
+                <div id="loadingProgress" class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%"></div>
+            </div>
         </div>
     </div>
 
-    <!-- شريط التنقل للكتاب -->
-    <nav class="navbar navbar-expand-lg py-3" style="background: var(--card-bg);">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg book-navbar">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <i class="bi bi-journal-bookmark-fill"></i>
-                <span>الطريق إلى 1000$</span>
+                <i class="fas fa-arrow-right me-2"></i>
+                العودة للرئيسية
             </a>
             
+            <div class="navbar-text d-none d-md-block">
+                <span id="currentChapter">الفصل 1</span>
+                <span class="text-muted mx-2">•</span>
+                <span id="readingTime">دقيقة 5</span>
+            </div>
+            
             <div class="d-flex align-items-center">
-                <!-- عناصر التحكم -->
+                <!-- Reading Controls -->
                 <div class="btn-group me-3" role="group">
                     <button class="btn btn-sm btn-outline-secondary" id="fontDecrease" title="تصغير الخط">
-                        <i class="bi bi-dash-lg"></i>
+                        <i class="fas fa-minus"></i>
                     </button>
                     <button class="btn btn-sm btn-outline-secondary" id="fontReset" title="الخط الافتراضي">
-                        <i class="bi bi-fonts"></i>
+                        <i class="fas fa-text-height"></i>
                     </button>
                     <button class="btn btn-sm btn-outline-secondary" id="fontIncrease" title="تكبير الخط">
-                        <i class="bi bi-plus-lg"></i>
+                        <i class="fas fa-plus"></i>
                     </button>
                 </div>
                 
-                <button class="btn btn-sm btn-outline-primary me-2" id="themeToggle">
-                    <i class="bi bi-moon"></i>
+                <!-- Theme Toggle -->
+                <button class="btn btn-sm btn-outline-primary me-3" id="themeToggle">
+                    <i class="fas fa-moon"></i>
                 </button>
                 
-                <button class="btn btn-sm btn-outline-secondary me-2" id="bookmarkBtn" title="حفظ مكان القراءة">
-                    <i class="bi bi-bookmark"></i>
+                <!-- Bookmark -->
+                <button class="btn btn-sm btn-outline-secondary me-3" id="bookmarkBtn" title="حفظ مكان القراءة">
+                    <i class="far fa-bookmark"></i>
                 </button>
                 
+                <!-- Print -->
                 <button class="btn btn-sm btn-outline-secondary" id="printBtn" title="طباعة الفصل">
-                    <i class="bi bi-printer"></i>
+                    <i class="fas fa-print"></i>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- فهرس الكتاب الجانبي -->
-    <aside class="toc-sidebar card" style="position: fixed; left: 20px; top: 100px; width: 300px; z-index: 100;">
-        <div class="card-body">
-            <h5 class="card-title mb-3">
-                <i class="bi bi-list me-2"></i>
-                فهرس الكتاب
-            </h5>
-            <div class="toc-content" style="max-height: 70vh; overflow-y: auto;">
-                <!-- سيتم ملؤه بالجافاسكريبت -->
+    <!-- Reading Progress -->
+    <div class="reading-progress-container">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <div class="progress flex-grow-1 me-3">
+                    <div id="readingProgress" class="progress-bar" 
+                         style="width: 0%; background: linear-gradient(90deg, var(--primary-color), var(--accent-color));"></div>
+                </div>
+                <div class="text-nowrap">
+                    <small class="text-muted" id="progressText">0% مكتمل</small>
+                </div>
             </div>
         </div>
-    </aside>
+    </div>
 
-    <!-- محتوى الكتاب الرئيسي -->
-    <main class="container mt-5 pt-3" style="margin-right: 350px;">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <!-- شريط التقدم -->
-                <div class="card mb-4">
-                    <div class="card-body py-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="progress" style="height: 8px; flex-grow: 1;">
-                                <div id="readingProgress" class="progress-bar" 
-                                     style="width: 0%; background: var(--gradient-primary);"></div>
-                            </div>
-                            <div class="ms-3">
-                                <small class="text-muted" id="progressText">0% مكتمل</small>
-                            </div>
-                        </div>
+    <!-- Main Content -->
+    <div class="container-fluid book-container">
+        <div class="row">
+            <!-- Sidebar TOC -->
+            <div class="col-lg-3 col-xl-2 d-none d-lg-block sidebar-wrapper">
+                <div class="toc-sidebar card">
+                    <div class="card-header bg-transparent">
+                        <h5 class="mb-0">
+                            <i class="fas fa-list me-2"></i>
+                            فهرس الكتاب
+                        </h5>
                     </div>
-                </div>
-                
-                <!-- منطقة محتوى الكتاب -->
-                <div id="bookContent" class="book-content" style="display: none;">
-                    <!-- سيتم ملؤه بالجافاسكريبت -->
-                </div>
-                
-                <!-- رسالة عدم التصريح -->
-                <div id="unauthorizedMessage" class="card text-center py-5" style="display: none;">
                     <div class="card-body">
-                        <i class="bi bi-shield-lock text-danger" style="font-size: 4rem;"></i>
-                        <h3 class="mt-4 mb-3">غير مصرح بالوصول</h3>
-                        <p class="text-muted mb-4">
-                            يبدو أنك لا تملك صلاحية الوصول إلى هذا الكتاب.<br>
-                            يرجى شراء الكتاب للحصول على رابط الوصول الخاص بك.
-                        </p>
-                        <div class="d-flex justify-content-center gap-3">
-                            <a href="index.html" class="btn btn-primary">
-                                <i class="bi bi-arrow-left me-2"></i>
-                                العودة للصفحة الرئيسية
-                            </a>
-                            <button class="btn btn-success buy-btn">
-                                <i class="bi bi-cart3 me-2"></i>
-                                شراء الكتاب الآن
-                            </button>
+                        <div class="toc-content" id="tableOfContents">
+                            <!-- Filled by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="book-stats">
+                            <small class="text-muted">
+                                <i class="fas fa-clock me-1"></i>
+                                <span id="totalReadingTime">~ 3 ساعات</span>
+                            </small>
                         </div>
                     </div>
                 </div>
-                
-                <!-- التنقل بين الفصول -->
-                <div class="d-flex justify-content-between mt-5 pt-4 border-top">
-                    <button class="btn btn-outline-primary" id="prevChapter">
-                        <i class="bi bi-arrow-right me-2"></i>
-                        الفصل السابق
-                    </button>
-                    
-                    <div class="text-center">
-                        <small class="text-muted" id="chapterInfo">الفصل 1 من 7</small>
+            </div>
+            
+            <!-- Book Content -->
+            <div class="col-lg-9 col-xl-8 offset-xl-2 offset-lg-3">
+                <main class="book-reader">
+                    <div class="book-header text-center mb-5">
+                        <h1 class="book-title">الطريق إلى 1000$ شهريًا</h1>
+                        <p class="book-author text-muted">أمجد الكلباني</p>
                     </div>
                     
-                    <button class="btn btn-outline-primary" id="nextChapter">
-                        الفصل التالي
-                        <i class="bi bi-arrow-left ms-2"></i>
-                    </button>
-                </div>
+                    <!-- Book Content Area -->
+                    <div id="bookContent" class="book-content">
+                        <!-- Will be filled by JavaScript -->
+                    </div>
+                    
+                    <!-- Unauthorized Message -->
+                    <div id="unauthorizedMessage" class="unauthorized-message text-center py-5" style="display: none;">
+                        <div class="container">
+                            <i class="fas fa-lock text-danger mb-4" style="font-size: 4rem;"></i>
+                            <h2 class="mb-3">غير مصرح بالوصول</h2>
+                            <p class="text-muted mb-4">
+                                يبدو أنك لا تملك صلاحية الوصول إلى هذا الكتاب.<br>
+                                يرجى شراء الكتاب للحصول على رابط الوصول الخاص بك.
+                            </p>
+                            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                                <a href="index.html" class="btn btn-primary">
+                                    <i class="fas fa-arrow-right me-2"></i>
+                                    العودة للصفحة الرئيسية
+                                </a>
+                                <a href="index.html#pricing" class="btn btn-success">
+                                    <i class="fas fa-shopping-cart me-2"></i>
+                                    شراء الكتاب الآن
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chapter Navigation -->
+                    <div class="chapter-navigation mt-5 pt-4 border-top">
+                        <div class="row">
+                            <div class="col-6">
+                                <button class="btn btn-outline-primary w-100" id="prevChapter">
+                                    <i class="fas fa-arrow-right me-2"></i>
+                                    الفصل السابق
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-outline-primary w-100" id="nextChapter">
+                                    الفصل التالي
+                                    <i class="fas fa-arrow-left ms-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-3">
+                            <small class="text-muted" id="chapterInfo">الفصل 1 من 7</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Reading Stats -->
+                    <div class="reading-stats card mt-5">
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-md-4 mb-3">
+                                    <div class="stat-item">
+                                        <h4 id="pagesRead">0</h4>
+                                        <p class="text-muted">صفحة مقروءة</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="stat-item">
+                                        <h4 id="readingDuration">0</h4>
+                                        <p class="text-muted">دقيقة قراءة</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="stat-item">
+                                        <h4 id="bookmarksCount">0</h4>
+                                        <p class="text-muted">إشارة مرجعية</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
             </div>
         </div>
-    </main>
+    </div>
 
-    <!-- الفوتر -->
-    <footer class="mt-5 py-4" style="background: var(--card-bg); border-top: 1px solid var(--border-color); margin-right: 350px;">
+    <!-- Footer -->
+    <footer class="book-footer mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="mb-0 text-muted">
-                        © 2026 أمجد الكلباني. جميع الحقوق محفوظة.<br>
-                        <small>هذا الكتاب محمي بحقوق الملكية الفكرية.</small>
+                    <p class="mb-0">
+                        © 2024 أمجد الكلباني. جميع الحقوق محفوظة.<br>
+                        <small class="text-muted">هذا الكتاب محمي بحقوق الملكية الفكرية.</small>
                     </p>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <p class="mb-0 text-muted">
-                        <small>
-                            <i class="bi bi-lock me-1"></i>
+                    <p class="mb-0">
+                        <small class="text-muted">
+                            <i class="fas fa-lock me-1"></i>
                             جلسة القراءة آمنة ومشفرة
                         </small>
                     </p>
@@ -166,82 +266,168 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
+    <!-- Bookmark Modal -->
+    <div class="modal fade" id="bookmarkModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">الإشارات المرجعية</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="bookmarksList">
+                        <!-- Bookmarks will be listed here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- محتوى الكتاب -->
     <script src="book-content.js"></script>
-    
-    <!-- ملف JavaScript الرئيسي -->
     <script src="script.js"></script>
     
-    <!-- كود خاص بصفحة الكتاب -->
+    <!-- Book Reader Script -->
     <script>
         class BookReader {
             constructor() {
                 this.currentChapter = 0;
-                this.fontSize = 16;
+                this.fontSize = 18;
                 this.bookmarks = [];
-                this.lastScrollPosition = 0;
+                this.readingStartTime = Date.now();
+                this.totalReadingTime = 0;
+                this.pagesRead = 0;
+                this.chapters = [];
+                
+                // Initialize from localStorage
+                this.loadState();
             }
             
-            init() {
-                this.loadBookContent();
-                this.setupBookListeners();
-                this.setupReadingProgress();
-                this.restoreReadingState();
-            }
-            
-            loadBookContent() {
-                // استيراد محتوى الكتاب من book-content.js
-                if (typeof arabicBookContent !== 'undefined') {
-                    this.displayChapters(arabicBookContent);
+            async init() {
+                // Verify token first
+                const token = localStorage.getItem('bookAccessToken');
+                
+                if (!token) {
+                    this.showUnauthorized();
+                    return;
+                }
+                
+                try {
+                    // Verify token with server
+                    const response = await fetch('/api/verify', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ token })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (!result.access) {
+                        this.showUnauthorized();
+                        return;
+                    }
+                    
+                    // User is authorized, load book
+                    await this.loadBook();
+                } catch (error) {
+                    console.error('Error verifying token:', error);
+                    this.showUnauthorized();
                 }
             }
             
-            displayChapters(chapters) {
+            async loadBook() {
+                try {
+                    // Show loading progress
+                    this.updateLoadingProgress(10);
+                    
+                    // Load book content
+                    if (typeof arabicBookContent !== 'undefined') {
+                        this.chapters = arabicBookContent;
+                        this.updateLoadingProgress(50);
+                        
+                        // Display book
+                        this.displayBook();
+                        this.setupEventListeners();
+                        this.updateLoadingProgress(100);
+                        
+                        // Hide loading screen
+                        setTimeout(() => {
+                            document.getElementById('loadingScreen').style.opacity = '0';
+                            setTimeout(() => {
+                                document.getElementById('loadingScreen').style.display = 'none';
+                            }, 300);
+                        }, 500);
+                    } else {
+                        throw new Error('Book content not found');
+                    }
+                } catch (error) {
+                    console.error('Error loading book:', error);
+                    this.showError('حدث خطأ في تحميل الكتاب. يرجى تحديث الصفحة.');
+                }
+            }
+            
+            displayBook() {
                 const contentDiv = document.getElementById('bookContent');
-                const tocDiv = document.querySelector('.toc-content');
+                const tocDiv = document.getElementById('tableOfContents');
                 
+                // Clear existing content
                 contentDiv.innerHTML = '';
                 tocDiv.innerHTML = '';
                 
-                chapters.forEach((chapter, index) => {
-                    // إضافة الفصل للمحتوى
-                    const chapterDiv = this.createChapterElement(chapter, index);
-                    contentDiv.appendChild(chapterDiv);
+                // Display each chapter
+                this.chapters.forEach((chapter, index) => {
+                    // Add to main content
+                    const chapterElement = this.createChapterElement(chapter, index);
+                    contentDiv.appendChild(chapterElement);
                     
-                    // إضافة الفصل للفهرس
+                    // Add to table of contents
                     this.addToTOC(chapter.title, index, tocDiv);
                 });
                 
-                // إظهار المحتوى
-                contentDiv.style.display = 'block';
-                document.getElementById('loadingScreen').style.display = 'none';
+                // Update chapter info
+                this.updateChapterInfo();
                 
-                // تحديث التقدم
-                this.updateProgress();
+                // Restore reading position
+                this.restoreReadingPosition();
+                
+                // Start tracking reading progress
+                this.startTracking();
             }
             
             createChapterElement(chapter, index) {
                 const div = document.createElement('div');
-                div.className = 'chapter mb-5';
+                div.className = 'chapter mb-5 chapter-transition';
                 div.id = `chapter-${index}`;
                 div.dataset.chapter = index;
                 
-                let content = `<h2 class="chapter-title mb-4">${chapter.title}</h2>`;
+                let content = `
+                    <div class="chapter-header">
+                        <h2 class="chapter-title mb-4">
+                            <span class="chapter-number">${index + 1}.</span>
+                            ${chapter.title}
+                        </h2>
+                    </div>
+                `;
                 
-                chapter.content.forEach(section => {
+                chapter.content.forEach((section, sectionIndex) => {
                     if (section.type === 'paragraph') {
-                        content += `<p class="mb-4">${section.text}</p>`;
+                        content += `<p class="chapter-paragraph mb-4">${section.text}</p>`;
                     } else if (section.type === 'subtitle') {
                         content += `<h3 class="section-title mb-3">${section.text}</h3>`;
                     } else if (section.type === 'list') {
-                        content += `<ul class="mb-4">`;
+                        content += `<ul class="chapter-list mb-4">`;
                         section.items.forEach(item => {
                             content += `<li class="mb-2">${item}</li>`;
                         });
                         content += `</ul>`;
+                    } else if (section.type === 'quote') {
+                        content += `
+                            <div class="quote-block my-4">
+                                <div class="quote-content">"${section.text}"</div>
+                                <div class="quote-author">— ${section.author}</div>
+                            </div>
+                        `;
                     }
                 });
                 
@@ -252,10 +438,14 @@
             addToTOC(title, index, container) {
                 const item = document.createElement('a');
                 item.href = `#chapter-${index}`;
-                item.className = 'd-block py-2 text-decoration-none text-muted';
+                item.className = 'toc-item d-block py-2 ps-3 text-decoration-none';
                 item.innerHTML = `
-                    <i class="bi bi-bookmark me-2"></i>
-                    ${index + 1}. ${title}
+                    <div class="d-flex align-items-center">
+                        <div class="toc-number">${index + 1}</div>
+                        <div class="toc-title flex-grow-1">${title}</div>
+                        <i class="fas fa-bookmark text-primary bookmark-indicator" 
+                           data-chapter="${index}" style="display: none;"></i>
+                    </div>
                 `;
                 
                 item.addEventListener('click', (e) => {
@@ -266,24 +456,24 @@
                 container.appendChild(item);
             }
             
-            setupBookListeners() {
-                // تغيير حجم الخط
+            setupEventListeners() {
+                // Font size controls
                 document.getElementById('fontIncrease').addEventListener('click', () => {
                     this.fontSize = Math.min(24, this.fontSize + 1);
                     this.updateFontSize();
                 });
                 
                 document.getElementById('fontDecrease').addEventListener('click', () => {
-                    this.fontSize = Math.max(12, this.fontSize - 1);
+                    this.fontSize = Math.max(14, this.fontSize - 1);
                     this.updateFontSize();
                 });
                 
                 document.getElementById('fontReset').addEventListener('click', () => {
-                    this.fontSize = 16;
+                    this.fontSize = 18;
                     this.updateFontSize();
                 });
                 
-                // التنقل بين الفصول
+                // Chapter navigation
                 document.getElementById('prevChapter').addEventListener('click', () => {
                     this.navigateChapter(-1);
                 });
@@ -292,14 +482,30 @@
                     this.navigateChapter(1);
                 });
                 
-                // الإشارات المرجعية
+                // Bookmark
                 document.getElementById('bookmarkBtn').addEventListener('click', () => {
-                    this.toggleBookmark();
+                    this.addBookmark();
                 });
                 
-                // الطباعة
+                // Print
                 document.getElementById('printBtn').addEventListener('click', () => {
                     window.print();
+                });
+                
+                // Theme toggle
+                document.getElementById('themeToggle').addEventListener('click', () => {
+                    document.body.classList.toggle('light-mode');
+                    document.body.classList.toggle('dark-mode');
+                    const icon = document.getElementById('themeToggle').querySelector('i');
+                    icon.classList.toggle('fa-moon');
+                    icon.classList.toggle('fa-sun');
+                });
+                
+                // Scroll tracking
+                window.addEventListener('scroll', () => {
+                    this.updateReadingProgress();
+                    this.updateActiveChapter();
+                    this.saveState();
                 });
             }
             
@@ -309,10 +515,9 @@
             }
             
             navigateChapter(direction) {
-                const chapters = document.querySelectorAll('.chapter');
                 const newIndex = this.currentChapter + direction;
                 
-                if (newIndex >= 0 && newIndex < chapters.length) {
+                if (newIndex >= 0 && newIndex < this.chapters.length) {
                     this.currentChapter = newIndex;
                     this.scrollToChapter(this.currentChapter);
                     this.updateChapterInfo();
@@ -327,101 +532,199 @@
                         behavior: 'smooth'
                     });
                     this.currentChapter = index;
-                    this.saveReadingState();
                     this.updateChapterInfo();
+                    this.saveState();
                 }
             }
             
             updateChapterInfo() {
-                const totalChapters = document.querySelectorAll('.chapter').length;
+                document.getElementById('currentChapter').textContent = `الفصل ${this.currentChapter + 1}`;
                 document.getElementById('chapterInfo').textContent = 
-                    `الفصل ${this.currentChapter + 1} من ${totalChapters}`;
+                    `الفصل ${this.currentChapter + 1} من ${this.chapters.length}`;
             }
             
-            setupReadingProgress() {
-                window.addEventListener('scroll', () => {
-                    this.updateProgress();
-                    this.saveReadingState();
-                });
-            }
-            
-            updateProgress() {
+            updateReadingProgress() {
                 const chapters = document.querySelectorAll('.chapter');
-                const viewportHeight = window.innerHeight;
-                const scrollTop = window.scrollY;
-                const docHeight = document.documentElement.scrollHeight - viewportHeight;
+                let totalHeight = 0;
+                let viewedHeight = 0;
                 
-                if (docHeight > 0) {
-                    const scrollPercent = (scrollTop / docHeight) * 100;
+                chapters.forEach((chapter, index) => {
+                    const rect = chapter.getBoundingClientRect();
+                    totalHeight += rect.height;
+                    
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+                        viewedHeight += visibleHeight;
+                    } else if (rect.bottom <= 0) {
+                        viewedHeight += rect.height;
+                    }
+                });
+                
+                if (totalHeight > 0) {
+                    const scrollPercent = (viewedHeight / totalHeight) * 100;
                     document.getElementById('readingProgress').style.width = `${scrollPercent}%`;
                     document.getElementById('progressText').textContent = 
                         `${Math.round(scrollPercent)}% مكتمل`;
+                    
+                    // Update pages read (estimated)
+                    this.pagesRead = Math.round((scrollPercent / 100) * 70);
+                    document.getElementById('pagesRead').textContent = this.pagesRead;
                 }
             }
             
-            toggleBookmark() {
+            updateActiveChapter() {
+                const chapters = document.querySelectorAll('.chapter');
+                const scrollPosition = window.scrollY + 100;
+                
+                let activeChapter = 0;
+                chapters.forEach((chapter, index) => {
+                    if (chapter.offsetTop <= scrollPosition) {
+                        activeChapter = index;
+                    }
+                });
+                
+                this.currentChapter = activeChapter;
+                this.updateChapterInfo();
+            }
+            
+            startTracking() {
+                // Update reading time every minute
+                setInterval(() => {
+                    this.totalReadingTime = Math.floor((Date.now() - this.readingStartTime) / 60000);
+                    document.getElementById('readingDuration').textContent = this.totalReadingTime;
+                    document.getElementById('readingTime').textContent = `دقيقة ${this.totalReadingTime}`;
+                }, 60000);
+            }
+            
+            addBookmark() {
                 const currentChapter = this.currentChapter;
-                const chapterTitle = document.querySelector(`#chapter-${currentChapter} h2`)?.textContent;
+                const chapterTitle = this.chapters[currentChapter]?.title;
+                const scrollPosition = window.scrollY;
                 
                 if (chapterTitle) {
                     const bookmark = {
                         chapter: currentChapter,
                         title: chapterTitle,
-                        timestamp: new Date().toISOString(),
-                        scrollPosition: window.scrollY
+                        timestamp: new Date().toLocaleString('ar-SA'),
+                        position: scrollPosition,
+                        id: Date.now()
                     };
                     
                     this.bookmarks.push(bookmark);
                     localStorage.setItem('book_bookmarks', JSON.stringify(this.bookmarks));
                     
-                    AppState.showNotification('تم حفظ مكان القراءة', 'success');
+                    // Update UI
+                    this.updateBookmarksCount();
+                    
+                    // Show confirmation
+                    this.showNotification('تم حفظ مكان القراءة', 'success');
                 }
             }
             
-            saveReadingState() {
+            updateBookmarksCount() {
+                document.getElementById('bookmarksCount').textContent = this.bookmarks.length;
+            }
+            
+            saveState() {
                 const state = {
                     chapter: this.currentChapter,
                     scrollPosition: window.scrollY,
                     fontSize: this.fontSize,
-                    timestamp: new Date().toISOString()
+                    bookmarks: this.bookmarks,
+                    totalReadingTime: this.totalReadingTime,
+                    pagesRead: this.pagesRead,
+                    lastUpdated: new Date().toISOString()
                 };
                 
                 localStorage.setItem('reading_state', JSON.stringify(state));
             }
             
-            restoreReadingState() {
+            loadState() {
                 const savedState = localStorage.getItem('reading_state');
                 if (savedState) {
                     const state = JSON.parse(savedState);
                     this.currentChapter = state.chapter || 0;
-                    this.fontSize = state.fontSize || 16;
+                    this.fontSize = state.fontSize || 18;
+                    this.bookmarks = state.bookmarks || [];
+                    this.totalReadingTime = state.totalReadingTime || 0;
+                    this.pagesRead = state.pagesRead || 0;
+                }
+                
+                // Load bookmarks from localStorage
+                const savedBookmarks = localStorage.getItem('book_bookmarks');
+                if (savedBookmarks) {
+                    this.bookmarks = JSON.parse(savedBookmarks);
+                }
+            }
+            
+            restoreReadingPosition() {
+                const savedState = localStorage.getItem('reading_state');
+                if (savedState) {
+                    const state = JSON.parse(savedState);
                     
+                    // Apply font size
+                    this.fontSize = state.fontSize || 18;
                     this.updateFontSize();
-                    this.updateChapterInfo();
                     
-                    // تأخير التمرير حتى يتم تحميل المحتوى
+                    // Scroll to position after content is loaded
                     setTimeout(() => {
-                        window.scrollTo(0, state.scrollPosition || 0);
+                        if (state.scrollPosition) {
+                            window.scrollTo(0, state.scrollPosition);
+                        }
                     }, 100);
                 }
             }
-        }
-        
-        // تهيئة قارئ الكتاب عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', () => {
-            // التحقق من صلاحية التوكن أولاً
-            if (AppState.userToken) {
-                // في الإصدار الحقيقي، هنا سيتم التحقق من الخادم
-                const bookReader = new BookReader();
-                bookReader.init();
-            } else {
-                // إظهار رسالة عدم التصريح
+            
+            updateLoadingProgress(percent) {
+                const progressBar = document.getElementById('loadingProgress');
+                if (progressBar) {
+                    progressBar.style.width = `${percent}%`;
+                }
+            }
+            
+            showUnauthorized() {
                 document.getElementById('loadingScreen').style.display = 'none';
                 document.getElementById('unauthorizedMessage').style.display = 'block';
-                document.querySelector('.toc-sidebar').style.display = 'none';
-                document.querySelector('main').style.marginRight = '0';
-                document.querySelector('footer').style.marginRight = '0';
+                document.querySelector('.sidebar-wrapper').style.display = 'none';
             }
+            
+            showError(message) {
+                const contentDiv = document.getElementById('bookContent');
+                contentDiv.innerHTML = `
+                    <div class="alert alert-danger text-center">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        ${message}
+                    </div>
+                `;
+                document.getElementById('loadingScreen').style.display = 'none';
+            }
+            
+            showNotification(message, type = 'info') {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.className = `notification notification-${type}`;
+                notification.innerHTML = `
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'} me-2"></i>
+                    ${message}
+                `;
+                
+                // Add to body
+                document.body.appendChild(notification);
+                
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    notification.classList.add('fade-out');
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            }
+        }
+        
+        // Initialize book reader when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const bookReader = new BookReader();
+            bookReader.init();
         });
     </script>
 </body>
