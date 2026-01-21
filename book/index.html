@@ -3,672 +3,747 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚀 الطريق إلى 1000$ شهرياً - أمجد الكلباني</title>
-    <meta name="description" content="كتاب رقمي متكامل يرشدك خطوة بخطوة لتحقيق 1000$ شهرياً من الإنترنت">
+    <title>الطريق إلى 1000$ شهريًا | منهجية التحول الرقمي</title>
     
-    <!-- Open Graph -->
-    <meta property="og:title" content="الطريق إلى 1000$ شهرياً">
-    <meta property="og:description" content="كتاب رقمي متكامل لتحقيق الدخل الرقمي">
-    <meta property="og:image" content="https://your-domain.com/cover.jpg">
-    <meta property="og:url" content="https://your-domain.com">
+    <!-- الفافيكون -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- AOS (Animate On Scroll) -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Styles -->
+    <!-- الأنماط -->
+    <link rel="stylesheet" href="themes.css">
     <link rel="stylesheet" href="styles.css">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <!-- Open Graph -->
+    <meta property="og:title" content="الطريق إلى 1000$ شهريًا">
+    <meta property="og:description" content="كتاب عملي يرشدك للتحول إلى رائد أعمال رقمي ناجح">
+    <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
     
-    <!-- JSON-LD Structured Data -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Book",
-        "name": "الطريق العملي إلى 1000$ شهريًا",
-        "author": {
-            "@type": "Person",
-            "name": "أمجد الكلباني"
-        },
-        "datePublished": "2026-01-01",
-        "bookFormat": "https://schema.org/EBook",
+        "name": "الطريق إلى 1000$ شهريًا",
+        "author": "أمجد الكلباني",
+        "bookFormat": "EBook",
+        "numberOfPages": "70",
+        "description": "كتاب عملي يرشدك خطوة بخطة للتحول إلى رائد أعمال رقمي ناجح",
         "offers": {
             "@type": "Offer",
-            "price": "19.00",
+            "price": "29.99",
             "priceCurrency": "USD"
         }
     }
     </script>
 </head>
-<body>
-    <!-- 🌟 Loading Animation -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content">
-            <div class="book-loader">
-                <div class="book">
-                    <div class="page"></div>
-                    <div class="page"></div>
-                    <div class="page"></div>
-                </div>
-            </div>
-            <p class="loading-text">جاري تحميل رحلتك نحو 1000$...</p>
-        </div>
-    </div>
-    
-    <!-- 🚀 Particle Background -->
-    <div class="particles-container" id="particles"></div>
-    
-    <!-- 🔝 Floating Purchase Button (Mobile) -->
-    <a href="#purchase" class="floating-purchase-btn animate__animated animate__pulse animate__infinite">
-        <i class="fas fa-shopping-cart"></i>
-        <span>اشتري الكتاب الآن</span>
-    </a>
-    
-    <!-- 🔔 Notification Toast -->
-    <div class="notification-toast" id="notificationToast">
-        <div class="toast-content">
-            <i class="fas fa-bell"></i>
-            <span id="toastMessage"></span>
-            <button class="toast-close">&times;</button>
-        </div>
-    </div>
-    
-    <!-- 🎯 Navigation -->
-    <nav class="navbar navbar-glass">
+<body class="light-mode">
+    <!-- شريط التنقل -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <div class="logo-wrapper">
-                    <i class="fas fa-book-open logo-icon"></i>
-                    <span class="logo-text">1000$<span class="logo-sub">/شهرياً</span></span>
-                </div>
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-book-open me-2"></i>
+                <span>الطريق إلى 1000$</span>
             </a>
             
-            <div class="nav-links">
-                <a href="#features" class="nav-link">المميزات</a>
-                <a href="#content" class="nav-link">المحتوى</a>
-                <a href="#testimonials" class="nav-link">تجارب</a>
-                <a href="#purchase" class="nav-link">الشراء</a>
-                <a href="book.html" class="nav-link btn-preview">
-                    <i class="fas fa-eye"></i> معاينة
-                </a>
-            </div>
-            
-            <button class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars"></i>
             </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">المميزات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#chapters">الفصول</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">الأسعار</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#author">المؤلف</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faq">الأسئلة</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <button class="btn btn-outline-primary" id="themeToggleNav">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
-    
-    <!-- 🌟 Hero Section -->
-    <section class="hero-section">
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
         <div class="container">
-            <div class="hero-grid">
-                <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
-                    <div class="badge premium-badge animate__animated animate__bounceIn">
-                        <i class="fas fa-crown"></i> الإصدار المميز 2026
-                    </div>
-                    
-                    <h1 class="hero-title animate__animated animate__fadeInUp">
-                        حوّل <span class="highlight-text">مهاراتك</span> إلى 
-                        <span class="gradient-text">1000$ شهرياً</span>
-                    </h1>
-                    
-                    <p class="hero-subtitle">
-                        الكتاب الرقمي الوحيد الذي يرافقك خطوة بخطوة من الصفر إلى أول ألف دولار عبر الإنترنت
-                    </p>
-                    
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">70+</div>
-                            <div class="stat-label">صفحة عملية</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">7</div>
-                            <div class="stat-label">فصول متكاملة</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">25+</div>
-                            <div class="stat-label">استراتيجية متقدمة</div>
-                        </div>
-                    </div>
-                    
-                    <div class="hero-cta">
-                        <a href="#purchase" class="btn-primary btn-gradient btn-lg animate__animated animate__pulse animate__infinite">
-                            <i class="fas fa-bolt"></i>
-                            ابدأ رحلتك الآن بـ 19$ فقط
-                        </a>
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="hero-content">
+                        <span class="badge bg-primary mb-3 animate-pulse">الإصدار 2.0</span>
+                        <h1 class="display-4 fw-bold mb-4">
+                            اكتشف <span class="text-gradient">الطريق</span> إلى
+                            <span class="text-gradient">1000$</span> شهريًا
+                        </h1>
+                        <p class="lead mb-5">
+                            كتاب عملي يرشدك خطوة بخطة للتحول من موظف عادي إلى رائد أعمال رقمي ناجح.
+                            أكثر من <strong>70 صفحة</strong> من الاستراتيجيات العملية والتكتيكات المجربة.
+                        </p>
                         
-                        <div class="trust-badges">
-                            <div class="trust-item">
-                                <i class="fas fa-shield-alt"></i>
-                                <span>ضمان استرداد 30 يوم</span>
-                            </div>
-                            <div class="trust-item">
-                                <i class="fas fa-clock"></i>
-                                <span>تحديثات مجانية دائمة</span>
-                            </div>
-                            <div class="trust-item">
-                                <i class="fas fa-headset"></i>
-                                <span>دعم مباشر</span>
-                            </div>
+                        <div class="hero-cta">
+                            <a href="#pricing" class="btn btn-primary btn-lg me-3">
+                                <i class="fas fa-shopping-cart me-2"></i>
+                                شراء الكتاب الآن
+                            </a>
+                            <a href="#features" class="btn btn-outline-primary btn-lg">
+                                <i class="fas fa-play-circle me-2"></i>
+                                شاهد فيديو التعريف
+                            </a>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="hero-book" data-aos="fade-left" data-aos-duration="1000">
-                    <div class="book-cover-3d">
-                        <div class="book-3d-inner">
-                            <div class="book-cover-front">
-                                <div class="cover-design">
-                                    <div class="cover-title">الطريق إلى 1000$</div>
-                                    <div class="cover-subtitle">شهرياً</div>
-                                    <div class="cover-author">أمجد الكلباني</div>
-                                    <div class="cover-sparkle">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-dollar-sign"></i>
-                                        <i class="fas fa-rocket"></i>
+                        
+                        <div class="hero-stats mt-5">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="stat">
+                                        <h3>70+</h3>
+                                        <p>صفحة عملية</p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat">
+                                        <h3>7</h3>
+                                        <p>فصول مفصلة</p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat">
+                                        <h3>100%</h3>
+                                        <p>ضمان استرداد</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="book-cover-side"></div>
-                            <div class="book-pages">
-                                <div class="page"></div>
-                                <div class="page"></div>
-                                <div class="page"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="hero-image">
+                        <div class="book-cover">
+                            <div class="book-cover-inner">
+                                <div class="book-title">
+                                    <h3>الطريق إلى 1000$ شهريًا</h3>
+                                    <p>أمجد الكلباني</p>
+                                </div>
+                                <div class="book-price">$29.99</div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="book-highlights">
-                        <div class="highlight-card">
+                        
+                        <!-- Floating Elements -->
+                        <div class="floating-element element-1">
                             <i class="fas fa-chart-line"></i>
-                            <h4>خطط عملية</h4>
-                            <p>خطوات مفصلة قابلة للتطبيق فوراً</p>
                         </div>
-                        <div class="highlight-card">
-                            <i class="fas fa-tools"></i>
-                            <h4>أدوات مجانية</h4>
-                            <p>أكثر من 50 أداة متقدمة</p>
+                        <div class="floating-element element-2">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="floating-element element-3">
+                            <i class="fas fa-coins"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Wave Divider -->
+        <div class="wave-divider">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+            </svg>
+        </div>
     </section>
-    
-    <!-- 📊 Features Section -->
-    <section class="features-section" id="features">
+
+    <!-- Features Section -->
+    <section class="features-section section-padding" id="features">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">لماذا هذا <span class="gradient-text">الكتاب مختلف</span>؟</h2>
-                <p class="section-subtitle">ليس مجرد كتاب، بل نظام متكامل لتحقيق الدخل</p>
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">ما الذي يميز هذا الكتاب؟</h2>
+                <p class="section-subtitle">أكثر من مجرد كتاب... إنه برنامج تحول كامل</p>
             </div>
             
-            <div class="features-grid">
-                <!-- Feature 1 -->
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature-icon">
-                        <div class="icon-wrapper gradient-1">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>فلسفة عقلية جديدة</h3>
+                        <p>7 مبادئ عقلية تتحول بها من موظف إلى رائد أعمال رقمي</p>
+                        <ul class="feature-list">
+                            <li>عقلية الحلول</li>
+                            <li>عقلية النظام</li>
+                            <li>عقلية القيمة</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>أدوات عملية مجانية</h3>
+                        <p>أدوات بحث وتحليل لا يعرفها 95% من المنافسين</p>
+                        <ul class="feature-list">
+                            <li>Google Trends Filter</li>
+                            <li>AnswerThePublic</li>
+                            <li>SparkToro</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
                             <i class="fas fa-road"></i>
                         </div>
+                        <h3>خارطة طريق 90 يوم</h3>
+                        <p>خطة مفصلة من الصفر إلى أول 1000$</p>
+                        <ul class="feature-list">
+                            <li>مرحلة البحث والتخطيط</li>
+                            <li>مرحلة بناء النموذج الأولي</li>
+                            <li>مرحلة الإطلاق والتوسع</li>
+                        </ul>
                     </div>
-                    <h3 class="feature-title">خارطة طريق مفصلة</h3>
-                    <p class="feature-desc">
-                        خطوات عملية يومية لمدة 90 يوماً، مع جداول قابلة للتتبع والتطبيق الفوري.
-                    </p>
-                    <div class="feature-badge">جديد 2026</div>
                 </div>
                 
-                <!-- Feature 2 -->
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature-icon">
-                        <div class="icon-wrapper gradient-2">
-                            <i class="fas fa-video"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shopping-bag"></i>
                         </div>
+                        <h3>هندسة المنتجات الرقمية</h3>
+                        <p>من الفكرة إلى 10,000$ شهرياً</p>
+                        <ul class="feature-list">
+                            <li>أنواع المنتجات عالية الربحية</li>
+                            <li>استراتيجيات تسعير متقدمة</li>
+                            <li>منصات البيع العالمية</li>
+                        </ul>
                     </div>
-                    <h3 class="feature-title">دروس فيديو حصرية</h3>
-                    <p class="feature-desc">
-                        أكثر من 5 ساعات فيديو تعليمية تشرح الخطوات الصعبة وتوضح النماذج العملية.
-                    </p>
-                    <div class="feature-badge">حصري</div>
                 </div>
                 
-                <!-- Feature 3 -->
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="feature-icon">
-                        <div class="icon-wrapper gradient-3">
-                            <i class="fas fa-file-excel"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-tie"></i>
                         </div>
+                        <h3>العمل الحر الاستراتيجي</h3>
+                        <p>من المستقل إلى الوكالة الرقمية</p>
+                        <ul class="feature-list">
+                            <li>إطار التخصص الدقيق</li>
+                            <li>استراتيجيات تسعير متقدمة</li>
+                            <li>منصات العمل الحر العالمية</li>
+                        </ul>
                     </div>
-                    <h3 class="feature-title">قوالب جاهزة للاستخدام</h3>
-                    <p class="feature-desc">
-                        قوالب Excel، Notion، Canva جاهزة للتعديل واستخدامها في مشاريعك مباشرة.
-                    </p>
-                    <div class="feature-badge">جاهزة</div>
                 </div>
                 
-                <!-- Feature 4 -->
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="feature-icon">
-                        <div class="icon-wrapper gradient-4">
-                            <i class="fas fa-users"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
                         </div>
+                        <h3>أنظمة الأتمتة المتقدمة</h3>
+                        <p>بناء أنظمة تعمل عندما تكون نائماً</p>
+                        <ul class="feature-list">
+                            <li>أدوات أتمتة مجانية ومدفوعة</li>
+                            <li>نماذج أتمتة متكاملة</li>
+                            <li>التفويض الذكي</li>
+                        </ul>
                     </div>
-                    <h3 class="feature-title">مجتمع الدعم المباشر</h3>
-                    <p class="feature-desc">
-                        انضم لمجتمع خاص بالمشترين للاستفادة من تجارب الآخرين وطرح الأسئلة.
-                    </p>
-                    <div class="feature-badge">مجتمع</div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- 📚 Book Content Preview -->
-    <section class="content-section" id="content">
+
+    <!-- Chapters Section -->
+    <section class="chapters-section section-padding" id="chapters">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">ماذا <span class="gradient-text">ستتعلم</span> بالضبط؟</h2>
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">فصول الكتاب السبعة</h2>
                 <p class="section-subtitle">70 صفحة من المحتوى العملي المتخصص</p>
             </div>
             
-            <div class="content-tabs">
-                <div class="tabs-header">
-                    <button class="tab-btn active" data-tab="chapters">الفصول</button>
-                    <button class="tab-btn" data-tab="bonuses">المكافآت</button>
-                    <button class="tab-btn" data-tab="tools">الأدوات</button>
-                </div>
-                
-                <div class="tabs-content">
-                    <div class="tab-pane active" id="chapters-tab">
-                        <div class="chapters-list">
-                            <!-- Chapter 1 -->
-                            <div class="chapter-item" data-aos="fade-right">
-                                <div class="chapter-number">01</div>
-                                <div class="chapter-content">
-                                    <h3>أسس الثروة الرقمية</h3>
-                                    <p>فهم الاقتصاد الرقمي واستراتيجيات التحول المالي</p>
-                                    <ul class="chapter-points">
-                                        <li>خرائط ذهنية للعقلية المالية الناجحة</li>
-                                        <li>أدوات بحث السوق المتقدمة</li>
-                                        <li>خطة 90 يوم للوصول لأول 1000$</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <!-- Chapter 2 -->
-                            <div class="chapter-item" data-aos="fade-right" data-aos-delay="100">
-                                <div class="chapter-number">02</div>
-                                <div class="chapter-content">
-                                    <h3>هندسة المنتجات الرقمية</h3>
-                                    <p>من الفكرة إلى 10,000$ شهرياً عبر منتجات ذكية</p>
-                                    <ul class="chapter-points">
-                                        <li>أنواع المنتجات عالية الربحية</li>
-                                        <li>استراتيجيات تسعير متقدمة</li>
-                                        <li>منصات البيع العالمية والعربية</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <!-- Show more button -->
-                            <div class="show-more-chapters">
-                                <button class="btn-outline" id="showMoreChapters">
-                                    <i class="fas fa-chevron-down"></i>
-                                    عرض جميع الفصول السبعة
-                                </button>
-                            </div>
+            <div class="chapters-timeline">
+                <div class="timeline">
+                    <!-- Chapter 1 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="chapter-number">01</div>
+                            <h3>أسس الثروة الرقمية</h3>
+                            <p>فهم الاقتصاد الرقمي واستراتيجيات التحول المالي</p>
+                            <ul>
+                                <li>خرائط ذهنية للعقلية المالية الناجحة</li>
+                                <li>أدوات بحث السوق المتقدمة</li>
+                                <li>خطة 90 يوم للوصول لأول $1000</li>
+                            </ul>
                         </div>
                     </div>
                     
-                    <div class="tab-pane" id="bonuses-tab">
-                        <div class="bonuses-grid">
-                            <!-- Bonus 1 -->
-                            <div class="bonus-card" data-aos="zoom-in">
-                                <div class="bonus-icon">
-                                    <i class="fas fa-video"></i>
-                                </div>
-                                <h4>دورة فيديو متقدمة</h4>
-                                <p>5 ساعات فيديو حصرية لشرح الاستراتيجيات الأكثر تعقيداً</p>
-                                <span class="bonus-value">قيمة 97$</span>
-                            </div>
-                            
-                            <!-- Bonus 2 -->
-                            <div class="bonus-card" data-aos="zoom-in" data-aos-delay="100">
-                                <div class="bonus-icon">
-                                    <i class="fas fa-file-contract"></i>
-                                </div>
-                                <h4>مكتبة القوالب</h4>
-                                <p>أكثر من 30 قالب جاهز للاستخدام في مشاريعك</p>
-                                <span class="bonus-value">قيمة 147$</span>
-                            </div>
-                            
-                            <!-- Bonus 3 -->
-                            <div class="bonus-card" data-aos="zoom-in" data-aos-delay="200">
-                                <div class="bonus-icon">
-                                    <i class="fas fa-chart-network"></i>
-                                </div>
-                                <h4>مجتمع الدعم</h4>
-                                <p>مجتمع خاص للمشترين للاستفادة من خبرات الآخرين</p>
-                                <span class="bonus-value">لا تقدر بثمن</span>
-                            </div>
+                    <!-- Chapter 2 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="chapter-number">02</div>
+                            <h3>هندسة المنتجات الرقمية</h3>
+                            <p>من الفكرة إلى $10,000 شهرياً عبر منتجات ذكية</p>
+                            <ul>
+                                <li>أنواع المنتجات عالية الربحية</li>
+                                <li>استراتيجيات تسعير متقدمة</li>
+                                <li>منصات البيع العالمية والعربية</li>
+                            </ul>
                         </div>
+                    </div>
+                    
+                    <!-- Show more button -->
+                    <div class="text-center mt-5">
+                        <button class="btn btn-outline-primary" id="showAllChapters">
+                            <i class="fas fa-book me-2"></i>
+                            عرض جميع الفصول السبعة
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- 💰 Pricing & Purchase Section -->
-    <section class="pricing-section" id="purchase">
+
+    <!-- Pricing Section -->
+    <section class="pricing-section section-padding" id="pricing">
         <div class="container">
-            <div class="pricing-header" data-aos="fade-up">
-                <h2 class="section-title">ابدأ رحلتك نحو <span class="gradient-text">الحرية المالية</span></h2>
-                <p class="section-subtitle">استثمر في نفسك اليوم، واحصد النتائج غداً</p>
-                
-                <div class="limited-offer animate__animated animate__flash animate__infinite">
-                    <i class="fas fa-clock"></i>
-                    <span>عرض خاص: السعر يرتفع قريباً!</span>
-                </div>
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">اختر باقة الكتاب المناسبة لك</h2>
+                <p class="section-subtitle">استثمر في معرفة ستغير مسارك المهني</p>
             </div>
             
-            <div class="pricing-card" data-aos="zoom-in" data-aos-duration="1000">
-                <div class="pricing-badge">
-                    <i class="fas fa-gem"></i>
-                    الإصدار الكامل
-                </div>
-                
-                <div class="pricing-body">
-                    <div class="price-display">
-                        <div class="old-price">47$</div>
-                        <div class="current-price">
-                            <span class="price-currency">$</span>
-                            <span class="price-number">19</span>
-                            <span class="price-period">/مرة واحدة</span>
+            <div class="row justify-content-center">
+                <!-- Basic Package -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>الباقة الأساسية</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">29.99</span>
+                                <span class="period">/ مرة واحدة</span>
+                            </div>
                         </div>
-                        <div class="price-saving">
-                            <i class="fas fa-bolt"></i>
-                            توفير 60% لفترة محدودة
-                        </div>
-                    </div>
-                    
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check-circle"></i> الكتاب الكامل (70 صفحة)</li>
-                        <li><i class="fas fa-check-circle"></i> 5 ساعات فيديو حصرية</li>
-                        <li><i class="fas fa-check-circle"></i> مكتبة القوالب الجاهزة</li>
-                        <li><i class="fas fa-check-circle"></i> دخول مجتمع الدعم</li>
-                        <li><i class="fas fa-check-circle"></i> تحديثات مجانية مدى الحياة</li>
-                        <li><i class="fas fa-check-circle"></i> ضمان استرداد 30 يوم</li>
-                    </ul>
-                    
-                    <div class="pricing-cta">
-                        <!-- Payhip Purchase Button -->
-                        <a href="https://payhip.com/b/your-product-id" 
-                           class="btn-primary btn-gradient btn-xl btn-purchase"
-                           id="payhipPurchaseBtn">
-                            <i class="fas fa-lock"></i>
-                            شراء آمن عبر Payhip
-                            <span class="btn-subtext">وصول فوري بعد الدفع</span>
-                        </a>
                         
-                        <div class="secure-payment">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>مدفوعات آمنة عبر بطاقات الائتمان و PayPal</span>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> الكتاب الإلكتروني الكامل (70 صفحة)</li>
+                                <li><i class="fas fa-check-circle"></i> تحديثات مجانية لمدة سنة</li>
+                                <li><i class="fas fa-check-circle"></i> إمكانية القراءة على جميع الأجهزة</li>
+                                <li><i class="fas fa-check-circle"></i> الدعم عبر البريد الإلكتروني</li>
+                                <li><i class="fas fa-times-circle"></i> دورة الفيديو المتقدمة</li>
+                                <li><i class="fas fa-times-circle"></i> القوالب الجاهزة والأدوات</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="pricing-footer">
+                            <button class="btn btn-outline-primary w-100 buy-btn" data-plan="basic">
+                                <i class="fas fa-shopping-cart me-2"></i>
+                                اشترِ الآن
+                            </button>
                         </div>
                     </div>
                 </div>
                 
-                <div class="pricing-footer">
-                    <div class="guarantee-badge">
-                        <i class="fas fa-medal"></i>
-                        <div>
-                            <strong>ضمان 30 يوم</strong>
-                            <small>إذا لم يعجبك الكتاب، استرد أموالك بالكامل</small>
+                <!-- Premium Package -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card premium">
+                        <div class="pricing-badge">الأكثر مبيعاً</div>
+                        <div class="pricing-header">
+                            <h3>الباقة المميزة</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">49.99</span>
+                                <span class="period">/ مرة واحدة</span>
+                            </div>
+                        </div>
+                        
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> كل مميزات الباقة الأساسية</li>
+                                <li><i class="fas fa-check-circle"></i> دورة فيديو متقدمة (5 ساعات)</li>
+                                <li><i class="fas fa-check-circle"></i> 10 قوالب جاهزة للعمل الفوري</li>
+                                <li><i class="fas fa-check-circle"></i> أدوات البحث المتقدمة (PDF)</li>
+                                <li><i class="fas fa-check-circle"></i> قائمة مراجعة التحقق الشاملة</li>
+                                <li><i class="fas fa-check-circle"></i> دعم أسبوعي عبر مجموعة خاصة</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="pricing-footer">
+                            <button class="btn btn-primary w-100 buy-btn" data-plan="premium">
+                                <i class="fas fa-crown me-2"></i>
+                                اشترِ الباقة المميزة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- VIP Package -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>باقة VIP</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">99.99</span>
+                                <span class="period">/ مرة واحدة</span>
+                            </div>
+                        </div>
+                        
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> كل مميزات الباقة المميزة</li>
+                                <li><i class="fas fa-check-circle"></i> جلسة استشارية خاصة (ساعة واحدة)</li>
+                                <li><i class="fas fa-check-circle"></i> مراجعة خطة عملك الشخصية</li>
+                                <li><i class="fas fa-check-circle"></i> مدى الحياة تحديثات مجانية</li>
+                                <li><i class="fas fa-check-circle"></i> وصول مدى الحياة للمجتمع VIP</li>
+                                <li><i class="fas fa-check-circle"></i> شهادة إكمال معتمدة</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="pricing-footer">
+                            <button class="btn btn-outline-primary w-100 buy-btn" data-plan="vip">
+                                <i class="fas fa-star me-2"></i>
+                                اشترِ باقة VIP
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Trust Indicators -->
-            <div class="trust-indicators">
-                <div class="trust-item">
-                    <i class="fas fa-user-check"></i>
-                    <span>+1,247 مشتري راضٍ</span>
+            <!-- Money Back Guarantee -->
+            <div class="guarantee-box text-center mt-5">
+                <div class="guarantee-icon">
+                    <i class="fas fa-shield-alt"></i>
                 </div>
-                <div class="trust-item">
-                    <i class="fas fa-star"></i>
-                    <span>تقييم 4.9/5 ⭐⭐⭐⭐⭐</span>
-                </div>
-                <div class="trust-item">
-                    <i class="fas fa-globe"></i>
-                    <span>متاح عالمياً</span>
-                </div>
+                <h4>ضمان استرداد الأموال لمدة 30 يوم</h4>
+                <p class="text-muted">إذا لم تحقق قيمة من الكتاب، سنعيد لك أموالك كاملة دون أي أسئلة.</p>
             </div>
         </div>
     </section>
-    
-    <!-- 👥 Testimonials -->
-    <section class="testimonials-section" id="testimonials">
+
+    <!-- Author Section -->
+    <section class="author-section section-padding" id="author">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">ماذا قال <span class="gradient-text">المشترون</span>؟</h2>
-                <p class="section-subtitle">انضم لأكثر من 1,247 شخص بدأوا رحلتهم نحو 1000$ شهرياً</p>
-            </div>
-            
-            <div class="testimonials-slider">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card" data-aos="fade-up">
-                    <div class="testimonial-header">
-                        <div class="reviewer-avatar">
-                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ahmad" alt="أحمد">
-                        </div>
-                        <div class="reviewer-info">
-                            <h4>أحمد س.</h4>
-                            <div class="review-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+            <div class="row align-items-center">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="author-image">
+                        <img src="https://via.placeholder.com/400x500/2563eb/ffffff?text=أمجد+الكلباني" alt="أمجد الكلباني" class="img-fluid rounded-3">
+                    </div>
+                </div>
+                
+                <div class="col-lg-8">
+                    <div class="author-content">
+                        <h2 class="section-title mb-4">عن المؤلف</h2>
+                        <h3 class="author-name mb-4">أمجد الكلباني</h3>
+                        
+                        <div class="author-bio">
+                            <p>رائد أعمال رقمي ومستثمر، بدأ رحلته من الصفر ليحقق أول 1000$ شهرياً خلال 90 يوم فقط.</p>
+                            
+                            <p>خبرة 8 سنوات في التسويق الرقمي والأعمال الإلكترونية، ساعد أكثر من 500 رائد أعمال على التحول الرقمي وبناء مصادر دخل مستدامة.</p>
+                            
+                            <div class="author-stats row mt-4">
+                                <div class="col-sm-6 mb-3">
+                                    <div class="stat">
+                                        <h4>8+</h4>
+                                        <p>سنوات خبرة</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <div class="stat">
+                                        <h4>500+</h4>
+                                        <p>رائد أعمال تدربوا معه</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <div class="stat">
+                                        <h4>1M+</h4>
+                                        <p>إيرادات حققها طلابه</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <div class="stat">
+                                        <h4>25+</h4>
+                                        <p>ورشة عمل أونلاين</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="testimonial-body">
-                        <p>"بعد 3 أشهر من تطبيق خطط الكتاب، حققت أول 850$ شهرياً من بيع القوالب الرقمية. الكتاب غير حياتي!"</p>
-                    </div>
-                    <div class="testimonial-footer">
-                        <span class="review-date">منذ شهرين</span>
-                        <span class="review-income">+850$ شهرياً</span>
-                    </div>
                 </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="testimonial-header">
-                        <div class="reviewer-avatar">
-                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sara" alt="سارة">
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section section-padding" id="faq">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">الأسئلة الشائعة</h2>
+                <p class="section-subtitle">إجابات على أكثر الأسئلة تداولاً</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="accordion" id="faqAccordion">
+                        <!-- Question 1 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    هل أحتاج إلى خبرة سابقة للاستفادة من الكتاب؟
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    لا، الكتاب مصمم ليكون مناسباً للمبتدئين تماماً. يبدأ من الصفر ويرشدك خطوة بخطوة. كل فصل يبني على الذي قبله، حتى تصل إلى النتائج المرجوة.
+                                </div>
+                            </div>
                         </div>
-                        <div class="reviewer-info">
-                            <h4>سارة م.</h4>
-                            <div class="review-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+                        
+                        <!-- Question 2 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    ما هي مدة الوصول إلى الكتاب؟
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    الوصول مدى الحياة! بمجرد الشراء، تحصل على رابط وصول دائم للكتاب مع جميع التحديثات المستقبلية مجاناً لمدة سنة كاملة (مدى الحياة لباقة VIP).
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 3 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    كيف يمكنني الدفع؟
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    نقبل جميع وسائل الدفع الإلكترونية: البطاقات الائتمانية (فيزا، ماستركارد)، PayPal، Apple Pay، Google Pay. الدفع آمن ومشفر بالكامل.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 4 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    ماذا عن ضمان استرداد الأموال؟
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    نقدم ضمان استرداد أموال لمدة 30 يوماً. إذا لم تكن راضياً عن الكتاب لأي سبب، يمكنك طلب استرداد كامل لمبلغ الشراء دون أي أسئلة.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 5 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                    هل يمكنني الوصول للكتاب على الهاتف؟
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    نعم، المنصة متجاوبة بالكامل وتعمل على جميع الأجهزة: الحواسيب، الأجهزة اللوحية، والهواتف الذكية. يمكنك القراءة في أي وقت ومن أي مكان.
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="testimonial-body">
-                        <p>"القوالب الجاهزة وحدها كانت تساوي ثمن الكتاب. استراتيجيات التسعير المتقدمة ضاعفت دخلي 3 مرات!"</p>
-                    </div>
-                    <div class="testimonial-footer">
-                        <span class="review-date">منذ 5 أشهر</span>
-                        <span class="review-income">+1,200$ شهرياً</span>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- ❓ FAQ Section -->
-    <section class="faq-section">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">أسئلة <span class="gradient-text">شائعة</span></h2>
-                <p class="section-subtitle">كل ما تريد معرفته قبل الشراء</p>
-            </div>
-            
-            <div class="faq-container">
-                <!-- FAQ 1 -->
-                <div class="faq-item" data-aos="fade-up">
-                    <div class="faq-question">
-                        <h3>كيف أحصل على الكتاب بعد الشراء؟</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>بمجرد اكتمال الدفع، سيتم إرسال رابط الوصول إلى بريدك الإلكتروني تلقائياً. يمكنك أيضاً تسجيل الدخول إلى حسابك على Payhip لتحميل الكتاب في أي وقت.</p>
-                    </div>
-                </div>
-                
-                <!-- FAQ 2 -->
-                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
-                    <div class="faq-question">
-                        <h3>هل هناك ضمان استرداد؟</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>نعم! لديك 30 يوماً كاملة لاسترداد أموالك إذا لم يعجبك الكتاب لأي سبب. بدون أسئلة، بدون تعقيدات.</p>
-                    </div>
-                </div>
-                
-                <!-- FAQ 3 -->
-                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
-                    <div class="faq-question">
-                        <h3>هل المحتوى مناسب للمبتدئين؟</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>أجل! الكتاب مصمم ليبدأ معك من الصفر. كل خطوة موضحة بالتفصيل، مع أمثلة واقعية من العالم العربي.</p>
-                    </div>
-                </div>
-            </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container text-center">
+            <h2 class="display-5 fw-bold mb-4">ابدأ رحلتك نحو الاستقلال المالي اليوم</h2>
+            <p class="lead mb-5">انضم إلى أكثر من 1000 رائد أعمال بدأوا رحلتهم بهذا الكتاب</p>
+            <a href="#pricing" class="btn btn-primary btn-lg px-5">
+                <i class="fas fa-rocket me-2"></i>
+                ابدأ رحلتك الآن
+            </a>
         </div>
     </section>
-    
-    <!-- 🚀 Final CTA -->
-    <section class="final-cta">
-        <div class="container">
-            <div class="final-cta-content" data-aos="zoom-in">
-                <h2 class="cta-title">لحظة قرارك تبدأ <span class="gradient-text">الآن</span></h2>
-                <p class="cta-subtitle">لا تؤجل حلمك في تحقيق الحرية المالية. ابدأ اليوم وستشكر نفسك بعد 90 يوماً</p>
-                
-                <div class="cta-timer">
-                    <div class="timer-label">العرض ينتهي خلال:</div>
-                    <div class="timer-display">
-                        <div class="timer-unit">
-                            <span class="timer-number">02</span>
-                            <span class="timer-label">ساعات</span>
-                        </div>
-                        <div class="timer-colon">:</div>
-                        <div class="timer-unit">
-                            <span class="timer-number">45</span>
-                            <span class="timer-label">دقائق</span>
-                        </div>
-                        <div class="timer-colon">:</div>
-                        <div class="timer-unit">
-                            <span class="timer-number">18</span>
-                            <span class="timer-label">ثواني</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <a href="#purchase" class="btn-primary btn-gradient btn-xl btn-final">
-                    <i class="fas fa-rocket"></i>
-                    ابدأ رحلتك الآن - 19$ فقط
-                    <small>دفعة واحدة - وصول مدى الحياة</small>
-                </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- 📞 Footer -->
+
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="footer-logo">
-                        <i class="fas fa-book-open"></i>
-                        <span>1000$ شهرياً</span>
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="footer-brand">
+                        <i class="fas fa-book-open me-2"></i>
+                        <span>الطريق إلى 1000$</span>
                     </div>
-                    <p class="footer-desc">
-                        كتاب رقمي متكامل يرشدك خطوة بخطوة لتحقيق دخل مستمر من الإنترنت.
-                    </p>
-                    <div class="footer-social">
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <p class="mt-3">منصة عربية متخصصة في تمكين رواد الأعمال الرقميين من تحقيق استقلالهم المالي.</p>
+                    
+                    <div class="social-links mt-4">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
-                <div class="footer-col">
-                    <h4 class="footer-title">روابط سريعة</h4>
-                    <ul class="footer-links">
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5>روابط سريعة</h5>
+                    <ul>
                         <li><a href="#features">المميزات</a></li>
-                        <li><a href="#content">المحتوى</a></li>
-                        <li><a href="#testimonials">التجارب</a></li>
-                        <li><a href="#purchase">الشراء</a></li>
-                        <li><a href="book.html">معاينة الكتاب</a></li>
+                        <li><a href="#chapters">الفصول</a></li>
+                        <li><a href="#pricing">الأسعار</a></li>
+                        <li><a href="#author">المؤلف</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-col">
-                    <h4 class="footer-title">الدعم</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:support@1000book.com">الدعم الفني</a></li>
-                        <li><a href="#">سياسة الاسترداد</a></li>
-                        <li><a href="#">الشروط والأحكام</a></li>
+                <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+                    <h5>الدعم</h5>
+                    <ul>
+                        <li><a href="#faq">الأسئلة الشائعة</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
                         <li><a href="#">سياسة الخصوصية</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-col">
-                    <h4 class="footer-title">اتصل بنا</h4>
-                    <div class="contact-info">
-                        <p><i class="fas fa-envelope"></i> support@1000book.com</p>
-                        <p><i class="fas fa-globe"></i> www.1000book.com</p>
-                    </div>
-                    <div class="payment-methods">
-                        <i class="fab fa-cc-visa"></i>
-                        <i class="fab fa-cc-mastercard"></i>
-                        <i class="fab fa-cc-paypal"></i>
-                        <i class="fas fa-credit-card"></i>
-                    </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5>الاشتراك في النشرة</h5>
+                    <p>احصل على نصائح مجانية وأدوات عملية أسبوعياً</p>
+                    
+                    <form class="subscribe-form">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="بريدك الإلكتروني">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
             
+            <hr class="my-5">
+            
             <div class="footer-bottom">
-                <p class="copyright">
-                    © 2026 أمجد الكلباني. جميع الحقوق محفوظة.
-                    <span class="copyright-note">هذا الكتاب للاستخدام الشخصي فقط</span>
-                </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-0">&copy; 2024 أمجد الكلباني. جميع الحقوق محفوظة.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p class="mb-0">مصمم بـ <i class="fas fa-heart text-danger"></i> للعالم العربي</p>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
-    
+
+    <!-- Buy Modal -->
+    <div class="modal fade" id="buyModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">إكمال عملية الشراء</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="selected-plan text-center mb-4">
+                        <h4 id="selectedPlanName">الباقة المميزة</h4>
+                        <div class="price display-6 fw-bold" id="selectedPlanPrice">$49.99</div>
+                    </div>
+                    
+                    <div class="payment-options">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            ستتم إعادة توجيهك إلى بوابة دفع آمنة لإكمال العملية
+                        </div>
+                        
+                        <button class="btn btn-primary w-100 mb-3" id="payNowBtn">
+                            <i class="fas fa-lock me-2"></i>
+                            الدفع الآمن الآن
+                        </button>
+                        
+                        <button class="btn btn-outline-secondary w-100">
+                            <i class="fab fa-paypal me-2"></i>
+                            الدفع عبر PayPal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="script.js"></script>
+    
+    <script>
+        // Buy buttons handler
+        document.querySelectorAll('.buy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const plan = this.getAttribute('data-plan');
+                const modal = new bootstrap.Modal(document.getElementById('buyModal'));
+                
+                // Update modal based on selected plan
+                const planNames = {
+                    'basic': 'الباقة الأساسية',
+                    'premium': 'الباقة المميزة',
+                    'vip': 'باقة VIP'
+                };
+                
+                const planPrices = {
+                    'basic': '$29.99',
+                    'premium': '$49.99',
+                    'vip': '$99.99'
+                };
+                
+                document.getElementById('selectedPlanName').textContent = planNames[plan];
+                document.getElementById('selectedPlanPrice').textContent = planPrices[plan];
+                
+                // Handle payment
+                document.getElementById('payNowBtn').onclick = function() {
+                    // In production, redirect to payment gateway
+                    alert('سيتم توجيهك إلى بوابة الدفع. في الإصدار الحقيقي، ستكون هذه بوابة Payhip أو Stripe.');
+                    // window.location.href = `/checkout?plan=${plan}`;
+                };
+                
+                modal.show();
+            });
+        });
+        
+        // Theme toggle
+        document.getElementById('themeToggleNav').addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            document.body.classList.toggle('dark-mode');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        });
+    </script>
 </body>
 </html>
