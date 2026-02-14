@@ -2,135 +2,85 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ستريك • تصميم متكامل</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>ستريك موبايل • عداد الأيام</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+      font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
     }
 
     body {
       min-height: 100vh;
-      background: radial-gradient(circle at 30% 30%, #0c1c22, #02090c);
+      background: radial-gradient(circle at 30% 20%, #0b1c22, #020a0d);
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
+      justify-content: flex-start;
       padding: 1rem;
+      position: relative;
     }
 
-    /* خلفية متحركة مع دوائر هندسية متعددة (لمسة من الفكرة 2 و 4) */
-    .geometric-bg {
-      position: absolute;
+    /* خلفية متحركة ناعمة */
+    .bg-ornament {
+      position: fixed;
       inset: 0;
+      pointer-events: none;
       z-index: 0;
-      opacity: 0.4;
     }
 
-    .geometric-bg::before,
-    .geometric-bg::after,
-    .geometric-bg .circle-ornament {
+    .bg-ornament::before {
       content: '';
       position: absolute;
-      border-radius: 50%;
-      background: rgba(0, 255, 200, 0.03);
-      border: 1px dashed rgba(0, 255, 200, 0.2);
-      animation: floatOrbit 20s infinite alternate ease-in-out;
+      width: 120%;
+      height: 120%;
+      top: -10%;
+      left: -10%;
+      background: radial-gradient(circle at var(--x, 30%) var(--y, 20%), rgba(0, 255, 200, 0.05) 0%, transparent 40%);
+      animation: bgShift 12s infinite alternate;
     }
 
-    .geometric-bg::before {
-      width: 50vmax;
-      height: 50vmax;
-      top: -15vmax;
-      left: -10vmax;
-      border-width: 2px;
-      animation-duration: 25s;
+    @keyframes bgShift {
+      0% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+      100% { transform: scale(1.2) rotate(5deg); opacity: 0.6; }
     }
 
-    .geometric-bg::after {
-      width: 40vmin;
-      height: 40vmin;
-      bottom: 5vh;
-      right: 5vw;
-      border-width: 3px;
-      animation-duration: 18s;
-    }
-
-    .circle-ornament1 {
-      width: 30vmin;
-      height: 30vmin;
-      top: 20vh;
-      right: 15vw;
-      border: 1px solid rgba(0, 255, 200, 0.15);
-      animation: pulseOrbit 14s infinite alternate;
-    }
-
-    .circle-ornament2 {
-      width: 20vmin;
-      height: 20vmin;
-      bottom: 10vh;
-      left: 10vw;
-      border: 2px dotted rgba(0, 255, 200, 0.1);
-      animation: spinSlow 30s linear infinite;
-    }
-
-    @keyframes floatOrbit {
-      0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
-      100% { transform: translate(5%, 5%) scale(1.1); opacity: 0.5; }
-    }
-
-    @keyframes pulseOrbit {
-      0% { transform: scale(1); opacity: 0.1; }
-      100% { transform: scale(1.3); opacity: 0.3; }
-    }
-
-    @keyframes spinSlow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    /* الحاوية الرئيسية */
-    .center-panel {
+    /* الحاوية الرئيسية (عمودية) */
+    .mobile-container {
       position: relative;
       z-index: 10;
-      width: min(750px, 100%);
+      width: 100%;
+      max-width: 420px; /* عرض مريح للجوال */
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2rem;
+      gap: 1.8rem;
+      padding: 1rem 0 2rem;
     }
 
-    /* الدائرة الكبيرة (مدمج فيها العد التنازلي + الستريك) */
-    .hero-circle {
-      width: 340px;
-      height: 340px;
+    /* ===== الدائرة الكبيرة (العد التنازلي + الستريك) ===== */
+    .main-circle {
+      width: min(85vw, 320px);
+      height: min(85vw, 320px);
       border-radius: 50%;
-      background: rgba(8, 22, 26, 0.7);
-      backdrop-filter: blur(8px);
-      border: 2px solid rgba(0, 255, 200, 0.5);
-      box-shadow: 0 0 60px rgba(0, 255, 200, 0.3), inset 0 0 40px rgba(0, 255, 200, 0.2);
+      background: rgba(8, 22, 26, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 3px solid rgba(0, 255, 200, 0.6);
+      box-shadow: 0 0 50px rgba(0, 255, 200, 0.4), inset 0 0 40px rgba(0, 255, 200, 0.3);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      position: relative;
-      animation: glowPulse 4s infinite alternate, rotateBorder 16s infinite linear;
-      transition: all 0.3s;
+      animation: softGlow 3s infinite alternate;
+      margin: 0.5rem 0;
     }
 
-    @keyframes glowPulse {
-      0% { box-shadow: 0 0 40px rgba(0, 255, 200, 0.3), inset 0 0 30px rgba(0, 255, 200, 0.2); }
-      100% { box-shadow: 0 0 80px rgba(0, 255, 250, 0.7), inset 0 0 60px rgba(0, 255, 200, 0.4); }
-    }
-
-    @keyframes rotateBorder {
-      0% { border-top-color: #8afff0; border-bottom-color: #008f84; }
-      50% { border-left-color: #5effe0; border-right-color: #00a69c; }
-      100% { border-top-color: #8afff0; border-bottom-color: #008f84; }
+    @keyframes softGlow {
+      0% { box-shadow: 0 0 30px rgba(0, 255, 200, 0.3), inset 0 0 20px rgba(0, 255, 200, 0.2); }
+      100% { box-shadow: 0 0 70px rgba(0, 255, 250, 0.7), inset 0 0 50px rgba(0, 255, 200, 0.4); }
     }
 
     .circle-content {
@@ -139,16 +89,16 @@
     }
 
     .countdown-label {
-      font-size: 1.1rem;
-      letter-spacing: 2px;
-      color: #b0ece3;
-      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      color: #a7f0e6;
       font-weight: 300;
-      text-shadow: 0 0 10px cyan;
+      text-shadow: 0 0 8px cyan;
+      margin-bottom: 0.25rem;
     }
 
     .countdown-number {
-      font-size: 3.5rem;
+      font-size: clamp(2.8rem, 12vw, 3.8rem);
       font-weight: 700;
       direction: ltr;
       font-family: 'Courier New', monospace;
@@ -157,276 +107,240 @@
       -webkit-text-fill-color: transparent;
       text-shadow: 0 0 30px #00ffe1;
       line-height: 1.2;
-      margin-bottom: 0.8rem;
     }
 
     .streak-inside {
-      font-size: 2.2rem;
+      font-size: clamp(1.8rem, 7vw, 2.4rem);
       font-weight: 600;
-      direction: ltr;
-      background: linear-gradient(145deg, #ffecaa, #ffb347);
+      background: linear-gradient(145deg, #ffe29a, #ffb347);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: 0 0 25px #ffae00;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
+      margin-top: 0.2rem;
     }
 
-    .streak-inside span {
-      font-size: 3rem;
-      margin-left: 0.2rem;
+    .streak-inside span:first-child {
+      font-size: 2rem;
     }
 
-    /* الدوائر الصغيرة المحيطة (تجسيد للفكرة 2 + 4) */
-    .orbit-circles {
-      position: absolute;
+    .next-target-note {
+      font-size: 0.75rem;
+      color: #7fcbc2;
+      margin-top: 0.5rem;
+      opacity: 0.9;
+    }
+
+    /* ===== بطاقات الوقت المنقضي (عرض أفقي متجاوب) ===== */
+    .elapsed-cards {
       width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    .orbit-circle {
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: rgba(0, 30, 30, 0.5);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(0, 255, 200, 0.4);
-      box-shadow: 0 0 30px rgba(0, 255, 200, 0.2);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: #c4fff5;
-      font-size: 0.8rem;
-      padding: 0.5rem;
-      text-align: center;
-      animation: orbitMove 12s infinite alternate;
-    }
-
-    .orbit-circle .orbit-value {
-      font-size: 1.3rem;
-      font-weight: 600;
-      direction: ltr;
-      font-family: 'Courier New', monospace;
-      background: linear-gradient(145deg, #e0fff8, #a0e6db);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .circle1 {
-      top: -15%;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: float1 5s infinite alternate;
-    }
-    .circle2 {
-      bottom: -10%;
-      left: 10%;
-      animation: float2 7s infinite alternate;
-    }
-    .circle3 {
-      bottom: -10%;
-      right: 10%;
-      animation: float3 6s infinite alternate;
-    }
-    .circle4 {
-      top: 20%;
-      left: -10%;
-      animation: float4 8s infinite alternate;
-    }
-    .circle5 {
-      top: 20%;
-      right: -10%;
-      animation: float5 7s infinite alternate;
-    }
-
-    @keyframes float1 { 0% { transform: translate(-50%, 0); } 100% { transform: translate(-50%, -15px); } }
-    @keyframes float2 { 0% { transform: translate(0, 0); } 100% { transform: translate(10px, -20px); } }
-    @keyframes float3 { 0% { transform: translate(0, 0); } 100% { transform: translate(-10px, -20px); } }
-    @keyframes float4 { 0% { transform: translate(0, 0); } 100% { transform: translate(15px, 10px); } }
-    @keyframes float5 { 0% { transform: translate(0, 0); } 100% { transform: translate(-15px, 10px); } }
-
-    /* الشريط السفلي (الفكرة 3) */
-    .info-strip {
-      width: 100%;
-      background: rgba(0, 20, 20, 0.6);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(0, 255, 200, 0.25);
-      border-radius: 60px;
-      padding: 1rem 1.8rem;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem 2rem;
-      box-shadow: 0 20px 30px -15px black, inset 0 0 30px rgba(0, 255, 200, 0.1);
-      animation: stripGlow 5s infinite alternate;
-      margin-top: 1.5rem;
-    }
-
-    @keyframes stripGlow {
-      0% { border-color: rgba(0, 255, 200, 0.2); box-shadow: 0 20px 30px -15px black; }
-      100% { border-color: rgba(0, 255, 200, 0.7); box-shadow: 0 20px 40px -10px #00ffe1; }
-    }
-
-    .strip-item {
-      display: flex;
-      align-items: center;
+      justify-content: center;
       gap: 0.7rem;
-      color: #cef8f0;
-      font-weight: 300;
+      margin: 0.5rem 0;
     }
 
-    .strip-item .label {
-      font-size: 0.9rem;
-      opacity: 0.8;
+    .elapsed-card {
+      background: rgba(0, 25, 25, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 255, 200, 0.3);
+      border-radius: 28px;
+      padding: 0.8rem 0.4rem;
+      min-width: 70px;
+      flex: 1 0 70px;
+      max-width: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 10px 20px -10px black;
+      animation: cardPulse 4s infinite alternate;
     }
 
-    .strip-item .value {
-      font-size: 1.6rem;
+    @keyframes cardPulse {
+      0% { border-color: rgba(0, 255, 200, 0.2); }
+      100% { border-color: rgba(0, 255, 200, 0.7); }
+    }
+
+    .card-value {
+      font-size: 2rem;
       font-weight: 600;
       font-family: 'Courier New', monospace;
       direction: ltr;
-      background: linear-gradient(145deg, #ffffff, #b2f0e8);
+      background: linear-gradient(145deg, #eaffff, #b0f0e8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: 0 0 15px cyan;
+      line-height: 1;
     }
 
-    .badge {
-      background: rgba(0, 255, 200, 0.15);
-      padding: 0.4rem 1rem;
-      border-radius: 40px;
-      font-size: 0.9rem;
-      border: 1px solid #00ffd0;
-      color: #d0fff5;
+    .card-label {
+      font-size: 0.8rem;
+      color: #b0e6dd;
+      margin-top: 0.2rem;
     }
 
-    /* تعديلات للشاشات الصغيرة */
-    @media (max-width: 600px) {
-      .hero-circle {
-        width: 280px;
-        height: 280px;
-      }
-      .countdown-number {
-        font-size: 2.5rem;
-      }
-      .streak-inside {
-        font-size: 1.6rem;
-      }
-      .orbit-circle {
-        width: 60px;
-        height: 60px;
-        font-size: 0.7rem;
-      }
-      .orbit-circle .orbit-value {
-        font-size: 1rem;
-      }
-      .info-strip {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
-      }
-      .strip-item {
-        justify-content: center;
-      }
+    /* بطاقة تاريخ البدء (خاصة) */
+    .start-card {
+      background: rgba(0, 40, 35, 0.7);
+      border-color: #00d4c0;
+      flex: 1 0 90px;
+    }
+
+    .start-card .card-value {
+      font-size: 1.2rem;
+      -webkit-text-fill-color: #d4fff0;
+      background: none;
+      color: #d4fff0;
+    }
+
+    /* ===== الشريط السفلي (معلومات إضافية) ===== */
+    .footer-strip {
+      width: 100%;
+      background: rgba(0, 15, 15, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid #00bfa5;
+      border-radius: 60px;
+      padding: 1rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      box-shadow: 0 20px 30px -15px black;
+      margin-top: 0.8rem;
+    }
+
+    .footer-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #d0f7f0;
+      font-size: 1rem;
+    }
+
+    .footer-label {
+      font-weight: 300;
+      opacity: 0.8;
+    }
+
+    .footer-value {
+      font-family: 'Courier New', monospace;
+      direction: ltr;
+      font-weight: 600;
+      background: linear-gradient(145deg, #ffffff, #b0f0e8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.3rem;
+    }
+
+    .reminder-badge {
+      background: rgba(0, 255, 200, 0.1);
+      border: 1px solid #00ffe1;
+      border-radius: 30px;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      color: #b0fff0;
+      font-size: 0.85rem;
+      font-weight: 300;
+    }
+
+    /* تعديلات صغيرة */
+    .note {
+      font-size: 0.8rem;
+      color: #4f9e96;
+      text-align: center;
+      margin-top: 0.5rem;
     }
   </style>
 </head>
 <body>
-  <!-- دوائر زخرفية خلفية (تجسيد هندسي) -->
-  <div class="geometric-bg">
-    <div class="circle-ornament1"></div>
-    <div class="circle-ornament2"></div>
-  </div>
+  <div class="bg-ornament"></div>
 
-  <div class="center-panel">
-    <!-- الدائرة الرئيسية (العد التنازلي + الستريك) -->
-    <div class="hero-circle">
+  <div class="mobile-container">
+    <!-- الدائرة الرئيسية (عد تنازلي + ستريك) -->
+    <div class="main-circle">
       <div class="circle-content">
         <div class="countdown-label">الوقت المتبقي</div>
         <div class="countdown-number" id="countdownDisplay">00:00:00</div>
-        <div class="streak-inside" id="streakInsideDisplay">
+        <div class="streak-inside">
           <span>🔥</span> <span id="streakNumber">0</span>
         </div>
-        <div style="font-size: 0.8rem; color: #7fcbc2; margin-top: 0.5rem;">حتى ١٢:٣٠ ص</div>
+        <div class="next-target-note">حتى ١٢:٣٠ ص</div>
       </div>
     </div>
 
-    <!-- دوائر صغيرة محيطة (بطاقات إضافية) -->
-    <div class="orbit-circles">
-      <div class="orbit-circle circle1">
-        <div class="orbit-value" id="elapsedDays">0</div>
-        <div>يوماً</div>
+    <!-- بطاقات الوقت المنقضي (مقسمة) -->
+    <div class="elapsed-cards">
+      <div class="elapsed-card">
+        <span class="card-value" id="elapsedDays">0</span>
+        <span class="card-label">أيام</span>
       </div>
-      <div class="orbit-circle circle2">
-        <div class="orbit-value" id="elapsedHours">00</div>
-        <div>ساعة</div>
+      <div class="elapsed-card">
+        <span class="card-value" id="elapsedHours">00</span>
+        <span class="card-label">ساعات</span>
       </div>
-      <div class="orbit-circle circle3">
-        <div class="orbit-value" id="elapsedMinutes">00</div>
-        <div>دقيقة</div>
+      <div class="elapsed-card">
+        <span class="card-value" id="elapsedMinutes">00</span>
+        <span class="card-label">دقائق</span>
       </div>
-      <div class="orbit-circle circle4">
-        <div class="orbit-value" id="elapsedSeconds">00</div>
-        <div>ثانية</div>
+      <div class="elapsed-card">
+        <span class="card-value" id="elapsedSeconds">00</span>
+        <span class="card-label">ثواني</span>
       </div>
-      <div class="orbit-circle circle5">
-        <div class="orbit-value" id="startDateText">١٤ فبراير</div>
-        <div>البداية</div>
+      <div class="elapsed-card start-card">
+        <span class="card-value" id="startDateDisplay">١٤ فبراير</span>
+        <span class="card-label">البداية</span>
       </div>
     </div>
 
-    <!-- الشريط السفلي الموحد (فكرة الشريط) -->
-    <div class="info-strip">
-      <div class="strip-item">
-        <span class="label">⏱️ منقضي</span>
-        <span class="value" id="elapsedStrip">0d 00:00:00</span>
+    <!-- الشريط السفلي (المنقضي الكلي + تاريخ البدء الكامل + تذكير) -->
+    <div class="footer-strip">
+      <div class="footer-item">
+        <span class="footer-label">⏳ المنقضي كلياً</span>
+        <span class="footer-value" id="elapsedTotal">0d 00:00:00</span>
       </div>
-      <div class="strip-item">
-        <span class="label">📅 بدأ</span>
-        <span class="value">١٤ فبراير ٢٠٢٦، ١٢:٣٠ ص</span>
+      <div class="footer-item">
+        <span class="footer-label">📅 بدأ في</span>
+        <span class="footer-value" style="-webkit-text-fill-color: #b2f0e8;">١٤ فبراير ٢٠٢٦، ١٢:٣٠ ص</span>
       </div>
-      <div class="badge">
-        <span>➕ كل ٢٤ ساعة يزداد الستريك</span>
+      <div class="reminder-badge">
+        ✦ يزداد الستريك كل ٢٤ ساعة عند ١٢:٣٠ ص ✦
       </div>
     </div>
+
+    <div class="note">جميع الحسابات من وقت جهازك المحلي</div>
   </div>
 
   <script>
     (function() {
-      // تاريخ البدء: 14 فبراير 2026، 00:30 (التوقيت المحلي)
+      // تاريخ البدث: 14 فبراير 2026، 00:30 (التوقيت المحلي)
       const startDate = new Date(2026, 1, 14, 0, 30, 0); // شهر 1 = فبراير
 
-      // عناصر العرض
+      // عناصر العد التنازلي
       const countdownEl = document.getElementById('countdownDisplay');
-      const streakNumberEl = document.getElementById('streakNumber');
-      
-      // عناصر الدوائر الصغيرة
+      const streakEl = document.getElementById('streakNumber');
+
+      // عناصر البطاقات
       const elapsedDaysEl = document.getElementById('elapsedDays');
       const elapsedHoursEl = document.getElementById('elapsedHours');
       const elapsedMinutesEl = document.getElementById('elapsedMinutes');
       const elapsedSecondsEl = document.getElementById('elapsedSeconds');
-      const startDateTextEl = document.getElementById('startDateText');
+      const startDateDisplay = document.getElementById('startDateDisplay');
       
       // عنصر الشريط
-      const elapsedStripEl = document.getElementById('elapsedStrip');
+      const elapsedTotalEl = document.getElementById('elapsedTotal');
 
-      // تنسيق التاريخ العربي
-      startDateTextEl.innerText = '١٤ فبراير';
+      // تثبيت تاريخ البدء بالعربية
+      startDateDisplay.innerText = '١٤ فبراير';
 
-      // دوال المساعدة
+      // دالة padding
       const pad = (n) => (n < 10 ? '0' : '') + n;
 
-      // حساب عدد الستريك (عدد مرات 12:30 ص التي مضت)
+      // حساب الستريك (عدد مرات 12:30 ص التي مضت)
       function computeStreak(now, start) {
         if (now < start) return 0;
         let lastHalf = new Date(now);
@@ -437,49 +351,14 @@
         if (lastHalf < start) return 0;
         const startUTC = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate());
         const lastUTC = Date.UTC(lastHalf.getFullYear(), lastHalf.getMonth(), lastHalf.getDate());
-        const dayDiff = Math.round((lastUTC - startUTC) / 86400000);
-        return dayDiff;
+        return Math.round((lastUTC - startUTC) / 86400000);
       }
 
-      // تنسيق الوقت المنقضي مقسم (للدوائر الصغيرة)
-      function updateSmallCircles(now) {
-        const diffMs = now - startDate;
-        if (diffMs < 0) {
-          elapsedDaysEl.innerText = '0';
-          elapsedHoursEl.innerText = '00';
-          elapsedMinutesEl.innerText = '00';
-          elapsedSecondsEl.innerText = '00';
-          return;
-        }
-        const totalSeconds = Math.floor(diffMs / 1000);
-        const days = Math.floor(totalSeconds / 86400);
-        const hours = Math.floor((totalSeconds % 86400) / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
+      // تحديث جميع القيم
+      function updateAll() {
+        const now = new Date();
 
-        elapsedDaysEl.innerText = days;
-        elapsedHoursEl.innerText = pad(hours);
-        elapsedMinutesEl.innerText = pad(minutes);
-        elapsedSecondsEl.innerText = pad(seconds);
-      }
-
-      // تنسيق الشريط الموحد
-      function updateStrip(now) {
-        const diffMs = now - startDate;
-        if (diffMs < 0) {
-          elapsedStripEl.innerText = '0d 00:00:00';
-          return;
-        }
-        const totalSeconds = Math.floor(diffMs / 1000);
-        const days = Math.floor(totalSeconds / 86400);
-        const hours = Math.floor((totalSeconds % 86400) / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
-        elapsedStripEl.innerText = `${days}d ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-      }
-
-      // تحديث العد التنازلي
-      function updateCountdown(now) {
+        // العد التنازلي لأقرب 12:30 ص
         let nextTarget;
         if (now < startDate) {
           nextTarget = new Date(startDate);
@@ -490,43 +369,51 @@
             nextTarget.setDate(nextTarget.getDate() + 1);
           }
         }
-        const diffMs = nextTarget - now;
-        const totalSeconds = Math.floor(diffMs / 1000);
-        const hours = Math.floor(totalSeconds / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
-        countdownEl.innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-      }
+        const cdMs = nextTarget - now;
+        const cdSec = Math.floor(cdMs / 1000);
+        const cdHours = Math.floor(cdSec / 3600);
+        const cdMins = Math.floor((cdSec % 3600) / 60);
+        const cdSecs = cdSec % 60;
+        countdownEl.innerText = `${pad(cdHours)}:${pad(cdMins)}:${pad(cdSecs)}`;
 
-      // التحديث الشامل
-      function updateAll() {
-        const now = new Date();
+        // الستريك
+        streakEl.innerText = computeStreak(now, startDate);
 
-        // العد التنازلي
-        updateCountdown(now);
+        // الوقت المنقضي
+        const diffMs = now - startDate;
+        if (diffMs < 0) {
+          elapsedDaysEl.innerText = '0';
+          elapsedHoursEl.innerText = '00';
+          elapsedMinutesEl.innerText = '00';
+          elapsedSecondsEl.innerText = '00';
+          elapsedTotalEl.innerText = '0d 00:00:00';
+        } else {
+          const totalSec = Math.floor(diffMs / 1000);
+          const days = Math.floor(totalSec / 86400);
+          const hours = Math.floor((totalSec % 86400) / 3600);
+          const mins = Math.floor((totalSec % 3600) / 60);
+          const secs = totalSec % 60;
 
-        // الستريك (داخل الدائرة)
-        const streak = computeStreak(now, startDate);
-        streakNumberEl.innerText = streak;
+          elapsedDaysEl.innerText = days;
+          elapsedHoursEl.innerText = pad(hours);
+          elapsedMinutesEl.innerText = pad(mins);
+          elapsedSecondsEl.innerText = pad(secs);
+          elapsedTotalEl.innerText = `${days}d ${pad(hours)}:${pad(mins)}:${pad(secs)}`;
+        }
 
-        // الدوائر الصغيرة (الوقت المنقضي مقسم)
-        updateSmallCircles(now);
-
-        // الشريط السفلي (الوقت المنقضي كامل)
-        updateStrip(now);
-
-        requestAnimationFrame(() => {
-          setTimeout(updateAll, 1000);
-        });
+        // التكرار بعد ثانية
+        requestAnimationFrame(() => setTimeout(updateAll, 1000));
       }
 
       updateAll();
 
-      // حركة إضافية: تأثير الماوس على الخلفية
-      document.addEventListener('mousemove', (e) => {
-        const x = (e.clientX / window.innerWidth) * 100;
-        const y = (e.clientY / window.innerHeight) * 100;
-        document.body.style.background = `radial-gradient(circle at ${x}% ${y}%, #0f2a30, #02090c)`;
+      // تأثير حركة للخلفية حسب اللمس (تجربة تفاعلية)
+      document.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const x = (touch.clientX / window.innerWidth) * 100;
+        const y = (touch.clientY / window.innerHeight) * 100;
+        document.documentElement.style.setProperty('--x', x + '%');
+        document.documentElement.style.setProperty('--y', y + '%');
       });
     })();
   </script>
