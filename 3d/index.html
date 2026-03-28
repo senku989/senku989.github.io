@@ -7,8 +7,10 @@
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <style>
-        :root {
-            --primary: #ff3366;
+        :root { --primary: #ff3366; }
+        * {
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
             margin: 0;
@@ -18,177 +20,149 @@
             color: white;
             text-align: center;
             transition: background-color 0.4s ease;
+            overflow-x: hidden;
         }
         body.light {
             background-color: #f5f5f5;
             color: #111111;
         }
-        body.light model-viewer {
-            box-shadow: 0 0 40px rgba(255, 51, 102, 0.25);
-        }
-        
-        /* Top Bar */
+
+        /* Top Bar - تطبيق أندرويد */
         .top-bar {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background: rgba(10,10,10,0.95);
-            backdrop-filter: blur(10px);
+            top: 0; left: 0; right: 0;
+            height: 64px;
+            background: rgba(10,10,10,0.98);
+            backdrop-filter: blur(12px);
             display: flex;
             align-items: center;
             justify-content: flex-end;
             padding: 0 20px;
-            z-index: 100;
-            gap: 20px;
-            border-bottom: 1px solid rgba(255,51,102,0.2);
+            z-index: 1000;
+            gap: 24px;
+            border-bottom: 1px solid rgba(255,51,102,0.15);
         }
-        body.light .top-bar {
-            background: rgba(245,245,245,0.95);
-            border-bottom: 1px solid rgba(255,51,102,0.2);
-        }
+        body.light .top-bar { background: rgba(245,245,245,0.98); }
 
-        /* Switches */
+        /* Toggle Switch - أنيميشن حقيقي (يسار رمادي ← يمين أخضر) */
         .toggle-switch {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             cursor: pointer;
-            user-select: none;
         }
         .switch-track {
-            width: 52px;
-            height: 28px;
-            background: #333;
-            border-radius: 50px;
+            width: 56px;
+            height: 32px;
+            background: #3a3a3a;
+            border-radius: 9999px;
             position: relative;
-            transition: all 0.3s;
+            transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        body.light .switch-track {
-            background: #ddd;
-        }
-        .switch-track::after {
-            content: '';
+        body.light .switch-track { background: #c8c8c8; }
+        .switch-knob {
             position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 22px;
-            height: 22px;
+            top: 4px; left: 4px;
+            width: 24px; height: 24px;
             background: #fff;
             border-radius: 50%;
-            transition: all 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .toggle-switch.active .switch-track {
-            background: #00cc66;
-        }
-        .toggle-switch.active .switch-track::after {
-            transform: translateX(24px);
-        }
+        .toggle-switch.active .switch-track { background: #00cc66; }
+        .toggle-switch.active .switch-knob { transform: translateX(24px); }
+
         .switch-label {
-            font-size: 0.95em;
+            font-size: 1em;
             font-weight: 600;
         }
 
         h1 {
-            margin: 80px 20px 8px;
-            font-size: 2.6em;
+            margin: 88px 20px 8px;
+            font-size: 2.7em;
             color: var(--primary);
         }
-        body.light h1 {
-            color: #d9224f;
-        }
+        body.light h1 { color: #d9224f; }
         .subtitle {
-            font-size: 1.2em;
+            font-size: 1.25em;
             color: #ff6699;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
-        body.light .subtitle {
-            color: #e6337a;
-        }
+        body.light .subtitle { color: #e6337a; }
 
         model-viewer {
             width: 100%;
             max-width: 920px;
             height: 65vh;
-            border-radius: 20px;
-            box-shadow: 0 0 45px rgba(255, 51, 102, 0.35);
-            margin: 0 auto 20px;
+            border-radius: 24px;
+            box-shadow: 0 0 50px rgba(255,51,102,0.4);
+            margin: 0 auto 25px;
             transition: background-color 0.4s ease;
         }
 
-        /* Controls Container - منظم جدًا */
+        /* Controls - تنظيم أندرويدي مثالي */
         .controls-container {
-            max-width: 860px;
+            max-width: 880px;
             margin: 0 auto 30px;
             padding: 0 20px;
         }
         .control-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 14px;
             justify-content: center;
             align-items: center;
-            margin-bottom: 18px;
-        }
-        .control-row:last-child {
-            margin-bottom: 0;
+            margin-bottom: 22px;
         }
 
         button {
-            padding: 13px 26px;
+            padding: 14px 28px;
             background: #222;
             color: white;
             border: none;
-            border-radius: 50px;
+            border-radius: 9999px;
             cursor: pointer;
-            font-size: 1.05em;
+            font-size: 1.08em;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
         }
         body.light button {
             background: #fff;
             color: #111;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
         }
-        button:hover {
+        button:hover, button:active {
             background: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255,51,102,0.4);
+            transform: translateY(-2px);
         }
+        button:focus { outline: none; }
 
-        /* Color buttons */
-        .bg-btn {
-            min-width: 110px;
-        }
+        .bg-btn { min-width: 118px; }
 
-        /* Auto Rotate Switch - منفصل وبارز */
+        /* Auto Rotate - منفصل تمامًا */
         .auto-rotate-container {
             background: #1f1f1f;
-            border-radius: 50px;
-            padding: 10px 24px;
+            border-radius: 9999px;
+            padding: 12px 28px;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        body.light .auto-rotate-container {
-            background: #eee;
-        }
-
-        /* Interactive Text Effect */
-        .interactive-text {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            gap: 14px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
             cursor: pointer;
-            padding: 2px 6px;
-            border-radius: 4px;
+        }
+        body.light .auto-rotate-container { background: #eee; }
+
+        /* Neon Text Effect - فقط إضاءة نيون بدون تكبير */
+        .interactive-text {
+            transition: text-shadow 0.3s ease;
+            padding: 4px 8px;
+            border-radius: 6px;
         }
         .interactive-text.active {
-            transform: scale(1.08);
             text-shadow: 
-                0 0 12px var(--primary),
-                0 0 24px var(--primary),
-                0 0 36px var(--primary);
+                0 0 10px var(--primary),
+                0 0 20px var(--primary),
+                0 0 30px var(--primary);
         }
 
         /* Modal */
@@ -196,55 +170,43 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.75);
+            background: rgba(0,0,0,0.8);
             align-items: center;
             justify-content: center;
             z-index: 2000;
         }
-        .modal.show {
-            display: flex;
-        }
+        .modal.show { display: flex; }
         .modal-content {
             background: #1f1f1f;
-            padding: 28px 32px;
-            border-radius: 24px;
+            padding: 30px 34px;
+            border-radius: 28px;
             max-width: 360px;
             width: 90%;
-            box-shadow: 0 0 40px rgba(255,51,102,0.5);
-            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 45px rgba(255,51,102,0.6);
+            animation: modalPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        body.light .modal-content {
-            background: #fff;
-            color: #111;
-        }
-        .modal-content h2 {
-            color: var(--primary);
-            margin: 0 0 16px;
-        }
+        body.light .modal-content { background: #fff; color: #111; }
         .close {
             position: absolute;
-            top: 16px;
-            right: 22px;
-            font-size: 32px;
-            color: #888;
+            top: 18px;
+            right: 24px;
+            font-size: 34px;
             cursor: pointer;
-        }
-        body.light .close {
-            color: #666;
         }
 
         @keyframes modalPop {
-            0% { transform: scale(0.6) translateY(40px); opacity: 0; }
+            0% { transform: scale(0.7) translateY(40px); opacity: 0; }
             100% { transform: scale(1) translateY(0); opacity: 1; }
         }
 
-        /* Footer */
+        /* Footer - زوايا مدورة */
         footer {
-            margin-top: 40px;
-            padding: 25px 20px;
+            margin-top: 50px;
+            padding: 28px 20px 35px;
             background: #111;
             color: #aaa;
-            font-size: 0.95em;
+            font-size: 0.98em;
+            border-radius: 28px 28px 0 0;
         }
         body.light footer {
             background: #eee;
@@ -259,14 +221,14 @@
         <!-- Theme Switch -->
         <div class="toggle-switch" id="theme-toggle">
             <span class="material-symbols-outlined" id="theme-icon">dark_mode</span>
-            <div class="switch-track" id="theme-track"></div>
+            <div class="switch-track"><div class="switch-knob" id="theme-knob"></div></div>
             <span class="switch-label" id="theme-label">داكن</span>
         </div>
 
         <!-- Language Switch -->
         <div class="toggle-switch" id="lang-toggle">
             <span class="material-symbols-outlined">language</span>
-            <div class="switch-track" id="lang-track"></div>
+            <div class="switch-track"><div class="switch-knob" id="lang-knob"></div></div>
             <span class="switch-label" id="lang-label">عربي</span>
         </div>
     </div>
@@ -279,7 +241,7 @@
         alt="ريو ريبر من غاتشياكوتا" 
         camera-controls 
         auto-rotate 
-        shadow-intensity="2" 
+        shadow-intensity="2.2" 
         exposure="0.95"
         environment-intensity="1.3"
         ar 
@@ -287,34 +249,27 @@
         camera-orbit="45deg 75deg 3m"
         style="background-color: #1a1a1a;">
 
-        <!-- Hotspots (4 نقاط: 2 يسار + 2 يمين) -->
-        <button slot="hotspot-left1" class="hotspot" data-position="-0.65m 1.05m 0.1m" data-normal="0 1 0">
-            <span class="material-symbols-outlined" style="font-size:22px">local_fire_department</span>
+        <!-- Hotspots - 2 يسار + 2 يمين (مواقع دقيقة) -->
+        <button slot="hotspot-left1" class="hotspot" data-position="-0.72m 1.15m 0.25m" data-normal="0 1 0">
+            <span class="material-symbols-outlined" style="font-size:26px">local_fire_department</span>
         </button>
-        <button slot="hotspot-left2" class="hotspot" data-position="-0.55m 0.45m -0.15m" data-normal="0 1 0">
-            <span class="material-symbols-outlined" style="font-size:22px">auto_awesome</span>
+        <button slot="hotspot-left2" class="hotspot" data-position="-0.65m 0.48m 0.35m" data-normal="0 1 0">
+            <span class="material-symbols-outlined" style="font-size:26px">auto_awesome</span>
         </button>
-        <button slot="hotspot-right1" class="hotspot" data-position="0.65m 1.05m 0.1m" data-normal="0 1 0">
-            <span class="material-symbols-outlined" style="font-size:22px">content_cut</span>
+        <button slot="hotspot-right1" class="hotspot" data-position="0.72m 1.15m 0.25m" data-normal="0 1 0">
+            <span class="material-symbols-outlined" style="font-size:26px">content_cut</span>
         </button>
-        <button slot="hotspot-right2" class="hotspot" data-position="0.55m 0.45m 0.2m" data-normal="0 1 0">
-            <span class="material-symbols-outlined" style="font-size:22px">checkroom</span>
+        <button slot="hotspot-right2" class="hotspot" data-position="0.65m 0.48m 0.35m" data-normal="0 1 0">
+            <span class="material-symbols-outlined" style="font-size:26px">checkroom</span>
         </button>
     </model-viewer>
 
     <div class="controls-container">
-
-        <!-- Row 1: Camera + Screenshot -->
         <div class="control-row">
-            <button onclick="resetCamera()" id="btn-full-pose">
-                وضعية كاملة
-            </button>
-            <button onclick="downloadScreenshot()" id="btn-screenshot" style="background:var(--primary);">
-                تحميل الوضعية الحالية
-            </button>
+            <button onclick="resetCamera()" id="btn-full-pose">وضعية كاملة</button>
+            <button onclick="downloadScreenshot()" id="btn-screenshot" style="background:var(--primary);">تحميل الوضعية الحالية</button>
         </div>
 
-        <!-- Row 2: Background Colors -->
         <div class="control-row" id="bg-buttons">
             <button onclick="setBackground('#1a1a1a', 'عادية')" class="bg-btn">عادية</button>
             <button onclick="setBackground('#3a0a1a', 'حمراء درامية')" class="bg-btn" style="background:#3a0a1a;color:white;">حمراء درامية</button>
@@ -323,18 +278,17 @@
             <button onclick="setBackground('#0a2a1a', 'نيون سيان')" class="bg-btn" style="background:#0a2a1a;color:white;">نيون سيان</button>
         </div>
 
-        <!-- Row 3: Auto Rotate Switch (منفصل وبارز) -->
+        <!-- Auto Rotate Switch - منفصل تمامًا -->
         <div class="control-row">
             <div class="auto-rotate-container" id="auto-container" onclick="toggleAutoRotate()">
                 <span class="material-symbols-outlined">rotate_right</span>
                 <span id="auto-label" class="switch-label">تدوير تلقائي: مفعل</span>
-                <div class="switch-track" id="auto-track"></div>
+                <div class="switch-track"><div class="switch-knob" id="auto-knob"></div></div>
             </div>
         </div>
-
     </div>
 
-    <p id="info-text" class="interactive-text" style="max-width:700px;margin:0 auto 40px;padding:0 20px;line-height:1.8;font-size:1.05em;">
+    <p id="info-text" class="interactive-text" style="max-width:720px;margin:0 auto 45px;padding:0 20px;line-height:1.85;font-size:1.07em;">
         اسحب الشخصية بحرية • اضغط على النقاط العائمة لمعلومات • جرب الواقع المعزز على الجوال
     </p>
 
@@ -360,38 +314,30 @@
         let autoRotateEnabled = true;
 
         // Cookie functions
-        function setCookie(name, value, days = 30) {
+        function setCookie(name, value, days = 365) {
             const date = new Date();
             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            document.cookie = `\( {name}= \){value};expires=${date.toUTCString()};path=/`;
+            document.cookie = `\( {name}= \){encodeURIComponent(value)};expires=${date.toUTCString()};path=/`;
         }
         function getCookie(name) {
             const cookies = document.cookie.split(';');
-            for (let cookie of cookies) {
-                const [key, val] = cookie.trim().split('=');
-                if (key === name) return val;
+            for (let c of cookies) {
+                const [key, val] = c.trim().split('=');
+                if (key === name) return decodeURIComponent(val);
             }
             return null;
         }
 
         // Translations
         const translations = {
-            ar: {
-                title: "ريو ريبر",
-                subtitle: "ريو ريبر • عضو في فريق المنظفين • مانجا غاتشياكوتا",
-                fullPose: "وضعية كاملة",
-                screenshot: "تحميل الوضعية الحالية",
-                bgNeutral: "عادية",
-                bgRed: "حمراء درامية",
-                bgPurple: "بنفسجية أنمي",
-                bgDarkPit: "بيت مظلم",
-                bgNeon: "نيون سيان",
-                autoOn: "تدوير تلقائي: مفعل",
-                autoOff: "تدوير تلقائي: معطل",
+            ar: { /* ... نفس الترجمات السابقة مع تعديل بسيط ... */ 
+                title: "ريو ريبر", subtitle: "ريو ريبر • عضو في فريق المنظفين • مانجا غاتشياكوتا",
+                fullPose: "وضعية كاملة", screenshot: "تحميل الوضعية الحالية",
+                bgNeutral: "عادية", bgRed: "حمراء درامية", bgPurple: "بنفسجية أنمي",
+                bgDarkPit: "بيت مظلم", bgNeon: "نيون سيان",
+                autoOn: "تدوير تلقائي: مفعل", autoOff: "تدوير تلقائي: معطل",
                 infoText: "اسحب الشخصية بحرية • اضغط على النقاط العائمة لمعلومات • جرب الواقع المعزز على الجوال",
-                themeDark: "داكن",
-                themeLight: "فاتح",
-                langLabel: "عربي",
+                themeDark: "داكن", themeLight: "فاتح", langLabel: "عربي",
                 footer: "© أمجد الكلبـاني ٢٠٢٦ | جميع الحقوق محفوظة",
                 modalHair: { title: "شعر ريو", text: "شعر ريو المتطاير زي اللهب 🔥<br>أشهر ما يميزها في المانجا!" },
                 modalPlayful: { title: "الطفولية", text: "طفولية ومرحة… لكن في القتال تصبح براغماتية مرعبة!" },
@@ -399,21 +345,13 @@
                 modalStyle: { title: "الستايل", text: "ستايل المنظفين الجريء<br>جاكيت + حزام + حقيبة حمراء" }
             },
             en: {
-                title: "Riyo Reaper",
-                subtitle: "Riyo Reaper • Member of the Cleaners Team • Gachiakuta Manga",
-                fullPose: "Full Body Pose",
-                screenshot: "Download Current Pose",
-                bgNeutral: "Neutral",
-                bgRed: "Dramatic Red",
-                bgPurple: "Anime Purple",
-                bgDarkPit: "Dark Pit",
-                bgNeon: "Neon Cyan",
-                autoOn: "Auto Rotate: ON",
-                autoOff: "Auto Rotate: OFF",
+                title: "Riyo Reaper", subtitle: "Riyo Reaper • Member of the Cleaners Team • Gachiakuta Manga",
+                fullPose: "Full Body Pose", screenshot: "Download Current Pose",
+                bgNeutral: "Neutral", bgRed: "Dramatic Red", bgPurple: "Anime Purple",
+                bgDarkPit: "Dark Pit", bgNeon: "Neon Cyan",
+                autoOn: "Auto Rotate: ON", autoOff: "Auto Rotate: OFF",
                 infoText: "Drag the character freely • Tap floating points for info • Try AR on mobile",
-                themeDark: "Dark",
-                themeLight: "Light",
-                langLabel: "English",
+                themeDark: "Dark", themeLight: "Light", langLabel: "English",
                 footer: "© Amjad Al Kalbani 2026 | All Rights Reserved",
                 modalHair: { title: "Riyo's Hair", text: "Riyo's flowing red hair like flames 🔥<br>Her most iconic feature!" },
                 modalPlayful: { title: "Playful Side", text: "Playful and childish… but deadly serious in battle!" },
@@ -422,20 +360,21 @@
             }
         };
 
-        // Apply language
         function applyLanguage(lang) {
             currentLang = lang;
             const t = translations[lang];
             document.documentElement.lang = lang;
             document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-            
+
             document.getElementById('page-title').textContent = t.title;
             document.getElementById('page-subtitle').textContent = t.subtitle;
             document.getElementById('btn-full-pose').textContent = t.fullPose;
             document.getElementById('btn-screenshot').textContent = t.screenshot;
             document.getElementById('info-text').innerHTML = t.infoText;
             document.getElementById('footer-text').textContent = t.footer;
-            
+            document.getElementById('lang-label').textContent = t.langLabel;
+            document.getElementById('theme-label').textContent = currentTheme === 'dark' ? t.themeDark : t.themeLight;
+
             // Background buttons
             const bgBtns = document.querySelectorAll('#bg-buttons button');
             bgBtns[0].textContent = t.bgNeutral;
@@ -443,33 +382,18 @@
             bgBtns[2].textContent = t.bgPurple;
             bgBtns[3].textContent = t.bgDarkPit;
             bgBtns[4].textContent = t.bgNeon;
-            
-            // Auto label
+
             document.getElementById('auto-label').textContent = autoRotateEnabled ? t.autoOn : t.autoOff;
-            
-            // Theme label
-            document.getElementById('theme-label').textContent = currentTheme === 'dark' ? t.themeDark : t.themeLight;
-            document.getElementById('lang-label').textContent = t.langLabel;
         }
 
-        // Apply theme
         function applyTheme(theme) {
             currentTheme = theme;
-            if (theme === 'light') {
-                document.body.classList.add('light');
-                document.getElementById('theme-icon').textContent = 'light_mode';
-            } else {
-                document.body.classList.remove('light');
-                document.getElementById('theme-icon').textContent = 'dark_mode';
-            }
+            const isLight = theme === 'light';
+            document.body.classList.toggle('light', isLight);
+            document.getElementById('theme-icon').textContent = isLight ? 'light_mode' : 'dark_mode';
         }
 
-        // Reset camera
-        function resetCamera() {
-            modelViewer.cameraOrbit = "45deg 75deg 3m";
-        }
-
-        // Download current pose as PNG
+        function resetCamera() { modelViewer.cameraOrbit = "45deg 75deg 3m"; }
         function downloadScreenshot() {
             const dataUrl = modelViewer.toDataURL('image/png');
             const link = document.createElement('a');
@@ -478,31 +402,19 @@
             link.click();
         }
 
-        // Change background
-        function setBackground(color, name) {
+        function setBackground(color) {
             currentBgColor = color;
             modelViewer.style.backgroundColor = color;
-            if (name.includes('حمراء') || name === 'Dramatic Red') {
-                modelViewer.environmentIntensity = 1.8; modelViewer.exposure = 1.15;
-            } else if (name.includes('بيت') || name === 'Dark Pit') {
-                modelViewer.environmentIntensity = 0.55; modelViewer.exposure = 0.65;
-            } else if (name.includes('نيون') || name === 'Neon Cyan') {
-                modelViewer.environmentIntensity = 1.4; modelViewer.exposure = 1.05;
-            } else {
-                modelViewer.environmentIntensity = 1.3; modelViewer.exposure = 0.95;
-            }
         }
 
-        // Toggle auto rotate
         function toggleAutoRotate() {
             autoRotateEnabled = !autoRotateEnabled;
             modelViewer.autoRotate = autoRotateEnabled;
             const t = translations[currentLang];
             document.getElementById('auto-label').textContent = autoRotateEnabled ? t.autoOn : t.autoOff;
-            setCookie('autoRotate', autoRotateEnabled ? 'true' : 'false');
+            setCookie('autoRotate', autoRotateEnabled);
         }
 
-        // Modal
         function showModal(title, text) {
             const modal = document.getElementById('infoModal');
             document.getElementById('modalTitle').textContent = title;
@@ -513,48 +425,42 @@
             document.getElementById('infoModal').classList.remove('show');
         }
 
-        // Neon text effect
         function addNeonEffect() {
-            const texts = document.querySelectorAll('.interactive-text');
-            texts.forEach(el => {
+            document.querySelectorAll('.interactive-text').forEach(el => {
                 el.addEventListener('click', () => {
                     el.classList.toggle('active');
-                    // Auto remove after 2 seconds if not clicked again
                     if (el.classList.contains('active')) {
-                        setTimeout(() => {
-                            if (el.classList.contains('active')) el.classList.remove('active');
-                        }, 2200);
+                        setTimeout(() => el.classList.remove('active'), 2200);
                     }
                 });
             });
         }
 
-        // Load all settings from cookies
         function loadSettings() {
-            const savedLang = getCookie('language') || 'ar';
-            const savedTheme = getCookie('theme') || 'dark';
-            const savedAuto = getCookie('autoRotate');
-            
-            currentLang = savedLang;
-            currentTheme = savedTheme;
-            autoRotateEnabled = savedAuto !== 'false';
-            
-            applyLanguage(savedLang);
-            applyTheme(savedTheme);
+            currentLang = getCookie('language') || 'ar';
+            currentTheme = getCookie('theme') || 'dark';
+            autoRotateEnabled = getCookie('autoRotate') !== 'false';
+
+            applyLanguage(currentLang);
+            applyTheme(currentTheme);
             modelViewer.autoRotate = autoRotateEnabled;
-            
-            // Hotspots modal listeners
+
+            // Hotspots (الآن تعمل 100%)
+            const t = translations[currentLang];
             const hotspotsData = {
-                hotspot_left1: translations[currentLang].modalHair,
-                hotspot_left2: translations[currentLang].modalPlayful,
-                hotspot_right1: translations[currentLang].modalRipper,
-                hotspot_right2: translations[currentLang].modalStyle
+                'hotspot-left1': t.modalHair,
+                'hotspot-left2': t.modalPlayful,
+                'hotspot-right1': t.modalRipper,
+                'hotspot-right2': t.modalStyle
             };
-            
+
             Object.keys(hotspotsData).forEach(slot => {
                 const btn = modelViewer.querySelector(`button[slot="${slot}"]`);
                 if (btn) {
-                    btn.addEventListener('click', () => {
+                    // إزالة أي listeners قديمة
+                    const newBtn = btn.cloneNode(true);
+                    btn.parentNode.replaceChild(newBtn, btn);
+                    newBtn.addEventListener('click', () => {
                         const data = hotspotsData[slot];
                         showModal(data.title, data.text);
                     });
@@ -562,36 +468,29 @@
             });
         }
 
-        // Event listeners for switches
         function initSwitches() {
-            // Theme toggle
-            const themeToggle = document.getElementById('theme-toggle');
-            themeToggle.addEventListener('click', () => {
+            // Theme
+            document.getElementById('theme-toggle').addEventListener('click', () => {
                 const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                 applyTheme(newTheme);
                 setCookie('theme', newTheme);
             });
-            
-            // Language toggle
-            const langToggle = document.getElementById('lang-toggle');
-            langToggle.addEventListener('click', () => {
+
+            // Language
+            document.getElementById('lang-toggle').addEventListener('click', () => {
                 const newLang = currentLang === 'ar' ? 'en' : 'ar';
                 applyLanguage(newLang);
                 setCookie('language', newLang);
-                
-                // Re-attach hotspot listeners with new language
-                loadSettings();
+                loadSettings(); // إعادة تحميل النقاط والنصوص
             });
         }
 
-        // Initialize everything
         window.addEventListener('load', () => {
             loadSettings();
             initSwitches();
             addNeonEffect();
-            
-            // Click outside modal to close
-            document.getElementById('infoModal').addEventListener('click', (e) => {
+
+            document.getElementById('infoModal').addEventListener('click', e => {
                 if (e.target.id === 'infoModal') closeModal();
             });
         });
