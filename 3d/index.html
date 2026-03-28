@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ضبط نقاط ريو ريبر - أداة تفاعلية (نقاط بارزة)</title>
-    <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <style>
         body {
@@ -159,6 +159,7 @@
             exposure="1"
             camera-orbit="45deg 75deg 3m"
             style="background-color: #1a1a1a;">
+
             <!-- النقاط الافتراضية (سيتم تحديثها عبر JavaScript) -->
             <button slot="hotspot-left1" class="hotspot" style="display:none;"></button>
             <button slot="hotspot-left2" class="hotspot" style="display:none;"></button>
@@ -167,7 +168,6 @@
         </model-viewer>
 
         <div class="controls-panel">
-            <!-- كل عناصر التحكم بدون أي تغيير -->
             <div class="hotspot-control" id="control-left1">
                 <h3>📍 النقطة اليسرى 1 (شعر/كتف)</h3>
                 <div class="coord-group">
@@ -239,10 +239,10 @@
     </footer>
 
     <script type="module">
-        import '@google/model-viewer';
 
         const viewer = document.getElementById('viewer');
         
+        // الإحداثيات الافتراضية الجديدة (في وسط النموذج)
         const defaultPositions = {
             left1: { x: -0.35, y: 1.10, z: 0.30 },
             left2: { x: -0.30, y: 0.55, z: 0.35 },
@@ -250,6 +250,7 @@
             right2: { x: 0.30, y: 0.55, z: 0.35 }
         };
 
+        // عناصر الإدخال
         const inputs = {
             left1: { x: document.getElementById('left1-x'), y: document.getElementById('left1-y'), z: document.getElementById('left1-z') },
             left2: { x: document.getElementById('left2-x'), y: document.getElementById('left2-y'), z: document.getElementById('left2-z') },
@@ -257,6 +258,7 @@
             right2: { x: document.getElementById('right2-x'), y: document.getElementById('right2-y'), z: document.getElementById('right2-z') }
         };
 
+        // عناصر العرض النصي
         const displays = {
             left1: document.getElementById('left1-display'),
             left2: document.getElementById('left2-display'),
@@ -264,21 +266,20 @@
             right2: document.getElementById('right2-display')
         };
 
+        // تحديث النقطة في model-viewer (إعادة إنشاء الزر مع السمة data-position)
         function updateHotspot(slot, x, y, z) {
             let btn = viewer.querySelector(`button[slot="${slot}"]`);
             if (!btn) {
                 btn = document.createElement('button');
                 btn.setAttribute('slot', slot);
                 btn.className = 'hotspot';
+                // إضافة أيقونة مميزة (يمكن تغييرها لاحقاً)
                 btn.innerHTML = '<span class="material-symbols-outlined" style="font-size:26px">info</span>';
                 viewer.appendChild(btn);
             }
-            btn.removeAttribute('data-position'); // مهم لإعادة التعيين
-            requestAnimationFrame(() => {
-                btn.setAttribute('data-position', `${x}m ${y}m ${z}m`);
-                btn.setAttribute('data-normal', '0 1 0');
-                btn.style.display = 'flex';
-            });
+            btn.setAttribute('data-position', `${x}m ${y}m ${z}m`);
+            btn.setAttribute('data-normal', '0 1 0');
+            btn.style.display = 'flex'; // إظهار الزر
         }
 
         function updateAllHotspots() {
@@ -379,11 +380,8 @@
             document.getElementById('resetAllBtn').addEventListener('click', resetAll);
             document.getElementById('copyAllBtn').addEventListener('click', copyAllCoordinates);
             
-            // ننتظر حتى يتم تحميل الموديل بالكامل قبل عرض النقاط
-            viewer.addEventListener('load', () => {
-                updateAllHotspots();
-            });
-
+            updateAllHotspots();
+            
             // إضافة أيقونات Material Icons إن لم تكن موجودة
             if (!document.querySelector('link[href*="material-symbols"]')) {
                 const link = document.createElement('link');
