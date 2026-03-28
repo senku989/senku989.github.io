@@ -3,120 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ضبط نقاط ريو ريبر - النسخة المصححة</title>
+    <title>أداة ضبط النقاط الأربعة - كاملة ومصححة</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <style>
-        body { margin: 0; padding: 20px; font-family: Arial, sans-serif; background: #1a1a1a; color: white; direction: rtl; }
-        h1 { text-align: center; color: #ff3366; }
-        .container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-        model-viewer { flex: 2; min-width: 600px; height: 70vh; background: #2a2a2a; border-radius: 16px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
-        .controls-panel { flex: 1; min-width: 280px; background: #2a2a2a; border-radius: 16px; padding: 20px; overflow-y: auto; max-height: 70vh; }
-        .hotspot-control { background: #3a3a3a; margin-bottom: 20px; padding: 15px; border-radius: 12px; border-right: 4px solid #ff3366; }
-        .hotspot-control h3 { margin: 0 0 10px 0; color: #ff99bb; }
-        .coord-group { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; flex-wrap: wrap; }
-        input { width: 70px; padding: 6px; border-radius: 8px; border: none; text-align: center; background: #555; color: white; }
-        button { background: #ff3366; border: none; color: white; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
-        .reset-btn { background: #666; font-size: 0.8em; }
-        .coord-display { font-family: monospace; background: #111; padding: 8px; border-radius: 8px; margin-top: 10px; font-size: 0.9em; }
-        
-        /* تصميم النقطة العائمة */
+        body { margin: 0; padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #121212; color: white; direction: rtl; }
+        h1 { text-align: center; color: #ff3366; margin-bottom: 5px; }
+        .container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 20px; }
+        model-viewer { flex: 2; min-width: 500px; height: 75vh; background: #1e1e1e; border-radius: 15px; border: 1px solid #333; }
+        .controls-panel { flex: 1; min-width: 320px; background: #1e1e1e; border-radius: 15px; padding: 15px; max-height: 75vh; overflow-y: auto; }
+        .hotspot-card { background: #2d2d2d; padding: 12px; border-radius: 10px; margin-bottom: 15px; border-right: 5px solid #ff3366; }
+        .hotspot-card h3 { margin: 0 0 10px 0; font-size: 0.9em; color: #ff99bb; }
+        .inputs { display: flex; gap: 8px; align-items: center; }
+        .inputs label { font-size: 0.8em; color: #aaa; }
+        input { width: 60px; background: #3d3d3d; border: 1px solid #555; color: white; padding: 5px; border-radius: 5px; text-align: center; }
+        .code-output { background: #000; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 0.75em; margin-top: 10px; white-space: pre-wrap; word-break: break-all; color: #00ff88; }
+        button#copyBtn { width: 100%; padding: 12px; background: #ff3366; border: none; color: white; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        button#copyBtn:hover { background: #ff5588; }
+
+        /* ستايل النقاط داخل المودل */
         .hotspot {
-            display: flex; align-items: center; justify-content: center;
-            width: 40px; height: 40px;
-            background: #00ff88; border-radius: 50%; border: 2px solid white;
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.6); cursor: pointer;
+            width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff;
+            background: #00ff88; cursor: pointer; box-shadow: 0 0 10px rgba(0,255,136,0.8);
+            display: flex; justify-content: center; align-items: center;
         }
-        .hotspot:not([data-position]) { display: none; } /* إخفاء في حال فقدان الإحداثيات */
+        .hotspot span { font-size: 18px; color: black; font-weight: bold; pointer-events: none; }
     </style>
 </head>
 <body>
-    <h1>🔧 أداة ضبط النقاط (النسخة المصححة)</h1>
-    <p style="text-align:center;">إذا كانت النقطة مختفية، زد قيمة <strong>Z</strong> لجعلها تخرج من داخل المجسم.</p>
+
+    <h1>🔧 أداة التحكم بالنقاط الأربعة</h1>
+    <p style="text-align:center; color: #aaa;">عدّل الأرقام وستتحرك النقاط فوراً على المجسم</p>
 
     <div class="container">
-        <model-viewer id="viewer"
-            src="3d_pic.glb" 
-            camera-controls
-            auto-rotate
-            shadow-intensity="1"
-            camera-orbit="45deg 75deg 3m">
-
-            <button slot="hotspot-left1" class="hotspot" data-position="-0.4m 1.0m 0.5m" data-normal="0 1 0">
-                <span class="material-symbols-outlined">info</span>
-            </button>
-            <button slot="hotspot-left2" class="hotspot" data-position="-0.4m 0.5m 0.5m" data-normal="0 1 0">
-                <span class="material-symbols-outlined">info</span>
-            </button>
-            <button slot="hotspot-right1" class="hotspot" data-position="0.4m 1.0m 0.5m" data-normal="0 1 0">
-                <span class="material-symbols-outlined">info</span>
-            </button>
-            <button slot="hotspot-right2" class="hotspot" data-position="0.4m 0.5m 0.5m" data-normal="0 1 0">
-                <span class="material-symbols-outlined">info</span>
-            </button>
+        <model-viewer id="viewer" src="3d_pic.glb" camera-controls shadow-intensity="1" camera-orbit="0deg 75deg 3m">
+            <button slot="hotspot-1" id="hp-1" class="hotspot" data-position="-0.35m 1.1m 0.3m" data-normal="0 1 0"><span>1</span></button>
+            <button slot="hotspot-2" id="hp-2" class="hotspot" data-position="-0.3m 0.55m 0.35m" data-normal="0 1 0"><span>2</span></button>
+            <button slot="hotspot-3" id="hp-3" class="hotspot" data-position="0.35m 1.1m 0.3m" data-normal="0 1 0"><span>3</span></button>
+            <button slot="hotspot-4" id="hp-4" class="hotspot" data-position="0.3m 0.55m 0.35m" data-normal="0 1 0"><span>4</span></button>
         </model-viewer>
 
-        <div class="controls-panel">
-            <div class="hotspot-control">
-                <h3>📍 النقطة 1</h3>
-                <div class="coord-group">
-                    X: <input type="number" id="l1-x" step="0.01" value="-0.40">
-                    Y: <input type="number" id="l1-y" step="0.01" value="1.00">
-                    Z: <input type="number" id="l1-z" step="0.01" value="0.50">
-                </div>
-                <div class="coord-display" id="d1">(-0.40, 1.00, 0.50)</div>
+        <div class="controls-panel" id="controls">
             </div>
-
-            <div class="hotspot-control">
-                <h3>📍 النقطة 2</h3>
-                <div class="coord-group">
-                    X: <input type="number" id="l2-x" step="0.01" value="-0.40">
-                    Y: <input type="number" id="l2-y" step="0.01" value="0.50">
-                    Z: <input type="number" id="l2-z" step="0.01" value="0.50">
-                </div>
-                <div class="coord-display" id="d2">(-0.40, 0.50, 0.50)</div>
-            </div>
-
-            <button id="copyAllBtn" style="width:100%; background:#2c8c5a;">📋 نسخ الكود النهائي</button>
-        </div>
     </div>
 
-    <script type="module">
+    <script>
         const viewer = document.getElementById('viewer');
+        const controlsContainer = document.getElementById('controls');
+        
+        // إعدادات النقاط الأربعة
+        const points = [
+            { id: 1, label: "اليسرى 1 (شعر/كتف)", x: -0.35, y: 1.1, z: 0.3 },
+            { id: 2, label: "اليسرى 2 (يد/خصر)", x: -0.30, y: 0.55, z: 0.35 },
+            { id: 3, label: "اليمنى 1 (شعر/كتف)", x: 0.35, y: 1.1, z: 0.3 },
+            { id: 4, label: "اليمنى 2 (يد/خصر)", x: 0.30, y: 0.55, z: 0.35 }
+        ];
 
-        function updateAll() {
-            const points = [
-                {id: 'l1', slot: 'hotspot-left1', disp: 'd1'},
-                {id: 'l2', slot: 'hotspot-left2', disp: 'd2'}
-            ];
-
-            points.forEach(p => {
-                const x = document.getElementById(`${p.id}-x`).value;
-                const y = document.getElementById(`${p.id}-y`).value;
-                const z = document.getElementById(`${p.id}-z`).value;
-                
-                const btn = viewer.querySelector(`button[slot="${p.slot}"]`);
-                if(btn) {
-                    // الطريقة الصحيحة لتحديث الإحداثيات في model-viewer
-                    btn.dataset.position = `${x}m ${y}m ${z}m`;
-                    document.getElementById(p.disp).textContent = `(${x}, ${y}, ${z})`;
-                }
-            });
-        }
-
-        // إضافة مستمعات الأحداث لكل المدخلات
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('input', updateAll);
+        // إنشاء لوحة التحكم ديناميكياً
+        points.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'hotspot-card';
+            card.innerHTML = `
+                <h3>📍 نقطة ${p.id}: ${p.label}</h3>
+                <div class="inputs">
+                    <label>X</label><input type="number" step="0.05" value="${p.x}" data-point="${p.id}" data-axis="x">
+                    <label>Y</label><input type="number" step="0.05" value="${p.y}" data-point="${p.id}" data-axis="y">
+                    <label>Z</label><input type="number" step="0.05" value="${p.z}" data-point="${p.id}" data-axis="z">
+                </div>
+            `;
+            controlsContainer.appendChild(card);
         });
 
-        // زر النسخ
-        document.getElementById('copyAllBtn').onclick = () => {
-            let output = "";
-            document.querySelectorAll('.hotspot').forEach(btn => {
-                output += btn.outerHTML + "\n";
+        // إضافة زر النسخ في النهاية
+        const copyBtn = document.createElement('button');
+        copyBtn.id = "copyBtn";
+        copyBtn.innerText = "📋 نسخ الكود النهائي للنقاط";
+        controlsContainer.appendChild(copyBtn);
+
+        const outputArea = document.createElement('div');
+        outputArea.className = 'code-output';
+        outputArea.id = "finalCode";
+        controlsContainer.appendChild(outputArea);
+
+        // وظيفة التحديث الفوري
+        function updatePositions() {
+            let finalHTML = "";
+            points.forEach(p => {
+                const x = document.querySelector(`input[data-point="${p.id}"][data-axis="x"]`).value;
+                const y = document.querySelector(`input[data-point="${p.id}"][data-axis="y"]`).value;
+                const z = document.querySelector(`input[data-point="${p.id}"][data-axis="z"]`).value;
+                
+                const hotspot = document.getElementById(`hp-${p.id}`);
+                const posString = `${x}m ${y}m ${z}m`;
+                
+                // التحديث الفعلي على المودل
+                hotspot.setAttribute('data-position', posString);
+                
+                // تجهيز النص للنسخ
+                finalHTML += `<button slot="hotspot-${p.id}" data-position="${posString}" data-normal="0 1 0"></button>\n`;
             });
-            navigator.clipboard.writeText(output);
-            alert("تم نسخ كود النقاط!");
+            outputArea.innerText = finalHTML;
+        }
+
+        // استماع للتغييرات في كل المدخلات
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', updatePositions);
+        });
+
+        // تنفيذ التحديث لأول مرة عند التحميل
+        updatePositions();
+
+        // وظيفة زر النسخ
+        copyBtn.onclick = () => {
+            navigator.clipboard.writeText(outputArea.innerText);
+            alert("تم نسخ الكود بنجاح!");
         };
     </script>
 </body>
