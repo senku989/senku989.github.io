@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ضبط نقاط ريو ريبر - أداة تفاعلية</title>
+    <title>ضبط نقاط ريو ريبر - أداة تفاعلية (نقاط بارزة)</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -116,11 +117,37 @@
             model-viewer { min-width: 300px; height: 50vh; }
             .controls-panel { max-height: 50vh; }
         }
+
+        /* ---------- أنماط النقاط البارزة ---------- */
+        .hotspot {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: #00ff88 !important;
+            border-radius: 50% !important;
+            border: 3px solid white !important;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.8), 0 0 8px rgba(0,0,0,0.5) !important;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            color: black !important;
+        }
+        .hotspot:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 1) !important;
+        }
+        .hotspot span {
+            font-size: 28px !important;
+            font-weight: bold;
+            color: #111 !important;
+            text-shadow: 0 0 2px white;
+        }
     </style>
 </head>
 <body>
     <h1>🔧 أداة ضبط مواقع النقاط العائمة (Hotspots) 🔧</h1>
-    <p style="text-align:center;">حرّك النموذج بالماوس لتحديد المواقع، ثم عدّل الإحداثيات في اللوحة اليمنى حتى تظهر النقطة في المكان المطلوب على النموذج. بعد الضبط، انسخ الإحداثيات النهائية وأرسلها لي.</p>
+    <p style="text-align:center;">حرّك النموذج بالماوس لتحديد المواقع، ثم عدّل الإحداثيات في اللوحة اليمنى حتى تظهر النقطة في المكان المطلوب على النموذج. <strong>النقاط الآن خضراء بارزة ومرئية بوضوح</strong>. بعد الضبط، انسخ الإحداثيات النهائية وأرسلها لي.</p>
 
     <div class="container">
         <model-viewer id="viewer"
@@ -145,13 +172,13 @@
                 <h3>📍 النقطة اليسرى 1 (شعر/كتف)</h3>
                 <div class="coord-group">
                     <label>X:</label>
-                    <input type="number" id="left1-x" step="0.01" value="-0.72">
+                    <input type="number" id="left1-x" step="0.01" value="-0.35">
                     <label>Y:</label>
-                    <input type="number" id="left1-y" step="0.01" value="1.15">
+                    <input type="number" id="left1-y" step="0.01" value="1.10">
                     <label>Z:</label>
-                    <input type="number" id="left1-z" step="0.01" value="0.25">
+                    <input type="number" id="left1-z" step="0.01" value="0.30">
                 </div>
-                <div class="coord-display" id="left1-display">(-0.72, 1.15, 0.25)</div>
+                <div class="coord-display" id="left1-display">(-0.35, 1.10, 0.30)</div>
                 <button class="reset-btn" data-target="left1">↺ افتراضي</button>
             </div>
 
@@ -159,13 +186,13 @@
                 <h3>📍 النقطة اليسرى 2 (يد/خصر)</h3>
                 <div class="coord-group">
                     <label>X:</label>
-                    <input type="number" id="left2-x" step="0.01" value="-0.65">
+                    <input type="number" id="left2-x" step="0.01" value="-0.30">
                     <label>Y:</label>
-                    <input type="number" id="left2-y" step="0.01" value="0.48">
+                    <input type="number" id="left2-y" step="0.01" value="0.55">
                     <label>Z:</label>
                     <input type="number" id="left2-z" step="0.01" value="0.35">
                 </div>
-                <div class="coord-display" id="left2-display">(-0.65, 0.48, 0.35)</div>
+                <div class="coord-display" id="left2-display">(-0.30, 0.55, 0.35)</div>
                 <button class="reset-btn" data-target="left2">↺ افتراضي</button>
             </div>
 
@@ -173,13 +200,13 @@
                 <h3>📍 النقطة اليمنى 1 (شعر/كتف)</h3>
                 <div class="coord-group">
                     <label>X:</label>
-                    <input type="number" id="right1-x" step="0.01" value="0.72">
+                    <input type="number" id="right1-x" step="0.01" value="0.35">
                     <label>Y:</label>
-                    <input type="number" id="right1-y" step="0.01" value="1.15">
+                    <input type="number" id="right1-y" step="0.01" value="1.10">
                     <label>Z:</label>
-                    <input type="number" id="right1-z" step="0.01" value="0.25">
+                    <input type="number" id="right1-z" step="0.01" value="0.30">
                 </div>
-                <div class="coord-display" id="right1-display">(0.72, 1.15, 0.25)</div>
+                <div class="coord-display" id="right1-display">(0.35, 1.10, 0.30)</div>
                 <button class="reset-btn" data-target="right1">↺ افتراضي</button>
             </div>
 
@@ -187,13 +214,13 @@
                 <h3>📍 النقطة اليمنى 2 (يد/خصر)</h3>
                 <div class="coord-group">
                     <label>X:</label>
-                    <input type="number" id="right2-x" step="0.01" value="0.65">
+                    <input type="number" id="right2-x" step="0.01" value="0.30">
                     <label>Y:</label>
-                    <input type="number" id="right2-y" step="0.01" value="0.48">
+                    <input type="number" id="right2-y" step="0.01" value="0.55">
                     <label>Z:</label>
                     <input type="number" id="right2-z" step="0.01" value="0.35">
                 </div>
-                <div class="coord-display" id="right2-display">(0.65, 0.48, 0.35)</div>
+                <div class="coord-display" id="right2-display">(0.30, 0.55, 0.35)</div>
                 <button class="reset-btn" data-target="right2">↺ افتراضي</button>
             </div>
 
@@ -207,7 +234,7 @@
         </div>
     </div>
     <footer>
-        💡 تلميح: يمكنك تدوير النموذج وتكبيره لتحديد المواقع بدقة. <br>
+        💡 تلميح: يمكنك تدوير النموذج وتكبيره لتحديد المواقع بدقة. النقاط الآن خضراء بارزة ولا تختفي عند الحواف.<br>
         بعد التعديل، انسخ الإحداثيات من الأسفل أو من كل نقطة وأرسلها لي.
     </footer>
 
@@ -216,12 +243,12 @@
 
         const viewer = document.getElementById('viewer');
         
-        // تعريف النقاط الافتراضية
+        // الإحداثيات الافتراضية الجديدة (في وسط النموذج)
         const defaultPositions = {
-            left1: { x: -0.72, y: 1.15, z: 0.25 },
-            left2: { x: -0.65, y: 0.48, z: 0.35 },
-            right1: { x: 0.72, y: 1.15, z: 0.25 },
-            right2: { x: 0.65, y: 0.48, z: 0.35 }
+            left1: { x: -0.35, y: 1.10, z: 0.30 },
+            left2: { x: -0.30, y: 0.55, z: 0.35 },
+            right1: { x: 0.35, y: 1.10, z: 0.30 },
+            right2: { x: 0.30, y: 0.55, z: 0.35 }
         };
 
         // عناصر الإدخال
@@ -242,39 +269,32 @@
 
         // تحديث النقطة في model-viewer (إعادة إنشاء الزر مع السمة data-position)
         function updateHotspot(slot, x, y, z) {
-            // نبحث عن الزر الموجود حالياً في هذا السlot
             let btn = viewer.querySelector(`button[slot="${slot}"]`);
             if (!btn) {
-                // إذا لم يكن موجوداً، ننشئه
                 btn = document.createElement('button');
                 btn.setAttribute('slot', slot);
                 btn.className = 'hotspot';
-                // نضيف أيقونة افتراضية (يمكنك تغييرها لاحقاً)
+                // إضافة أيقونة مميزة (يمكن تغييرها لاحقاً)
                 btn.innerHTML = '<span class="material-symbols-outlined" style="font-size:26px">info</span>';
                 viewer.appendChild(btn);
             }
-            // تعيين الإحداثيات
             btn.setAttribute('data-position', `${x}m ${y}m ${z}m`);
             btn.setAttribute('data-normal', '0 1 0');
-            // جعل الزر مرئياً
-            btn.style.display = '';
+            btn.style.display = 'flex'; // إظهار الزر
         }
 
-        // دالة لتحديث جميع النقاط بناءً على القيم الحالية
         function updateAllHotspots() {
             updateHotspot('hotspot-left1', parseFloat(inputs.left1.x.value), parseFloat(inputs.left1.y.value), parseFloat(inputs.left1.z.value));
             updateHotspot('hotspot-left2', parseFloat(inputs.left2.x.value), parseFloat(inputs.left2.y.value), parseFloat(inputs.left2.z.value));
             updateHotspot('hotspot-right1', parseFloat(inputs.right1.x.value), parseFloat(inputs.right1.y.value), parseFloat(inputs.right1.z.value));
             updateHotspot('hotspot-right2', parseFloat(inputs.right2.x.value), parseFloat(inputs.right2.y.value), parseFloat(inputs.right2.z.value));
             
-            // تحديث العروض النصية
             displays.left1.textContent = `(${inputs.left1.x.value}, ${inputs.left1.y.value}, ${inputs.left1.z.value})`;
             displays.left2.textContent = `(${inputs.left2.x.value}, ${inputs.left2.y.value}, ${inputs.left2.z.value})`;
             displays.right1.textContent = `(${inputs.right1.x.value}, ${inputs.right1.y.value}, ${inputs.right1.z.value})`;
             displays.right2.textContent = `(${inputs.right2.x.value}, ${inputs.right2.y.value}, ${inputs.right2.z.value})`;
         }
 
-        // إضافة مستمعات التغيير لكل حقل إدخال
         function bindInputEvents(targetKey) {
             const { x, y, z } = inputs[targetKey];
             const update = () => updateAllHotspots();
@@ -283,7 +303,6 @@
             z.addEventListener('input', update);
         }
 
-        // إضافة مستمعات لأزرار إعادة الضبط لكل نقطة
         function bindResetButtons() {
             document.querySelectorAll('.reset-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -299,7 +318,6 @@
             });
         }
 
-        // إعادة ضبط الكل
         function resetAll() {
             for (const key of ['left1', 'left2', 'right1', 'right2']) {
                 const def = defaultPositions[key];
@@ -310,7 +328,6 @@
             updateAllHotspots();
         }
 
-        // نسخ جميع الإحداثيات بتنسيق جاهز للاستخدام في الكود الأصلي
         function copyAllCoordinates() {
             const coords = {
                 left1: { x: inputs.left1.x.value, y: inputs.left1.y.value, z: inputs.left1.z.value },
@@ -319,7 +336,6 @@
                 right2: { x: inputs.right2.x.value, y: inputs.right2.y.value, z: inputs.right2.z.value }
             };
             
-            // توليد نص HTML للنسخ
             const htmlSnippet = `
 <!-- النقاط العائمة - إحداثيات جديدة -->
 <button slot="hotspot-left1" data-position="${coords.left1.x}m ${coords.left1.y}m ${coords.left1.z}m" data-normal="0 1 0">
@@ -339,7 +355,6 @@
             const outputDiv = document.getElementById('outputArea');
             outputDiv.innerHTML = `<strong>📋 الإحداثيات الجديدة (انسخ هذه الأسطر وأرسلها لي):</strong><br><code style="display:block; margin-top:8px; background:#000; padding:8px; border-radius:6px; overflow-x:auto;">${escapeHtml(htmlSnippet)}</code>`;
             
-            // محاولة نسخ إلى الحافظة
             navigator.clipboard.writeText(htmlSnippet).then(() => {
                 alert('تم نسخ الإحداثيات إلى الحافظة! يمكنك لصقها في المحادثة.');
             }).catch(() => {
@@ -347,7 +362,6 @@
             });
         }
         
-        // دالة بسيطة لتأمين النص من XSS
         function escapeHtml(str) {
             return str.replace(/[&<>]/g, function(m) {
                 if (m === '&') return '&amp;';
@@ -359,7 +373,6 @@
             });
         }
 
-        // تهيئة جميع المستمعات
         function init() {
             for (const key of ['left1', 'left2', 'right1', 'right2']) {
                 bindInputEvents(key);
@@ -368,10 +381,9 @@
             document.getElementById('resetAllBtn').addEventListener('click', resetAll);
             document.getElementById('copyAllBtn').addEventListener('click', copyAllCoordinates);
             
-            // تطبيق الإحداثيات الافتراضية لظهور النقاط فوراً
             updateAllHotspots();
             
-            // إضافة أيقونات Material Icons (اختياري) – سنضيف الرابط في الـ head
+            // إضافة أيقونات Material Icons إن لم تكن موجودة
             if (!document.querySelector('link[href*="material-symbols"]')) {
                 const link = document.createElement('link');
                 link.rel = 'stylesheet';
