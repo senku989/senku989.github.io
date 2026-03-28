@@ -3,24 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ضبط نقاط ريو ريبر - نسخة محسنة</title>
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <title>ضبط نقاط ريو ريبر - أداة تفاعلية (نقاط بارزة)</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer@latest/dist/model-viewer.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-        }
         body {
             margin: 0;
             padding: 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0a0a0a;
-            color: #eee;
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: white;
             direction: rtl;
         }
-        h1, h2 {
-            color: #ff6699;
+        h1 {
             text-align: center;
+            color: #ff3366;
         }
         .container {
             display: flex;
@@ -29,44 +26,42 @@
             justify-content: center;
         }
         model-viewer {
-            flex: 3;
-            min-width: 500px;
+            flex: 2;
+            min-width: 600px;
             height: 70vh;
-            background: #1a1a1a;
-            border-radius: 20px;
+            background: #2a2a2a;
+            border-radius: 16px;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
-        .panel {
-            flex: 1.2;
+        .controls-panel {
+            flex: 1;
             min-width: 280px;
-            background: #1e1e1e;
-            border-radius: 20px;
+            background: #2a2a2a;
+            border-radius: 16px;
             padding: 20px;
             overflow-y: auto;
             max-height: 70vh;
         }
-        .hotspot-card {
-            background: #2c2c2c;
+        .hotspot-control {
+            background: #3a3a3a;
             margin-bottom: 20px;
             padding: 15px;
             border-radius: 12px;
-            border-right: 4px solid #ff6699;
+            border-right: 4px solid #ff3366;
         }
-        .hotspot-card h3 {
-            margin: 0 0 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .hotspot-control h3 {
+            margin: 0 0 10px 0;
+            color: #ff99bb;
         }
-        .coord-row {
+        .coord-group {
             display: flex;
-            gap: 8px;
-            margin: 10px 0;
+            gap: 10px;
+            margin-bottom: 10px;
             align-items: center;
             flex-wrap: wrap;
         }
-        .coord-row label {
-            width: 25px;
+        .coord-group label {
+            width: 30px;
             font-weight: bold;
         }
         input {
@@ -75,100 +70,85 @@
             border-radius: 8px;
             border: none;
             text-align: center;
-            background: #444;
+            background: #555;
             color: white;
         }
         button {
-            background: #ff6699;
+            background: #ff3366;
             border: none;
             color: white;
             padding: 6px 12px;
             border-radius: 8px;
             cursor: pointer;
             margin: 2px;
-            transition: 0.2s;
         }
-        button:hover {
-            background: #ff3366;
-            transform: scale(1.02);
-        }
-        .reset-btn {
-            background: #555;
+        button.reset-btn {
+            background: #666;
         }
         .coord-display {
             font-family: monospace;
             background: #111;
-            padding: 6px;
-            border-radius: 6px;
-            margin-top: 8px;
-            font-size: 0.85rem;
-            text-align: center;
-        }
-        .global-btn {
-            background: #2c8c5a;
-            width: 100%;
-            margin-top: 8px;
-        }
-        .debug-info {
-            margin-top: 20px;
-            background: #111;
-            padding: 10px;
+            padding: 8px;
             border-radius: 8px;
-            font-size: 0.8rem;
-            font-family: monospace;
-            white-space: pre-wrap;
+            margin-top: 10px;
+            font-size: 0.9em;
+            word-break: break-all;
+        }
+        .copy-btn {
+            background: #2c8c5a;
+            margin-top: 10px;
+            width: 100%;
         }
         hr {
-            border-color: #ff6699;
             margin: 20px 0;
+            border-color: #ff3366;
         }
-        .toggle-visibility {
-            background: #ffaa33;
-            color: #111;
-            margin-bottom: 15px;
+        .global-buttons {
+            margin-top: 20px;
+            text-align: center;
         }
         footer {
             text-align: center;
             margin-top: 20px;
-            font-size: 0.8rem;
             color: #aaa;
+            font-size: 0.8em;
         }
         @media (max-width: 800px) {
             model-viewer { min-width: 300px; height: 50vh; }
-            .panel { max-height: 50vh; }
+            .controls-panel { max-height: 50vh; }
         }
 
-        /* ---------- أنماط النقاط القوية ---------- */
+        /* ---------- أنماط النقاط البارزة ---------- */
         .hotspot {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: #ff3333 !important;
+            width: 48px;
+            height: 48px;
+            background: #00ff88 !important;
             border-radius: 50% !important;
             border: 3px solid white !important;
-            box-shadow: 0 0 20px rgba(255, 51, 51, 0.9), 0 0 5px black !important;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.8), 0 0 8px rgba(0,0,0,0.5) !important;
             cursor: pointer;
-            transition: transform 0.2s ease;
-            z-index: 1000;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            color: black !important;
         }
         .hotspot:hover {
-            transform: scale(1.3);
-            box-shadow: 0 0 30px red !important;
+            transform: scale(1.2);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 1) !important;
         }
         .hotspot span {
             font-size: 28px !important;
             font-weight: bold;
-            color: white !important;
-            text-shadow: 0 0 3px black;
+            color: #111 !important;
+            text-shadow: 0 0 2px white;
         }
     </style>
 </head>
 <body>
-    <h1>🔧 أداة ضبط مواقع النقاط - نسخة معززة 🔧</h1>
-    <p style="text-align:center;">النقاط تظهر الآن بلون <strong style="color:#ff3333">أحمر زاهي مع حدود بيضاء</strong>. إذا لم تظهر، تأكد من تحميل النموذج (<code>3d_pic.glb</code>) وجرب زر "تحديث النقاط".</p>
-    
+    <h1>🔧 أداة ضبط مواقع النقاط العائمة (Hotspots) 🔧</h1>
+    <p style="text-align:center;">حرّك النموذج بالماوس لتحديد المواقع، ثم عدّل الإحداثيات في اللوحة اليمنى حتى تظهر النقطة في المكان المطلوب على النموذج. <strong>النقاط الآن خضراء بارزة ومرئية بوضوح</strong>. بعد الضبط، انسخ الإحداثيات النهائية وأرسلها لي.</p>
+
     <div class="container">
         <model-viewer id="viewer"
             src="3d_pic.glb"
@@ -178,31 +158,84 @@
             shadow-intensity="1"
             exposure="1"
             camera-orbit="45deg 75deg 3m"
-            style="background-color: #1a1a1a;"
-            @load="onModelLoad">
+            style="background-color: #1a1a1a;">
+            <!-- النقاط الافتراضية (سيتم تحديثها عبر JavaScript) -->
+            <button slot="hotspot-left1" class="hotspot" style="display:none;"></button>
+            <button slot="hotspot-left2" class="hotspot" style="display:none;"></button>
+            <button slot="hotspot-right1" class="hotspot" style="display:none;"></button>
+            <button slot="hotspot-right2" class="hotspot" style="display:none;"></button>
         </model-viewer>
 
-        <div class="panel">
-            <button id="refreshHotspotsBtn" class="toggle-visibility">🔄 تحديث النقاط (أعد تطبيق الإحداثيات)</button>
-            <button id="togglePointsBtn" class="toggle-visibility">👁️ إخفاء/إظهار النقاط</button>
-            <hr>
-
-            <!-- نقاط قابلة للتعديل -->
-            <div id="hotspotsControls">
-                <!-- سيتم ملؤها بواسطة JS -->
+        <div class="controls-panel">
+            <!-- كل عناصر التحكم بدون أي تغيير -->
+            <div class="hotspot-control" id="control-left1">
+                <h3>📍 النقطة اليسرى 1 (شعر/كتف)</h3>
+                <div class="coord-group">
+                    <label>X:</label>
+                    <input type="number" id="left1-x" step="0.01" value="-0.35">
+                    <label>Y:</label>
+                    <input type="number" id="left1-y" step="0.01" value="1.10">
+                    <label>Z:</label>
+                    <input type="number" id="left1-z" step="0.01" value="0.30">
+                </div>
+                <div class="coord-display" id="left1-display">(-0.35, 1.10, 0.30)</div>
+                <button class="reset-btn" data-target="left1">↺ افتراضي</button>
             </div>
 
-            <div class="debug-info" id="debugInfo">
-                ⏳ انتظر تحميل النموذج...
+            <div class="hotspot-control" id="control-left2">
+                <h3>📍 النقطة اليسرى 2 (يد/خصر)</h3>
+                <div class="coord-group">
+                    <label>X:</label>
+                    <input type="number" id="left2-x" step="0.01" value="-0.30">
+                    <label>Y:</label>
+                    <input type="number" id="left2-y" step="0.01" value="0.55">
+                    <label>Z:</label>
+                    <input type="number" id="left2-z" step="0.01" value="0.35">
+                </div>
+                <div class="coord-display" id="left2-display">(-0.30, 0.55, 0.35)</div>
+                <button class="reset-btn" data-target="left2">↺ افتراضي</button>
             </div>
+
+            <div class="hotspot-control" id="control-right1">
+                <h3>📍 النقطة اليمنى 1 (شعر/كتف)</h3>
+                <div class="coord-group">
+                    <label>X:</label>
+                    <input type="number" id="right1-x" step="0.01" value="0.35">
+                    <label>Y:</label>
+                    <input type="number" id="right1-y" step="0.01" value="1.10">
+                    <label>Z:</label>
+                    <input type="number" id="right1-z" step="0.01" value="0.30">
+                </div>
+                <div class="coord-display" id="right1-display">(0.35, 1.10, 0.30)</div>
+                <button class="reset-btn" data-target="right1">↺ افتراضي</button>
+            </div>
+
+            <div class="hotspot-control" id="control-right2">
+                <h3>📍 النقطة اليمنى 2 (يد/خصر)</h3>
+                <div class="coord-group">
+                    <label>X:</label>
+                    <input type="number" id="right2-x" step="0.01" value="0.30">
+                    <label>Y:</label>
+                    <input type="number" id="right2-y" step="0.01" value="0.55">
+                    <label>Z:</label>
+                    <input type="number" id="right2-z" step="0.01" value="0.35">
+                </div>
+                <div class="coord-display" id="right2-display">(0.30, 0.55, 0.35)</div>
+                <button class="reset-btn" data-target="right2">↺ افتراضي</button>
+            </div>
+
             <hr>
-            <button id="copyCoordsBtn" class="global-btn">📋 نسخ جميع الإحداثيات (ككود HTML)</button>
-            <button id="resetDefaultBtn" class="global-btn reset-btn">⟳ إعادة ضبط الإحداثيات للافتراضي</button>
+
+            <div class="global-buttons">
+                <button id="copyAllBtn" style="background:#2c8c5a;">📋 نسخ جميع الإحداثيات (ككود HTML)</button>
+                <button id="resetAllBtn" class="reset-btn">⟳ إعادة ضبط الكل للافتراضي</button>
+            </div>
+            <div id="outputArea" style="margin-top:15px; background:#111; padding:10px; border-radius:8px; font-family:monospace; font-size:0.85rem; white-space:pre-wrap;"></div>
         </div>
     </div>
     <footer>
-        💡 تأكد من وجود ملف <code>3d_pic.glb</code> في نفس المجلد. <br>
-        إذا لم تظهر النقاط رغم ذلك، اضغط F12 وافتح وحدة التحكم وأخبرني بالرسائل التي تظهر.
+        💡 تلميح: يمكنك تدوير النموذج وتكبيره لتحديد المواقع بدقة. النقاط الآن خضراء بارزة ولا تختفي عند الحواف.<br>
+        بعد التعديل، انسخ الإحداثيات من الأسفل أو من كل نقطة وأرسلها لي.
     </footer>
 
     <script type="module">
@@ -210,174 +243,157 @@
 
         const viewer = document.getElementById('viewer');
         
-        // الإحداثيات الافتراضية (منطقة منتصف الجسم)
         const defaultPositions = {
-            left1: { x: -0.35, y: 1.10, z: 0.30, name: 'النقطة اليسرى العلوية' },
-            left2: { x: -0.30, y: 0.55, z: 0.35, name: 'النقطة اليسرى السفلية' },
-            right1: { x: 0.35, y: 1.10, z: 0.30, name: 'النقطة اليمنى العلوية' },
-            right2: { x: 0.30, y: 0.55, z: 0.35, name: 'النقطة اليمنى السفلية' },
-            center: { x: 0, y: 0.8, z: 0, name: 'نقطة تجريبية (مركز)' } // نقطة إضافية للتأكد من الظهور
+            left1: { x: -0.35, y: 1.10, z: 0.30 },
+            left2: { x: -0.30, y: 0.55, z: 0.35 },
+            right1: { x: 0.35, y: 1.10, z: 0.30 },
+            right2: { x: 0.30, y: 0.55, z: 0.35 }
         };
-        
-        let currentPositions = JSON.parse(JSON.stringify(defaultPositions));
-        let hotspotsVisible = true;
-        
-        // دالة لإنشاء واجهة التحكم لكل نقطة
-        function buildControls() {
-            const container = document.getElementById('hotspotsControls');
-            container.innerHTML = '';
-            for (const [key, pos] of Object.entries(currentPositions)) {
-                const card = document.createElement('div');
-                card.className = 'hotspot-card';
-                card.id = `card-${key}`;
-                card.innerHTML = `
-                    <h3>📍 ${pos.name}</h3>
-                    <div class="coord-row">
-                        <label>X:</label>
-                        <input type="number" step="0.01" id="${key}-x" value="${pos.x}">
-                        <label>Y:</label>
-                        <input type="number" step="0.01" id="${key}-y" value="${pos.y}">
-                        <label>Z:</label>
-                        <input type="number" step="0.01" id="${key}-z" value="${pos.z}">
-                    </div>
-                    <div class="coord-display" id="${key}-display">(${pos.x}, ${pos.y}, ${pos.z})</div>
-                    <button class="reset-btn" data-key="${key}">↺ إعادة افتراضي</button>
-                `;
-                container.appendChild(card);
-                
-                // ربط أحداث التغيير
-                const xInp = document.getElementById(`${key}-x`);
-                const yInp = document.getElementById(`${key}-y`);
-                const zInp = document.getElementById(`${key}-z`);
-                const update = () => {
-                    currentPositions[key].x = parseFloat(xInp.value);
-                    currentPositions[key].y = parseFloat(yInp.value);
-                    currentPositions[key].z = parseFloat(zInp.value);
-                    document.getElementById(`${key}-display`).innerText = `(${currentPositions[key].x}, ${currentPositions[key].y}, ${currentPositions[key].z})`;
-                    refreshHotspots();
-                };
-                xInp.addEventListener('input', update);
-                yInp.addEventListener('input', update);
-                zInp.addEventListener('input', update);
+
+        const inputs = {
+            left1: { x: document.getElementById('left1-x'), y: document.getElementById('left1-y'), z: document.getElementById('left1-z') },
+            left2: { x: document.getElementById('left2-x'), y: document.getElementById('left2-y'), z: document.getElementById('left2-z') },
+            right1: { x: document.getElementById('right1-x'), y: document.getElementById('right1-y'), z: document.getElementById('right1-z') },
+            right2: { x: document.getElementById('right2-x'), y: document.getElementById('right2-y'), z: document.getElementById('right2-z') }
+        };
+
+        const displays = {
+            left1: document.getElementById('left1-display'),
+            left2: document.getElementById('left2-display'),
+            right1: document.getElementById('right1-display'),
+            right2: document.getElementById('right2-display')
+        };
+
+        function updateHotspot(slot, x, y, z) {
+            let btn = viewer.querySelector(`button[slot="${slot}"]`);
+            if (!btn) {
+                btn = document.createElement('button');
+                btn.setAttribute('slot', slot);
+                btn.className = 'hotspot';
+                btn.innerHTML = '<span class="material-symbols-outlined" style="font-size:26px">info</span>';
+                viewer.appendChild(btn);
             }
+            btn.removeAttribute('data-position'); // مهم لإعادة التعيين
+            requestAnimationFrame(() => {
+                btn.setAttribute('data-position', `${x}m ${y}m ${z}m`);
+                btn.setAttribute('data-normal', '0 1 0');
+                btn.style.display = 'flex';
+            });
+        }
+
+        function updateAllHotspots() {
+            updateHotspot('hotspot-left1', parseFloat(inputs.left1.x.value), parseFloat(inputs.left1.y.value), parseFloat(inputs.left1.z.value));
+            updateHotspot('hotspot-left2', parseFloat(inputs.left2.x.value), parseFloat(inputs.left2.y.value), parseFloat(inputs.left2.z.value));
+            updateHotspot('hotspot-right1', parseFloat(inputs.right1.x.value), parseFloat(inputs.right1.y.value), parseFloat(inputs.right1.z.value));
+            updateHotspot('hotspot-right2', parseFloat(inputs.right2.x.value), parseFloat(inputs.right2.y.value), parseFloat(inputs.right2.z.value));
             
-            // أزرار إعادة الضبط لكل نقطة
+            displays.left1.textContent = `(${inputs.left1.x.value}, ${inputs.left1.y.value}, ${inputs.left1.z.value})`;
+            displays.left2.textContent = `(${inputs.left2.x.value}, ${inputs.left2.y.value}, ${inputs.left2.z.value})`;
+            displays.right1.textContent = `(${inputs.right1.x.value}, ${inputs.right1.y.value}, ${inputs.right1.z.value})`;
+            displays.right2.textContent = `(${inputs.right2.x.value}, ${inputs.right2.y.value}, ${inputs.right2.z.value})`;
+        }
+
+        function bindInputEvents(targetKey) {
+            const { x, y, z } = inputs[targetKey];
+            const update = () => updateAllHotspots();
+            x.addEventListener('input', update);
+            y.addEventListener('input', update);
+            z.addEventListener('input', update);
+        }
+
+        function bindResetButtons() {
             document.querySelectorAll('.reset-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    const key = btn.getAttribute('data-key');
-                    if (key && defaultPositions[key]) {
-                        currentPositions[key] = { ...defaultPositions[key] };
-                        document.getElementById(`${key}-x`).value = currentPositions[key].x;
-                        document.getElementById(`${key}-y`).value = currentPositions[key].y;
-                        document.getElementById(`${key}-z`).value = currentPositions[key].z;
-                        document.getElementById(`${key}-display`).innerText = `(${currentPositions[key].x}, ${currentPositions[key].y}, ${currentPositions[key].z})`;
-                        refreshHotspots();
+                    const target = btn.getAttribute('data-target');
+                    if (target && defaultPositions[target]) {
+                        const def = defaultPositions[target];
+                        inputs[target].x.value = def.x;
+                        inputs[target].y.value = def.y;
+                        inputs[target].z.value = def.z;
+                        updateAllHotspots();
                     }
                 });
             });
         }
-        
-        // دالة لتحديث النقاط في model-viewer
-        function refreshHotspots() {
-            // حذف جميع النقاط الموجودة أولاً (للتأكد من التحديث)
-            const existing = viewer.querySelectorAll('button[slot^="hotspot-"]');
-            existing.forEach(btn => btn.remove());
-            
-            // إضافة النقاط من جديد
-            for (const [key, pos] of Object.entries(currentPositions)) {
-                if (!hotspotsVisible) continue;
-                const btn = document.createElement('button');
-                btn.setAttribute('slot', `hotspot-${key}`);
-                btn.className = 'hotspot';
-                btn.innerHTML = `<span class="material-symbols-outlined">info</span>`;
-                btn.setAttribute('data-position', `${pos.x}m ${pos.y}m ${pos.z}m`);
-                btn.setAttribute('data-normal', '0 1 0');
-                viewer.appendChild(btn);
+
+        function resetAll() {
+            for (const key of ['left1', 'left2', 'right1', 'right2']) {
+                const def = defaultPositions[key];
+                inputs[key].x.value = def.x;
+                inputs[key].y.value = def.y;
+                inputs[key].z.value = def.z;
             }
-            
-            // تحديث معلومات التصحيح
-            const debug = document.getElementById('debugInfo');
-            const count = Object.keys(currentPositions).length;
-            debug.innerHTML = `✅ تم تحديث النقاط: ${count} نقطة. الإحداثيات الحالية:<br>${Object.entries(currentPositions).map(([k, v]) => `${k}: (${v.x}, ${v.y}, ${v.z})`).join('<br>')}`;
+            updateAllHotspots();
         }
-        
-        function togglePoints() {
-            hotspotsVisible = !hotspotsVisible;
-            if (hotspotsVisible) {
-                refreshHotspots();
-                document.getElementById('togglePointsBtn').textContent = '👁️ إخفاء النقاط';
-            } else {
-                const existing = viewer.querySelectorAll('button[slot^="hotspot-"]');
-                existing.forEach(btn => btn.remove());
-                document.getElementById('togglePointsBtn').textContent = '👁️ إظهار النقاط';
-                document.getElementById('debugInfo').innerHTML = '🔘 النقاط مخفية مؤقتاً.';
-            }
-        }
-        
-        function resetToDefault() {
-            currentPositions = JSON.parse(JSON.stringify(defaultPositions));
-            // إعادة تعيين قيم الحقول
-            for (const key of Object.keys(currentPositions)) {
-                const pos = currentPositions[key];
-                document.getElementById(`${key}-x`).value = pos.x;
-                document.getElementById(`${key}-y`).value = pos.y;
-                document.getElementById(`${key}-z`).value = pos.z;
-                document.getElementById(`${key}-display`).innerText = `(${pos.x}, ${pos.y}, ${pos.z})`;
-            }
-            refreshHotspots();
-        }
-        
-        function copyCoordinates() {
-            const coords = {};
-            for (const [key, pos] of Object.entries(currentPositions)) {
-                if (key === 'center') continue; // النقطة التجريبية لا نحتاجها في الكود النهائي
-                coords[key] = { x: pos.x, y: pos.y, z: pos.z };
-            }
-            // ترتيب المفاتيح حسب الأصل: left1, left2, right1, right2
-            const order = ['left1', 'left2', 'right1', 'right2'];
-            let htmlSnippet = '';
-            const icons = {
-                left1: 'local_fire_department',
-                left2: 'auto_awesome',
-                right1: 'content_cut',
-                right2: 'checkroom'
+
+        function copyAllCoordinates() {
+            const coords = {
+                left1: { x: inputs.left1.x.value, y: inputs.left1.y.value, z: inputs.left1.z.value },
+                left2: { x: inputs.left2.x.value, y: inputs.left2.y.value, z: inputs.left2.z.value },
+                right1: { x: inputs.right1.x.value, y: inputs.right1.y.value, z: inputs.right1.z.value },
+                right2: { x: inputs.right2.x.value, y: inputs.right2.y.value, z: inputs.right2.z.value }
             };
-            for (const key of order) {
-                if (coords[key]) {
-                    htmlSnippet += `<button slot="hotspot-${key}" data-position="${coords[key].x}m ${coords[key].y}m ${coords[key].z}m" data-normal="0 1 0">\n    <span class="material-symbols-outlined">${icons[key]}</span>\n</button>\n`;
-                }
-            }
+            
+            const htmlSnippet = `
+<!-- النقاط العائمة - إحداثيات جديدة -->
+<button slot="hotspot-left1" data-position="${coords.left1.x}m ${coords.left1.y}m ${coords.left1.z}m" data-normal="0 1 0">
+    <span class="material-symbols-outlined">local_fire_department</span>
+</button>
+<button slot="hotspot-left2" data-position="${coords.left2.x}m ${coords.left2.y}m ${coords.left2.z}m" data-normal="0 1 0">
+    <span class="material-symbols-outlined">auto_awesome</span>
+</button>
+<button slot="hotspot-right1" data-position="${coords.right1.x}m ${coords.right1.y}m ${coords.right1.z}m" data-normal="0 1 0">
+    <span class="material-symbols-outlined">content_cut</span>
+</button>
+<button slot="hotspot-right2" data-position="${coords.right2.x}m ${coords.right2.y}m ${coords.right2.z}m" data-normal="0 1 0">
+    <span class="material-symbols-outlined">checkroom</span>
+</button>
+            `;
+            
+            const outputDiv = document.getElementById('outputArea');
+            outputDiv.innerHTML = `<strong>📋 الإحداثيات الجديدة (انسخ هذه الأسطر وأرسلها لي):</strong><br><code style="display:block; margin-top:8px; background:#000; padding:8px; border-radius:6px; overflow-x:auto;">${escapeHtml(htmlSnippet)}</code>`;
             
             navigator.clipboard.writeText(htmlSnippet).then(() => {
-                alert('تم نسخ الإحداثيات! يمكنك لصقها في الكود الأصلي.');
+                alert('تم نسخ الإحداثيات إلى الحافظة! يمكنك لصقها في المحادثة.');
             }).catch(() => {
-                alert('فشل النسخ التلقائي. انسخ النص يدوياً من وحدة التحكم.');
+                alert('لم نتمكن من النسخ التلقائي، لكن النص موجود في الأسفل يمكنك نسخه يدوياً.');
             });
-            console.log('إحداثيات النقاط:\n' + htmlSnippet);
-            document.getElementById('debugInfo').innerHTML += `<br>📋 تم نسخ الإحداثيات.`;
         }
         
-        // عند تحميل النموذج، نطبق النقاط مرة أخرى للتأكد
-        viewer.addEventListener('load', () => {
-            document.getElementById('debugInfo').innerHTML = '✅ تم تحميل النموذج. يتم تحديث النقاط...';
-            refreshHotspots();
-        });
-        
-        // انتظار تحميل الصفحة وبناء الواجهة
-        window.addEventListener('DOMContentLoaded', () => {
-            buildControls();
-            refreshHotspots();
+        function escapeHtml(str) {
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+                return c;
+            });
+        }
+
+        function init() {
+            for (const key of ['left1', 'left2', 'right1', 'right2']) {
+                bindInputEvents(key);
+            }
+            bindResetButtons();
+            document.getElementById('resetAllBtn').addEventListener('click', resetAll);
+            document.getElementById('copyAllBtn').addEventListener('click', copyAllCoordinates);
             
-            document.getElementById('refreshHotspotsBtn').addEventListener('click', () => refreshHotspots());
-            document.getElementById('togglePointsBtn').addEventListener('click', togglePoints);
-            document.getElementById('resetDefaultBtn').addEventListener('click', resetToDefault);
-            document.getElementById('copyCoordsBtn').addEventListener('click', copyCoordinates);
-        });
+            // ننتظر حتى يتم تحميل الموديل بالكامل قبل عرض النقاط
+            viewer.addEventListener('load', () => {
+                updateAllHotspots();
+            });
+
+            // إضافة أيقونات Material Icons إن لم تكن موجودة
+            if (!document.querySelector('link[href*="material-symbols"]')) {
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0';
+                document.head.appendChild(link);
+            }
+        }
         
-        // معالجة الخطأ في حالة عدم وجود النموذج
-        viewer.addEventListener('error', (e) => {
-            document.getElementById('debugInfo').innerHTML = `❌ خطأ في تحميل النموذج: ${e.detail?.message || 'تأكد من وجود ملف 3d_pic.glb'}`;
-        });
+        init();
     </script>
 </body>
 </html>
