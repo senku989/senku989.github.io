@@ -100,6 +100,30 @@
             transition: background-color 0.4s ease;
         }
 
+        /* Neon Red Glow for Hotspots */
+        .hotspot {
+            background: rgba(255, 51, 102, 0.85);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 12px rgba(255, 51, 102, 0.9), 0 0 24px rgba(255, 51, 102, 0.6);
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .hotspot:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 51, 102, 1), 0 0 35px rgba(255, 51, 102, 0.8);
+        }
+        /* Adjust icon color */
+        .hotspot span {
+            color: white;
+            text-shadow: 0 0 4px rgba(0,0,0,0.5);
+        }
+
         /* Controls - تنظيم أندرويدي مثالي */
         .controls-container {
             max-width: 880px;
@@ -151,6 +175,13 @@
             cursor: pointer;
         }
         body.light .auto-rotate-container { background: #eee; }
+        /* Make auto-rotate container also use active class for visual feedback */
+        .auto-rotate-container.active .switch-track {
+            background: #00cc66;
+        }
+        .auto-rotate-container.active .switch-knob {
+            transform: translateX(24px);
+        }
 
         /* Neon Text Effect - فقط إضاءة نيون بدون تكبير */
         .interactive-text {
@@ -249,17 +280,17 @@
         camera-orbit="45deg 75deg 3m"
         style="background-color: #1a1a1a;">
 
-        <!-- Hotspots - إحداثيات جديدة حسب المطلوب -->
-        <button slot="hotspot-1" data-position="-0.03628853783019337m 0.3183729055871609m -0.16359950862344022m" data-normal="0.16378326710413493 0.7217418348627954 -0.6725055875051011">
+        <!-- Hotspots - إحداثيات ثابتة -->
+        <button slot="hotspot-1" class="hotspot" data-position="-0.03628853783019337m 0.3183729055871609m -0.16359950862344022m" data-normal="0.16378326710413493 0.7217418348627954 -0.6725055875051011">
             <span class="material-symbols-outlined" style="font-size:26px">local_fire_department</span>
         </button>
-        <button slot="hotspot-2" data-position="0.012194577841889043m 0.3327015041563016m 0.18153558058742655m" data-normal="0.8334495040137978 0.0775097782612263 0.54713266995588">
+        <button slot="hotspot-2" class="hotspot" data-position="0.012194577841889043m 0.3327015041563016m 0.18153558058742655m" data-normal="0.8334495040137978 0.0775097782612263 0.54713266995588">
             <span class="material-symbols-outlined" style="font-size:26px">auto_awesome</span>
         </button>
-        <button slot="hotspot-3" data-position="0.18302125182788953m -0.4354901852790469m -0.1077256980890807m" data-normal="0.9472015336473351 -0.07713005345576332 -0.3112237290279254">
+        <button slot="hotspot-3" class="hotspot" data-position="0.18302125182788953m -0.4354901852790469m -0.1077256980890807m" data-normal="0.9472015336473351 -0.07713005345576332 -0.3112237290279254">
             <span class="material-symbols-outlined" style="font-size:26px">content_cut</span>
         </button>
-        <button slot="hotspot-4" data-position="0.09383115420419386m -0.48325044048168364m 0.10570011206220514m" data-normal="0.8995859308935477 -0.41268976739524477 0.1429416273366447">
+        <button slot="hotspot-4" class="hotspot" data-position="0.09383115420419386m -0.48325044048168364m 0.10570011206220514m" data-normal="0.8995859308935477 -0.41268976739524477 0.1429416273366447">
             <span class="material-symbols-outlined" style="font-size:26px">checkroom</span>
         </button>
     </model-viewer>
@@ -421,9 +452,10 @@
             const langActive = currentLang === 'en';
             document.getElementById('lang-toggle').classList.toggle('active', langActive);
             
-            // Auto-rotate switch
+            // Auto-rotate switch: use the container's active class
             const autoActive = autoRotateEnabled;
-            document.getElementById('auto-container').classList.toggle('active', autoActive);
+            const autoContainer = document.getElementById('auto-container');
+            autoContainer.classList.toggle('active', autoActive);
         }
 
         // ---------- Other UI Functions ----------
@@ -448,7 +480,7 @@
             const t = translations[currentLang];
             document.getElementById('auto-label').textContent = autoRotateEnabled ? t.autoOn : t.autoOff;
             setCookie('autoRotate', autoRotateEnabled);
-            updateSwitchStates();
+            updateSwitchStates(); // update visual
         }
 
         function showModal(title, text) {
@@ -473,19 +505,8 @@
             });
         }
 
-        // ---------- Load Saved Settings & Initialize Hotspots (One Time) ----------
-        function loadSettings() {
-            // Retrieve cookies
-            currentLang = getCookie('language') || 'ar';
-            currentTheme = getCookie('theme') || 'dark';
-            autoRotateEnabled = getCookie('autoRotate') !== 'false';
-
-            applyLanguage(currentLang);
-            applyTheme(currentTheme);
-            modelViewer.autoRotate = autoRotateEnabled;
-            updateSwitchStates();
-
-            // Setup hotspot listeners using new slot names
+        // ---------- Initialize Hotspots (one time, fixed positions) ----------
+        function setupHotspots() {
             const hotspots = [
                 { slot: 'hotspot-1', key: 'modalHair' },
                 { slot: 'hotspot-2', key: 'modalPlayful' },
@@ -505,6 +526,19 @@
             });
         }
 
+        // ---------- Load Saved Settings & Initialize ----------
+        function loadSettings() {
+            // Retrieve cookies
+            currentLang = getCookie('language') || 'ar';
+            currentTheme = getCookie('theme') || 'dark';
+            autoRotateEnabled = getCookie('autoRotate') !== 'false';
+
+            applyLanguage(currentLang);
+            applyTheme(currentTheme);
+            modelViewer.autoRotate = autoRotateEnabled;
+            updateSwitchStates();
+        }
+
         // ---------- Initialize Interactive Switches ----------
         function initSwitches() {
             // Theme toggle
@@ -521,17 +555,15 @@
                 applyLanguage(newLang);
                 setCookie('language', newLang);
                 updateSwitchStates();
+                // Hotspots remain unchanged, just their modal content updates via currentLang
             });
-
-            // Auto-rotate is already handled via onclick in HTML, but we ensure it calls toggleAutoRotate
-            // The auto-container already has onclick="toggleAutoRotate()"
-            // No duplicate listener needed.
         }
 
         // ---------- On Page Load ----------
         window.addEventListener('load', () => {
             loadSettings();
             initSwitches();
+            setupHotspots();   // attach listeners once
             addNeonEffect();
 
             // Close modal when clicking outside content
