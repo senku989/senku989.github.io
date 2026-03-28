@@ -313,31 +313,38 @@
         let currentBgColor = '#1a1a1a';
         let autoRotateEnabled = true;
 
-        // Cookie functions
+        // ---------- Fixed Cookie Functions ----------
         function setCookie(name, value, days = 365) {
             const date = new Date();
             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            document.cookie = `\( {name}= \){encodeURIComponent(value)};expires=${date.toUTCString()};path=/`;
+            document.cookie = `${name}=${encodeURIComponent(value)};expires=${date.toUTCString()};path=/`;
         }
+
         function getCookie(name) {
-            const cookies = document.cookie.split(';');
-            for (let c of cookies) {
-                const [key, val] = c.trim().split('=');
-                if (key === name) return decodeURIComponent(val);
-            }
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
             return null;
         }
 
-        // Translations
+        // ---------- Translations (Full Arabic & English) ----------
         const translations = {
-            ar: { /* ... نفس الترجمات السابقة مع تعديل بسيط ... */ 
-                title: "ريو ريبر", subtitle: "ريو ريبر • عضو في فريق المنظفين • مانجا غاتشياكوتا",
-                fullPose: "وضعية كاملة", screenshot: "تحميل الوضعية الحالية",
-                bgNeutral: "عادية", bgRed: "حمراء درامية", bgPurple: "بنفسجية أنمي",
-                bgDarkPit: "بيت مظلم", bgNeon: "نيون سيان",
-                autoOn: "تدوير تلقائي: مفعل", autoOff: "تدوير تلقائي: معطل",
+            ar: {
+                title: "ريو ريبر",
+                subtitle: "ريو ريبر • عضو في فريق المنظفين • مانجا غاتشياكوتا",
+                fullPose: "وضعية كاملة",
+                screenshot: "تحميل الوضعية الحالية",
+                bgNeutral: "عادية",
+                bgRed: "حمراء درامية",
+                bgPurple: "بنفسجية أنمي",
+                bgDarkPit: "بيت مظلم",
+                bgNeon: "نيون سيان",
+                autoOn: "تدوير تلقائي: مفعل",
+                autoOff: "تدوير تلقائي: معطل",
                 infoText: "اسحب الشخصية بحرية • اضغط على النقاط العائمة لمعلومات • جرب الواقع المعزز على الجوال",
-                themeDark: "داكن", themeLight: "فاتح", langLabel: "عربي",
+                themeDark: "داكن",
+                themeLight: "فاتح",
+                langLabel: "عربي",
                 footer: "© أمجد الكلبـاني ٢٠٢٦ | جميع الحقوق محفوظة",
                 modalHair: { title: "شعر ريو", text: "شعر ريو المتطاير زي اللهب 🔥<br>أشهر ما يميزها في المانجا!" },
                 modalPlayful: { title: "الطفولية", text: "طفولية ومرحة… لكن في القتال تصبح براغماتية مرعبة!" },
@@ -345,13 +352,21 @@
                 modalStyle: { title: "الستايل", text: "ستايل المنظفين الجريء<br>جاكيت + حزام + حقيبة حمراء" }
             },
             en: {
-                title: "Riyo Reaper", subtitle: "Riyo Reaper • Member of the Cleaners Team • Gachiakuta Manga",
-                fullPose: "Full Body Pose", screenshot: "Download Current Pose",
-                bgNeutral: "Neutral", bgRed: "Dramatic Red", bgPurple: "Anime Purple",
-                bgDarkPit: "Dark Pit", bgNeon: "Neon Cyan",
-                autoOn: "Auto Rotate: ON", autoOff: "Auto Rotate: OFF",
+                title: "Riyo Reaper",
+                subtitle: "Riyo Reaper • Member of the Cleaners Team • Gachiakuta Manga",
+                fullPose: "Full Body Pose",
+                screenshot: "Download Current Pose",
+                bgNeutral: "Neutral",
+                bgRed: "Dramatic Red",
+                bgPurple: "Anime Purple",
+                bgDarkPit: "Dark Pit",
+                bgNeon: "Neon Cyan",
+                autoOn: "Auto Rotate: ON",
+                autoOff: "Auto Rotate: OFF",
                 infoText: "Drag the character freely • Tap floating points for info • Try AR on mobile",
-                themeDark: "Dark", themeLight: "Light", langLabel: "English",
+                themeDark: "Dark",
+                themeLight: "Light",
+                langLabel: "English",
                 footer: "© Amjad Al Kalbani 2026 | All Rights Reserved",
                 modalHair: { title: "Riyo's Hair", text: "Riyo's flowing red hair like flames 🔥<br>Her most iconic feature!" },
                 modalPlayful: { title: "Playful Side", text: "Playful and childish… but deadly serious in battle!" },
@@ -360,6 +375,7 @@
             }
         };
 
+        // ---------- Apply Language (Updates UI texts) ----------
         function applyLanguage(lang) {
             currentLang = lang;
             const t = translations[lang];
@@ -374,26 +390,45 @@
             document.getElementById('footer-text').textContent = t.footer;
             document.getElementById('lang-label').textContent = t.langLabel;
             document.getElementById('theme-label').textContent = currentTheme === 'dark' ? t.themeDark : t.themeLight;
+            document.getElementById('auto-label').textContent = autoRotateEnabled ? t.autoOn : t.autoOff;
 
-            // Background buttons
+            // Background buttons text
             const bgBtns = document.querySelectorAll('#bg-buttons button');
             bgBtns[0].textContent = t.bgNeutral;
             bgBtns[1].textContent = t.bgRed;
             bgBtns[2].textContent = t.bgPurple;
             bgBtns[3].textContent = t.bgDarkPit;
             bgBtns[4].textContent = t.bgNeon;
-
-            document.getElementById('auto-label').textContent = autoRotateEnabled ? t.autoOn : t.autoOff;
         }
 
+        // ---------- Apply Theme (visual + switch icon) ----------
         function applyTheme(theme) {
             currentTheme = theme;
             const isLight = theme === 'light';
             document.body.classList.toggle('light', isLight);
             document.getElementById('theme-icon').textContent = isLight ? 'light_mode' : 'dark_mode';
+            const t = translations[currentLang];
+            document.getElementById('theme-label').textContent = isLight ? t.themeLight : t.themeDark;
         }
 
+        // ---------- Update Visual State of All Switches (active class) ----------
+        function updateSwitchStates() {
+            // Theme switch: active when light theme
+            const themeActive = currentTheme === 'light';
+            document.getElementById('theme-toggle').classList.toggle('active', themeActive);
+            
+            // Language switch: active when English selected
+            const langActive = currentLang === 'en';
+            document.getElementById('lang-toggle').classList.toggle('active', langActive);
+            
+            // Auto-rotate switch
+            const autoActive = autoRotateEnabled;
+            document.getElementById('auto-container').classList.toggle('active', autoActive);
+        }
+
+        // ---------- Other UI Functions ----------
         function resetCamera() { modelViewer.cameraOrbit = "45deg 75deg 3m"; }
+        
         function downloadScreenshot() {
             const dataUrl = modelViewer.toDataURL('image/png');
             const link = document.createElement('a');
@@ -413,6 +448,7 @@
             const t = translations[currentLang];
             document.getElementById('auto-label').textContent = autoRotateEnabled ? t.autoOn : t.autoOff;
             setCookie('autoRotate', autoRotateEnabled);
+            updateSwitchStates();
         }
 
         function showModal(title, text) {
@@ -421,6 +457,7 @@
             document.getElementById('modalText').innerHTML = text;
             modal.classList.add('show');
         }
+        
         function closeModal() {
             document.getElementById('infoModal').classList.remove('show');
         }
@@ -436,7 +473,9 @@
             });
         }
 
+        // ---------- Load Saved Settings & Initialize Hotspots (One Time) ----------
         function loadSettings() {
+            // Retrieve cookies
             currentLang = getCookie('language') || 'ar';
             currentTheme = getCookie('theme') || 'dark';
             autoRotateEnabled = getCookie('autoRotate') !== 'false';
@@ -444,52 +483,58 @@
             applyLanguage(currentLang);
             applyTheme(currentTheme);
             modelViewer.autoRotate = autoRotateEnabled;
+            updateSwitchStates();
 
-            // Hotspots (الآن تعمل 100%)
-            const t = translations[currentLang];
-            const hotspotsData = {
-                'hotspot-left1': t.modalHair,
-                'hotspot-left2': t.modalPlayful,
-                'hotspot-right1': t.modalRipper,
-                'hotspot-right2': t.modalStyle
-            };
-
-            Object.keys(hotspotsData).forEach(slot => {
-                const btn = modelViewer.querySelector(`button[slot="${slot}"]`);
-                if (btn) {
-                    // إزالة أي listeners قديمة
-                    const newBtn = btn.cloneNode(true);
-                    btn.parentNode.replaceChild(newBtn, btn);
-                    newBtn.addEventListener('click', () => {
-                        const data = hotspotsData[slot];
-                        showModal(data.title, data.text);
+            // Setup hotspot listeners (only once, without destroying original buttons)
+            const hotspots = [
+                { slot: 'hotspot-left1', key: 'modalHair' },
+                { slot: 'hotspot-left2', key: 'modalPlayful' },
+                { slot: 'hotspot-right1', key: 'modalRipper' },
+                { slot: 'hotspot-right2', key: 'modalStyle' }
+            ];
+            hotspots.forEach(h => {
+                const btn = modelViewer.querySelector(`button[slot="${h.slot}"]`);
+                if (btn && !btn._hasListener) {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const t = translations[currentLang];
+                        showModal(t[h.key].title, t[h.key].text);
                     });
+                    btn._hasListener = true;
                 }
             });
         }
 
+        // ---------- Initialize Interactive Switches ----------
         function initSwitches() {
-            // Theme
+            // Theme toggle
             document.getElementById('theme-toggle').addEventListener('click', () => {
                 const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                 applyTheme(newTheme);
                 setCookie('theme', newTheme);
+                updateSwitchStates();
             });
 
-            // Language
+            // Language toggle
             document.getElementById('lang-toggle').addEventListener('click', () => {
                 const newLang = currentLang === 'ar' ? 'en' : 'ar';
                 applyLanguage(newLang);
                 setCookie('language', newLang);
-                loadSettings(); // إعادة تحميل النقاط والنصوص
+                updateSwitchStates();
             });
+
+            // Auto-rotate is already handled via onclick in HTML, but we ensure it calls toggleAutoRotate
+            // The auto-container already has onclick="toggleAutoRotate()"
+            // No duplicate listener needed.
         }
 
+        // ---------- On Page Load ----------
         window.addEventListener('load', () => {
             loadSettings();
             initSwitches();
             addNeonEffect();
 
+            // Close modal when clicking outside content
             document.getElementById('infoModal').addEventListener('click', e => {
                 if (e.target.id === 'infoModal') closeModal();
             });
