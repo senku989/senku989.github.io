@@ -3,130 +3,542 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أداة التعيين بالنقر المباشر</title>
+    <title>ريو ريبر | غاتشياكوتا</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <style>
-        body { margin: 0; font-family: sans-serif; background: #1a1a1a; color: white; display: flex; height: 100vh; overflow: hidden; }
-        
-        /* لوحة التحكم الجانبية */
-        .sidebar { width: 350px; background: #252525; padding: 20px; border-left: 1px solid #444; overflow-y: auto; box-shadow: -5px 0 15px rgba(0,0,0,0.5); }
-        
-        .instruction-box { background: #333; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px dashed #ff3366; }
-        
-        .point-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .point-btn { padding: 10px; border: 1px solid #555; background: #444; color: white; cursor: pointer; border-radius: 5px; text-align: center; }
-        .point-btn.active { background: #ff3366; border-color: white; font-weight: bold; }
-
-        .coord-view { background: #000; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 0.85em; color: #00ff88; margin-bottom: 10px; }
-        
-        model-viewer { flex-grow: 1; background: #1a1a1a; cursor: crosshair; }
-
-        /* ستايل النقاط */
-        .hotspot {
-            width: 20px; height: 20px; border-radius: 50%; border: 2px solid white;
-            background: #ff3366; box-shadow: 0 0 10px rgba(255,51,102,0.8);
-            pointer-events: none; /* لكي لا تعيق النقرة خلفها */
+        :root { --primary: #ff3366; }
+        * {
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
-        .hotspot span { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background: black; padding: 2px 6px; border-radius: 4px; font-size: 10px; }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            transition: background-color 0.4s ease;
+            overflow-x: hidden;
+        }
+        body.light {
+            background-color: #f5f5f5;
+            color: #111111;
+        }
 
-        button#copyBtn { width: 100%; padding: 15px; background: #2c8c5a; border: none; color: white; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 20px; }
+        /* Top Bar - تطبيق أندرويد */
+        .top-bar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 64px;
+            background: rgba(10,10,10,0.98);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 20px;
+            z-index: 1000;
+            gap: 24px;
+            border-bottom: 1px solid rgba(255,51,102,0.15);
+        }
+        body.light .top-bar { background: rgba(245,245,245,0.98); }
+
+        /* Toggle Switch - أنيميشن حقيقي (يسار رمادي ← يمين أخضر) */
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .switch-track {
+            width: 56px;
+            height: 32px;
+            background: #3a3a3a;
+            border-radius: 9999px;
+            position: relative;
+            transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        body.light .switch-track { background: #c8c8c8; }
+        .switch-knob {
+            position: absolute;
+            top: 4px; left: 4px;
+            width: 24px; height: 24px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .toggle-switch.active .switch-track { background: #00cc66; }
+        .toggle-switch.active .switch-knob { transform: translateX(24px); }
+
+        .switch-label {
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        h1 {
+            margin: 88px 20px 8px;
+            font-size: 2.7em;
+            color: var(--primary);
+        }
+        body.light h1 { color: #d9224f; }
+        .subtitle {
+            font-size: 1.25em;
+            color: #ff6699;
+            margin-bottom: 20px;
+        }
+        body.light .subtitle { color: #e6337a; }
+
+        model-viewer {
+            width: 100%;
+            max-width: 920px;
+            height: 65vh;
+            border-radius: 24px;
+            box-shadow: 0 0 50px rgba(255,51,102,0.4);
+            margin: 0 auto 25px;
+            transition: background-color 0.4s ease;
+        }
+
+        /* Controls - تنظيم أندرويدي مثالي */
+        .controls-container {
+            max-width: 880px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+        }
+        .control-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        button {
+            padding: 14px 28px;
+            background: #222;
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-size: 1.08em;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+        body.light button {
+            background: #fff;
+            color: #111;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+        button:hover, button:active {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+        button:focus { outline: none; }
+
+        .bg-btn { min-width: 118px; }
+
+        /* Auto Rotate - منفصل تمامًا */
+        .auto-rotate-container {
+            background: #1f1f1f;
+            border-radius: 9999px;
+            padding: 12px 28px;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            cursor: pointer;
+        }
+        body.light .auto-rotate-container { background: #eee; }
+
+        /* Neon Text Effect - فقط إضاءة نيون بدون تكبير */
+        .interactive-text {
+            transition: text-shadow 0.3s ease;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+        .interactive-text.active {
+            text-shadow: 
+                0 0 10px var(--primary),
+                0 0 20px var(--primary),
+                0 0 30px var(--primary);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        .modal.show { display: flex; }
+        .modal-content {
+            background: #1f1f1f;
+            padding: 30px 34px;
+            border-radius: 28px;
+            max-width: 360px;
+            width: 90%;
+            box-shadow: 0 0 45px rgba(255,51,102,0.6);
+            animation: modalPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        body.light .modal-content { background: #fff; color: #111; }
+        .close {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 34px;
+            cursor: pointer;
+        }
+
+        @keyframes modalPop {
+            0% { transform: scale(0.7) translateY(40px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        /* Footer - زوايا مدورة */
+        footer {
+            margin-top: 50px;
+            padding: 28px 20px 35px;
+            background: #111;
+            color: #aaa;
+            font-size: 0.98em;
+            border-radius: 28px 28px 0 0;
+        }
+        body.light footer {
+            background: #eee;
+            color: #444;
+        }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <h2>🎯 تعيين النقاط بالنقر</h2>
-        <div class="instruction-box">
-            1. اختر رقم النقطة من الأسفل.<br>
-            2. <b>انقر على المودل</b> في المكان المطلوب.<br>
-            3. سيتم سحب الإحداثيات فوراً.
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <!-- Theme Switch -->
+        <div class="toggle-switch" id="theme-toggle">
+            <span class="material-symbols-outlined" id="theme-icon">dark_mode</span>
+            <div class="switch-track"><div class="switch-knob" id="theme-knob"></div></div>
+            <span class="switch-label" id="theme-label">داكن</span>
         </div>
 
-        <div class="point-selector">
-            <div class="point-btn active" onclick="selectPoint(1)" id="btn-1">نقطة 1</div>
-            <div class="point-btn" onclick="selectPoint(2)" id="btn-2">نقطة 2</div>
-            <div class="point-btn" onclick="selectPoint(3)" id="btn-3">نقطة 3</div>
-            <div class="point-btn" onclick="selectPoint(4)" id="btn-4">نقطة 4</div>
+        <!-- Language Switch -->
+        <div class="toggle-switch" id="lang-toggle">
+            <span class="material-symbols-outlined">language</span>
+            <div class="switch-track"><div class="switch-knob" id="lang-knob"></div></div>
+            <span class="switch-label" id="lang-label">عربي</span>
         </div>
-
-        <div id="outputs">
-            </div>
-
-        <button id="copyBtn">📋 نسخ كود الـ HTML النهائي</button>
     </div>
 
-    <model-viewer id="viewer" src="3d_pic.glb" camera-controls shadow-intensity="1">
-        <button slot="hotspot-1" id="hp-1" class="hotspot" data-position="0m 0m 0m" data-normal="0 1 0"><span>1</span></button>
-        <button slot="hotspot-2" id="hp-2" class="hotspot" data-position="0m 0m 0m" data-normal="0 1 0"><span>2</span></button>
-        <button slot="hotspot-3" id="hp-3" class="hotspot" data-position="0m 0m 0m" data-normal="0 1 0"><span>3</span></button>
-        <button slot="hotspot-4" id="hp-4" class="hotspot" data-position="0m 0m 0m" data-normal="0 1 0"><span>4</span></button>
+    <h1 id="page-title" class="interactive-text">ريو ريبر</h1>
+    <p id="page-subtitle" class="subtitle interactive-text">ريو ريبر • عضو في فريق المنظفين • مانجا غاتشياكوتا</p>
+
+    <model-viewer id="viewer" 
+        src="3d_pic.glb" 
+        alt="ريو ريبر من غاتشياكوتا" 
+        camera-controls 
+        auto-rotate 
+        shadow-intensity="2.2" 
+        exposure="0.95"
+        environment-intensity="1.3"
+        ar 
+        ar-modes="webxr scene-viewer quick-look"
+        camera-orbit="45deg 75deg 3m"
+        style="background-color: #1a1a1a;">
+
+        <!-- Hotspots - إحداثيات جديدة حسب المطلوب -->
+        <button slot="hotspot-1" data-position="-0.03628853783019337m 0.3183729055871609m -0.16359950862344022m" data-normal="0.16378326710413493 0.7217418348627954 -0.6725055875051011">
+            <span class="material-symbols-outlined" style="font-size:26px">local_fire_department</span>
+        </button>
+        <button slot="hotspot-2" data-position="0.012194577841889043m 0.3327015041563016m 0.18153558058742655m" data-normal="0.8334495040137978 0.0775097782612263 0.54713266995588">
+            <span class="material-symbols-outlined" style="font-size:26px">auto_awesome</span>
+        </button>
+        <button slot="hotspot-3" data-position="0.18302125182788953m -0.4354901852790469m -0.1077256980890807m" data-normal="0.9472015336473351 -0.07713005345576332 -0.3112237290279254">
+            <span class="material-symbols-outlined" style="font-size:26px">content_cut</span>
+        </button>
+        <button slot="hotspot-4" data-position="0.09383115420419386m -0.48325044048168364m 0.10570011206220514m" data-normal="0.8995859308935477 -0.41268976739524477 0.1429416273366447">
+            <span class="material-symbols-outlined" style="font-size:26px">checkroom</span>
+        </button>
     </model-viewer>
 
+    <div class="controls-container">
+        <div class="control-row">
+            <button onclick="resetCamera()" id="btn-full-pose">وضعية كاملة</button>
+            <button onclick="downloadScreenshot()" id="btn-screenshot" style="background:var(--primary);">تحميل الوضعية الحالية</button>
+        </div>
+
+        <div class="control-row" id="bg-buttons">
+            <button onclick="setBackground('#1a1a1a', 'عادية')" class="bg-btn">عادية</button>
+            <button onclick="setBackground('#3a0a1a', 'حمراء درامية')" class="bg-btn" style="background:#3a0a1a;color:white;">حمراء درامية</button>
+            <button onclick="setBackground('#1a0a2a', 'بنفسجية أنمي')" class="bg-btn" style="background:#1a0a2a;color:white;">بنفسجية أنمي</button>
+            <button onclick="setBackground('#0a1a2a', 'بيت مظلم')" class="bg-btn" style="background:#0a1a2a;color:white;">بيت مظلم</button>
+            <button onclick="setBackground('#0a2a1a', 'نيون سيان')" class="bg-btn" style="background:#0a2a1a;color:white;">نيون سيان</button>
+        </div>
+
+        <!-- Auto Rotate Switch - منفصل تمامًا -->
+        <div class="control-row">
+            <div class="auto-rotate-container" id="auto-container" onclick="toggleAutoRotate()">
+                <span class="material-symbols-outlined">rotate_right</span>
+                <span id="auto-label" class="switch-label">تدوير تلقائي: مفعل</span>
+                <div class="switch-track"><div class="switch-knob" id="auto-knob"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <p id="info-text" class="interactive-text" style="max-width:720px;margin:0 auto 45px;padding:0 20px;line-height:1.85;font-size:1.07em;">
+        اسحب الشخصية بحرية • اضغط على النقاط العائمة لمعلومات • جرب الواقع المعزز على الجوال
+    </p>
+
+    <!-- Modal -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close material-symbols-outlined" onclick="closeModal()">close</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalText"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p id="footer-text" class="interactive-text">© أمجد الكلبـاني ٢٠٢٦ | جميع الحقوق محفوظة</p>
+    </footer>
+
     <script>
-        const viewer = document.getElementById('viewer');
-        let activePoint = 1;
-        const savedCoords = {};
+        const modelViewer = document.getElementById('viewer');
+        let currentLang = 'ar';
+        let currentTheme = 'dark';
+        let currentBgColor = '#1a1a1a';
+        let autoRotateEnabled = true;
 
-        // اختيار النقطة المراد تعديلها
-        window.selectPoint = (num) => {
-            activePoint = num;
-            document.querySelectorAll('.point-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(`btn-${num}`).classList.add('active');
-        };
-
-        // الحدث السحري: النقر لتحديد الموقع
-        viewer.addEventListener('click', (event) => {
-            const rect = viewer.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-
-            // الحصول على الموقع والـ Normal من مكان النقرة بالضبط
-            const hit = viewer.positionAndNormalFromPoint(x, y);
-
-            if (hit) {
-                const { position, normal } = hit;
-                
-                // تحويلها لنصوص مفهومة للمحرك
-                const posStr = `${position.x}m ${position.y}m ${position.z}m`;
-                const normStr = `${normal.x} ${normal.y} ${normal.z}`;
-
-                // تحديث النقطة على المودل فوراً
-                const hotspot = document.getElementById(`hp-${activePoint}`);
-                hotspot.setAttribute('data-position', posStr);
-                hotspot.setAttribute('data-normal', normStr);
-
-                // حفظ القيم للعرض والنسخ
-                savedCoords[activePoint] = { pos: posStr, norm: normStr };
-                updateUI();
-            }
-        });
-
-        function updateUI() {
-            let html = "";
-            for(let i=1; i<=4; i++) {
-                const data = savedCoords[i] || { pos: 'لم تحدد بعد', norm: '0 1 0' };
-                html += `
-                    <div style="margin-bottom:15px">
-                        <strong style="color:#ff3366">نقطة ${i}:</strong>
-                        <div class="coord-view">${data.pos}</div>
-                    </div>
-                `;
-            }
-            document.getElementById('outputs').innerHTML = html;
+        // ---------- Fixed Cookie Functions ----------
+        function setCookie(name, value, days = 365) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            document.cookie = `${name}=${encodeURIComponent(value)};expires=${date.toUTCString()};path=/`;
         }
 
-        document.getElementById('copyBtn').onclick = () => {
-            let finalCode = "\n";
-            for(let i=1; i<=4; i++) {
-                if(savedCoords[i]) {
-                    finalCode += `<button slot="hotspot-${i}" data-position="${savedCoords[i].pos}" data-normal="${savedCoords[i].norm}"></button>\n`;
-                }
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+            return null;
+        }
+
+        // ---------- Translations (Full Arabic & English) ----------
+        const translations = {
+            ar: {
+                title: "ريو ريبر",
+                subtitle: "ريو ريبر • عضو في فريق المنظفين • مانجا غاتشياكوتا",
+                fullPose: "وضعية كاملة",
+                screenshot: "تحميل الوضعية الحالية",
+                bgNeutral: "عادية",
+                bgRed: "حمراء درامية",
+                bgPurple: "بنفسجية أنمي",
+                bgDarkPit: "بيت مظلم",
+                bgNeon: "نيون سيان",
+                autoOn: "تدوير تلقائي: مفعل",
+                autoOff: "تدوير تلقائي: معطل",
+                infoText: "اسحب الشخصية بحرية • اضغط على النقاط العائمة لمعلومات • جرب الواقع المعزز على الجوال",
+                themeDark: "داكن",
+                themeLight: "فاتح",
+                langLabel: "عربي",
+                footer: "© أمجد الكلبـاني ٢٠٢٦ | جميع الحقوق محفوظة",
+                modalHair: { title: "شعر ريو", text: "شعر ريو المتطاير زي اللهب 🔥<br>أشهر ما يميزها في المانجا!" },
+                modalPlayful: { title: "الطفولية", text: "طفولية ومرحة… لكن في القتال تصبح براغماتية مرعبة!" },
+                modalRipper: { title: "المقص", text: "المقص العملاق ⚔️<br>أداتها الحيوية — تستخدمه برجليها" },
+                modalStyle: { title: "الستايل", text: "ستايل المنظفين الجريء<br>جاكيت + حزام + حقيبة حمراء" }
+            },
+            en: {
+                title: "Riyo Reaper",
+                subtitle: "Riyo Reaper • Member of the Cleaners Team • Gachiakuta Manga",
+                fullPose: "Full Body Pose",
+                screenshot: "Download Current Pose",
+                bgNeutral: "Neutral",
+                bgRed: "Dramatic Red",
+                bgPurple: "Anime Purple",
+                bgDarkPit: "Dark Pit",
+                bgNeon: "Neon Cyan",
+                autoOn: "Auto Rotate: ON",
+                autoOff: "Auto Rotate: OFF",
+                infoText: "Drag the character freely • Tap floating points for info • Try AR on mobile",
+                themeDark: "Dark",
+                themeLight: "Light",
+                langLabel: "English",
+                footer: "© Amjad Al Kalbani 2026 | All Rights Reserved",
+                modalHair: { title: "Riyo's Hair", text: "Riyo's flowing red hair like flames 🔥<br>Her most iconic feature!" },
+                modalPlayful: { title: "Playful Side", text: "Playful and childish… but deadly serious in battle!" },
+                modalRipper: { title: "The Ripper", text: "The Ripper ⚔️<br>Her Vital Instrument — giant scissors used with her legs" },
+                modalStyle: { title: "Style", text: "Bold Cleaner style<br>Jacket + belt + red pouch" }
             }
-            navigator.clipboard.writeText(finalCode);
-            alert("تم نسخ الكود النهائي بنجاح!");
         };
 
-        updateUI();
+        // ---------- Apply Language (Updates UI texts) ----------
+        function applyLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            document.getElementById('page-title').textContent = t.title;
+            document.getElementById('page-subtitle').textContent = t.subtitle;
+            document.getElementById('btn-full-pose').textContent = t.fullPose;
+            document.getElementById('btn-screenshot').textContent = t.screenshot;
+            document.getElementById('info-text').innerHTML = t.infoText;
+            document.getElementById('footer-text').textContent = t.footer;
+            document.getElementById('lang-label').textContent = t.langLabel;
+            document.getElementById('theme-label').textContent = currentTheme === 'dark' ? t.themeDark : t.themeLight;
+            document.getElementById('auto-label').textContent = autoRotateEnabled ? t.autoOn : t.autoOff;
+
+            // Background buttons text
+            const bgBtns = document.querySelectorAll('#bg-buttons button');
+            bgBtns[0].textContent = t.bgNeutral;
+            bgBtns[1].textContent = t.bgRed;
+            bgBtns[2].textContent = t.bgPurple;
+            bgBtns[3].textContent = t.bgDarkPit;
+            bgBtns[4].textContent = t.bgNeon;
+        }
+
+        // ---------- Apply Theme (visual + switch icon) ----------
+        function applyTheme(theme) {
+            currentTheme = theme;
+            const isLight = theme === 'light';
+            document.body.classList.toggle('light', isLight);
+            document.getElementById('theme-icon').textContent = isLight ? 'light_mode' : 'dark_mode';
+            const t = translations[currentLang];
+            document.getElementById('theme-label').textContent = isLight ? t.themeLight : t.themeDark;
+        }
+
+        // ---------- Update Visual State of All Switches (active class) ----------
+        function updateSwitchStates() {
+            // Theme switch: active when light theme
+            const themeActive = currentTheme === 'light';
+            document.getElementById('theme-toggle').classList.toggle('active', themeActive);
+            
+            // Language switch: active when English selected
+            const langActive = currentLang === 'en';
+            document.getElementById('lang-toggle').classList.toggle('active', langActive);
+            
+            // Auto-rotate switch
+            const autoActive = autoRotateEnabled;
+            document.getElementById('auto-container').classList.toggle('active', autoActive);
+        }
+
+        // ---------- Other UI Functions ----------
+        function resetCamera() { modelViewer.cameraOrbit = "45deg 75deg 3m"; }
+        
+        function downloadScreenshot() {
+            const dataUrl = modelViewer.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = currentLang === 'ar' ? 'ريو_ريبر_وضعية_مخصصة.png' : 'Riyo_Reaper_Custom_Pose.png';
+            link.href = dataUrl;
+            link.click();
+        }
+
+        function setBackground(color) {
+            currentBgColor = color;
+            modelViewer.style.backgroundColor = color;
+        }
+
+        function toggleAutoRotate() {
+            autoRotateEnabled = !autoRotateEnabled;
+            modelViewer.autoRotate = autoRotateEnabled;
+            const t = translations[currentLang];
+            document.getElementById('auto-label').textContent = autoRotateEnabled ? t.autoOn : t.autoOff;
+            setCookie('autoRotate', autoRotateEnabled);
+            updateSwitchStates();
+        }
+
+        function showModal(title, text) {
+            const modal = document.getElementById('infoModal');
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalText').innerHTML = text;
+            modal.classList.add('show');
+        }
+        
+        function closeModal() {
+            document.getElementById('infoModal').classList.remove('show');
+        }
+
+        function addNeonEffect() {
+            document.querySelectorAll('.interactive-text').forEach(el => {
+                el.addEventListener('click', () => {
+                    el.classList.toggle('active');
+                    if (el.classList.contains('active')) {
+                        setTimeout(() => el.classList.remove('active'), 2200);
+                    }
+                });
+            });
+        }
+
+        // ---------- Load Saved Settings & Initialize Hotspots (One Time) ----------
+        function loadSettings() {
+            // Retrieve cookies
+            currentLang = getCookie('language') || 'ar';
+            currentTheme = getCookie('theme') || 'dark';
+            autoRotateEnabled = getCookie('autoRotate') !== 'false';
+
+            applyLanguage(currentLang);
+            applyTheme(currentTheme);
+            modelViewer.autoRotate = autoRotateEnabled;
+            updateSwitchStates();
+
+            // Setup hotspot listeners using new slot names
+            const hotspots = [
+                { slot: 'hotspot-1', key: 'modalHair' },
+                { slot: 'hotspot-2', key: 'modalPlayful' },
+                { slot: 'hotspot-3', key: 'modalRipper' },
+                { slot: 'hotspot-4', key: 'modalStyle' }
+            ];
+            hotspots.forEach(h => {
+                const btn = modelViewer.querySelector(`button[slot="${h.slot}"]`);
+                if (btn && !btn._hasListener) {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const t = translations[currentLang];
+                        showModal(t[h.key].title, t[h.key].text);
+                    });
+                    btn._hasListener = true;
+                }
+            });
+        }
+
+        // ---------- Initialize Interactive Switches ----------
+        function initSwitches() {
+            // Theme toggle
+            document.getElementById('theme-toggle').addEventListener('click', () => {
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+                setCookie('theme', newTheme);
+                updateSwitchStates();
+            });
+
+            // Language toggle
+            document.getElementById('lang-toggle').addEventListener('click', () => {
+                const newLang = currentLang === 'ar' ? 'en' : 'ar';
+                applyLanguage(newLang);
+                setCookie('language', newLang);
+                updateSwitchStates();
+            });
+
+            // Auto-rotate is already handled via onclick in HTML, but we ensure it calls toggleAutoRotate
+            // The auto-container already has onclick="toggleAutoRotate()"
+            // No duplicate listener needed.
+        }
+
+        // ---------- On Page Load ----------
+        window.addEventListener('load', () => {
+            loadSettings();
+            initSwitches();
+            addNeonEffect();
+
+            // Close modal when clicking outside content
+            document.getElementById('infoModal').addEventListener('click', e => {
+                if (e.target.id === 'infoModal') closeModal();
+            });
+        });
     </script>
 </body>
 </html>
