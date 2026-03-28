@@ -98,6 +98,8 @@
             box-shadow: 0 0 50px rgba(255,51,102,0.4);
             margin: 0 auto 25px;
             transition: background-color 0.4s ease;
+            /* سطر الإصلاح: يعزل المودل عن اتجاه الصفحة لضمان دقة الإحداثيات */
+            direction: ltr !important;
         }
 
         /* Neon Red Glow for Hotspots */
@@ -113,6 +115,8 @@
             transition: box-shadow 0.2s ease, transform 0.2s ease;
             cursor: pointer;
             border: 2px solid rgba(255, 255, 255, 0.3);
+            /* سطر الإصلاح: يضمن ثبات النقاط داخل المودل */
+            direction: ltr;
         }
         .hotspot:hover {
             transform: scale(1.1);
@@ -247,16 +251,13 @@
 </head>
 <body>
 
-    <!-- Top Bar -->
     <div class="top-bar">
-        <!-- Theme Switch -->
         <div class="toggle-switch" id="theme-toggle">
             <span class="material-symbols-outlined" id="theme-icon">dark_mode</span>
             <div class="switch-track"><div class="switch-knob" id="theme-knob"></div></div>
             <span class="switch-label" id="theme-label">داكن</span>
         </div>
 
-        <!-- Language Switch -->
         <div class="toggle-switch" id="lang-toggle">
             <span class="material-symbols-outlined">language</span>
             <div class="switch-track"><div class="switch-knob" id="lang-knob"></div></div>
@@ -280,7 +281,6 @@
         camera-orbit="45deg 75deg 3m"
         style="background-color: #1a1a1a;">
 
-        <!-- Hotspots - إحداثيات ثابتة -->
         <button slot="hotspot-1" class="hotspot" data-position="-0.03628853783019337m 0.3183729055871609m -0.16359950862344022m" data-normal="0.16378326710413493 0.7217418348627954 -0.6725055875051011">
             <span class="material-symbols-outlined" style="font-size:26px">local_fire_department</span>
         </button>
@@ -309,7 +309,6 @@
             <button onclick="setBackground('#0a2a1a', 'نيون سيان')" class="bg-btn" style="background:#0a2a1a;color:white;">نيون سيان</button>
         </div>
 
-        <!-- Auto Rotate Switch - منفصل تمامًا -->
         <div class="control-row">
             <div class="auto-rotate-container" id="auto-container" onclick="toggleAutoRotate()">
                 <span class="material-symbols-outlined">rotate_right</span>
@@ -323,7 +322,6 @@
         اسحب الشخصية بحرية • اضغط على النقاط العائمة لمعلومات • جرب الواقع المعزز على الجوال
     </p>
 
-    <!-- Modal -->
     <div id="infoModal" class="modal">
         <div class="modal-content">
             <span class="close material-symbols-outlined" onclick="closeModal()">close</span>
@@ -332,7 +330,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <p id="footer-text" class="interactive-text">© أمجد الكلبـاني ٢٠٢٦ | جميع الحقوق محفوظة</p>
     </footer>
