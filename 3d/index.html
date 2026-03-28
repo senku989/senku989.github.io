@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ريو ريبر | غاتشياكوتا</title>
+
+    <meta property="og:title" content="ريو ريبر | Riyo Reaper">
+    <meta property="og:description" content="استعرض مودل 3D لشخصية ريو ريبر من مانجا غاتشياكوتا. عضو فريق المنظفين.">
+    <meta property="og:image" content="https://wallpapercave.com/wp/wp15988020.jpg"> <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <style>
@@ -27,7 +33,7 @@
             color: #111111;
         }
 
-        /* Top Bar - تعديل لتثبيت المواقع */
+        /* Top Bar - ثابت المواقع دائماً */
         .top-bar {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -41,12 +47,10 @@
             z-index: 1000;
             gap: 24px;
             border-bottom: 1px solid rgba(255,51,102,0.15);
-            /* سطر الإصلاح: يمنع الأزرار من القفز لليسار عند تحويل اللغة للعربية */
             direction: ltr !important;
         }
         body.light .top-bar { background: rgba(245,245,245,0.98); }
 
-        /* Toggle Switch - أنيميشن حقيقي (يسار رمادي ← يمين أخضر) */
         .toggle-switch {
             display: flex;
             align-items: center;
@@ -100,11 +104,9 @@
             box-shadow: 0 0 50px rgba(255,51,102,0.4);
             margin: 0 auto 25px;
             transition: background-color 0.4s ease;
-            /* سطر الإصلاح: يمنع اختفاء النقاط العائمة في اللغة العربية */
             direction: ltr !important;
         }
 
-        /* Neon Red Glow for Hotspots */
         .hotspot {
             background: rgba(255, 51, 102, 0.85);
             border-radius: 50%;
@@ -117,20 +119,17 @@
             transition: box-shadow 0.2s ease, transform 0.2s ease;
             cursor: pointer;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            /* سطر الإصلاح: يضمن دقة إحداثيات النقطة */
             direction: ltr;
         }
         .hotspot:hover {
             transform: scale(1.1);
             box-shadow: 0 0 20px rgba(255, 51, 102, 1), 0 0 35px rgba(255, 51, 102, 0.8);
         }
-        /* Adjust icon color */
         .hotspot span {
             color: white;
             text-shadow: 0 0 4px rgba(0,0,0,0.5);
         }
 
-        /* Controls - تنظيم أندرويدي مثالي */
         .controls-container {
             max-width: 880px;
             margin: 0 auto 30px;
@@ -165,11 +164,9 @@
             background: var(--primary);
             transform: translateY(-2px);
         }
-        button:focus { outline: none; }
 
         .bg-btn { min-width: 118px; }
 
-        /* Auto Rotate - منفصل تمامًا */
         .auto-rotate-container {
             background: #1f1f1f;
             border-radius: 9999px;
@@ -184,7 +181,6 @@
         .auto-rotate-container.active .switch-track { background: #00cc66; }
         .auto-rotate-container.active .switch-knob { transform: translateX(24px); }
 
-        /* Neon Text Effect */
         .interactive-text {
             transition: text-shadow 0.3s ease;
             padding: 4px 8px;
@@ -194,7 +190,6 @@
             text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 30px var(--primary);
         }
 
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -228,7 +223,6 @@
             100% { transform: scale(1) translateY(0); opacity: 1; }
         }
 
-        /* Footer */
         footer {
             margin-top: 50px;
             padding: 28px 20px 35px;
