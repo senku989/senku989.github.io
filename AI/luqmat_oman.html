@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Luqmat Oman - لقمة عمان</title>
+<script type="text/javascript" nonce="0adbba9003b14456842bad7d33a" src="//local.adguard.org?ts=1775111625301&amp;type=content-script&amp;dmn=contribution.usercontent.google.com&amp;url=https%3A%2F%2Fcontribution.usercontent.google.com%2Fdownload%3Fc%3DCgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzg3NjA4MDg4NmVjZTRmZjFiYTZjYTAxZTE1MTFjNWIzEgsSBxC4_auivw0YAZIBIwoKcHJvamVjdF9pZBIVQhM3NjcxMjM0MTI1NDA5Nzc4NzUw%26filename%3D%26opi%3D89354086&amp;app=com.android.chrome&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=0"></script><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#e2bfb0",
+                        "surface-container-highest": "#e5e1e7",
+                        "on-background": "#1c1b1f",
+                        "surface-dim": "#ddd9de",
+                        "surface-container-high": "#ebe7ec",
+                        "secondary-fixed": "#8ef9a4",
+                        "on-secondary-container": "#007234",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#71dc8a",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005324",
+                        "on-tertiary-container": "#6b0014",
+                        "inverse-on-surface": "#f4eff5",
+                        "primary-container": "#ff6d00",
+                        "surface-variant": "#e5e1e7",
+                        "primary": "#9f4200",
+                        "inverse-surface": "#313034",
+                        "on-secondary-fixed": "#00210a",
+                        "background": "#fdf8fd",
+                        "secondary": "#006d31",
+                        "primary-fixed-dim": "#ffb692",
+                        "surface-tint": "#9f4200",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#594136",
+                        "on-primary-fixed": "#341100",
+                        "outline": "#8d7164",
+                        "surface-container-low": "#f7f2f8",
+                        "secondary-container": "#8bf6a1",
+                        "on-primary-container": "#582100",
+                        "tertiary": "#bf002c",
+                        "tertiary-fixed-dim": "#ffb3b2",
+                        "on-surface": "#1c1b1f",
+                        "tertiary-container": "#ff686e",
+                        "primary-fixed": "#ffdbcb",
+                        "surface": "#fdf8fd",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#ffb692",
+                        "surface-container": "#f1ecf2",
+                        "surface-bright": "#fdf8fd",
+                        "on-tertiary-fixed": "#410008",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "tertiary-fixed": "#ffdad9",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#92001f"
+                    },
+                    fontFamily: {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+        .glass-effect { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .screen-container { scroll-behavior: smooth; transition: opacity 0.3s ease; }
+        .iphone-frame { width: 375px; height: 812px; position: relative; overflow: hidden; border: 8px solid #1c1b1f; border-radius: 48px; background: #fdf8fd; box-shadow: 0 50px 100px -20px rgba(0,0,0,0.25); }
+        .iphone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 160px; height: 30px; background: #1c1b1f; border-bottom-left-radius: 18px; border-bottom-right-radius: 18px; z-index: 100; }
+        .safe-area-bottom { padding-bottom: 34px; }
+    </style>
+</head>
+<body class="bg-surface-dim min-h-screen flex items-center justify-center font-body text-on-surface">
+<!-- Desktop Viewport Emulation -->
+<div class="iphone-frame">
+<div class="iphone-notch"></div>
+<!-- Screen Container -->
+<div class="w-full h-full relative overflow-y-auto no-scrollbar screen-container" id="main-canvas">
+<!-- SPLASH SCREEN -->
+<section class="absolute inset-0 bg-background z-[90] flex flex-col items-center justify-center space-y-6" id="screen-splash">
+<div class="w-24 h-24 bg-primary rounded-3xl flex items-center justify-center shadow-2xl">
+<span class="material-symbols-outlined text-white text-5xl" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<div class="text-center">
+<h1 class="font-headline text-3xl font-extrabold text-primary tracking-tight">لقمة عمان</h1>
+<p class="text-outline font-medium tracking-widest uppercase text-xs mt-1">Luqmat Oman</p>
+</div>
+<div class="flex items-center space-y-2 mt-12 opacity-80">
+<div class="h-[2px] w-8 bg-tertiary"></div>
+<div class="h-[2px] w-12 bg-white"></div>
+<div class="h-[2px] w-8 bg-secondary"></div>
+</div>
+</section>
+<!-- ONBOARDING SCREEN -->
+<section class="hidden absolute inset-0 bg-background z-[80] flex flex-col" id="screen-onboarding">
+<div class="flex-1 relative overflow-hidden" id="onboarding-slides">
+<div class="h-full flex flex-col justify-center px-8 text-center space-y-6">
+<div class="w-full h-64 rounded-3xl overflow-hidden shadow-xl">
+<img class="w-full h-full object-cover" data-alt="Modern high-end Omani fine dining setup with incense and traditional architectural details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVfVApT_2d6QaMU10bTXEiRdS6hbeZ7HI2-TpUXPLagDCVxOJ-cbcWrikIVY-UjF6eBAcWSPAWL2BSkzxyVWx574yNQwXUBTbFmNlsddA0pHuaWT-6YZCEfrHwp-JLSRfTdqlp8K-G5JxRYG-f70Dx0q0lF4ZI62GOj2rpi2GMAHxd8SKR1lB1_HJ2DEXzPCa-NJGaf-m7D95UmZHZosj4Klfu7zK4vsDkWoOdfbpJZG_xWlgHK48_VpaiqAvVe0_g6vL6BCt4YBE"/>
+</div>
+<h2 class="font-headline text-2xl font-bold text-on-background">مرحباً بكم في لقمة عمان</h2>
+<p class="text-on-surface-variant leading-relaxed">اكتشف أفضل المأكولات العمانية التقليدية والعالمية بلمسة واحدة.</p>
+</div>
+</div>
+<div class="px-8 pb-12">
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-bold text-lg shadow-lg" onclick="navigateTo('screen-login')">ابدأ الآن</button>
+</div>
+</section>
+<!-- LOGIN SCREEN -->
+<section class="hidden absolute inset-0 bg-background z-[70] p-8 flex flex-col" id="screen-login">
+<div class="mt-20 space-y-2">
+<h2 class="font-headline text-3xl font-extrabold text-on-background">تسجيل الدخول</h2>
+<p class="text-on-surface-variant">أهلاً بك مجدداً في رحلتك للنكهات.</p>
+</div>
+<div class="mt-12 space-y-4">
+<div class="space-y-1">
+<label class="text-xs font-bold text-outline-variant mr-1">البريد الإلكتروني</label>
+<input class="w-full bg-surface-container-low border-none rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary/20 transition-all outline-none" type="email" value="demo@luqmat.om"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-outline-variant mr-1">كلمة المرور</label>
+<input class="w-full bg-surface-container-low border-none rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary/20 transition-all outline-none" type="password" value="123456"/>
+</div>
+</div>
+<div class="mt-12">
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary py-4 rounded-xl font-bold text-lg shadow-xl shadow-primary/20 active:scale-95 transition-transform" onclick="navigateTo('screen-home')">دخول</button>
+<p class="text-center text-on-surface-variant text-sm mt-6">ليس لديك حساب؟ <span class="text-primary font-bold">اشترك الآن</span></p>
+</div>
+</section>
+<!-- MAIN NAVIGATION WRAPPERS -->
+<div class="hidden" id="nav-wrapper">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-[375px] z-50 bg-[#fdf8fd]/80 glass-effect flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-700" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-stone-400 uppercase tracking-tighter">Sohar, Al Wadi</span>
+<span class="text-xs font-headline font-bold text-on-background">مسقط، عمان</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="text-orange-700 font-bold text-xs">EN</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border-2 border-primary-fixed">
+<img class="w-full h-full object-cover" data-alt="Portrait of a professional man in Oman business attire with soft warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATkZF9pM7n716cPxvthayt3_E4uMuAma6vKwpuAuNyJvBvb602R8SZRJujEQ3edhaE8pN4VuAASdIeIWFUNNJ2qX02ExetQt37ZIIj9wLwshZC-AuMQkQRWMz6iUadR5WPNmd78uFO-EN1w0WLGrJhZgYcTgeoYUh7PMiuEUc0W5Soen2pwXSar2qYbFI2oKqTGJIXtgN5mg95U9fl-_bV8RiRXJcBzBgeXWHCalrJcyUnGsL8Qrr-ZdtLWIZTOa3PeuyuEPVZL6I"/>
+</div>
+</div>
+</header>
+<!-- Bottom Nav -->
+<nav class="fixed bottom-0 w-[375px] z-50 bg-white/90 glass-effect flex justify-around items-center px-4 py-3 pb-safe shadow-[0_-4px_20px_rgba(0,0,0,0.03)] rounded-t-2xl">
+<button class="flex flex-col items-center justify-center bg-orange-50 text-orange-700 rounded-xl px-4 py-2 transition-all nav-item" id="nav-home" onclick="navigateTo('screen-home')">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold uppercase tracking-widest mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400 px-4 py-2 hover:text-orange-600 transition-all nav-item" id="nav-history" onclick="navigateTo('screen-history')">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold uppercase tracking-widest mt-1">Orders</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400 px-4 py-2 hover:text-orange-600 transition-all nav-item">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold uppercase tracking-widest mt-1">Favs</span>
+</button>
+<button class="flex flex-col items-center justify-center text-stone-400 px-4 py-2 hover:text-orange-600 transition-all nav-item" id="nav-profile" onclick="navigateTo('screen-profile')">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold uppercase tracking-widest mt-1">Profile</span>
+</button>
+</nav>
+</div>
+<!-- HOME SCREEN -->
+<section class="hidden w-full h-full pt-20 pb-32 px-6 space-y-8" id="screen-home">
+<!-- Search -->
+<div class="relative group">
+<div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="w-full bg-surface-container-low border-none rounded-2xl py-4 pr-12 pl-4 focus:ring-0 group-hover:bg-surface-container transition-colors text-sm" placeholder="ابحث عن مطعم أو وجبة..." type="text"/>
+</div>
+<!-- Featured Bento Grid -->
+<div class="grid grid-cols-2 gap-4 h-64">
+<div class="col-span-1 bg-primary-container rounded-3xl p-4 flex flex-col justify-between text-white relative overflow-hidden group">
+<div class="relative z-10">
+<span class="bg-white/20 px-2 py-1 rounded-full text-[10px] font-bold">HOT DEAL</span>
+<h3 class="font-headline font-bold text-lg mt-2">خصم 50% على القهوة العمانية</h3>
+</div>
+<img class="absolute -bottom-4 -left-4 w-32 h-32 object-cover opacity-60 group-hover:scale-110 transition-transform" data-alt="Traditional Omani coffee set with brass dallah and small cups on a patterned textile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBEbLLo6vQTknMyHGAZX0xLujNwWSl4-UE9KpHT8lGBX-DQOr2SfGnjzzzYEacM3biK7OmwFtot9MUomzZLks492jQmjpB8wzy0VNfncBDdl7bqIMWMkr_2SYHea50xSMVZFUNGUlgOkNqQD6QBQcC6qa4W6PBMwELQm11U8xS4hny3wJ_zmFQMEw7FosyVn125ByfwSZe5AQ3VvWffacAyTQgLpD00PNqkFYT1_hupRYSM266GbaQ97jGoqY8Db9w0_mSEN7jB7k"/>
+</div>
+<div class="col-span-1 grid grid-rows-2 gap-4">
+<div class="bg-secondary rounded-3xl p-4 flex flex-col justify-between text-white overflow-hidden relative group">
+<h3 class="font-headline font-bold text-sm relative z-10">أفضل المشويات</h3>
+<span class="material-symbols-outlined text-4xl opacity-30 absolute bottom-2 left-2">outdoor_grill</span>
+</div>
+<div class="bg-surface-container-highest rounded-3xl p-4 flex flex-col justify-between text-on-surface overflow-hidden relative group">
+<h3 class="font-headline font-bold text-sm relative z-10">حلويات صحراوية</h3>
+<span class="material-symbols-outlined text-4xl opacity-20 absolute bottom-2 left-2">icecream</span>
+</div>
+</div>
+</div>
+<!-- Categories -->
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<h2 class="font-headline text-xl font-extrabold">التصنيفات</h2>
+<span class="text-primary text-xs font-bold">عرض الكل</span>
+</div>
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+<div class="flex flex-col items-center gap-2 min-w-[70px]">
+<div class="w-16 h-16 bg-white shadow-sm rounded-2xl flex items-center justify-center border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary text-3xl">restaurant</span>
+</div>
+<span class="text-[11px] font-bold">عماني</span>
+</div>
+<div class="flex flex-col items-center gap-2 min-w-[70px]">
+<div class="w-16 h-16 bg-white shadow-sm rounded-2xl flex items-center justify-center border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary text-3xl">local_pizza</span>
+</div>
+<span class="text-[11px] font-bold">بيتزا</span>
+</div>
+<div class="flex flex-col items-center gap-2 min-w-[70px]">
+<div class="w-16 h-16 bg-white shadow-sm rounded-2xl flex items-center justify-center border border-outline-variant/10">
+<span class="material-symbols-outlined text-tertiary text-3xl">bakery_dining</span>
+</div>
+<span class="text-[11px] font-bold">حلويات</span>
+</div>
+<div class="flex flex-col items-center gap-2 min-w-[70px]">
+<div class="w-16 h-16 bg-white shadow-sm rounded-2xl flex items-center justify-center border border-outline-variant/10">
+<span class="material-symbols-outlined text-orange-600 text-3xl">emoji_food_beverage</span>
+</div>
+<span class="text-[11px] font-bold">مشروبات</span>
+</div>
+</div>
+</div>
+<!-- Restaurants List -->
+<div class="space-y-6">
+<div class="flex justify-between items-end">
+<h2 class="font-headline text-xl font-extrabold">المطاعم القريبة</h2>
+<span class="text-primary text-xs font-bold">فرز حسب التقريب</span>
+</div>
+<div class="space-y-6" id="restaurants-grid">
+<!-- Restaurant Item 1 -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer group" onclick="openRestaurant(1)">
+<div class="h-44 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Traditional Omani Shuwa meat slow-cooked with aromatic spices served on a large silver platter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB05dCpFJBev8g8u-6plBVFw5Hc3X0DFPb-IbdpjnpTM_ygoiI6L3rUw-W4pbQqu4wAm2fRP38ZOpWQY-rRocPfh6Y61cegMB9SQw2tQWK0RwTNWHEKYP1u41eIqQjXa9UCP8JRvj-syXbNPs_p6xFfKqzN9IEei46X9sTf0d-x2Y1c654_H0nCm3iJjY9gsSvH-TBc4RpYM_mJp2Y2NOzQ_q-Q9NnUQkxPM9hoMdsPerNUokl9Y8mZoJvu9XGET-cTze9od1O4bno"/>
+<div class="absolute top-4 right-4 bg-white/90 glass-effect px-2 py-1 rounded-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-yellow-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.9</span>
+</div>
+<div class="absolute bottom-4 left-4 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full">30-40 دقيقة</div>
+</div>
+<div class="p-4 flex justify-between items-center">
+<div>
+<h3 class="font-headline font-bold text-lg">بيت الشواء العماني</h3>
+<p class="text-on-surface-variant text-xs">مأكولات شعبية • لحوم • صحار</p>
+</div>
+<div class="w-10 h-10 bg-secondary-container rounded-full flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-xl">verified</span>
+</div>
+</div>
+</div>
+<!-- Restaurant Item 2 -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer group" onclick="openRestaurant(2)">
+<div class="h-44 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Middle Eastern grilled meat platter with colorful vegetables and saffron rice" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_4KHKLZ8remUoz4vb5OKYRSM0AwvC_wrnJF2YSyPilhfWixyqgns6tfkgY3Z-DNiShMNQZhItvrULJ4kU3teffi4SA7pitLnIyjBiXwcgml65V_JwS8gfvn0mn0a9hu8uvRR8bXYlUUVnkXcbaHcLEJ3RfMihsGL4aQnHFf1rqamiv_klFWereX_5oK-t-rzTrbHsj3BOwr_pBFmHLNrWCCQTS1DlupI9uBnPDOnDSyO2S6zH6iQmg373-97_mNOzrAkk35N3tGA"/>
+<div class="absolute top-4 right-4 bg-white/90 glass-effect px-2 py-1 rounded-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-yellow-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.7</span>
+</div>
+<div class="absolute bottom-4 left-4 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full">25-35 دقيقة</div>
+</div>
+<div class="p-4">
+<h3 class="font-headline font-bold text-lg">مطعم النخيل</h3>
+<p class="text-on-surface-variant text-xs">مشويات • أرز • عربي</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- RESTAURANT DETAILS SCREEN -->
+<section class="hidden w-full h-full bg-background relative" id="screen-details">
+<button class="fixed top-6 right-6 z-[60] w-10 h-10 bg-white/50 glass-effect rounded-full flex items-center justify-center text-on-surface" onclick="navigateTo('screen-home')">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<div class="h-64 w-full overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Close-up of vibrant Mediterranean food spread on a rustic wooden table" id="detail-hero" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4sM4oBO3LfHs-f_rgDhTH_c0oeLkmxU5mIf0LE22uxDeVdkzKbxOOAC5f-lMCpDsnCnrLUB4A7UR4NcE-Bsphfd5Nb6f75tKj7D9q6xEesDJ4wl-09SoFEZOzLzUWR7HOdpIWeE01jbRyw0qbaBOSuvwbAbTYgEmH0tGdNLoH7dMnx6aQqrMe0E2bKYY-VDishA0iJ-6OQdV1J1AhwmzHBU0vh_Xt_avetjuox2JI_yXRHYebvZ9fh3_uv-AeIUTwajEP4VzRoo0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+</div>
+<div class="relative -mt-12 bg-background rounded-t-[40px] px-6 pt-8 pb-32 space-y-8 min-h-[500px]">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-headline text-3xl font-extrabold text-on-background" id="detail-name">بيت الشواء العماني</h2>
+<p class="text-on-surface-variant text-sm mt-1">صحار، الوادي • توصيل مجاني</p>
+</div>
+<div class="bg-orange-50 text-primary px-3 py-2 rounded-2xl text-center">
+<p class="text-lg font-bold">4.9</p>
+<p class="text-[9px] uppercase font-bold tracking-widest">Rating</p>
+</div>
+</div>
+<div class="flex gap-4 overflow-x-auto no-scrollbar">
+<span class="bg-secondary/10 text-secondary px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap">قائمة الغداء</span>
+<span class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap">عروض عائلية</span>
+<span class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap">مقبلات</span>
+</div>
+<div class="space-y-6">
+<h3 class="font-headline text-xl font-bold">الأكثر طلباً</h3>
+<div class="space-y-4">
+<!-- Menu Item 1 -->
+<div class="flex items-center gap-4 bg-surface-container-low p-3 rounded-2xl group active:bg-surface-container transition-colors">
+<div class="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Authentic Omani Mandi rice with meat and fried onions on top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQZ-pDFdVcjQpTro3vfFAFnOmBDQvLcrGYGwVfw8Isysu2L2q7KgWbl3_L3hVdxSPaBqX0USjkvlu2derouSKBvi1VtyowNsXCOh3x6IYRV0uO47cpLK_53JtIptajDAhJBnMwdB5Y6RQEvRkrPpVVis64Y5r_r0EItLwMz4UwmNevCV-7CvmHvHfFkTDeJ0osPkpvCYMA7p_Zkc7seNvD7s0tD-wLkEhgVnSVVCssD9XIpZraOJqXLdtr---RiDpUhsSaXk5OiVA"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-sm">مندي لحم بلدي</h4>
+<p class="text-[11px] text-on-surface-variant line-clamp-1">لحم طازج مع أرز المندي المتبل</p>
+<p class="text-primary font-bold mt-1">4.500 ر.ع</p>
+</div>
+<button class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform" onclick="addToCart('مندي لحم بلدي', 4.5)">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<!-- Menu Item 2 -->
+<div class="flex items-center gap-4 bg-surface-container-low p-3 rounded-2xl group active:bg-surface-container transition-colors">
+<div class="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Golden fried kibbeh pieces with mint garnish and tahini sauce" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpMDFwEl9QuakfCdueZd5aoalAWsH6Wux6dXlLxZA32DzrPwBsor-4R-h7ann2uBczDG7l2Da3V2JTTju8iu5BfDMVa8JHQaRBAwIyx8MN61pTv-PdmgQ8ypR5pk5pSxUSxbMMtQ8zX6y-eQtPpK2TwrddCIB9ZpzOSOb7--FNUJIVbK00aLK14b3uerHTq_W077m0JR3_q2zZ6PQXYz2oskSACISrEwFD_uy0fxU0AcwPWOe8kjC0EOWsRlkEPhH2wL1ChMqNfu4"/>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-sm">شواء عماني أصيل</h4>
+<p class="text-[11px] text-on-surface-variant line-clamp-1">مطبوخ تحت الأرض لمدة 24 ساعة</p>
+<p class="text-primary font-bold mt-1">6.200 ر.ع</p>
+</div>
+<button class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform" onclick="addToCart('شواء عماني أصيل', 6.2)">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Float Cart Summary -->
+<div class="fixed bottom-24 left-6 right-6 bg-primary text-white rounded-2xl p-4 flex justify-between items-center shadow-2xl translate-y-32 transition-transform duration-500 z-50" id="cart-peek">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center font-bold" id="cart-count">1</div>
+<span class="font-bold">عرض السلة</span>
+</div>
+<span class="font-bold text-lg" id="cart-total-peek">4.500 ر.ع</span>
+</div>
+</section>
+<!-- CART / CHECKOUT SCREEN -->
+<section class="hidden w-full h-full bg-background pt-20 px-6 pb-32" id="screen-cart">
+<h2 class="font-headline text-3xl font-extrabold mb-8">سلة الطلبات</h2>
+<div class="space-y-6" id="cart-items">
+<!-- Dynamic Cart Items -->
+</div>
+<div class="mt-12 p-6 bg-surface-container-low rounded-3xl space-y-4">
+<div class="flex justify-between text-on-surface-variant">
+<span>المجموع الفرعي</span>
+<span id="subtotal">0.000 ر.ع</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>رسوم التوصيل</span>
+<span>0.500 ر.ع</span>
+</div>
+<div class="border-t border-outline-variant/30 pt-4 flex justify-between font-extrabold text-xl">
+<span>الإجمالي</span>
+<span class="text-primary" id="total">0.500 ر.ع</span>
+</div>
+</div>
+<div class="mt-8 space-y-4">
+<h3 class="font-bold">طريقة الدفع</h3>
+<div class="bg-white border-2 border-primary rounded-2xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-8 bg-surface-container-high rounded flex items-center justify-center font-bold text-xs">VISA</div>
+<div>
+<p class="font-bold text-sm">**** **** **** 4582</p>
+<p class="text-[10px] text-on-surface-variant">Expires 12/26</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-4 rounded-2xl font-bold mt-8 shadow-xl shadow-primary/30" onclick="processCheckout()">تأكيد الطلب</button>
+</section>
+<!-- ORDER TRACKING SCREEN -->
+<section class="hidden w-full h-full bg-background pt-20 px-6 pb-12 flex flex-col items-center" id="screen-tracking">
+<div class="w-full text-center space-y-4">
+<div class="w-24 h-24 bg-secondary-container rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="material-symbols-outlined text-secondary text-5xl">pedal_bike</span>
+</div>
+<h2 class="font-headline text-2xl font-extrabold">طلبك في الطريق!</h2>
+<p class="text-on-surface-variant">مطعم بيت الشواء العماني • #LQM-8891</p>
+</div>
+<div class="w-full mt-12 space-y-8 relative">
+<div class="absolute right-5 top-0 bottom-0 w-0.5 bg-surface-container-high"></div>
+<div class="relative flex items-start gap-6 pr-12">
+<div class="absolute right-3.5 top-1.5 w-3.5 h-3.5 bg-secondary rounded-full ring-4 ring-secondary/20"></div>
+<div>
+<h4 class="font-bold text-sm">جاري التوصيل</h4>
+<p class="text-xs text-on-surface-variant">السائق يقترب من موقعك الآن</p>
+</div>
+</div>
+<div class="relative flex items-start gap-6 pr-12 opacity-50">
+<div class="absolute right-3.5 top-1.5 w-3.5 h-3.5 bg-surface-container-highest rounded-full"></div>
+<div>
+<h4 class="font-bold text-sm">استلم السائق الطلب</h4>
+<p class="text-xs text-on-surface-variant">12:45 مساءً</p>
+</div>
+</div>
+<div class="relative flex items-start gap-6 pr-12 opacity-50">
+<div class="absolute right-3.5 top-1.5 w-3.5 h-3.5 bg-surface-container-highest rounded-full"></div>
+<div>
+<h4 class="font-bold text-sm">جاري التحضير</h4>
+<p class="text-xs text-on-surface-variant">12:30 مساءً</p>
+</div>
+</div>
+</div>
+<div class="mt-auto w-full space-y-4 safe-area-bottom">
+<div class="bg-surface-container-low p-4 rounded-3xl flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-dim">
+<img class="w-full h-full object-cover" data-alt="Professional profile photo of a delivery driver with a friendly smile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAujfjYelyKpjzDiYwUZP3HGrJVKQWtTC8nahje3TSC5T9Uuw2nLyUTtAvtKF_eZxY7EjhWEoN0nVAdunfvmPu9EgRqjY_a0fW_-xNHzsykOdBwOsjjVT_Oi6MuG4GKc2j_NQ6M1KAjxOsfEHOkwAxR8plcH3z9vGf8ri602noBQwf_9X1YxCvPqPHTUfWTto-0IdckBuYomTlg_QVxPibSzlMh9C8k1DyoVupgGIpVoxxc3CNB5EE5RVyWKdfPKaBRoh2sCZDP95k"/>
+</div>
+<div>
+<p class="font-bold text-sm">أحمد البلوشي</p>
+<p class="text-[10px] text-on-surface-variant">رقم المركبة: 5542 أ ط</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm text-secondary">
+<span class="material-symbols-outlined text-xl">call</span>
+</button>
+<button class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm text-primary">
+<span class="material-symbols-outlined text-xl">chat</span>
+</button>
+</div>
+</div>
+<button class="w-full py-4 text-primary font-bold" onclick="navigateTo('screen-home')">العودة للرئيسية</button>
+</div>
+</section>
+<!-- PROFILE / HISTORY SCREEN -->
+<section class="hidden w-full h-full bg-background pt-20 px-6 pb-32" id="screen-profile">
+<div class="flex flex-col items-center space-y-4 mb-10">
+<div class="relative">
+<div class="w-24 h-24 rounded-full border-4 border-primary p-1">
+<img class="w-full h-full object-cover rounded-full" data-alt="Portrait of a professional man in Oman business attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQAix7KOOdkZRLJx8BzjM-XX7_oH7_jELXwETMjRZ3aIwxN0x-Lnjb8VxgryTazsPlAVV-RKbk4TkdqGrL0x-23IKF_I6z56w8YTzu4tMN1fuHmEOVyzYqKZUKxe__OYjTFHp3RK8EGHr3_BjgBH0pOkxyy-US8jAIK0DZRSXX0oZsCUZ9N2MtlgxzkjFlg6GISSyhRbdj3f5ahvgNpD_lK88mOVc_KaiKXloQLWuf5oPYWnm3igF6-YbKz5nvAUBzVEdWlMrjvLI"/>
+</div>
+<div class="absolute bottom-0 right-0 bg-primary text-white w-7 h-7 rounded-full flex items-center justify-center border-2 border-white">
+<span class="material-symbols-outlined text-sm">edit</span>
+</div>
+</div>
+<div class="text-center">
+<h3 class="font-headline text-2xl font-extrabold">عبدالله المعمري</h3>
+<p class="text-on-surface-variant text-sm">abdullah@example.om</p>
+</div>
+</div>
+<div class="space-y-2">
+<h4 class="font-bold text-sm mb-4">نشاطاتي</h4>
+<div class="bg-surface-container-low p-5 rounded-2xl flex items-center justify-between cursor-pointer active:bg-surface-container transition-colors" onclick="navigateTo('screen-history')">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">history</span>
+<span class="font-bold text-sm">سجل الطلبات</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+</div>
+<div class="bg-surface-container-low p-5 rounded-2xl flex items-center justify-between cursor-pointer active:bg-surface-container transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary">payments</span>
+<span class="font-bold text-sm">طرق الدفع</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+</div>
+<div class="bg-surface-container-low p-5 rounded-2xl flex items-center justify-between cursor-pointer active:bg-surface-container transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-tertiary">settings</span>
+<span class="font-bold text-sm">الإعدادات</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+</div>
+</div>
+</section>
+<!-- HISTORY LIST SCREEN -->
+<section class="hidden w-full h-full bg-background pt-20 px-6 pb-32" id="screen-history">
+<h2 class="font-headline text-3xl font-extrabold mb-8">طلباتي السابقة</h2>
+<div class="space-y-6">
+<div class="bg-white p-5 rounded-3xl shadow-sm border border-outline-variant/10">
+<div class="flex justify-between items-start mb-4">
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-2xl bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Traditional Omani dish preview in a small card format" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGWbNd9zWZRyWtt5YGegDaqCzHOOXGlc5WKYu0GRYebpcxatXqP-7RkkTfbgSKsPy6kzAhwVfYWm3m1zUI0YxqkeM8j38nHd9d2MU32J-zqTtVJw2f84UTP7CMueoOcr6AuMn2FvONyA5B2vZDM7slssMjIn1ki3lbsEvdbbxE8ktFbT5POon2qjRkgAgGpLD-1y0mYKfy8fk79tn9O9ZDaueMz_D8o0NyasTX1X51apKYAwiRAPM7kObHHX6KRKuQbLEOsxzWa5g"/>
+</div>
+<div>
+<h4 class="font-bold text-sm">بيت الشواء العماني</h4>
+<p class="text-[10px] text-on-surface-variant">الأمس • 08:30 مساءً</p>
+</div>
+</div>
+<span class="bg-secondary/10 text-secondary text-[10px] font-bold px-2 py-1 rounded">تم التوصيل</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-4">مندي لحم (2)، صالونة دجاج (1)، هريس (1)</p>
+<div class="flex justify-between items-center border-t border-outline-variant/20 pt-4">
+<span class="font-bold text-primary">12.500 ر.ع</span>
+<button class="text-[10px] font-bold text-on-surface-variant bg-surface-container-high px-3 py-1.5 rounded-lg">إعادة طلب</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<script>
+        let cart = [];
+        let currentScreen = 'screen-splash';
+
+        // Fake State Navigation
+        function navigateTo(screenId) {
+            const screens = ['screen-splash', 'screen-onboarding', 'screen-login', 'screen-home', 'screen-details', 'screen-cart', 'screen-tracking', 'screen-profile', 'screen-history'];
+            
+            screens.forEach(s => {
+                document.getElementById(s).classList.add('hidden');
+            });
+            
+            document.getElementById(screenId).classList.remove('hidden');
+            currentScreen = screenId;
+
+            // Nav visibility logic
+            const mainScreens = ['screen-home', 'screen-profile', 'screen-history'];
+            if (mainScreens.includes(screenId) || screenId === 'screen-cart') {
+                document.getElementById('nav-wrapper').classList.remove('hidden');
+            } else {
+                document.getElementById('nav-wrapper').classList.add('hidden');
+            }
+
+            // Active nav tab highlighting
+            updateNavState(screenId);
+        }
+
+        function updateNavState(screenId) {
+            const tabs = {
+                'screen-home': 'nav-home',
+                'screen-history': 'nav-history',
+                'screen-profile': 'nav-profile'
+            };
+
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('bg-orange-50', 'text-orange-700', 'dark:bg-orange-950/30', 'dark:text-orange-400');
+                item.classList.add('text-stone-400');
+                const span = item.querySelector('.material-symbols-outlined');
+                if(span) span.style.fontVariationSettings = "'FILL' 0";
+            });
+
+            const activeTabId = tabs[screenId];
+            if (activeTabId) {
+                const activeTab = document.getElementById(activeTabId);
+                activeTab.classList.add('bg-orange-50', 'text-orange-700');
+                activeTab.classList.remove('text-stone-400');
+                const span = activeTab.querySelector('.material-symbols-outlined');
+                if(span) span.style.fontVariationSettings = "'FILL' 1";
+            }
+        }
+
+        // Restaurant Selection
+        function openRestaurant(id) {
+            const names = ["", "بيت الشواء العماني", "مطعم النخيل"];
+            const images = ["", "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=400&h=250&auto=format&fit=crop", "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=400&h=250&auto=format&fit=crop"];
+            
+            document.getElementById('detail-name').innerText = names[id];
+            document.getElementById('detail-hero').src = images[id];
+            
+            navigateTo('screen-details');
+        }
+
+        // Cart Logic
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCartUI();
+            
+            // Show Peek
+            const peek = document.getElementById('cart-peek');
+            peek.classList.remove('translate-y-32');
+            peek.onclick = () => navigateTo('screen-cart');
+        }
+
+        function updateCartUI() {
+            const list = document.getElementById('cart-items');
+            const count = document.getElementById('cart-count');
+            const totalPeek = document.getElementById('cart-total-peek');
+            const subtotalEl = document.getElementById('subtotal');
+            const totalEl = document.getElementById('total');
+
+            list.innerHTML = '';
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                subtotal += item.price;
+                list.innerHTML += `
+                    <div class="flex justify-between items-center bg-surface-container-low p-4 rounded-2xl">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center font-bold text-primary">1x</div>
+                            <div>
+                                <h4 class="font-bold text-sm">${item.name}</h4>
+                                <p class="text-[10px] text-on-surface-variant">Default preferences</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold text-sm">${item.price.toFixed(3)} ر.ع</p>
+                            <button onclick="removeFromCart(${index})" class="text-[10px] text-tertiary font-bold">إزالة</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            count.innerText = cart.length;
+            totalPeek.innerText = `${subtotal.toFixed(3)} ر.ع`;
+            subtotalEl.innerText = `${subtotal.toFixed(3)} ر.ع`;
+            totalEl.innerText = `${(subtotal + 0.5).toFixed(3)} ر.ع`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+            if (cart.length === 0) {
+                document.getElementById('cart-peek').classList.add('translate-y-32');
+                navigateTo('screen-home');
+            }
+        }
+
+        function processCheckout() {
+            // Fake Delay for processing
+            const btn = document.querySelector('#screen-cart button');
+            const originalText = btn.innerText;
+            btn.innerText = 'جاري المعالجة...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.disabled = false;
+                cart = [];
+                updateCartUI();
+                document.getElementById('cart-peek').classList.add('translate-y-32');
+                navigateTo('screen-tracking');
+            }, 1500);
+        }
+
+        // Splash to Onboarding flow
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('screen-splash').style.opacity = '0';
+                setTimeout(() => {
+                    navigateTo('screen-onboarding');
+                }, 300);
+            }, 2500);
+        };
+
+    </script>
+</body></html>
